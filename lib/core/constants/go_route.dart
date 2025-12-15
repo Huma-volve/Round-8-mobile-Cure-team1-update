@@ -84,6 +84,9 @@ abstract class Approutes {
       GoRoute(
         path: AppRoute.onBoarding,
         builder: (context, state) => const OnboaedingScreen(),
+      ),GoRoute(
+        path: AppRoute.navBar,
+        builder: (context, state) => const NavBar(),
       ),
       GoRoute(
         path: AppRoute.splash,
@@ -136,6 +139,10 @@ abstract class Approutes {
       GoRoute(
         path: AppRoute.cardsScreen,
         builder: (context, state) => const CardsScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.home,
+        builder: (context, state) => const HomePage(),
       ),
 
       //profile
