@@ -27,6 +27,11 @@ dependencies:
   shared_preferences: ^2.5.4
   image_picker: ^1.2.1
   permission_handler: ^12.0.1
+  smooth_page_indicator: ^1.1.0+2
+  pinput: ^6.0.1
+  device_preview: ^1.2.0
+
+
 
 dev_dependencies:
   flutter_test:
@@ -37,3 +42,39 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/payment/
+    - assets/images/profile/
+    - assets/images/sittings/
+
+fonts:
+
+  - family: Montserrat
+    fonts:
+      - asset: assets/fonts/Montserrat-Medium.ttf
+        weight: 500
+  - family: georgia
+    fonts:
+      - asset: assets/fonts/georgia.ttf
+        weight: 400
+  - family: PlusJakartaSans
+    fonts:
+      - asset: assets/fonts/PlusJakartaSans-Regular.ttf
+        weight: 400
+  - family: Inter_28pt
+    fonts:
+      - asset: assets/fonts/Inter_28pt-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Inter_28pt-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Inter_28pt-Medium.ttf
+        weight: 500
+
+flutter_assets:
+  assets_path: assets/images/
+  output_path: lib/core/utils
+  filename: assets.dart
+  field_prefix: resource
+  ignore_comments: true
