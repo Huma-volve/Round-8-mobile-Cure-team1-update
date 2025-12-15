@@ -19,4 +19,17 @@ class ColorsLight {
   static const Color border = Color(0xFFE5E7EB);
   static const Color green = Color.fromARGB(255, 18, 176, 44);
   static const Color error = Colors.redAccent;
+  static const Color royalBlue=Color(0xff145DB8);
+  static const Color prussianBlue=Color(0xff05162C);
+  static const Color lightGray=Color(0xffF5F6F7);
+  static const Color transparentBrightYellow=Color(0xffF9E000);
+  static const Color vividYellow=Color(0xffF9E000);
+  static const Color red=Color(0xffFC4B4E);
+ static const Color grey1 = Color(0xffF5F6F7);
+ static const Color grey2 = Color(0xffE8EFF8);
+ static const Color darkGrey = Color(0xff404448);
+ static const Color green = Color(0xff4CAF50);
+ static const Color lightGreen = Color(0xFFEDF7EE);
+  static const Color coolGrey = Color(0xFF99A2AB);
+  static const Color creamyLight = Color(0xFFFFF6E9);
 }
