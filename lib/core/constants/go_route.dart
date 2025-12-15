@@ -1,9 +1,11 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
-import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/add_review_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/book_apointmennt_.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/doctor_details_screen.dart';
@@ -11,8 +13,6 @@ import 'package:cure_team_1_update/features/doctor_details/presentation/screens/
 import 'package:cure_team_1_update/features/auth/login/presentation/pages/login_page.dart';
 import 'package:cure_team_1_update/features/auth/otp/presentation/pages/otp_page.dart';
 import 'package:cure_team_1_update/features/auth/sign_up/presentation/pages/sign_up_page.dart';
-import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
-import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
 import 'package:cure_team_1_update/features/notifications/screen/notifications.dart';
 import 'package:cure_team_1_update/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:cure_team_1_update/features/payment/screens/add_card_screen.dart';
@@ -29,12 +29,15 @@ import 'package:go_router/go_router.dart';
 
 abstract class Approutes {
   static GoRouter router = GoRouter(
+    initialLocation: '/',
     routes: [
-      //booking
+      // Splash
       GoRoute(
         path: '/',
         builder: (context, state) => const SplashScreen(),
       ),
+
+      // Booking
       GoRoute(
         path: AppRoute.bookappointment,
         builder: (context, state) => const Bookappointment(),
@@ -64,6 +67,8 @@ abstract class Approutes {
           );
         },
       ),
+
+      // Auth
       GoRoute(
         path: AppRoute.signupPage,
         builder: (context, state) => const SignUpPage(),
@@ -73,6 +78,12 @@ abstract class Approutes {
         builder: (context, state) => const OtpPage(),
       ),
       GoRoute(
+        path: AppRoute.loginPage,
+        builder: (context, state) => const LoginPage(),
+      ),
+
+      // Chat
+      GoRoute(
         path: AppRoute.chat,
         builder: (context, state) => const Chat(),
       ),
@@ -80,51 +91,30 @@ abstract class Approutes {
         path: AppRoute.chatbody,
         builder: (context, state) => const Chatbody(),
       ),
+
+      // Notifications
       GoRoute(
         path: AppRoute.notifications,
         builder: (context, state) => const Notifications(),
       ),
-      GoRoute(
-          path: AppRoute.ProfileScreen,
-          builder: (context, state) => const ProfileScreen()),
-      // GoRoute(
-      //     path: AppRoute.home, builder: (context, state) => const HomePage()),
-      // GoRoute(
-      //   path: AppRoute.BookingSection,
-      //   builder: (context, state) => const BookingSection(),
-      // ),
+
+      // OnBoarding
       GoRoute(
         path: AppRoute.onBoarding,
         builder: (context, state) => const OnboaedingScreen(),
       ),
+
+      // Nav & Home
       GoRoute(
         path: AppRoute.navBar,
         builder: (context, state) => const NavBar(),
       ),
       GoRoute(
-        path: AppRoute.splash,
-        builder: (context, state) => const SplashScreen(),
+        path: AppRoute.home,
+        builder: (context, state) => const HomePage(),
       ),
-      GoRoute(
-        path: AppRoute.bookappointment,
-        builder: (context, state) => const Bookappointment(),
-      ),
-      GoRoute(
-        path: AppRoute.selectPaymentMethodScreen,
-        builder: (context, state) => const SelectPaymentMethodScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.addReviewScreen,
-        builder: (context, state) => const AddReviewScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.doctorDetails,
-        builder: (context, state) => const DoctorDetailsScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.loginPage,
-        builder: (context, state) => const LoginPage(),
-      ),
+
+      // Payment
       GoRoute(
         path: AppRoute.paymentScreenpaymentScreen,
         builder: (context, state) => const PaymentMethodsScreen(),
@@ -137,30 +127,30 @@ abstract class Approutes {
         path: AppRoute.cardsScreen,
         builder: (context, state) => const CardsScreen(),
       ),
-      GoRoute(
-        path: AppRoute.home,
-        builder: (context, state) => const HomePage(),
-      ),
 
-      //profile
+      // Profile
+      GoRoute(
+        path: AppRoute.ProfileScreen,
+        builder: (context, state) => const ProfileScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.profileScreen,
+        builder: (context, state) => const ProfileScreen(),
+      ),
       GoRoute(
         path: AppRoute.editProfileScreen,
         builder: (context, state) => const EditProfileScreen(),
       ),
 
-      GoRoute(
-        path: AppRoute.profileScreen,
-        builder: (context, state) => const ProfileScreen(),
-      ),
-//settings
+      // Settings
       GoRoute(
         path: AppRoute.settingsScreen,
         builder: (context, state) => const SettingsScreen(),
       ),
-
       GoRoute(
         path: AppRoute.passwordManagementScreen,
-        builder: (context, state) => const PasswordManagementScreen(),
+        builder: (context, state) =>
+            const PasswordManagementScreen(),
       ),
       GoRoute(
         path: AppRoute.faqsScreen,
@@ -168,7 +158,8 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.privacyPolicyScreen,
-        builder: (context, state) => const PrivacyPolicyScreen(),
+        builder: (context, state) =>
+            const PrivacyPolicyScreen(),
       ),
     ],
   );

@@ -14,10 +14,10 @@ class DoctorDetailsWidget extends StatelessWidget {
     return  Row(
       children: [
         Padding(
-          padding:  EdgeInsets.only(left: 12.w),
+          padding:  EdgeInsets.only(left: 0.w),
           child: const DoctorImage(),
         ),
-         SizedBox(width: 16.w,),
+         SizedBox(width: 0.w,),
         const DoctorInfo()
       ],
     );
