@@ -121,16 +121,6 @@ abstract class Approutes {
         builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
-        path: AppRoute.signupPage,
-        builder: (context, state) => const SignUpPage(),
-      ),
-
-      GoRoute(
-        path: AppRoute.otpPage,
-        builder: (context, state) => const OtpPage(),
-      ),
-      //payment
-      GoRoute(
         path: AppRoute.paymentScreenpaymentScreen,
         builder: (context, state) => const PaymentMethodsScreen(),
       ),

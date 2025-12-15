@@ -10,6 +10,7 @@ class CustomeAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
           onPressed: () {
@@ -17,9 +18,7 @@ class CustomeAppbar extends StatelessWidget {
           },
           icon: const Icon(Icons.arrow_back),
         ),
-        SizedBox(
-          width: 40.w,
-        ),
+        const Spacer(),
         Text(
           title,
           style: AppTextStyles.styleLarge20(context),

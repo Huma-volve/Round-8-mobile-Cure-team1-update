@@ -45,6 +45,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/sittings/
+    - assets/images/profile/
+    - assets/images/payment/
+  
 
 fonts:
 

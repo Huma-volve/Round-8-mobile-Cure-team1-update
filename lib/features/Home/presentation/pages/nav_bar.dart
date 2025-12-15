@@ -1,5 +1,6 @@
 import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,7 +20,7 @@ class NavBar extends StatefulWidget {
 class _HomePageState extends State<NavBar> {
   List<Widget> pages = [
     const HomePage(),
-    //MyBookItemScreen(mybookingModel: MybookingModel(bookingStatus: bookingStatus, buttonActionName: buttonActionName, buttonOptionName: buttonOptionName),),
+    const MyBookingScreen(),
     const Chat(),
     const ProfileScreen()
   ];

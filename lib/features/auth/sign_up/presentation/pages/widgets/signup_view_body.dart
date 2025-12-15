@@ -3,6 +3,7 @@ import 'package:cure_team_1_update/core/common/widgets/custome_button.dart';
 import 'package:cure_team_1_update/core/common/widgets/custome_text_field.dart';
 import 'package:cure_team_1_update/core/common/widgets/phone_input.dart';
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/constants/go_route.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
@@ -27,8 +28,8 @@ class SignupViewBody extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 40.h,
+            const SizedBox(
+              height: 50,
             ),
             Center(
               child: Image.asset(
@@ -91,7 +92,9 @@ class SignupViewBody extends StatelessWidget {
             SizedBox(
               height: 24.h,
             ),
-            ButtonWithGoogle(onTap: () {}),
+            ButtonWithGoogle(onTap: () {
+              context.go(AppRoute.navBar);
+            }),
             SizedBox(
               height: 20.h,
             ),

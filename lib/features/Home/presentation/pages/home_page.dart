@@ -1,8 +1,10 @@
+import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/veiw_all_specialties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../Data/models/doctor_model.dart';
@@ -99,7 +101,11 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(8),
                 itemBuilder: (context, index) {
                   final item = doctorsList[index];
-                  return DoctorItem(doctor: item);
+                  return InkWell(
+                      onTap: () {
+                        context.push(AppRoute.doctorDetails);
+                      },
+                      child: DoctorItem(doctor: item));
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return const SizedBox(

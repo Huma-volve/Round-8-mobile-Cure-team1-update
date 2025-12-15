@@ -16,7 +16,11 @@ class OtpViewBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          const SizedBox(
+            height: 40,
+          ),
           const CustomeAppbar(title: 'OTP Code Verification'),
           SizedBox(
             height: 70.h,

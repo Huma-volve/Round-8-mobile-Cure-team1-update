@@ -17,7 +17,7 @@ class Notifications extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(
-              height: 35,
+              height: 40,
             ),
             Row(
               children: [
