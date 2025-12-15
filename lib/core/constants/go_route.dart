@@ -2,6 +2,9 @@ import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/features/auth/login/presentation/pages/login_page.dart';
 import 'package:cure_team_1_update/features/auth/otp/presentation/pages/otp_page.dart';
 import 'package:cure_team_1_update/features/auth/sign_up/presentation/pages/sign_up_page.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
+import 'package:cure_team_1_update/features/notifications/screen/notifications.dart';
 import 'package:cure_team_1_update/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:cure_team_1_update/features/payment/screens/add_card_screen.dart';
 import 'package:cure_team_1_update/features/payment/screens/cards_screen.dart';
@@ -50,18 +53,18 @@ abstract class Approutes {
         path: AppRoute.otpPage,
         builder: (context, state) => const OtpPage(),
       ),
-      // GoRoute(
-      //   path: AppRoute.chat,
-      //   builder: (context, state) => const Chat(),
-      // ),
-      // GoRoute(
-      //   path: AppRoute.chatbody,
-      //   builder: (context, state) => const Chatbody(),
-      // ),
-      // GoRoute(
-      //   path: AppRoute.notifications,
-      //   builder: (context, state) => const Notifications(),
-      // ),
+      GoRoute(
+        path: AppRoute.chat,
+        builder: (context, state) => const Chat(),
+      ),
+      GoRoute(
+        path: AppRoute.chatbody,
+        builder: (context, state) => const Chatbody(),
+      ),
+      GoRoute(
+        path: AppRoute.notifications,
+        builder: (context, state) => const Notifications(),
+      ),
       GoRoute(
           path: AppRoute.ProfileScreen,
           builder: (context, state) => const ProfileScreen()),
@@ -90,11 +93,6 @@ abstract class Approutes {
       // GoRoute(
       //   path: AppRoute.doctorDetails,
       //   builder: (context, state) => const DoctorDetailsScreen(),
-      // ),
-
-      // GoRoute(
-      //   path: AppRoute.notifications,
-      //   builder: (context, state) => const Notifications(),
       // ),
 
       //payment

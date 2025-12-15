@@ -27,11 +27,12 @@ class Notificationmassage extends StatelessWidget {
     ];
     return ListView.builder(
         itemCount: all_list.length,
-        itemBuilder: (context, indx) => InkWell(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Chatbody()));
-            },
-            child: Histroychat(massage: all_list[indx])));
+        itemBuilder: (context, indx) => Histroychat(
+              massage: all_list[indx],
+              fun: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Chatbody()));
+              },
+            ));
   }
 }

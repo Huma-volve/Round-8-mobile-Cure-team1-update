@@ -37,46 +37,48 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          const Customabppar(),
-          const SizedBox(
-            height: 20,
-          ),
-          CustomeTextField(
-            focusnode: _focus,
-            perfixIcon: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SvgPicture.asset(
-                Assets.resourceImagesMagnifer,
-              ),
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 20,
             ),
-            text: 'Search for chat, doctor',
-            controller: controller,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ...(isslected)
-              ? [
-                  Text(
-                    'history',
-                    style: AppTextStyles.stylegeorgia27(context),
-                  ),
-                  const SizedBox(height: 20),
-                ]
-              : [const Favoritesappber()],
-          const SizedBox(
-            height: 20,
-          ),
-          const Expanded(child: Notificationmassage())
-        ],
+            const Customabppar(),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomeTextField(
+              focusnode: _focus,
+              perfixIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset(
+                  Assets.resourceImagesMagnifer,
+                ),
+              ),
+              text: 'Search for chat, doctor',
+              controller: controller,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ...(isslected)
+                ? [
+                    Text(
+                      'history',
+                      style: AppTextStyles.stylegeorgia27(context),
+                    ),
+                    const SizedBox(height: 20),
+                  ]
+                : [const Favoritesappber()],
+            const SizedBox(
+              height: 20,
+            ),
+            const Expanded(child: Notificationmassage())
+          ],
+        ),
       ),
     );
   }

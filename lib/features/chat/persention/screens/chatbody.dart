@@ -93,7 +93,7 @@ class _ChatbodyState extends State<Chatbody> {
                       suffixIcon: SizedBox(
                         width: 60.w,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             SvgPicture.asset(Assets.resourceImagesPaperclip),
                             const SizedBox(
