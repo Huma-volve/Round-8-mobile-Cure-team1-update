@@ -1,11 +1,8 @@
 import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
-import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
-import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
-import 'package:cure_team_1_update/core/utils/assets.dart';
+
 import 'package:cure_team_1_update/features/settings/widgets/fAQ_expansion_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -73,7 +70,7 @@ class FAQsScreen extends StatelessWidget {
   //     child: Theme(
   //       data: ThemeData().copyWith(dividerColor: Colors.transparent),
   //       child: ExpansionTile(
-  //         title: Text(title, style: AppTextStyles.styleLarge8),
+  //         title: Text(title, style: StyleTextHelper.styleLarge8),
   //         initiallyExpanded: isExpanded,
   //         trailing: isExpanded
   //             ? SvgPicture.asset(
@@ -97,7 +94,7 @@ class FAQsScreen extends StatelessWidget {
   //         childrenPadding: EdgeInsets.fromLTRB(10.w, 0, 10.w, 10.h),
   //         children: [
   //           Divider(),
-  //           Text(content, style: AppTextStyles.styleSmall6)
+  //           Text(content, style: StyleTextHelper.styleSmall6)
   //         ],
   //       ),
   //     ),

@@ -1,6 +1,7 @@
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/responsive_size.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,8 +35,8 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style:
-              AppTextStyles.styleSmall6.copyWith(color: ColorsLight.offWhite),
+          style: StyleTextHelper.textStyle16Regular(context)
+              .copyWith(color: ColorsLight.offWhite),
         ),
       ),
     );
@@ -79,17 +80,18 @@ class CustomTextField extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         onChanged: onChanged,
-        style: AppTextStyles.styleSmall6.copyWith(
-          color: const Color.fromARGB(255, 141, 143, 148),
-        ),
+        style: StyleTextHelper.textStyle18Regular(context),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: AppTextStyles.styleLarge18(context),
+          hintStyle: StyleTextHelper.textStyle18Regular(context).copyWith(
+            color: const Color.fromARGB(255, 141, 143, 148),
+          ),
           border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(
             vertical: 18.h,
             horizontal: 4.w,
           ),
+
           prefixIcon: prefixWidget ??
               (prefixIcon != null
                   ? Icon(
@@ -98,8 +100,9 @@ class CustomTextField extends StatelessWidget {
                       size: 10.sp,
                     )
                   : null),
-          suffixIcon:
-              suffixIcon, // Suffix widget sizing handled by caller or default
+
+          suffixIcon: suffixIcon,
+          // Suffix widget sizing handled by caller or default
         ),
       ),
     );
