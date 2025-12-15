@@ -1,4 +1,6 @@
-
+import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../core/style/responsive_size.dart';
@@ -17,8 +19,8 @@ class NavBar extends StatefulWidget {
 class _HomePageState extends State<NavBar> {
   List<Widget> pages = [
     const HomePage(),
-  //  const BookingSection(),
-   // const Chat(),
+    //MyBookItemScreen(mybookingModel: MybookingModel(bookingStatus: bookingStatus, buttonActionName: buttonActionName, buttonOptionName: buttonOptionName),),
+    const Chat(),
     const ProfileScreen()
   ];
   int currentitem = 0;
@@ -55,14 +57,14 @@ class _HomePageState extends State<NavBar> {
                 child: SvgPicture.asset(
                   Assets.resourceImagesHome,
                   colorFilter:
-                  const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+                      const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
                 ),
               ),
               activeIcon: Center(
                 child: SvgPicture.asset(
                   Assets.resourceImagesHome,
                   colorFilter:
-                  const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
                 ),
               ),
               label: 'Home',
@@ -70,16 +72,16 @@ class _HomePageState extends State<NavBar> {
             BottomNavigationBarItem(
               icon: Center(
                 child: SvgPicture.asset(
-                  Assets.resourceImagescalendar,
+                  Assets.resourceImagesCalendar,
                   colorFilter:
-                  const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+                      const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
                 ),
               ),
               activeIcon: Center(
                 child: SvgPicture.asset(
-                  Assets.resourceImagescalendar,
+                  Assets.resourceImagesCalendar,
                   colorFilter:
-                  const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
                 ),
               ),
               label: 'Booking',
@@ -89,14 +91,14 @@ class _HomePageState extends State<NavBar> {
                 child: SvgPicture.asset(
                   Assets.resourceImagesChat,
                   colorFilter:
-                  const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+                      const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
                 ),
               ),
               activeIcon: Center(
                 child: SvgPicture.asset(
                   Assets.resourceImagesChat,
                   colorFilter:
-                  const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
                 ),
               ),
               label: 'Chat',
@@ -104,16 +106,16 @@ class _HomePageState extends State<NavBar> {
             BottomNavigationBarItem(
               icon: Center(
                 child: SvgPicture.asset(
-                  Assets.resourceImagesprofile,
+                  Assets.resourceImagesProfile,
                   colorFilter:
-                  const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+                      const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
                 ),
               ),
               activeIcon: Center(
                 child: SvgPicture.asset(
-                  Assets.resourceImagesprofile,
+                  Assets.resourceImagesProfile,
                   colorFilter:
-                  const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
                 ),
               ),
               label: 'Profile',

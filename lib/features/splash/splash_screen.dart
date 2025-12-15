@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(const Duration(seconds: 3), () async {
       if (!mounted) return;
-      GoRouter.of(context).go(AppRoute.navBar);
+      GoRouter.of(context).go(AppRoute.loginPage);
     });
   }
 

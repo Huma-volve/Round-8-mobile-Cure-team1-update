@@ -52,7 +52,9 @@ class LoginViewBody extends StatelessWidget {
             height: 16.h,
           ),
           ButtonWithGoogle(
-            onTap: () {},
+            onTap: () {
+              context.go(AppRoute.navBar);
+            },
           ),
           SizedBox(
             height: 16.h,
@@ -66,7 +68,7 @@ class LoginViewBody extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  GoRouter.of(context).pushReplacement(AppRoute.home);
+                  GoRouter.of(context).pushReplacement(AppRoute.signupPage);
                 },
                 child: const Text(
                   'Sign up',

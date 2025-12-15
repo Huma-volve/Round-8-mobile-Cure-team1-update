@@ -1,6 +1,8 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
+import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
+import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/add_review_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/book_apointmennt_.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/doctor_details_screen.dart';
@@ -8,6 +10,9 @@ import 'package:cure_team_1_update/features/doctor_details/presentation/screens/
 import 'package:cure_team_1_update/features/auth/login/presentation/pages/login_page.dart';
 import 'package:cure_team_1_update/features/auth/otp/presentation/pages/otp_page.dart';
 import 'package:cure_team_1_update/features/auth/sign_up/presentation/pages/sign_up_page.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
+import 'package:cure_team_1_update/features/notifications/screen/notifications.dart';
 import 'package:cure_team_1_update/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:cure_team_1_update/features/payment/screens/add_card_screen.dart';
 import 'package:cure_team_1_update/features/payment/screens/cards_screen.dart';
@@ -23,10 +28,12 @@ import 'package:go_router/go_router.dart';
 
 abstract class Approutes {
   static GoRouter router = GoRouter(
-    initialLocation: AppRoute.myBookingScreen,
     routes: [
       //booking
-
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const SplashScreen(),
+      ),
       GoRoute(
         path: AppRoute.bookappointment,
         builder: (context, state) => const Bookappointment(),
@@ -60,18 +67,18 @@ abstract class Approutes {
         path: AppRoute.otpPage,
         builder: (context, state) => const OtpPage(),
       ),
-      // GoRoute(
-      //   path: AppRoute.chat,
-      //   builder: (context, state) => const Chat(),
-      // ),
-      // GoRoute(
-      //   path: AppRoute.chatbody,
-      //   builder: (context, state) => const Chatbody(),
-      // ),
-      // GoRoute(
-      //   path: AppRoute.notifications,
-      //   builder: (context, state) => const Notifications(),
-      // ),
+      GoRoute(
+        path: AppRoute.chat,
+        builder: (context, state) => const Chat(),
+      ),
+      GoRoute(
+        path: AppRoute.chatbody,
+        builder: (context, state) => const Chatbody(),
+      ),
+      GoRoute(
+        path: AppRoute.notifications,
+        builder: (context, state) => const Notifications(),
+      ),
       GoRoute(
           path: AppRoute.ProfileScreen,
           builder: (context, state) => const ProfileScreen()),
@@ -84,7 +91,8 @@ abstract class Approutes {
       GoRoute(
         path: AppRoute.onBoarding,
         builder: (context, state) => const OnboaedingScreen(),
-      ),GoRoute(
+      ),
+      GoRoute(
         path: AppRoute.navBar,
         builder: (context, state) => const NavBar(),
       ),
@@ -121,12 +129,6 @@ abstract class Approutes {
         path: AppRoute.otpPage,
         builder: (context, state) => const OtpPage(),
       ),
-
-      // GoRoute(
-      //   path: AppRoute.notifications,
-      //   builder: (context, state) => const Notifications(),
-      // ),
-
       //payment
       GoRoute(
         path: AppRoute.paymentScreenpaymentScreen,
