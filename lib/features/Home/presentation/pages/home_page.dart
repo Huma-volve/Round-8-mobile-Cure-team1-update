@@ -2,9 +2,11 @@
 import 'package:cure_team_1_update/features/Home/presentation/pages/search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/veiw_all_specialties.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/utils/assets.dart';
 import '../../Data/models/doctor_model.dart';
-import '../widgets/booking_section.dart';
 import '../widgets/doctor_item.dart';
 import '../widgets/home_top_section.dart';
 import '../widgets/specialties_list.dart';
@@ -68,10 +70,10 @@ class _HomePageState extends State<HomePage> {
                 height: 6,
               ),
               const SpecialtiesList(),
-              const SizedBox(
+               SizedBox(
                 height: 10,
               ),
-              const BookingSection(),
+
               Row(children: [
                 const Expanded(
                   child: Text(

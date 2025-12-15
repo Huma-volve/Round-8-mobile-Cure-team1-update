@@ -71,7 +71,9 @@ class HomeTopSection extends StatelessWidget {
               BoxShadow(color: Colors.black26, offset: Offset(0, 6), blurRadius: 6),
             ],
           ),
-          child: InkWell(onTap: (){},
+          child: InkWell(onTap: (){
+
+          },
               child: const Icon(Icons.notifications_none_outlined,)),
         ),
       ],

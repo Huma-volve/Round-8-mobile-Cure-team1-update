@@ -6,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/Home/presentation/pages/home_page.dart';
-import '../../features/Home/presentation/widgets/booking_section.dart';
 import '../../features/profile/screens/profile_screen.dart';
 
 class Customnavigationbar extends StatefulWidget {
@@ -32,22 +31,22 @@ class _CustomnavigationbarState extends State<Customnavigationbar> {
             ),
           );
         }
-        if (index == 1) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const BookingSection(),
-            ),
-          );
-        }
-      //  if (index == 2) {
-         // Navigator.push(
-        //    context,
-        //    MaterialPageRoute(
-        //      builder: (context) => const Chat(),
-        //    ),
-       //   );
-       // }
+        //if (index == 1) {
+       //   Navigator.push(
+       //     context,
+       //     MaterialPageRoute(
+       //       builder: (context) => const BookingSection(),
+      //      ),
+      //    );
+     //   }
+     //   if (index == 2) {
+     //     Navigator.push(
+     //       context,
+      //      MaterialPageRoute(
+      //        builder: (context) => const Chat(),
+      ///      ),
+      //    );
+     //   }
         if (index == 3) {
           Navigator.push(
             context,
