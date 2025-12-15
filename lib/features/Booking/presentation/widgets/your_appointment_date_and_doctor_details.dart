@@ -31,11 +31,11 @@ const Spacer(),
       SizedBox(
         width: double.infinity,
         child: BookingOptionButton(bottonName: mybookingModel.buttonOptionName)),
-        SizedBox(height: 24.h,),
+        SizedBox(height: 24.r,),
             SizedBox(
       width: double.infinity,
       child: BookingActionButton(bottonName: mybookingModel.buttonActionName, isCnaceledButton: true)),
-       SizedBox(height: 40.h,),
+       SizedBox(height: 40.r,),
         
       ],
     );
