@@ -1,5 +1,6 @@
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -35,14 +36,18 @@ class _FAQExpansionTileState extends State<FAQExpansionTile> {
               isExpanded = value;
             });
           },
-          title: Text(widget.title, style: AppTextStyles.styleLarge8),
+          title: Text(widget.title,
+              style: StyleTextHelper.textStyle20Regular(context).copyWith(
+                fontFamily: 'georgia',
+              )),
           trailing: Icon(
             isExpanded ? Icons.add : Icons.minimize,
           ),
           childrenPadding: EdgeInsets.fromLTRB(10.w, 0, 10.w, 10.h),
           children: [
             const Divider(),
-            Text(widget.content, style: AppTextStyles.styleSmall6),
+            Text(widget.content,
+                style: StyleTextHelper.textStyle16Regular(context)),
           ],
         ),
       ),

@@ -3,6 +3,7 @@ import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/features/payment/widgets/build_empity_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -78,7 +79,8 @@ class _CardsScreenState extends State<CardsScreen> {
           GoRouter.of(context).canPop() ? GoRouter.of(context).pop() : null;
         },
       ),
-      body: _cards.isEmpty ? buildEmptyState() : buildCardList(),
+      body:
+          _cards.isEmpty ? buildEmptyState(context: context) : buildCardList(),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.all(24.0.r),
         child: CustomButton(
@@ -132,14 +134,14 @@ class _CardsScreenState extends State<CardsScreen> {
               Expanded(
                 child: Text(
                   '${card.type} **** $last4',
-                  style: AppTextStyles.styleMedium10,
+                  style: StyleTextHelper.textStyle16Regular(context),
                 ),
               ),
               // Radio
               Icon(
                 Icons.radio_button_checked,
                 color: ColorsLight.primaryColor,
-                size: 24.sp,
+                size: 12.sp,
               ),
             ],
           ),

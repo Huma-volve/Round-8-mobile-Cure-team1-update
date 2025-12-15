@@ -1,5 +1,6 @@
 import 'package:cure_team_1_update/core/style/responsive_size.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/features/profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,30 +21,30 @@ class _CustomnavigationbarState extends State<Customnavigationbar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       onTap: (index) {
-        if (index == 0) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const HomePage(),
-            ),
-          );
-        }
-        if (index == 1) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const BookingSection(),
-            ),
-          );
-        }
-        if (index == 2) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const Chat(),
-            ),
-          );
-        }
+        // if (index == 0) {
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => const HomePage(),
+        //     ),
+        //   );
+        // }
+        // if (index == 1) {
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => const BookingSection(),
+        //     ),
+        //   );
+        // }
+        // if (index == 2) {
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => const Chat(),
+        //     ),
+        //   );
+        // }
         if (index == 3) {
           Navigator.push(
             context,

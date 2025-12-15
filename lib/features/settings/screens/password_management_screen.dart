@@ -3,6 +3,7 @@ import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,7 +61,8 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Current password', style: AppTextStyles.styleSmall8),
+              Text('Current password',
+                  style: StyleTextHelper.textStyle16Regular(context)),
               SizedBox(height: 8.h),
               CustomTextField(
                 hintText: '********',
@@ -90,7 +92,8 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
 
               SizedBox(height: 24.h),
 
-              Text('New password', style: AppTextStyles.styleSmall8),
+              Text('New password',
+                  style: StyleTextHelper.textStyle16Regular(context)),
               SizedBox(height: 8.h),
               CustomTextField(
                 hintText: '********',
@@ -123,7 +126,8 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
 
               SizedBox(height: 24.h),
 
-              Text('Confirm new password', style: AppTextStyles.styleSmall8),
+              Text('Confirm new password',
+                  style: StyleTextHelper.textStyle16Regular(context)),
               SizedBox(height: 8.h),
               CustomTextField(
                 hintText: '********',
