@@ -1,15 +1,13 @@
 import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
 import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
-import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
-import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
+import 'package:cure_team_1_update/features/payment/screens/cards_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
-import 'cards_screen.dart';
 
 class PaymentMethodsScreen extends StatefulWidget {
   const PaymentMethodsScreen({super.key});
@@ -36,7 +34,10 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Credit & Debit Card', style: AppTextStyles.styleLarge10),
+            Text('Credit & Debit Card',
+                style: StyleTextHelper.textStyle20Regular(context).copyWith(
+                  fontFamily: 'georgia',
+                )),
             SizedBox(height: 16.h),
             _buildCardDisplay(
               'VISA',
@@ -45,11 +46,12 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
             ), // Default to Visa for now
             SizedBox(height: 16.h),
             _buildCardDisplay('MasterCard', 'Bank Name', false),
-
             SizedBox(height: 32.h),
-            Text('More Payment Options', style: AppTextStyles.styleLarge10),
+            Text('More Payment Options',
+                style: StyleTextHelper.textStyle20Regular(context).copyWith(
+                  fontFamily: 'georgia',
+                )),
             SizedBox(height: 16.h),
-
             // Wallet Options
             Container(
               decoration: BoxDecoration(
@@ -73,6 +75,11 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
   Widget _buildCardDisplay(String type, String title, bool isVisa) {
     return InkWell(
       onTap: () {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return const CardsScreen();
+          },
+        ));
         GoRouter.of(context).push(AppRoute.cardsScreen);
       },
       child: Container(
@@ -94,13 +101,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
               height: 18.h, // Adjusted size
             ),
           ),
-          // Wait, for 'Debit Card' vs 'Credit Card', the prompt implies these are linked cards.
-          // The icons in screenshot are generic card icons or brand icons.
-          // I will use Visa for one and maybe another asset if available, but for now Visa is fine or just leave as is.
-          // Actually, the previous step used Assets.visa, so I stick with it.
-          // For the second one, I will leave it as AppAssets.visa or check if I have mastercard. I don't.
-          // I'll keep the logic simple.
-          title: Text(type, style: AppTextStyles.styleMedium8),
+          title: Text(type, style: StyleTextHelper.textStyle16Regular(context)),
           trailing: Icon(
             Icons.chevron_right,
             color: ColorsLight.textGrey,
@@ -127,7 +128,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
           leading: SizedBox(
               width: 18.w,
               child: SvgPicture.asset(assetPath, width: 12.w, height: 12.w)),
-          title: Text(name, style: AppTextStyles.styleMedium8),
+          title: Text(name, style: StyleTextHelper.textStyle16Regular(context)),
           trailing: Container(
             width: 10.w,
             height: 10.w,

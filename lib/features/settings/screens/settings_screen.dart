@@ -31,15 +31,22 @@ class SettingsScreen extends StatelessWidget {
         child: Column(
           children: [
             buildMenuItem(
+              context: context,
               title: 'Password Management',
               assetPath: Assets.settingsLockKeyhole,
               onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return const PasswordManagementScreen();
+                  },
+                ));
                 GoRouter.of(context).push(AppRoute.passwordManagementScreen);
                 ;
               },
             ),
             SizedBox(height: 16.h),
             buildMenuItem(
+              context: context,
               title: 'Delete Account',
               // Using userRounded or similar as we don't have a specific delete-user SVG
               // If 'minus-sign' was relevant I'd combine it, but simple User icon is safer fallback than broken asset

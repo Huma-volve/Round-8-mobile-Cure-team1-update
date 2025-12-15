@@ -1,4 +1,5 @@
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/style/theme/app_text_styles.dart';
@@ -26,7 +27,7 @@ Widget buildDropdown({
           value: items.contains(value) ? value : null,
           hint: Text(
             hint,
-            style: AppTextStyles.styleLarge16(context),
+            style: StyleTextHelper.textStyle16Regular(context),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -39,7 +40,7 @@ Widget buildDropdown({
           menuMaxHeight: 300,
           borderRadius: BorderRadius.circular(12),
           dropdownColor: Colors.white,
-          style: AppTextStyles.styleLarge16(context),
+          style: StyleTextHelper.textStyle16Regular(context),
           items: items.map((String val) {
             return DropdownMenuItem<String>(
               value: val,

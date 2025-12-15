@@ -1,6 +1,7 @@
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,6 +11,7 @@ Widget buildMenuItem({
   required String title,
   required VoidCallback onTap,
   double? iconWidth,
+  required BuildContext context,
 }) {
   return Container(
     decoration: BoxDecoration(
@@ -27,7 +29,7 @@ Widget buildMenuItem({
           BlendMode.srcIn,
         ),
       ),
-      title: Text(title, style: AppTextStyles.styleSmall8),
+      title: Text(title, style: StyleTextHelper.textStyle12Regular(context)),
       trailing: SvgPicture.asset(
         Assets.profileArrowRight,
         fit: BoxFit.contain,

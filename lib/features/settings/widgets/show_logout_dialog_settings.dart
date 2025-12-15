@@ -1,5 +1,6 @@
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/core/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ void showLogoutDialogSettings(BuildContext context) {
             SizedBox(height: 8.h),
             Text(
               'Logout',
-              style: AppTextStyles.styleLarge10,
+              style: StyleTextHelper.textStyle16Bold(context),
             ),
             SizedBox(height: 8.h),
             const Divider(),
@@ -32,7 +33,7 @@ void showLogoutDialogSettings(BuildContext context) {
             Text(
               'Are you sure you want to delete your account?',
               textAlign: TextAlign.center,
-              style: AppTextStyles.styleSmall8.copyWith(
+              style: StyleTextHelper.textStyle16Regular(context).copyWith(
                 color: ColorsLight.textMain,
               ),
             ),

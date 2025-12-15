@@ -1,4 +1,5 @@
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,7 +31,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(
         title ?? '',
-        style: titleStyle ?? AppTextStyles.styleMedium10,
+        style: titleStyle ??
+            StyleTextHelper.textStyle20Regular(context).copyWith(
+              fontFamily: 'georgia',
+            ),
       ),
       centerTitle: centerTitle,
       backgroundColor: backgroundColor,

@@ -1,3 +1,4 @@
+import 'package:cure_team_1_update/features/profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cure_team_1_update/core/constants/go_route.dart';

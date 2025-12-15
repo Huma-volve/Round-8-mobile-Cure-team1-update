@@ -2,6 +2,7 @@ import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -122,14 +123,16 @@ class _AddCardScreenState extends State<AddCardScreen> {
                 expiryDate: _expiryDate,
               ),
               SizedBox(height: 32.h),
-              Text('Cardholder Name', style: AppTextStyles.styleMedium12),
+              Text('Cardholder Name',
+                  style: StyleTextHelper.textStyle16Regular(context)),
               SizedBox(height: 8.h),
               CustomTextField(
                 hintText: 'Cardholder Name',
                 controller: _cardHolderController,
               ),
               SizedBox(height: 24.h),
-              Text('Card Number', style: AppTextStyles.styleMedium12),
+              Text('Card Number',
+                  style: StyleTextHelper.textStyle16Regular(context)),
               SizedBox(height: 8.h),
               CustomTextField(
                 hintText: 'Card Number',
@@ -138,7 +141,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                 suffixIcon: Icon(
                   Icons.credit_card,
                   color: ColorsLight.textGrey,
-                  size: 24.sp,
+                  size: 10.sp,
                 ),
               ),
               SizedBox(height: 24.h),
@@ -148,7 +151,8 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Expiry Date', style: AppTextStyles.styleSmall12),
+                        Text('Expiry Date',
+                            style: StyleTextHelper.textStyle16Regular(context)),
                         SizedBox(height: 10.h),
                         SizedBox(
                           width: 60.w,
@@ -163,7 +167,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                               Container(
                                 color: ColorsLight.gray,
                                 width: 1.w,
-                                height: 50.h,
+                                height: 40.h,
                               ),
                               Expanded(
                                 child: _buildSmallInput(
@@ -182,7 +186,8 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('CVV Code', style: AppTextStyles.styleSmall12),
+                        Text('CVV Code',
+                            style: StyleTextHelper.textStyle16Regular(context)),
                         SizedBox(height: 8.h),
                         CustomTextField(
                           hintText: '123',
@@ -213,13 +218,13 @@ class _AddCardScreenState extends State<AddCardScreen> {
       child: TextField(
         controller: controller,
         textAlign: TextAlign.center,
-        style: AppTextStyles.styleSmall12,
+        style: StyleTextHelper.textStyle16Regular(context),
         keyboardType: TextInputType.number,
         maxLength: 2,
         decoration: InputDecoration(
           counterText: "", // Hide character counter
           hintText: hint,
-          hintStyle: AppTextStyles.styleSmall12,
+          hintStyle: StyleTextHelper.textStyle16Regular(context),
           border: InputBorder.none,
           // contentPadding: EdgeInsets.symmetric(vertical: 14.h),
         ),

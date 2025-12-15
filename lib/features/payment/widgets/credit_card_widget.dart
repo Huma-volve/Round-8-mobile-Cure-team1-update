@@ -1,6 +1,7 @@
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -49,7 +50,8 @@ class CreditCardWidget extends StatelessWidget {
                   Assets.profileGroupAddCard), // Placeholder for "Spenny" logo
               Text(
                 'VISA',
-                style: AppTextStyles.styleLarge18(context),
+                style: StyleTextHelper.textStyle30Regular(context)
+                    .copyWith(color: ColorsLight.offWhite),
               ),
             ],
           ),
@@ -66,7 +68,8 @@ class CreditCardWidget extends StatelessWidget {
           SizedBox(height: 8.h),
           Text(
             cardNumber,
-            style: AppTextStyles.styleLarge18(context),
+            style: StyleTextHelper.textStyle28Regular(context)
+                .copyWith(color: ColorsLight.offWhite),
           ),
           SizedBox(height: 12.h),
           Row(
@@ -74,11 +77,13 @@ class CreditCardWidget extends StatelessWidget {
             children: [
               Text(
                 cardHolder.toUpperCase(),
-                style: const TextStyle(color: Colors.white, fontSize: 14),
+                style: StyleTextHelper.textStyle16Regular(context)
+                    .copyWith(color: ColorsLight.offWhite),
               ),
               Text(
                 expiryDate,
-                style: const TextStyle(color: Colors.white, fontSize: 14),
+                style: StyleTextHelper.textStyle16Regular(context)
+                    .copyWith(color: ColorsLight.offWhite),
               ),
             ],
           ),
