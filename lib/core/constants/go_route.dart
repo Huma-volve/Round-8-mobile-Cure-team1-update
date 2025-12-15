@@ -10,53 +10,45 @@ import 'package:cure_team_1_update/features/settings/screens/privacy_policy_scre
 import 'package:cure_team_1_update/features/settings/screens/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/Home/presentation/pages/home_page.dart';
+import '../../features/Home/presentation/widgets/booking_section.dart';
+
 abstract class Approutes {
   static GoRouter router = GoRouter(
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const SplashScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.bookappointment,
-        builder: (context, state) => const Bookappointment(),
-      ),
-      GoRoute(
-        path: AppRoute.selectPaymentMethodScreen,
-        builder: (context, state) => const SelectPaymentMethodScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.addReviewScreen,
-        builder: (context, state) => const AddReviewScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.doctorDetails,
-        builder: (context, state) => const DoctorDetailsScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.loginPage,
-        builder: (context, state) => const LoginPage(),
-      ),
-      GoRoute(
-        path: AppRoute.signupPage,
-        builder: (context, state) => const SignUpPage(),
-      ),
-      GoRoute(
-        path: AppRoute.otpPage,
-        builder: (context, state) => const OtpPage(),
-      ),
-      GoRoute(
-        path: AppRoute.chat,
-        builder: (context, state) => const Chat(),
-      ),
-      GoRoute(
-        path: AppRoute.chatbody,
-        builder: (context, state) => const Chatbody(),
-      ),
-      GoRoute(
-        path: AppRoute.notifications,
-        builder: (context, state) => const Notifications(),
-      ),
+     // GoRoute(
+     //   path: '/',
+     //   builder: (context, state) => const SplashScreen(),
+    //  ),
+    //  GoRoute(
+     //   path: AppRoute.bookappointment,
+     //   builder: (context, state) => const Bookappointment(),
+    //  ),
+
+     // GoRoute(
+      //  path: AppRoute.loginPage,
+      //  builder: (context, state) => const LoginPage(),
+     // ),
+     // GoRoute(
+     //   path: AppRoute.signupPage,
+     //   builder: (context, state) => const SignUpPage(),
+     // ),
+     // GoRoute(
+      //  path: AppRoute.otpPage,
+     //   builder: (context, state) => const OtpPage(),
+     // ),
+     // GoRoute(
+     //   path: AppRoute.chat,
+     //   builder: (context, state) => const Chat(),
+    //  ),
+    //  GoRoute(
+    //    path: AppRoute.chatbody,
+   //     builder: (context, state) => const Chatbody(),
+   //   ),
+     // GoRoute(
+     //   path: AppRoute.notifications,
+     //   builder: (context, state) => const Notifications(),
+    //  ),
       GoRoute(
           path: AppRoute.ProfileScreen,
           builder: (context, state) => const ProfileScreen()),
@@ -66,48 +58,28 @@ abstract class Approutes {
         path: AppRoute.BookingSection,
         builder: (context, state) => const BookingSection(),
       ),
-      GoRoute(
-        path: AppRoute.onBoarding,
-        builder: (context, state) => const OnboaedingScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.splash,
-        builder: (context, state) => const SplashScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.bookappointment,
-        builder: (context, state) => const Bookappointment(),
-      ),
-      GoRoute(
-        path: AppRoute.selectPaymentMethodScreen,
-        builder: (context, state) => const SelectPaymentMethodScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.addReviewScreen,
-        builder: (context, state) => const AddReviewScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.doctorDetails,
-        builder: (context, state) => const DoctorDetailsScreen(),
-      ),
-      GoRoute(
-        path: AppRoute.loginPage,
-        builder: (context, state) => const LoginPage(),
-      ),
-      GoRoute(
-        path: AppRoute.signupPage,
-        builder: (context, state) => const SignUpPage(),
-      ),
+      //GoRoute(
+      //  path: AppRoute.onBoarding,
+      //  builder: (context, state) => const OnboaedingScreen(),
+      //),
 
-      GoRoute(
-        path: AppRoute.otpPage,
-        builder: (context, state) => const OtpPage(),
-      ),
+     // GoRoute(
+     //   path: AppRoute.bookappointment,
+     //   builder: (context, state) => const Bookappointment(),
+    //  ),
+    //  GoRoute(
+    //    path: AppRoute.selectPaymentMethodScreen,
+    //    builder: (context, state) => const SelectPaymentMethodScreen(),
+    //  ),
+     // GoRoute(
+     //   path: AppRoute.addReviewScreen,
+     //   builder: (context, state) => const AddReviewScreen(),
+     // ),
+     // GoRoute(
+     //   path: AppRoute.doctorDetails,
+      //  builder: (context, state) => const DoctorDetailsScreen(),
+     // ),
 
-      GoRoute(
-        path: AppRoute.notifications,
-        builder: (context, state) => const Notifications(),
-      ),
 
       //payment
       GoRoute(

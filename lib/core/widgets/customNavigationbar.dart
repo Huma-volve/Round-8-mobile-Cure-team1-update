@@ -5,6 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/Home/presentation/pages/home_page.dart';
+import '../../features/Home/presentation/widgets/booking_section.dart';
+import '../../features/profile/screens/profile_screen.dart';
+
 class Customnavigationbar extends StatefulWidget {
   const Customnavigationbar({super.key, required this.pages});
   final List<String>? pages;
@@ -36,14 +40,14 @@ class _CustomnavigationbarState extends State<Customnavigationbar> {
             ),
           );
         }
-        if (index == 2) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const Chat(),
-            ),
-          );
-        }
+      //  if (index == 2) {
+         // Navigator.push(
+        //    context,
+        //    MaterialPageRoute(
+        //      builder: (context) => const Chat(),
+        //    ),
+       //   );
+       // }
         if (index == 3) {
           Navigator.push(
             context,
