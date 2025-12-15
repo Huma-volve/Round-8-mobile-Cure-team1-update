@@ -1,4 +1,4 @@
-
+import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/responsive_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +6,92 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppTextStyles {
   // ==================== GEORGIA ====================
   static const String _georgia = 'Georgian';
+
+  static TextStyle interRegular14(BuildContext context) => TextStyle(
+        fontSize: responsive_size(context, fontsize: 14),
+        fontWeight: FontWeight.w400,
+        fontFamily: 'Inter_28pt',
+      );
+  static TextStyle interSemiBold20(BuildContext context) => TextStyle(
+        fontSize: responsive_size(context, fontsize: 20),
+        fontWeight: FontWeight.w600,
+        fontFamily: 'Inter_28pt',
+      );
+  static TextStyle interMedum16(BuildContext context) => TextStyle(
+        fontSize: responsive_size(context, fontsize: 16),
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Inter_28pt',
+      );
+  static TextStyle montserratRegular14(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 14),
+      fontWeight: FontWeight.w400,
+      fontFamily: 'Montserrat',
+      color: ColorsLight.blueGray);
+      static TextStyle montserratRegular16(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 16),
+      fontWeight: FontWeight.w400,
+      fontFamily: 'Montserrat',
+      );
+        static TextStyle montserratRegular12(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 12),
+      fontWeight: FontWeight.w400,
+      fontFamily: 'Montserrat',
+      color: ColorsLight.prussianBlue);
+  static TextStyle montserratMedum16(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 16),
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Montserrat',
+      color: ColorsLight.blueGray);
+       static TextStyle montserratMedum12(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 12),
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Montserrat',
+      color: ColorsLight.blueGray);
+        static TextStyle montserratMedum24(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 24),
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Montserrat',
+      color: ColorsLight.prussianBlue);
+  static TextStyle montserratMedum14(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 14),
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Montserrat',
+      color: ColorsLight.blueGray);
+
+  static TextStyle georgiaRegular20(BuildContext context) => TextStyle(
+        fontSize: responsive_size(context, fontsize: 20),
+        fontWeight: FontWeight.w400,
+        fontFamily: 'georgia',
+      );
+      static TextStyle georgiaRegular24(BuildContext context) => TextStyle(
+        fontSize: responsive_size(context, fontsize: 24),
+        fontWeight: FontWeight.w400,
+        fontFamily: 'georgia',
+      );
+  static TextStyle georgiaRegular40(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 40),
+      fontWeight: FontWeight.w400,
+      fontFamily: 'georgia',
+      color: ColorsLight.prussianBlue);
+
+  static TextStyle georgiaRegular14(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 14),
+      fontWeight: FontWeight.w400,
+      fontFamily: 'georgia',
+      color: ColorsLight.blueGray);
+  static TextStyle georgiaRegular16(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 16),
+      fontWeight: FontWeight.w400,
+      fontFamily: 'georgia',
+      color: ColorsLight.prussianBlue);
+
+  static TextStyle georgiaSemiBold14(BuildContext context) => TextStyle(
+      fontSize: responsive_size(context, fontsize: 14),
+      fontWeight: FontWeight.w600,
+      fontFamily: 'georgia',
+      color: ColorsLight.gray);
+
+//       ////////
 
   static TextStyle georgiaH1(context) => TextStyle(
         fontFamily: _georgia,
@@ -19,6 +105,7 @@ class AppTextStyles {
     fontWeight: FontWeight.w300,
     fontFamily: 'Montserrat',
   );
+
   static TextStyle styleMedium6 = TextStyle(
     fontSize: 6.sp,
     fontWeight: FontWeight.w500,

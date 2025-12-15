@@ -16,11 +16,14 @@ class AppRoute {
   static const search = "/search";
   static const viewAllForSpecialties = "/viewAllForSpecialties";
   static const map = "/map";
-
+//booking
   static const doctorDetails = "/doctorDetails";
   static const bookappointment = "/bookappointment";
   static const selectPaymentMethodScreen = "/selectPaymentMethodPage";
   static const addReviewScreen = "/addreviewScreeb";
+ static const myBookingitemSsceen = "/myBookingitemSsceen";
+static const myBookingScreen = "/myBookingScreen";
+
 
   //payment
   static const paymentScreenpaymentScreen = "/PaymentMethodsScreen";

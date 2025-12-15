@@ -4,6 +4,7 @@ import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/features/profile/widgets/build_menu_item.dart';
 import 'package:cure_team_1_update/features/profile/widgets/show_logout_dialog.dart';
 import 'package:flutter/material.dart';
@@ -32,15 +33,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorsLight.scaffoldBackground,
-        // appBar: const CustomAppBar(
-        //   // title: 'Profile',
-        //   centerTitle: false,
-        //   backgroundColor: Colors.transparent,
-        //   elevation: 0,
-        //   scrolledUnderElevation: 0,
-        // ),
         body: SingleChildScrollView(
-            padding: EdgeInsets.all(24.0.r),
+            padding: EdgeInsets.all(24.r),
             child: Column(children: [
               // User Info Card
               SizedBox(height: 12.h),
@@ -60,8 +54,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ), // Placeholder
                       backgroundColor: Colors.grey,
                     ),
-                    title:
-                        Text('Seif Mohamed', style: AppTextStyles.styleLarge8),
+                    title: Text('Seif Mohamed',
+                        style: StyleTextHelper.textStyle20Regular(context)
+                            .copyWith(fontFamily: 'georgia')),
                     subtitle: Row(children: [
                       Icon(
                         Icons.location_on,
@@ -70,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       Text(
                         '129,El-Nasr Street, Cairo',
-                        style: AppTextStyles.styleSmall6
+                        style: StyleTextHelper.textStyle12Regular(context)
                             .copyWith(color: ColorsLight.blueGray),
                       ),
                     ]),
@@ -108,7 +103,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       BlendMode.srcIn,
                     ),
                   ),
-                  title: Text('Notification', style: AppTextStyles.styleSmall8),
+                  title: Text('Notification',
+                      style: StyleTextHelper.textStyle16Regular(context)),
                   value: _notificationEnabled,
                   activeColor: ColorsLight.offWhite, // As per design
                   // activeThumbColor: ColorsLight.,
@@ -124,30 +120,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(height: 16.h),
 
               buildMenuItem(
+                context: context,
                 assetPath: Assets.profileGroupAddCard,
                 iconWidth: 8.w,
                 title: 'Payment Method',
                 onTap: () {
-                  GoRouter.of(context)
-                      .push(AppRoute.paymentScreenpaymentScreen);
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const PaymentMethodsScreen();
+                    },
+                  ));
+                  // GoRouter.of(context)
+                  //     .push(AppRoute.paymentScreenpaymentScreen);
                 },
               ),
               SizedBox(height: 16.h),
               buildMenuItem(
+                context: context,
                 assetPath: Assets.profileHeart,
                 title: 'Favorite',
                 onTap: () {},
               ),
               SizedBox(height: 16.h),
               buildMenuItem(
+                context: context,
                 assetPath: Assets.profileSettings,
                 title: 'Settings',
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const SettingsScreen();
+                    },
+                  ));
                   GoRouter.of(context).push(AppRoute.settingsScreen);
                 },
               ),
               SizedBox(height: 16.h),
               buildMenuItem(
+                context: context,
                 assetPath: Assets.profileChat,
                 title: 'FAQs',
                 onTap: () {
@@ -156,9 +166,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(height: 16.h),
               buildMenuItem(
+                context: context,
                 assetPath: Assets.settingsLockKeyhole,
                 title: 'Privacy Policy',
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const PrivacyPolicyScreen();
+                    },
+                  ));
                   GoRouter.of(context).push(AppRoute.privacyPolicyScreen);
                 },
               ),
@@ -184,7 +200,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   title: Text('Log out',
-                      style: AppTextStyles.styleSmall8
+                      style: StyleTextHelper.textStyle20Regular(context)
                           .copyWith(color: ColorsLight.error)),
                 ),
               )
