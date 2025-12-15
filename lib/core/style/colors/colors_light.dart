@@ -28,7 +28,6 @@ class ColorsLight {
  static const Color grey1 = Color(0xffF5F6F7);
  static const Color grey2 = Color(0xffE8EFF8);
  static const Color darkGrey = Color(0xff404448);
- static const Color green = Color(0xff4CAF50);
  static const Color lightGreen = Color(0xFFEDF7EE);
   static const Color coolGrey = Color(0xFF99A2AB);
   static const Color creamyLight = Color(0xFFFFF6E9);

@@ -19,6 +19,7 @@ import 'package:go_router/go_router.dart';
 
 abstract class Approutes {
   static GoRouter router = GoRouter(
+    initialLocation: AppRoute.myBookingScreen,
     routes: [
       //booking
 
