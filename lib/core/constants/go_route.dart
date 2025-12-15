@@ -1,4 +1,13 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/features/payment/screens/add_card_screen.dart';
+import 'package:cure_team_1_update/features/payment/screens/cards_screen.dart';
+import 'package:cure_team_1_update/features/payment/screens/payment_methods_screen.dart';
+import 'package:cure_team_1_update/features/profile/screens/edit_profile_screen.dart';
+import 'package:cure_team_1_update/features/profile/screens/profile_screen.dart';
+import 'package:cure_team_1_update/features/settings/screens/faqs_screen.dart';
+import 'package:cure_team_1_update/features/settings/screens/password_management_screen.dart';
+import 'package:cure_team_1_update/features/settings/screens/privacy_policy_screen.dart';
+import 'package:cure_team_1_update/features/settings/screens/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class Approutes {
