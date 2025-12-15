@@ -1,4 +1,10 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
+import 'package:cure_team_1_update/features/doctor_details/presentation/screens/add_review_screen.dart';
+import 'package:cure_team_1_update/features/doctor_details/presentation/screens/book_apointmennt_.dart';
+import 'package:cure_team_1_update/features/doctor_details/presentation/screens/doctor_details_screen.dart';
+import 'package:cure_team_1_update/features/doctor_details/presentation/screens/select_payment_method_screen.dart';
 import 'package:cure_team_1_update/features/auth/login/presentation/pages/login_page.dart';
 import 'package:cure_team_1_update/features/auth/otp/presentation/pages/otp_page.dart';
 import 'package:cure_team_1_update/features/auth/sign_up/presentation/pages/sign_up_page.dart';
@@ -17,30 +23,34 @@ import 'package:go_router/go_router.dart';
 
 abstract class Approutes {
   static GoRouter router = GoRouter(
+    initialLocation: AppRoute.myBookingScreen,
     routes: [
+      //booking
+
       GoRoute(
-        path: '/',
-        builder: (context, state) => const SplashScreen(),
+        path: AppRoute.bookappointment,
+        builder: (context, state) => const Bookappointment(),
       ),
-      // GoRoute(
-      //   path: AppRoute.bookappointment,
-      //   builder: (context, state) => const Bookappointment(),
-      // ),
-      // GoRoute(
-      //   path: AppRoute.selectPaymentMethodScreen,
-      //   builder: (context, state) => const SelectPaymentMethodScreen(),
-      // ),
-      // GoRoute(
-      //   path: AppRoute.addReviewScreen,
-      //   builder: (context, state) => const AddReviewScreen(),
-      // ),
-      // GoRoute(
-      //   path: AppRoute.doctorDetails,
-      //   builder: (context, state) => const DoctorDetailsScreen(),
-      // ),
       GoRoute(
-        path: AppRoute.loginPage,
-        builder: (context, state) => const LoginPage(),
+        path: AppRoute.selectPaymentMethodScreen,
+        builder: (context, state) => const SelectPaymentMethodScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.addReviewScreen,
+        builder: (context, state) => const AddReviewScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.doctorDetails,
+        builder: (context, state) => const DoctorDetailsScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.myBookingitemSsceen,
+        builder: (context, state) {
+          final mybokkingModel = state.extra as MybookingModel;
+          return MyBookItemScreen(
+            mybookingModel: mybokkingModel,
+          );
+        },
       ),
       GoRoute(
         path: AppRoute.signupPage,
@@ -75,22 +85,39 @@ abstract class Approutes {
         path: AppRoute.onBoarding,
         builder: (context, state) => const OnboaedingScreen(),
       ),
-      // GoRoute(
-      //   path: AppRoute.bookappointment,
-      //   builder: (context, state) => const Bookappointment(),
-      // ),
-      // GoRoute(
-      //   path: AppRoute.selectPaymentMethodScreen,
-      //   builder: (context, state) => const SelectPaymentMethodScreen(),
-      // ),
-      // GoRoute(
-      //   path: AppRoute.addReviewScreen,
-      //   builder: (context, state) => const AddReviewScreen(),
-      // ),
-      // GoRoute(
-      //   path: AppRoute.doctorDetails,
-      //   builder: (context, state) => const DoctorDetailsScreen(),
-      // ),
+      GoRoute(
+        path: AppRoute.splash,
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.bookappointment,
+        builder: (context, state) => const Bookappointment(),
+      ),
+      GoRoute(
+        path: AppRoute.selectPaymentMethodScreen,
+        builder: (context, state) => const SelectPaymentMethodScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.addReviewScreen,
+        builder: (context, state) => const AddReviewScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.doctorDetails,
+        builder: (context, state) => const DoctorDetailsScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.loginPage,
+        builder: (context, state) => const LoginPage(),
+      ),
+      GoRoute(
+        path: AppRoute.signupPage,
+        builder: (context, state) => const SignUpPage(),
+      ),
+
+      GoRoute(
+        path: AppRoute.otpPage,
+        builder: (context, state) => const OtpPage(),
+      ),
 
       // GoRoute(
       //   path: AppRoute.notifications,

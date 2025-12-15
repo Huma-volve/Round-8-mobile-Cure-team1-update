@@ -81,6 +81,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.5+1"
+  date_picker_timeline:
+    dependency: "direct main"
+    description:
+      name: date_picker_timeline
+      sha256: b99308cd224ca42900aa3ba2a75213c8deff6edee35fc18905a7834e8b0d7e70
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.7"
   dbus:
     dependency: transitive
     description:
@@ -113,6 +121,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.53"
+  easy_date_timeline:
+    dependency: "direct main"
+    description:
+      name: easy_date_timeline
+      sha256: "0fb8fe360d78b7ccb409da9de0e8a71e8e06f0e8a60ea6c54dabf830479309b2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.9"
   equatable:
     dependency: "direct main"
     description:
@@ -445,6 +461,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  mobkit_dashed_border:
+    dependency: "direct main"
+    description:
+      name: mobkit_dashed_border
+      sha256: d1bce2af4c19c6702b5981d8b4d1e09654fff6939f1e328b689fe37ab3499283
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.8"
   nested:
     dependency: transitive
     description:

@@ -1,7 +1,7 @@
-import 'package:cure_team_1_update/features/profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cure_team_1_update/core/constants/go_route.dart';
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -9,12 +9,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(
-            375, 812), // You can adjust this based on your design specs
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, child) {
-          return MaterialApp.router(routerConfig: Approutes.router);
-        });
+      designSize: const Size(
+          375, 812), // You can adjust this based on your design specs
+      minTextAdapt: true,
+
+      splitScreenMode: true,
+      builder: (_ , child) {
+           return MaterialApp.router(
+        title: 'cure_team_1',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+         
+         routerConfig: Approutes.router
+      );
+      }
+    );
   }
 }
