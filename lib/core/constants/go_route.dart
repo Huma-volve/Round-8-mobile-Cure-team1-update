@@ -1,5 +1,6 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
+import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
 import 'package:cure_team_1_update/features/auth/login/presentation/pages/login_page.dart';
 import 'package:cure_team_1_update/features/auth/otp/presentation/pages/otp_page.dart';
 import 'package:cure_team_1_update/features/auth/sign_up/presentation/pages/sign_up_page.dart';
@@ -18,6 +19,7 @@ import 'package:go_router/go_router.dart';
 
 abstract class Approutes {
   static GoRouter router = GoRouter(
+    initialLocation: AppRoute.navBar,
     routes: [
       GoRoute(
         path: '/',
@@ -75,6 +77,9 @@ abstract class Approutes {
       GoRoute(
         path: AppRoute.onBoarding,
         builder: (context, state) => const OnboaedingScreen(),
+      ),GoRoute(
+        path: AppRoute.navBar,
+        builder: (context, state) => const NavBar(),
       ),
       // GoRoute(
       //   path: AppRoute.bookappointment,

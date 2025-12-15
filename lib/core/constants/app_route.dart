@@ -8,6 +8,7 @@ class AppRoute {
   static const notifications = "/Notifications";
   static const BookingSection = "/BookingSection";
   static const ProfileScreen = "/ ProfileScreen";
+  static const navBar = "/navbar";
 
   static const onBoarding = "/onBoarding";
   static const home = "/home";

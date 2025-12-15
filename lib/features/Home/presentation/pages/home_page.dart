@@ -66,12 +66,20 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyle(fontSize: 18, color: Colors.blue),
                     )),
               ]),
+
               const SizedBox(
                 height: 6,
               ),
               const SpecialtiesList(),
                SizedBox(
-                height: 10,
+                height: 5,
+              ),
+              Container(
+                width: double.infinity,
+                child: Image.asset(
+                    fit: BoxFit.fill,
+                    height: 150.h,
+                    "assets/images/Mask_group.png"),
               ),
 
               Row(children: [
@@ -98,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(
-                      height: 4,
+                      height: 12,
                     );
                   },
                   itemCount: doctorsList.length,

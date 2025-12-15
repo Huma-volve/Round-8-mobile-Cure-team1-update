@@ -66,7 +66,7 @@ class LoginViewBody extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  GoRouter.of(context).pushReplacement(AppRoute.signupPage);
+                  GoRouter.of(context).pushReplacement(AppRoute.home);
                 },
                 child: const Text(
                   'Sign up',

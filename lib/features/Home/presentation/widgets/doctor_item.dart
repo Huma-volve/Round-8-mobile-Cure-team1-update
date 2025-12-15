@@ -17,9 +17,10 @@ class _DoctorItemState extends State<DoctorItem> {
     return
       Container(
 
+
         width: double .infinity,
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        padding: const EdgeInsets.all(12),
+      // /  margin: const EdgeInsets.symmetric(vertical: 8),
+       // padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: Colors.white,
