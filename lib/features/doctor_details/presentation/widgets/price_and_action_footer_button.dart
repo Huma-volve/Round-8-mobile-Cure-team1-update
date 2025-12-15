@@ -20,14 +20,14 @@ final  Function()? onPressed;
       child: Card(
        elevation: 10,
         child: Container(
-         height: 144,
+         height: 144.r,
          width: double.infinity,
         child: Padding(
-          padding:  EdgeInsets.only(top: 17.h,left: 24.w,right: 24.w),
+          padding:  EdgeInsets.only(top: 17.r,left: 24.r,right: 24.r),
           child: Column(
            children: [
          const    PriceWidget(),
-         SizedBox(height: 15.h,),
+         SizedBox(height: 15.r,),
               CustomElevatedButton(onPressed:  onPressed, buttonName: buttonName,)      
            ],
           ),

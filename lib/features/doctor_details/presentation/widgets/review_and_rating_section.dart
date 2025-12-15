@@ -15,20 +15,20 @@ class ReviewAndRatingSection extends StatelessWidget {
     return Row(
       children: [
          SizedBox(
-          width: 58.w,
+          width: 58.r,
           child: ReviewAndRatingSectionItem(reviewAndRatingSectionModel: ReviewAndRatingSectionModel(image: Assets.resourceImagesProfile2user, data: 2.000, title: 'patients'),)),
        const  Spacer(),
         SizedBox( 
-            width: 78.w,
+            width: 78.r,
            child: ReviewAndRatingSectionItem(reviewAndRatingSectionModel: ReviewAndRatingSectionModel(image: Assets.resourceImagesExperiance, data: 10, title: 'experience'),)),
     
        const  Spacer(),
        SizedBox(
-          width: 55.91.w,
+          width: 55.91.r,
         child: ReviewAndRatingSectionItem(reviewAndRatingSectionModel: ReviewAndRatingSectionModel(image: Assets.resourceImagesStar, data: 4.5, title: 'rating'),)),
            const  Spacer(),
         SizedBox(
-            width: 56.w,
+            width: 58.r,
           child: ReviewAndRatingSectionItem(reviewAndRatingSectionModel: ReviewAndRatingSectionModel(image: Assets.resourceImagesReviews, data: 1.872, title: 'reviews'),)),
     
     

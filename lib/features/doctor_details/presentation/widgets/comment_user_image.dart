@@ -11,8 +11,8 @@ class CommentUserImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 62.h,
-      width: 62.w,
+      height: 62.r,
+      width: 62.r,
       decoration: BoxDecoration(
         image: const DecorationImage(image: AssetImage(Assets.resourceImagesUserComment)),
         borderRadius: BorderRadius.circular(40)

@@ -15,7 +15,7 @@ class CommentUserInfo extends StatelessWidget {
     return Row(
       children: [
       const  CommentUserImage(),
-     SizedBox(width: 9.52.w,)
+     SizedBox(width: 9.52.r,)
              ,  Column(
     crossAxisAlignment: CrossAxisAlignment.start,
       children: [

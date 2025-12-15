@@ -20,20 +20,20 @@ class YourApointMentDateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 48.h,
+      height: 48.r,
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.all(width: 1, color: Colors.blue),
+        border: Border.all(width: 1.r, color: Colors.blue),
         borderRadius: BorderRadius.circular(12),
       ),
       padding:  EdgeInsets.only(left: 16.w,right: 12.w),
       child: Row(
         children: [
            SizedBox(
-            width: 20.w,
-            height: 20.h,
+            width: 20.r,
+            height: 20.r,
             child: Image.asset(Assets.resourceImagesCalendar02)),
-         SizedBox(width: 8.w,),
+         SizedBox(width: 8.r,),
           if (selectedDayName != null)
             Row(
              
@@ -45,7 +45,7 @@ class YourApointMentDateWidget extends StatelessWidget {
 
               ],
             ),
-          Spacer(),
+          const Spacer(),
              Image.asset(Assets.resourceImagesDownArrow),
         ],
       ),

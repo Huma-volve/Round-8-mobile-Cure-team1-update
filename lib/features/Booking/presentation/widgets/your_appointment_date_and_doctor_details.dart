@@ -22,7 +22,7 @@ final MybookingModel mybookingModel;
       const  CustomDivivder(),
         
     const  YourAppointmentDoctorDetails(),
-    SizedBox(height: 24.h,),
+    SizedBox(height: 24.r,),
     const YourApointMentDateWidget(selectedDayName: '21', selectedMonthName: 'July', selectedDayNumber: 'Monday'),
 
   const Expanded(child: HourGrideView()),

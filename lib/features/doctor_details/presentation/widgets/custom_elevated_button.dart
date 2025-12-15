@@ -14,7 +14,7 @@ final  Function()? onPressed;
   Widget build(BuildContext context) {
     return ElevatedButton(
                style: ElevatedButton.styleFrom(
-                 fixedSize:  Size(380.w, 44.h),
+                 fixedSize:  Size(410.r, 44.r),
                  backgroundColor:ColorsLight.royalBlue ,
                  shape: RoundedRectangleBorder(
                    

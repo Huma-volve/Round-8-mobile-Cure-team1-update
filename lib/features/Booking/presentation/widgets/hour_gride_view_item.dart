@@ -17,7 +17,7 @@ final String selectedTime;
         color:selectedTime==time?ColorsLight.royalBlue: ColorsLight.lightGray,
         borderRadius: BorderRadius.circular(10)
       ),
-      child: Center(child: Text(time,style: AppTextStyles.montserratMedum16(context).copyWith(fontSize: 14,color: selectedTime==time?Colors.white:ColorsLight.blueGray),)),
+      child: Center(child: Text(time,style: AppTextStyles.montserratMedum14(context).copyWith(color: selectedTime==time?Colors.white:ColorsLight.blueGray),)),
     );
   }
 }

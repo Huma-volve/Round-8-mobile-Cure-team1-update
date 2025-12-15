@@ -21,10 +21,10 @@ class AddReview extends StatelessWidget {
       const Spacer(),
     
       SizedBox(
-       width: 20.w,
-       height: 20.h,
+       width: 20.r,
+       height: 20.r,
        child: Image.asset(Assets.resourceImagesAddReview)),
-       SizedBox(width: 5.w,),
+       SizedBox(width: 5.r,),
        TextButton(
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero

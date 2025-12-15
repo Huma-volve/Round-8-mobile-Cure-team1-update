@@ -26,7 +26,7 @@ class MyBookingItemDoctorDetails extends StatelessWidget {
               borderRadius: BorderRadius.circular(35)
             ),
           )
-       ,SizedBox(width: 8.w,)
+       ,SizedBox(width: 8.r,)
       , Column(
     crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,7 +38,7 @@ class MyBookingItemDoctorDetails extends StatelessWidget {
      
         ],
       ),
-      SizedBox(height: 8.w,),
+      SizedBox(height: 8.r,),
       const MyBookingDoctorDetailsLocation()
       ],
     );

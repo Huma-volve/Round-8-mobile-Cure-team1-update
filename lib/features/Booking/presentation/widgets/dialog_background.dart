@@ -21,7 +21,7 @@ class DialogBackground extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-            width: 2.w,
+            width: 2.r,
             color: isCnaceledButton
                 ? ColorsLight.blueGray
                 : ColorsLight.royalBlue),

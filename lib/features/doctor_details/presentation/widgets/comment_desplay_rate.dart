@@ -14,7 +14,7 @@ class CommentDisplayRate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(right: 8.w),
+      padding:  EdgeInsets.only(right: 8.r),
       child: Container(
       //  height: 32.h,
       // width: 61.w,
@@ -23,15 +23,15 @@ class CommentDisplayRate extends StatelessWidget {
        borderRadius: BorderRadius.circular(6)
       ),
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 14.w,vertical: 12.h),
+        padding:  EdgeInsets.symmetric(horizontal: 14.r,vertical: 12.r),
         child: Row(
          children: [
           
          SizedBox(
-          width: 20.w,
-          height: 20.h,
+          width: 20.r,
+          height: 20.r,
           child: Image.asset(Assets.resourceImagesActiveStar)),
-          SizedBox(width: 2.w,),
+          SizedBox(width: 2.r,),
          Text('4.5',style: AppTextStyles.plusJakartaSansbold16(context).copyWith(color: ColorsLight.vividYellow),)
         ],),
       ),

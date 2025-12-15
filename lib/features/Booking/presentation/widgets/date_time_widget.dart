@@ -22,7 +22,7 @@ class _DateTimeWidgeState extends State<DateTimeWidge> {
     return DatePicker(
         DateTime.now(),
         // height: 60.h,
-        width: 50.w,
+        width: 50.r,
         initialSelectedDate: selectedValue,
     
         selectedTextColor: Colors.white,

@@ -39,11 +39,11 @@ final MybookingModel mybookingModel;
             const  CustomDivivder(),
       
           const  MyBookingItemDoctorDetails(),
-            SizedBox(height: 16.h,),
+            SizedBox(height: 16.r,),
             Row(
               children: [
                 Expanded(child: BookingActionButton(bottonName: mybookingModel.buttonActionName, isCnaceledButton: mybookingModel.isCnaceledButton,)),
-                SizedBox(width: 24.w,),
+                SizedBox(width: 24.r,),
                 Expanded(child: BookingOptionButton(bottonName: mybookingModel.buttonOptionName))
               ],
             ),

@@ -15,19 +15,20 @@ class MedicalSpecialty extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     return SizedBox(
-      width: width - 174.w,
+      width: width - 210.r,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
        
           Text('Pulmonologist',style: AppTextStyles.montserratRegular14(context),),
       const   Spacer(),
+
             Container(
-           height: 40.h,
-           width: 40.w,
+           height: 40.r,
+           width: 40.r,
            decoration: BoxDecoration(
              image: const DecorationImage(image: AssetImage(AppImages.favorite)),
-             border: Border.all(width: 3,color: ColorsLight.offWhite),
+             border: Border.all(width: 3.r,color: ColorsLight.offWhite),
              borderRadius: BorderRadius.circular(40)
            ),
          ),

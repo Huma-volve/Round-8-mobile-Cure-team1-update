@@ -13,15 +13,18 @@ class CommentDesplay extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.all(width: 4,color: ColorsLight.lightGray),
-        borderRadius: BorderRadius.circular(16)
+        border: Border.all(width: 4.r,color: ColorsLight.lightGray),
+        borderRadius: BorderRadius.circular(16.r)
       ),
-      child: Column(
-        children: [
-          const CommentUserInfo(),
-          SizedBox(height: 9.h,),
-          Text(comment,style: AppTextStyles.montserratMedum16(context),),
-        ],
+      child: Padding(
+        padding:  EdgeInsets.symmetric(vertical: 14.r,horizontal: 12.r),
+        child: Column(
+          children: [
+            const CommentUserInfo(),
+            SizedBox(height: 9.r,),
+            Text(comment,style: AppTextStyles.montserratMedum16(context),),
+          ],
+        ),
       ),
     );
   }

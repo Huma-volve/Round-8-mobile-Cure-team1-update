@@ -13,10 +13,10 @@ class HourGrideView extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 9,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 105.w / 40.h,
+            childAspectRatio: 105.r/ 40.r,
             crossAxisCount: 3,
-            mainAxisSpacing: 16.h,
-            crossAxisSpacing: 40.w),
+            mainAxisSpacing: 16.r,
+            crossAxisSpacing: 40.r),
         itemBuilder: (context, index) =>  HourGrideViewItem(time: allTimes[index], selectedTime: '11:00 AM',));
   }
 }

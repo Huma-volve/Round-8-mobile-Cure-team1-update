@@ -15,8 +15,8 @@ class DoctorInfoLocation extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          height: 18.h,
-          width: 18.h,
+          height: 18.r,
+          width: 18.r,
           decoration: const BoxDecoration(
               image: DecorationImage(image: AssetImage(Assets.resourceImagesLocation))),
         ),

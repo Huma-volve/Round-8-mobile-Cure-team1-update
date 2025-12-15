@@ -13,21 +13,21 @@ final MybookingModel mybookingModel;
   @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 16.w),
+      padding:  EdgeInsets.symmetric(horizontal: 16.r),
       child: Column(
         children: [
           SizedBox( 
-               height: 24.h,),
+               height: 24.r,),
 
         const  MyBookAppbar(title: 'Your Appointment'),
 
          SizedBox(
-        height: 40.h,
+        height: 40.r,
        ),
     
        const  AppointmentWarning(),
        SizedBox(
-        height: 24.h,
+        height: 24.r,
        ),
      
        Expanded(child: YourAppointmentDateAndDoctorDetails(mybookingModel: mybookingModel))

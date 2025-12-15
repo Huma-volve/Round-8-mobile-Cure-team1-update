@@ -20,13 +20,13 @@ final String title;
           context.pop();
           },
           child: Container(
-            height: 24.h,
-            width: 24.w,
+            height: 24.r,
+            width: 24.r,
             decoration: const BoxDecoration(
                 image: DecorationImage(image: AssetImage(Assets.resourceImagesArrowImage))),
           ),
         ),
-        SizedBox(width: 77.w,),
+        SizedBox(width: 77.r,),
         Text(
          title,
           style: AppTextStyles.georgiaRegular24(context),

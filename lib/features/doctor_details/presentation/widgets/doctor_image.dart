@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
+
 class DoctorImage extends StatelessWidget {
   const DoctorImage({
     super.key,
@@ -14,11 +15,9 @@ class DoctorImage extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        
-        
         Container(
-          height: 113.h,
-          width: 113.w,
+          height: 113.r,
+          width: 113.r,
           decoration: BoxDecoration(
          
             borderRadius: BorderRadius.circular(60),
@@ -26,11 +25,11 @@ class DoctorImage extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 5.h,
-          right: -6.w,
+          bottom: 5.r,
+          right: -6.r,
           child: Container(
-            height: 24.h,
-            width: 24.w,
+            height: 24.r,
+            width: 24.r,
             decoration: const BoxDecoration(
               image: DecorationImage(image: 
               AssetImage(Assets.resourceImagesCheckedImage))

@@ -16,7 +16,7 @@ class DoctorDetailsScreenScrollableContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 16.w),
+      padding:   EdgeInsets.symmetric(horizontal: 16.r),
   child:    ListView(
       children: [
         Column(

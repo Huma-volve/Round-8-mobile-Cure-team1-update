@@ -17,7 +17,7 @@ class MyBookinScreenBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 24.h,
+              height: 24.r,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -27,11 +27,11 @@ class MyBookinScreenBody extends StatelessWidget {
               ),
             ),
              SizedBox(
-              height: 24.h,
+              height: 24.r,
             ),
            const  DateTimeWidge(),
             SizedBox(
-              height: 20.h,
+              height: 20.r,
             ),
             MyBookingItem(
               mybookingModel: MybookingModel(
@@ -42,7 +42,7 @@ class MyBookinScreenBody extends StatelessWidget {
                   isCnaceledButton: true),
             ),
             SizedBox(
-              height: 16.h,
+              height: 16.r,
             ),
             MyBookingItem(
               mybookingModel: MybookingModel(
@@ -52,7 +52,7 @@ class MyBookinScreenBody extends StatelessWidget {
             ),
             
             SizedBox(
-              height: 16.h,
+              height: 16.r,
             ),
             MyBookingItem(
               mybookingModel: MybookingModel(

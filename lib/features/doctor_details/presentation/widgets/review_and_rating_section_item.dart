@@ -14,20 +14,20 @@ class ReviewAndRatingSectionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-    height: 98.h,
+    height: 98.r,
     child: Row(
       children: [
         Column(
           children: [
             Container(
-            height: 30.55.h,
-            width: 30.55.w,
+            height: 30.55.r,
+            width: 30.55.r,
             decoration:  BoxDecoration(
      image: DecorationImage(image: AssetImage(reviewAndRatingSectionModel.image))
             ),
             )
         ,
-        SizedBox(height: 14.h,),
+        SizedBox(height: 14.r,),
         Text(reviewAndRatingSectionModel.data.toString(),style: AppTextStyles.georgiaSemiBold14(context),),
          Text(reviewAndRatingSectionModel.title,style: AppTextStyles.montserratRegular14(context),),
           ],
