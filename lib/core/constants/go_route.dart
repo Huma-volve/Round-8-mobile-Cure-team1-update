@@ -3,6 +3,7 @@ import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/add_review_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/book_apointmennt_.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/doctor_details_screen.dart';
@@ -49,6 +50,10 @@ abstract class Approutes {
       GoRoute(
         path: AppRoute.doctorDetails,
         builder: (context, state) => const DoctorDetailsScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.myBookingScreen,
+        builder: (context, state) => const MyBookingScreen(),
       ),
       GoRoute(
         path: AppRoute.myBookingitemSsceen,
