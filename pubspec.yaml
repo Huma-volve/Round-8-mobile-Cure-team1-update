@@ -13,7 +13,7 @@ dependencies:
   connectivity_plus: ^7.0.0
   cross_file: ^0.3.5+1
   date_picker_timeline: ^1.2.7
-  device_preview: ^1.3.1
+  dio: ^5.9.0
   easy_date_timeline: ^2.0.9
   equatable: ^2.0.5
   flutter:
@@ -35,6 +35,7 @@ dependencies:
   smooth_page_indicator: ^2.0.1
 
 dev_dependencies:
+  device_preview: ^1.3.1
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
@@ -48,7 +49,6 @@ flutter:
     - assets/images/sittings/
     - assets/images/profile/
     - assets/images/payment/
-  
 
 fonts:
 

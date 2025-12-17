@@ -46,8 +46,7 @@ class Notifications extends StatelessWidget {
             ),
             Text(
               'We’ll notify you once we have new notifications.',
-              style: AppTextStyles.styleLarge16(context)
-                  .copyWith(color: const Color(0xff6D7379), fontSize: 15),
+              style: AppTextStyles.styleLarge16(context),
             ),
             const Spacer(),
           ],

@@ -1,0 +1,11 @@
+import 'package:dio/dio.dart';
+
+class ApiServices {
+  static String basURL = "https://round8-backend-team-one.huma-volve.com/api/";
+  final Dio _dio;
+  const ApiServices(this._dio);
+  get(endpoint) async {
+    Response respons = await _dio.get('$basURL$endpoint');
+    return respons.data;
+  }
+}
