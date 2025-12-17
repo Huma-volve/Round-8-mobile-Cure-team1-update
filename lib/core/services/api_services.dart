@@ -8,4 +8,9 @@ class ApiServices {
     Response respons = await _dio.get('$basURL$endpoint');
     return respons.data;
   }
+
+  post(endpoint, Map data) async {
+    Response respons = await _dio.post('$basURL$endpoint', data: data);
+    return respons.data;
+  }
 }
