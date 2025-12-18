@@ -1,4 +1,5 @@
 import 'package:cure_team_1_update/core/services/api_services.dart';
+import 'package:cure_team_1_update/core/services/network/apiInterceptor%20.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -8,7 +9,8 @@ Future<void> setup() async {
 
   //....Hive
   //object from dio
-  getit.registerSingleton<Dio>(Dio());
+  //pass heder to dio object
+  getit.registerSingleton<Dio>(Dio()..interceptors.add(ApiInterceptor()));
   //object from ApiServices
   getit.registerSingleton<ApiServices>(ApiServices(getit.get<Dio>()));
 }

@@ -31,6 +31,7 @@ dependencies:
   mobkit_dashed_border: ^0.0.8
   permission_handler: ^12.0.1
   pinput: ^6.0.1
+  shared_preferences: ^2.5.4
   shimmer: ^3.0.0
   smooth_page_indicator: ^2.0.1
 
