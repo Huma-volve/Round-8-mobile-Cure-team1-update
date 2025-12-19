@@ -86,7 +86,7 @@ class Cachehelper {
     _shared = await SharedPreferences.getInstance();
   }
 
-  static Future<void> cacheTokin(token) async {
+  static Future<void> cacheToken(token) async {
     await _shared.setString("token", token);
   }
 

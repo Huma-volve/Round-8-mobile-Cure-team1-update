@@ -4,9 +4,11 @@ class ApiServices {
   static String basURL = "https://round8-backend-team-one.huma-volve.com/api/";
   final Dio _dio;
   const ApiServices(this._dio);
-  get(endpoint, token) async {
-    Response respons = await _dio.get('$basURL$endpoint',
-        options: Options(headers: {'Authorization': 'Bearer $token'}));
+  get(endpoint) async {
+    Response respons = await _dio.get(
+      '$basURL$endpoint',
+    );
+    print(respons.data);
     return respons.data;
   }
 

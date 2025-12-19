@@ -10,7 +10,8 @@ Future<void> setup() async {
   //....Hive
   //object from dio
   //pass heder to dio object
-  getit.registerSingleton<Dio>(Dio()..interceptors.add(ApiInterceptor()));
+  getit.registerSingleton<Dio>(Dio());
   //object from ApiServices
-  getit.registerSingleton<ApiServices>(ApiServices(getit.get<Dio>()));
+  getit.registerSingleton<ApiServices>(
+      ApiServices(getit.get<Dio>()..interceptors.add(ApiInterceptor())));
 }

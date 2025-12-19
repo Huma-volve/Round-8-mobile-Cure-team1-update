@@ -149,8 +149,7 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.passwordManagementScreen,
-        builder: (context, state) =>
-            const PasswordManagementScreen(),
+        builder: (context, state) => const PasswordManagementScreen(),
       ),
       GoRoute(
         path: AppRoute.faqsScreen,
@@ -158,8 +157,7 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.privacyPolicyScreen,
-        builder: (context, state) =>
-            const PrivacyPolicyScreen(),
+        builder: (context, state) => const PrivacyPolicyScreen(),
       ),
     ],
   );

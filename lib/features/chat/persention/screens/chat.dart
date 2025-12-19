@@ -1,4 +1,7 @@
 import 'package:cure_team_1_update/core/common/widgets/custome_text_field.dart';
+import 'package:cure_team_1_update/core/services/api_services.dart';
+import 'package:cure_team_1_update/core/services/service_locator.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 
@@ -9,9 +12,13 @@ import 'package:cure_team_1_update/core/widgets/customNavigationbar.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/customabppar.dart';
 
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/notificationmassage.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 
 class Chat extends StatefulWidget {
   const Chat({super.key});
@@ -31,6 +38,9 @@ class _ChatState extends State<Chat> {
       setState(() {
         isslected = _focus.hasFocus;
       });
+    });
+    Future.microtask(() {
+      context.read<ChatCubit>().test();
     });
     super.initState();
   }
