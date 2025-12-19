@@ -1,4 +1,3 @@
-
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/doctor_info_location.dart';
@@ -17,7 +16,8 @@ class DoctorInfo extends StatelessWidget {
       children: [
         Text(
           'Dr. Jessica Turner',
-          style: AppTextStyles.georgiaRegular20(context).copyWith(color: ColorsLight.prussianBlue),
+          style: AppTextStyles.georgiaRegular20(context)
+              .copyWith(color: ColorsLight.prussianBlue),
         ),
         const MedicalSpecialty(),
         const DoctorInfoLocation(),

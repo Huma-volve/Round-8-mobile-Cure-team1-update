@@ -1,5 +1,4 @@
-class DoctorModel{
-
+class DoctorModel {
   final String image;
   final String name;
   final String hospital;
@@ -8,16 +7,17 @@ class DoctorModel{
   final String date;
   final bool isFavorite;
 
-  DoctorModel( {
+  DoctorModel({
     required this.image,
     required this.name,
     required this.hospital,
     required this.rating,
     required this.date,
     required this.isFavorite,
-    required  this.specialty,
+    required this.specialty,
   });
 }
+
 List<DoctorModel> doctorsList = [
   DoctorModel(
     specialty: "Cardiologist",
@@ -30,7 +30,6 @@ List<DoctorModel> doctorsList = [
   ),
   DoctorModel(
     specialty: "Dentist",
-
     image: 'assets/images/f62102f2c9084a917a6a9ec004fbb686e7eabea4.jpg',
     name: 'Dr. Sara Ali',
     hospital: 'Al Shifa Hospital',
@@ -40,7 +39,6 @@ List<DoctorModel> doctorsList = [
   ),
   DoctorModel(
     specialty: "ENT",
-
     image: 'assets/images/f62102f2c9084a917a6a9ec004fbb686e7eabea4.jpg',
     name: 'Dr. Mahmoud Hassan',
     hospital: 'Dar AlFouad Hospital',
@@ -50,7 +48,6 @@ List<DoctorModel> doctorsList = [
   ),
   DoctorModel(
     specialty: "Cardiologist",
-
     image: 'assets/images/f62102f2c9084a917a6a9ec004fbb686e7eabea4.jpg',
     name: 'Dr. Mona Abdallah',
     hospital: 'Nozha Hospital',

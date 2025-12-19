@@ -40,7 +40,7 @@ class _ChatState extends State<Chat> {
       });
     });
     Future.microtask(() {
-      context.read<ChatCubit>().test();
+      context.read<ChatCubit>();
     });
     super.initState();
   }

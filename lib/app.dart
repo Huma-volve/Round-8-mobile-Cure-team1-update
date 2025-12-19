@@ -1,5 +1,6 @@
 import 'package:cure_team_1_update/core/services/api_services.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
+import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           return MultiBlocProvider(
             providers: [
               BlocProvider<ChatCubit>(
-                create: (_) => ChatCubit(getit<ApiServices>()),
+                create: (_) => getit.get<ChatCubit>(),
               ),
             ],
             child: MaterialApp.router(

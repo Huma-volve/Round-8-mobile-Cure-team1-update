@@ -12,6 +12,7 @@ dependencies:
   bloc: ^8.1.2
   connectivity_plus: ^7.0.0
   cross_file: ^0.3.5+1
+  dartz: ^0.10.1
   date_picker_timeline: ^1.2.7
   dio: ^5.9.0
   easy_date_timeline: ^2.0.9

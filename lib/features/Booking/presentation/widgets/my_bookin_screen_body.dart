@@ -1,4 +1,3 @@
-
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/date_time_widget.dart';
@@ -26,10 +25,10 @@ class MyBookinScreenBody extends StatelessWidget {
                 style: AppTextStyles.georgiaRegular20(context),
               ),
             ),
-             SizedBox(
+            SizedBox(
               height: 24.r,
             ),
-           const  DateTimeWidge(),
+            const DateTimeWidge(),
             SizedBox(
               height: 20.r,
             ),
@@ -50,7 +49,6 @@ class MyBookinScreenBody extends StatelessWidget {
                   buttonActionName: 'Book again',
                   buttonOptionName: 'Feedback'),
             ),
-            
             SizedBox(
               height: 16.r,
             ),
@@ -66,4 +64,3 @@ class MyBookinScreenBody extends StatelessWidget {
     );
   }
 }
-

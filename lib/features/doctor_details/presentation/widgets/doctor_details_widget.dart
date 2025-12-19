@@ -1,4 +1,3 @@
-
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/doctor_image.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/doctor_info.dart';
 // import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/doctor_info.dart';
@@ -12,16 +11,17 @@ class DoctorDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return Row(
       children: [
-         Padding(
-          padding:  EdgeInsets.only(left: 16.r),
-          child:  DoctorImage(),
+        Padding(
+          padding: EdgeInsets.only(left: 16.r),
+          child: DoctorImage(),
         ),
-         SizedBox(width: 16.r,),
+        SizedBox(
+          width: 16.r,
+        ),
         const DoctorInfo()
       ],
     );
   }
 }
-

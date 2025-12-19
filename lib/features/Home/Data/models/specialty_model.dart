@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Specialty{
+class Specialty {
   final String name;
   final IconData icon;
-
 
   Specialty({required this.name, required this.icon});
   static List<Specialty> specialties = [

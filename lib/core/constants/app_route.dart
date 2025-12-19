@@ -21,9 +21,8 @@ class AppRoute {
   static const bookappointment = "/bookappointment";
   static const selectPaymentMethodScreen = "/selectPaymentMethodPage";
   static const addReviewScreen = "/addreviewScreeb";
- static const myBookingitemSsceen = "/myBookingitemSsceen";
-static const myBookingScreen = "/myBookingScreen";
-
+  static const myBookingitemSsceen = "/myBookingitemSsceen";
+  static const myBookingScreen = "/myBookingScreen";
 
   //payment
   static const paymentScreenpaymentScreen = "/PaymentMethodsScreen";

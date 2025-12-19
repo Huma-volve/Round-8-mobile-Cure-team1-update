@@ -1,23 +1,25 @@
 import 'package:bloc/bloc.dart';
-import 'package:cure_team_1_update/core/services/api_services.dart';
-import 'package:cure_team_1_update/core/services/service_locator.dart';
+import 'package:cure_team_1_update/core/error/failures.dart';
 import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
-import 'package:dio/dio.dart';
+import 'package:cure_team_1_update/core/utils/chattab.dart';
+import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
+import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
+
 import 'package:equatable/equatable.dart';
 
 part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
-  ApiServices api;
-  ChatCubit(this.api) : super(ChatCubitInitial()) {
-    test();
+  Chatrepoa chatrepoa;
+  ChatCubit(this.chatrepoa) : super(ChatCubitInitial()) {
+    getconv(Chattab.all);
   }
-  Future<void> test() async {
-    print('-------------------nds--');
-
+  Future<void> getconv(Chattab tab) async {
     await Cachehelper.cacheToken(
-        '64|7IPYzTIIOR9jilzZf2rrzRBU8BRULcADARxYK0hs949d7601');
-    var respon = await getit<ApiServices>().get('conversations');
-    print('00000000${respon}');
+        "114|7gYvlIpcUGx69fE0a39r0pLtzEmheETZnWkwwtCxf4d4a0d9");
+    emit(Lodingchat());
+    var result = await chatrepoa.featchconversion(tab);
+    result.fold((faluir) => emit(Fuailerchat(faluir)),
+        (conv) => emit(Successchat(conv)));
   }
 }

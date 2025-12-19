@@ -1,5 +1,5 @@
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
-import 'package:cure_team_1_update/core/style/responsive_size.dart';
+
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/prfiledatils.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/imageprofile.dart';
