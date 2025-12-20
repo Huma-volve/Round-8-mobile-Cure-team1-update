@@ -22,4 +22,9 @@ class ChatCubit extends Cubit<ChatState> {
     result.fold((faluir) => emit(Fuailerchat(faluir)),
         (conv) => emit(Successchat(conv)));
   }
+  Future<void> search( String  nameconv)async{
+    emit(Lodingchat());
+   var resalt =  await chatrepoa.searchconversion(nameconv);
+   resalt.fold((faluir)=>emit(Fuailerchat(faluir)),(conv)=>emit(Successchat(conv)));
+  
 }

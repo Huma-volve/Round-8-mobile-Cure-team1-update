@@ -25,9 +25,10 @@ class immplementRemotdata extends Remotdata {
   }
 
   @override
-  Future<List<Conversion>> searchconversion(convName) {
-    // TODO: implement searchconversion
-    throw UnimplementedError();
+  Future<List<Conversion>> searchconversion(convName) async {
+    var respons = await apiServices.get("conversations?search=convName");
+    List<Conversion> conv = parsingdata(respons);
+    return Future.value(conv);
   }
 }
 
