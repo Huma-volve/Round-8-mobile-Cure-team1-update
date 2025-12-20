@@ -1,6 +1,10 @@
+import 'package:cure_team_1_update/core/app/upload_image/cubit/upload_image_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_route.dart';
+import '../../location/presentation/cubit/location_cubit.dart';
+import '../../location/presentation/state/location_state.dart';
 import '../pages/favorite_page.dart';
 
 class HomeTopSection extends StatelessWidget {
@@ -23,25 +27,49 @@ class HomeTopSection extends StatelessWidget {
               const Text("Welcome back, Rahma",
                   style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 4),
-              Row(
-                children: [
-                  const Icon(Icons.location_on_outlined, size: 16),
-                  const SizedBox(height: 4),
-                  TextButton(
-                    onPressed: () {
-                      GoRouter.of(context).push('/map');
-                    },
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      minimumSize: const Size(0, 0),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                    child: const Text(
-                      "129, El-Nasr Street, Cairo",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                  ),
-                ],
+              BlocBuilder<LocationCubit, LocationState>(
+                builder: (context, state) {
+
+                  if(state is LoadingState){
+                    return const CircularProgressIndicator();
+                  }
+                  else if(state is LocationAddressLoaded){
+                    final address = state.address;
+                    return Row(
+                    children: [
+                      const Icon(Icons.location_on_outlined, size: 16),
+                      const SizedBox(height: 4),
+                      TextButton(
+                        onPressed: () {
+    final cubitState = context.read<LocationCubit>().state;
+
+    if (cubitState is LocationAddressLoaded) {
+    GoRouter.of(context).push(
+    AppRoute.map,
+    extra: cubitState.location,
+    );
+    }
+
+                        },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size(0, 0),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: Text(
+                  "${address.street}, ${address.city}",
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                  else if (state is LocationError) {
+                    return Text(state.message);
+                  }
+                  return const SizedBox();
+                  },
+
               ),
             ],
           ),

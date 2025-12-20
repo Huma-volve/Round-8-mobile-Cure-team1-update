@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
             providers: [
               BlocProvider<ChatCubit>(
                 create: (_) => getit.get<ChatCubit>(),
+
               ),
             ],
             child: MaterialApp.router(
