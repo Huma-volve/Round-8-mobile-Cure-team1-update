@@ -1,4 +1,3 @@
-
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/add_review.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/rating.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +10,13 @@ class AddReviewAndRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         const AddReview(),
-         SizedBox(height: 24.h,),
-       const  Rating()
+        SizedBox(
+          height: 24.h,
+        ),
+        const Rating()
       ],
     );
   }

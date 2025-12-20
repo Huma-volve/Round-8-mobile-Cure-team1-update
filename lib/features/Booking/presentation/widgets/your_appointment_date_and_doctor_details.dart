@@ -1,4 +1,3 @@
-
 import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/booking_action_button.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/booking_option_button.dart';
@@ -12,31 +11,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class YourAppointmentDateAndDoctorDetails extends StatelessWidget {
-  const YourAppointmentDateAndDoctorDetails({super.key, required this.mybookingModel});
-final MybookingModel mybookingModel;
+  const YourAppointmentDateAndDoctorDetails(
+      {super.key, required this.mybookingModel});
+  final MybookingModel mybookingModel;
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
-        MyBookingItemHeader(bookingStatus: mybookingModel.bookingStatus, isUpcomingStatus: mybookingModel.isUpcomingStatus,),
-      const  CustomDivivder(),
-        
-    const  YourAppointmentDoctorDetails(),
-    SizedBox(height: 24.r,),
-    const YourApointMentDateWidget(selectedDayName: '21', selectedMonthName: 'July', selectedDayNumber: 'Monday'),
-
-  const Expanded(child: HourGrideView()),
-
-const Spacer(),
-      SizedBox(
-        width: double.infinity,
-        child: BookingOptionButton(bottonName: mybookingModel.buttonOptionName)),
-        SizedBox(height: 24.r,),
-            SizedBox(
-      width: double.infinity,
-      child: BookingActionButton(bottonName: mybookingModel.buttonActionName, isCnaceledButton: true)),
-       SizedBox(height: 40.r,),
-        
+        MyBookingItemHeader(
+          bookingStatus: mybookingModel.bookingStatus,
+          isUpcomingStatus: mybookingModel.isUpcomingStatus,
+        ),
+        const CustomDivivder(),
+        const YourAppointmentDoctorDetails(),
+        SizedBox(
+          height: 24.r,
+        ),
+        const YourApointMentDateWidget(
+            selectedDayName: '21',
+            selectedMonthName: 'July',
+            selectedDayNumber: 'Monday'),
+        const Expanded(child: HourGrideView()),
+        const Spacer(),
+        SizedBox(
+            width: double.infinity,
+            child: BookingOptionButton(
+                bottonName: mybookingModel.buttonOptionName)),
+        SizedBox(
+          height: 24.r,
+        ),
+        SizedBox(
+            width: double.infinity,
+            child: BookingActionButton(
+                bottonName: mybookingModel.buttonActionName,
+                isCnaceledButton: true)),
+        SizedBox(
+          height: 40.r,
+        ),
       ],
     );
   }

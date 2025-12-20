@@ -1,8 +1,7 @@
 
 import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart' hide LocationServiceDisabledException;
+import 'package:geolocator/geolocator.dart';
 
-import '../../../../../core/error/exceptions.dart';
 
 class LocationDataSource {
   Future<Position> getCurrentLocation() async {
@@ -17,7 +16,7 @@ class LocationDataSource {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      throw LocationPermissionDeniedException();
+      // throw LocationPermissionDeniedException();
     }
 
     final position = await Geolocator.getCurrentPosition(

@@ -4,11 +4,16 @@ class Assets {
 
   static const String fontsGeorgia = 'assets/fonts/georgia.ttf';
   static const String fontsGeorgiaEgular = 'assets/fonts/georgia_egular.otf';
-  static const String fontsMontserratMedium = 'assets/fonts/Montserrat-Medium.ttf';
-  static const String fontsPlusJakartaSansRegular = 'assets/fonts/PlusJakartaSans-Regular.ttf';
-  static const String images48de4c7e2653d6ae038592eb93a42c2bd2b7b666 = 'assets/images/48de4c7e2653d6ae038592eb93a42c2bd2b7b666.jpg';
-  static const String images84c1b0d51403f4f1d7e9bd56b7c704bb2bf992e9 = 'assets/images/84c1b0d51403f4f1d7e9bd56b7c704bb2bf992e9.jpg';
-  static const String imagesActiveCheckedIcon = 'assets/images/active_checked_icon.png';
+  static const String fontsMontserratMedium =
+      'assets/fonts/Montserrat-Medium.ttf';
+  static const String fontsPlusJakartaSansRegular =
+      'assets/fonts/PlusJakartaSans-Regular.ttf';
+  static const String images48de4c7e2653d6ae038592eb93a42c2bd2b7b666 =
+      'assets/images/48de4c7e2653d6ae038592eb93a42c2bd2b7b666.jpg';
+  static const String images84c1b0d51403f4f1d7e9bd56b7c704bb2bf992e9 =
+      'assets/images/84c1b0d51403f4f1d7e9bd56b7c704bb2bf992e9.jpg';
+  static const String imagesActiveCheckedIcon =
+      'assets/images/active_checked_icon.png';
   static const String imagesActiveStar = 'assets/images/active_star.png';
   static const String imagesAddReview = 'assets/images/add_review.png';
   static const String imagesAltArrowDown = 'assets/images/Alt_Arrow_Down.png';
@@ -27,7 +32,6 @@ class Assets {
   static const String iconheart = 'assets/images/Vector.png';
   static const String iconface = '  assets/images/Vector (3).png';
 
-
   static const String imagesChat = 'assets/images/chat.svg';
   static const String imagesCheckedImage = 'assets/images/checked_image.png';
   static const String imagesDna = 'assets/images/dna.png';
@@ -35,13 +39,16 @@ class Assets {
   static const String imagesDot = 'assets/images/dot.svg';
   static const String imagesExperiance = 'assets/images/experiance.png';
   static const String imagesEye = 'assets/images/eye.png';
-  static const String imagesF62102f2c9084a917a6a9ec004fbb686e7eabea4 = 'assets/images/f62102f2c9084a917a6a9ec004fbb686e7eabea4.jpg';
+  static const String imagesF62102f2c9084a917a6a9ec004fbb686e7eabea4 =
+      'assets/images/f62102f2c9084a917a6a9ec004fbb686e7eabea4.jpg';
   static const String imagesFavorite = 'assets/images/favorite.png';
-  static const String imagesFluentEmojiHighContrastBrain = 'assets/images/fluent-emoji-high-contrast_brain.png';
+  static const String imagesFluentEmojiHighContrastBrain =
+      'assets/images/fluent-emoji-high-contrast_brain.png';
   static const String imagesHeart = 'assets/images/heart.png';
   static const String imagesHome = 'assets/images/Home.svg';
   static const String imagesHstory = 'assets/images/hstory.svg';
-  static const String imagesHugeiconsDentalTooth = 'assets/images/hugeicons_dental-tooth.png';
+  static const String imagesHugeiconsDentalTooth =
+      'assets/images/hugeicons_dental-tooth.png';
   static const String imagesIcon = 'assets/images/Icon.png';
   static const String imagesIconGoogle = 'assets/images/icon_google.png';
   static const String imagesIconSplash = 'assets/images/icon_splash.png';
@@ -63,7 +70,8 @@ class Assets {
   static const String imagesProfile2user = 'assets/images/profile-2user.png';
   static const String imagesReviews = 'assets/images/reviews.png';
   static const String imagesRobert = 'assets/images/robert.png';
-  static const String imagesSolarCheckCircle = 'assets/images/solar_check_circle.png';
+  static const String imagesSolarCheckCircle =
+      'assets/images/solar_check_circle.png';
   static const String imagesSplashDot = 'assets/images/splash_dot.png';
   static const String imagesStar = 'assets/images/star.png';
   static const String imagesStarEmpty = 'assets/images/star_empty.png';
@@ -77,24 +85,41 @@ class Assets {
   static const String imagesVisa = 'assets/images/visa.png';
   static const String imagesVolumeCross = 'assets/images/Volume_Cross.svg';
   static const String imagesZzzz = 'assets/images/zzzz.png';
-  static const String paymentIcOutlinePaypalPayment = 'assets/images/payment/ic_outline-paypal_payment.svg';
-  static const String paymentLogosApplePayPayment = 'assets/images/payment/logos_apple-pay_payment.svg';
-  static const String paymentVisaPayment = 'assets/images/payment/visa_payment.svg';
-  static const String profileArrowRightProfile = 'assets/images/profile/arrow_right_profile.svg';
-  static const String profileBanknoteProfile = 'assets/images/profile/Banknote_profile.svg';
-  static const String profileCameraEditProfile = 'assets/images/profile/camera_edit_profile.svg';
-  static const String profileChatProfile = 'assets/images/profile/Chat_profile.svg';
-  static const String profileFamiconsPersonEditProfile = 'assets/images/profile/famicons_person_edit_profile.svg';
-  static const String profileFlagEgyptEditProfile = 'assets/images/profile/Flag_egypt_edit_profile.svg';
-  static const String profileGroupAddCardProfile = 'assets/images/profile/Group_add_card_profile.svg';
-  static const String profileHeartProfile = 'assets/images/profile/Heart_profile.svg';
-  static const String profileLogoutProfile = 'assets/images/profile/Logout_Profile.svg';
-  static const String profileMdiEmailEditProfile = 'assets/images/profile/mdi_email_edit_profile.svg';
-  static const String profileNotificationProfile = 'assets/images/profile/notification_profile.svg';
+  static const String paymentIcOutlinePaypalPayment =
+      'assets/images/payment/ic_outline-paypal_payment.svg';
+  static const String paymentLogosApplePayPayment =
+      'assets/images/payment/logos_apple-pay_payment.svg';
+  static const String paymentVisaPayment =
+      'assets/images/payment/visa_payment.svg';
+  static const String profileArrowRightProfile =
+      'assets/images/profile/arrow_right_profile.svg';
+  static const String profileBanknoteProfile =
+      'assets/images/profile/Banknote_profile.svg';
+  static const String profileCameraEditProfile =
+      'assets/images/profile/camera_edit_profile.svg';
+  static const String profileChatProfile =
+      'assets/images/profile/Chat_profile.svg';
+  static const String profileFamiconsPersonEditProfile =
+      'assets/images/profile/famicons_person_edit_profile.svg';
+  static const String profileFlagEgyptEditProfile =
+      'assets/images/profile/Flag_egypt_edit_profile.svg';
+  static const String profileGroupAddCardProfile =
+      'assets/images/profile/Group_add_card_profile.svg';
+  static const String profileHeartProfile =
+      'assets/images/profile/Heart_profile.svg';
+  static const String profileLogoutProfile =
+      'assets/images/profile/Logout_Profile.svg';
+  static const String profileMdiEmailEditProfile =
+      'assets/images/profile/mdi_email_edit_profile.svg';
+  static const String profileNotificationProfile =
+      'assets/images/profile/notification_profile.svg';
   static const String profileProfile = 'assets/images/profile/Profile.svg';
-  static const String profileSettingsProfile = 'assets/images/profile/Settings_profile.svg';
-  static const String sittingsMaterialSymbolsAddRoundedFAQ = 'assets/images/sittings/material-symbols_add-rounded_FAQ.svg';
-  static const String sittingsMinusSignFAQ = 'assets/images/sittings/minus-sign_FAQ.svg';
-  static const String sittingsOutlineVisiblePasswordSittings = 'assets/images/sittings/Outline_visible_password_sittings.svg';
-
+  static const String profileSettingsProfile =
+      'assets/images/profile/Settings_profile.svg';
+  static const String sittingsMaterialSymbolsAddRoundedFAQ =
+      'assets/images/sittings/material-symbols_add-rounded_FAQ.svg';
+  static const String sittingsMinusSignFAQ =
+      'assets/images/sittings/minus-sign_FAQ.svg';
+  static const String sittingsOutlineVisiblePasswordSittings =
+      'assets/images/sittings/Outline_visible_password_sittings.svg';
 }

@@ -1,5 +1,3 @@
-
-
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +12,8 @@ class UnActiveCirlcleCheckedIcon extends StatelessWidget {
       height: 20,
       width: 20,
       decoration: BoxDecoration(
-        border: Border.all(width: 2,color:ColorsLight.blueGray),
-        borderRadius: BorderRadius.circular(20)
-      ),
+          border: Border.all(width: 2, color: ColorsLight.blueGray),
+          borderRadius: BorderRadius.circular(20)),
     );
   }
 }

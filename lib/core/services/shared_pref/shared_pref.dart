@@ -79,3 +79,18 @@ class SharedPref {
     await sharedPreferences.clear();
   }
 }
+
+class Cachehelper {
+  static late SharedPreferences _shared;
+  static Future<void> init() async {
+    _shared = await SharedPreferences.getInstance();
+  }
+
+  static Future<void> cacheToken(token) async {
+    await _shared.setString("token", token);
+  }
+
+  static String? getToken() {
+    return _shared.getString("token");
+  }
+}

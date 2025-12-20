@@ -1,5 +1,3 @@
-
-
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +19,8 @@ class DialogConfirmButton extends StatelessWidget {
         onPressed: () {},
         child: Text(
           'yes,Cancel',
-          style: AppTextStyles.interMedum16(context).copyWith(color: Colors.white),
+          style:
+              AppTextStyles.interMedum16(context).copyWith(color: Colors.white),
         ));
   }
 }

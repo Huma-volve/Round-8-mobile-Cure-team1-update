@@ -27,12 +27,12 @@ class AppTextStyles {
       fontWeight: FontWeight.w400,
       fontFamily: 'Montserrat',
       color: ColorsLight.blueGray);
-      static TextStyle montserratRegular16(BuildContext context) => TextStyle(
-      fontSize: responsive_size(context, fontsize: 16),
-      fontWeight: FontWeight.w400,
-      fontFamily: 'Montserrat',
+  static TextStyle montserratRegular16(BuildContext context) => TextStyle(
+        fontSize: responsive_size(context, fontsize: 16),
+        fontWeight: FontWeight.w400,
+        fontFamily: 'Montserrat',
       );
-        static TextStyle montserratRegular12(BuildContext context) => TextStyle(
+  static TextStyle montserratRegular12(BuildContext context) => TextStyle(
       fontSize: responsive_size(context, fontsize: 12),
       fontWeight: FontWeight.w400,
       fontFamily: 'Montserrat',
@@ -42,12 +42,12 @@ class AppTextStyles {
       fontWeight: FontWeight.w500,
       fontFamily: 'Montserrat',
       color: ColorsLight.blueGray);
-       static TextStyle montserratMedum12(BuildContext context) => TextStyle(
+  static TextStyle montserratMedum12(BuildContext context) => TextStyle(
       fontSize: responsive_size(context, fontsize: 12),
       fontWeight: FontWeight.w500,
       fontFamily: 'Montserrat',
       color: ColorsLight.blueGray);
-        static TextStyle montserratMedum24(BuildContext context) => TextStyle(
+  static TextStyle montserratMedum24(BuildContext context) => TextStyle(
       fontSize: responsive_size(context, fontsize: 24),
       fontWeight: FontWeight.w500,
       fontFamily: 'Montserrat',
@@ -63,7 +63,7 @@ class AppTextStyles {
         fontWeight: FontWeight.w400,
         fontFamily: 'georgia',
       );
-      static TextStyle georgiaRegular24(BuildContext context) => TextStyle(
+  static TextStyle georgiaRegular24(BuildContext context) => TextStyle(
         fontSize: responsive_size(context, fontsize: 24),
         fontWeight: FontWeight.w400,
         fontFamily: 'georgia',

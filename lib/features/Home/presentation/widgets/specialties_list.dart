@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../Data/models/specialty_model.dart';
 import '../pages/doctors.dart';
-class SpecialtiesList extends StatefulWidget {
 
+class SpecialtiesList extends StatefulWidget {
   const SpecialtiesList({super.key});
 
   @override
@@ -17,22 +17,22 @@ class _SpecialtiesListState extends State<SpecialtiesList> {
       height: 55,
       child: ListView.separated(
           padding: const EdgeInsets.all(8),
-
           scrollDirection: Axis.horizontal,
-          itemBuilder:(context,index){
+          itemBuilder: (context, index) {
             final spec = Specialty.specialties[index];
 
             return InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => DoctorsBySpecialtyScreen(specialtyName: spec.name,
-                      ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => DoctorsBySpecialtyScreen(
+                      specialtyName: spec.name,
                     ),
-                  );},
+                  ),
+                );
+              },
               child: Container(
-
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 10,
@@ -45,17 +45,18 @@ class _SpecialtiesListState extends State<SpecialtiesList> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child:  Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(spec.icon, size: 16),
                     const SizedBox(width: 4),
                     Text(spec.name),
                   ],
-                ),),
-            )
-            ;},
-          separatorBuilder:  (context, index) => const SizedBox(width: 10),
+                ),
+              ),
+            );
+          },
+          separatorBuilder: (context, index) => const SizedBox(width: 10),
           itemCount: Specialty.specialties.length),
     );
   }
