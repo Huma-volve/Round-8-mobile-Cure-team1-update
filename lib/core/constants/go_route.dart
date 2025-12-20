@@ -3,6 +3,7 @@ import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
+import 'package:cure_team_1_update/features/Home/presentation/pages/map.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
@@ -25,7 +26,10 @@ import 'package:cure_team_1_update/features/settings/screens/password_management
 import 'package:cure_team_1_update/features/settings/screens/privacy_policy_screen.dart';
 import 'package:cure_team_1_update/features/settings/screens/settings_screen.dart';
 import 'package:cure_team_1_update/features/splash/splash_screen.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../features/Home/location/Domin/entities/user_location.dart';
 
 abstract class Approutes {
   static GoRouter router = GoRouter(
@@ -113,6 +117,14 @@ abstract class Approutes {
         path: AppRoute.home,
         builder: (context, state) => const HomePage(),
       ),
+      GoRoute(
+        path: AppRoute.map,
+        builder: (context, state) {
+          final location = state.extra as UserLocation;
+          return MapScreen(location: location);
+        },
+      ),
+
 
       // Payment
       GoRoute(

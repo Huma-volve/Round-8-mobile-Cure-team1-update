@@ -1,13 +1,18 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/veiw_all_specialties.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../Data/models/doctor_model.dart';
+import '../../location/presentation/cubit/location_cubit.dart';
+import '../../location/presentation/state/location_state.dart';
 import '../widgets/doctor_item.dart';
 import '../widgets/home_top_section.dart';
 import '../widgets/specialties_list.dart';
@@ -22,6 +27,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    context.read<LocationCubit>().fetchLocationAndAddress();
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 27),
@@ -95,27 +101,20 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(fontSize: 18, color: Colors.blue),
                   )),
             ]),
-            Expanded(
-              child: ListView.separated(
-                scrollDirection: Axis.vertical,
-                padding: const EdgeInsets.all(8),
-                itemBuilder: (context, index) {
-                  final item = doctorsList[index];
-                  return InkWell(
-                      onTap: () {
-                        context.push(AppRoute.doctorDetails);
-                      },
-                      child: DoctorItem(doctor: item));
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(
-                    height: 12,
-                  );
-                },
-                itemCount: doctorsList.length,
-              ),
+            BlocBuilder<LocationCubit, LocationState>(
+              builder: (context, state) {
+                if (state is LocationLoading) {
+                  return CircularProgressIndicator();
+                } else if (state is LocationAddressLoaded) {
+                  return Text('Lat: ${state.location.lat}, Lng: ${state.location.lng}');
+                } else if (state is LocationError) {
+                  return
+                    Text(state.message);
+                }
+                return SizedBox();
+              },
             )
-          ],
+          ]
         ),
       ),
     );

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cure_team_1_update/core/constants/go_route.dart';
+
+
 
 
 class MyApp extends StatelessWidget {
@@ -15,16 +18,17 @@ class MyApp extends StatelessWidget {
 
       splitScreenMode: true,
       builder: (_ , child) {
-           return MaterialApp.router(
-        title: 'cure_team_1',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          useMaterial3: true,
-        ),
-        debugShowCheckedModeBanner: false,
-         
-         routerConfig: Approutes.router
-      );
+           return  MaterialApp.router(
+                     title: 'cure_team_1',
+                     theme: ThemeData(
+                       primarySwatch: Colors.blue,
+                       useMaterial3: true,
+                     ),
+                     debugShowCheckedModeBanner: false,
+                      
+                      routerConfig: Approutes.router
+                   );
+
       }
     );
   }
