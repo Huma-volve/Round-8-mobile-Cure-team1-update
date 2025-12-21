@@ -30,6 +30,9 @@ class Serverfailuer extends Failuer {
   }
   factory Serverfailuer.badRespons(int statusCode, dynamic respons) {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+      if (respons is String) {
+        return Serverfailuer(respons);
+      }
       return Serverfailuer(respons['error']['message']);
     } else if (statusCode == 404) {
       return Serverfailuer('Your request not found,plase try later!');
