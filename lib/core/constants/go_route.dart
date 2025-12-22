@@ -26,7 +26,6 @@ import 'package:cure_team_1_update/features/settings/presentation/screens/passwo
 import 'package:cure_team_1_update/features/settings/presentation/screens/privacy_policy_screen.dart';
 import 'package:cure_team_1_update/features/settings/presentation/screens/settings_screen.dart';
 import 'package:cure_team_1_update/features/splash/splash_screen.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/Home/location/Domin/entities/user_location.dart';
@@ -124,7 +123,6 @@ abstract class Approutes {
           return MapScreen(location: location);
         },
       ),
-
 
       // Payment
       GoRoute(

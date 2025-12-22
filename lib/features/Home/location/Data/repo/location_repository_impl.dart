@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:geocoding/geocoding.dart';
 
 import '../../Domin/entities/user_location.dart';
 import '../../Domin/repositories/location_repository.dart';
@@ -20,6 +19,7 @@ class LocationRepositoryImpl implements LocationRepository {
       return UserLocation(lat: 33.888, lng: 36.2222);
     }
   }
+
   @override
   Future<UserAddress> getUserAddress({
     required double lat,
