@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../core/style/responsive_size.dart';
 import '../../../../core/utils/assets.dart';
-import '../../../profile/screens/profile_screen.dart';
+import '../../../profile/presentation/screens/profile_screen.dart';
 import '../../Data/models/doctor_model.dart';
 import 'home_page.dart';
 

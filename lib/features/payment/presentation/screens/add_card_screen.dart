@@ -6,9 +6,9 @@ import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/widgets/custom_widgets.dart';
+import '../../../../core/widgets/custom_widgets.dart';
 import '../widgets/credit_card_widget.dart';
-import '../models/card_model.dart';
+import '../../data/models/card_model.dart';
 
 class AddCardScreen extends StatefulWidget {
   const AddCardScreen({super.key});

@@ -1,9 +1,13 @@
 import 'package:cure_team_1_update/core/services/api_services.dart';
 import 'package:cure_team_1_update/core/services/network/apiInterceptor%20.dart';
+import 'package:cure_team_1_update/features/profile/data/data_source/profile_data_source.dart';
+import 'package:cure_team_1_update/features/profile/data/repos/edit_profile_repo.dart';
+import 'package:cure_team_1_update/features/profile/presentation/bloc/bloc/edit_profile_bloc.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/datasource/remotdata/remotdata.dart';
 import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -21,4 +25,10 @@ Future<void> setup() async {
   getit.registerSingleton<Repoimplement>(
       Repoimplement(immplementRemotdata(getit.get<ApiServices>())));
   getit.registerSingleton<ChatCubit>(ChatCubit(getit.get<Repoimplement>()));
+
+  //edit profile
+  getit
+    ..registerFactory(() => EditProfileBloc(getit()))
+    ..registerLazySingleton(() => EditProfileRepo(getit()))
+    ..registerLazySingleton(() => EditProfileDataSource(getit()));
 }

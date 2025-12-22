@@ -1,7 +1,7 @@
 import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 
-import 'package:cure_team_1_update/features/settings/widgets/fAQ_expansion_tile.dart';
+import 'package:cure_team_1_update/features/settings/presentation/widgets/fAQ_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

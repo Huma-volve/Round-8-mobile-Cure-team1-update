@@ -5,18 +5,18 @@ import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
-import 'package:cure_team_1_update/features/profile/widgets/build_menu_item.dart';
-import 'package:cure_team_1_update/features/profile/widgets/show_logout_dialog.dart';
+import 'package:cure_team_1_update/features/profile/presentation/widgets/build_menu_item.dart';
+import 'package:cure_team_1_update/features/profile/presentation/widgets/show_logout_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/widgets/custom_widgets.dart';
-import '../../settings/screens/settings_screen.dart';
-import '../../payment/screens/payment_methods_screen.dart';
+import '../../../../core/widgets/custom_widgets.dart';
+import '../../../settings/presentation/screens/settings_screen.dart';
+import '../../../payment/presentation/screens/payment_methods_screen.dart';
 import 'edit_profile_screen.dart';
-import '../../settings/screens/faqs_screen.dart';
-import '../../settings/screens/privacy_policy_screen.dart';
+import '../../../settings/presentation/screens/faqs_screen.dart';
+import '../../../settings/presentation/screens/privacy_policy_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

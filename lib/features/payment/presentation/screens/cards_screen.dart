@@ -4,13 +4,13 @@ import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
-import 'package:cure_team_1_update/features/payment/widgets/build_empity_state.dart';
+import 'package:cure_team_1_update/features/payment/presentation/widgets/build_empity_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/widgets/custom_widgets.dart';
-import '../models/card_model.dart';
+import '../../../../core/widgets/custom_widgets.dart';
+import '../../data/models/card_model.dart';
 import 'add_card_screen.dart';
 
 class CardsScreen extends StatefulWidget {
