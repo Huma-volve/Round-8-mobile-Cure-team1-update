@@ -1,7 +1,7 @@
-import 'package:cure_team_1_update/core/utils/assets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:cure_team_1_update/core/utils/assets.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_svg/svg.dart';
 
 // class Customnavigationbar extends StatefulWidget {
 //   const Customnavigationbar({super.key});
@@ -90,10 +90,10 @@ import 'package:flutter_svg/svg.dart';
 //   }
 // }
 
-import 'package:cure_team_1_update/core/utils/assets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:cure_team_1_update/core/utils/assets.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_svg/svg.dart';
 
 // class Customnavigationbar extends StatefulWidget {
 //   const Customnavigationbar({super.key});

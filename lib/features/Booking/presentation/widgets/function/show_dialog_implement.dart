@@ -11,8 +11,8 @@ Future<dynamic> showDialogImplement(BuildContext context) {
       context: context,
       builder: (context) => Dialog(
             child: Container(
-              height: 475.h,
-              width: 341.w,
+              height: 445.r,
+              width: 341.r,
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(48)),
               child: Padding(
@@ -21,7 +21,7 @@ Future<dynamic> showDialogImplement(BuildContext context) {
                   children: [
                     const DialogAlertWidget(),
                     SizedBox(
-                      height: 32.h,
+                      height: 32.r,
                     ),
                     Text(
                       'Warning!',
@@ -29,7 +29,7 @@ Future<dynamic> showDialogImplement(BuildContext context) {
                           .copyWith(color: ColorsLight.vividYellow),
                     ),
                     SizedBox(
-                      height: 8.h,
+                      height: 8.r,
                     ),
                     Text(
                       'Cancellation must be made at least 24 hours in advance to receive a refund',
@@ -37,7 +37,7 @@ Future<dynamic> showDialogImplement(BuildContext context) {
                           .copyWith(color: ColorsLight.blueGray),
                     ),
                     SizedBox(
-                      height: 32.h,
+                      height: 32.r,
                     ),
                     TextButton(
                         onPressed: () {},
@@ -47,7 +47,7 @@ Future<dynamic> showDialogImplement(BuildContext context) {
                               .copyWith(color: ColorsLight.blueGray),
                         )),
                     SizedBox(
-                      height: 16.h,
+                      height: 16.r,
                     ),
                     const DialogConfirmButton()
                   ],

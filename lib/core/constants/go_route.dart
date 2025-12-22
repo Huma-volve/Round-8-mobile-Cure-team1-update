@@ -1,5 +1,5 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
-import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
+import 'package:cure_team_1_update/features/Booking/domain/enums/booking_enum.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
@@ -59,13 +59,12 @@ abstract class Approutes {
         builder: (context, state) => const MyBookingScreen(),
       ),
       GoRoute(
-        path: AppRoute.myBookingitemSsceen,
+        path: AppRoute.updateMyBookingSceen,
         builder: (context, state) {
-          final mybokkingModel = state.extra as MybookingModel;
-          return MyBookItemScreen(
-            mybookingModel: mybokkingModel,
-          );
-        },
+          BookingEnum bookingStatus =state.extra as BookingEnum;
+        return  UpdateMyBookingScreen(bookingStatus: bookingStatus );
+        }
+        
       ),
 
       // Auth

@@ -1,15 +1,15 @@
 
 
-import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
+import 'package:cure_team_1_update/features/Booking/domain/enums/booking_enum.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/appoint_ment_warning.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/my_book_appbar.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/your_appointment_date_and_doctor_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MyBookItemScreenBody extends StatelessWidget {
-  const MyBookItemScreenBody({super.key, required this.mybookingModel});
-final MybookingModel mybookingModel;
+class UpdateMyBookingScreenBody extends StatelessWidget {
+  const UpdateMyBookingScreenBody({super.key, required this.bookingStatus});
+final BookingEnum bookingStatus;
   @override
   Widget build(BuildContext context) {
     return  Padding(
@@ -30,7 +30,7 @@ final MybookingModel mybookingModel;
         height: 24.r,
        ),
      
-       Expanded(child: YourAppointmentDateAndDoctorDetails(mybookingModel: mybookingModel))
+       Expanded(child: YourAppointmentDateAndDoctorDetails(bookingStatus: bookingStatus,))
       
         ],
       ),
