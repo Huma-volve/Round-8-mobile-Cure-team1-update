@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/widgets/custom_widgets.dart';
+import '../../../../core/widgets/custom_widgets.dart';
 
 class PasswordManagementScreen extends StatefulWidget {
   const PasswordManagementScreen({super.key});
