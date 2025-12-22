@@ -32,7 +32,7 @@ class AddReview extends StatelessWidget {
          onPressed: () { 
 
 
-          context.go(AppRoute.addReviewScreen);
+          context.push(AppRoute.addReviewScreen);
           }, child: Text('add review',style: AppTextStyles.montserratRegular14(context).copyWith(color: ColorsLight.royalBlue),),)
      ],
     );
