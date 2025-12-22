@@ -122,4 +122,6 @@ class Assets {
       'assets/images/sittings/minus-sign_FAQ.svg';
   static const String sittingsOutlineVisiblePasswordSittings =
       'assets/images/sittings/Outline_visible_password_sittings.svg';
+  static const String defutlprofileimage =
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6s-FT9wVx4YZbN0bC4Sp2uu7bOiYXSnDUmg&s';
 }

@@ -29,6 +29,8 @@ class _FavoritesappberState extends State<Favoritesappber> {
                   context.read<ChatCubit>().getconv(Chattab.unread);
                 } else if (index == 2) {
                   context.read<ChatCubit>().getconv(Chattab.favorites);
+                } else {
+                  context.read<ChatCubit>().getconv(Chattab.all);
                 }
               },
               child: Padding(

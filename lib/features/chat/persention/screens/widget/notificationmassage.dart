@@ -42,9 +42,9 @@ class Notificationmassage extends StatelessWidget {
           }
 
           return ListView.builder(
-              itemCount: all_list.length,
+              itemCount: state.conversionlist.length,
               itemBuilder: (context, indx) => Histroychat(
-                    massage: all_list[indx],
+                    massage: state.conversionlist[indx],
                     fun: () {
                       Navigator.push(
                           context,

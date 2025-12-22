@@ -9,6 +9,7 @@ class CustomeTextField extends StatefulWidget {
     this.perfixIcon,
     this.suffixIcon,
     this.focusnode,
+    this.function,
     required this.controller,
   });
   final String text;
@@ -16,6 +17,7 @@ class CustomeTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final FocusNode? focusnode;
   final TextEditingController controller;
+  final void Function(String)? function;
 
   @override
   State<CustomeTextField> createState() => _CustomeTextFieldState();
@@ -32,6 +34,7 @@ class _CustomeTextFieldState extends State<CustomeTextField> {
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: TextFormField(
+          onChanged: widget.function,
           focusNode: widget.focusnode,
           controller: widget.controller,
           keyboardType: TextInputType.emailAddress,

@@ -69,6 +69,9 @@ class _ChatState extends State<Chat> {
                 ),
               ),
               text: 'Search for chat, doctor',
+              function: (value) {
+                context.read<ChatCubit>().search(value);
+              },
               controller: controller,
             ),
             const SizedBox(

@@ -16,15 +16,17 @@ class ChatCubit extends Cubit<ChatState> {
   }
   Future<void> getconv(Chattab tab) async {
     await Cachehelper.cacheToken(
-        "114|7gYvlIpcUGx69fE0a39r0pLtzEmheETZnWkwwtCxf4d4a0d9");
+        "25|GhGhOXrbatW6ZktkCNHlBKr53mZfOUcBWgPftGZ91be7a649");
     emit(Lodingchat());
     var result = await chatrepoa.featchconversion(tab);
     result.fold((faluir) => emit(Fuailerchat(faluir)),
         (conv) => emit(Successchat(conv)));
   }
-  Future<void> search( String  nameconv)async{
+
+  Future<void> search(String nameconv) async {
     emit(Lodingchat());
-   var resalt =  await chatrepoa.searchconversion(nameconv);
-   resalt.fold((faluir)=>emit(Fuailerchat(faluir)),(conv)=>emit(Successchat(conv)));
-  
+    var resalt = await chatrepoa.searchconversion(nameconv);
+    resalt.fold((faluir) => emit(Fuailerchat(faluir)),
+        (conv) => emit(Successchat(conv)));
+  }
 }
