@@ -12,7 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class Chatbody extends StatefulWidget {
   const Chatbody({super.key, required this.id});
-  final int id;
+  final int? id;
   @override
   State<Chatbody> createState() => _ChatbodyState();
 }

@@ -2,7 +2,7 @@ import 'last_message.dart';
 import 'other_user.dart';
 
 class Conversion {
-  int? id;
+  int id;
   bool? isPrivate;
   OtherUser? otherUser;
   LastMessage? lastMessage;
@@ -12,7 +12,7 @@ class Conversion {
   String? updatedAt;
 
   Conversion({
-    this.id,
+    required this.id,
     this.isPrivate,
     this.otherUser,
     this.lastMessage,
@@ -23,7 +23,7 @@ class Conversion {
   });
 
   factory Conversion.fromJson(Map<String, dynamic> json) => Conversion(
-        id: json['id'] as int?,
+        id: json['id'] as int,
         isPrivate: json['is_private'] as bool?,
         otherUser: json['other_user'] == null
             ? null
