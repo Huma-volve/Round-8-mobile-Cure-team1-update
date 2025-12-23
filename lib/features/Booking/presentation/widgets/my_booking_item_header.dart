@@ -21,7 +21,7 @@ final BookingEnum bookingStatus;
         SizedBox(width: 4.w,),
         Text('Monday, July 21 - 11:00 Am',style: AppTextStyles.montserratRegular12(context)),
        const Spacer(),
-        Text(captilize(bookingStatus.name),style: AppTextStyles.montserratRegular14(context).copyWith(color:bookingStatus == BookingEnum.upcoming  ? ColorsLight.royalBlue:Colors.red),)
+        Text(captilize(bookingStatus.name),style: AppTextStyles.montserratRegular14(context).copyWith(color:bookingStatus == BookingEnum.pending  ? ColorsLight.royalBlue:Colors.red),)
       ],
     );
   }

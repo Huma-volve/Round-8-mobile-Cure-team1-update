@@ -1,18 +1,22 @@
 
+
+
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class SingleMonthCalendar extends StatefulWidget {
-  const SingleMonthCalendar({super.key});
-
+  const SingleMonthCalendar({super.key, this.onSelectedDate});
+final Function(String? selectedDate)?onSelectedDate;
   @override
   State<SingleMonthCalendar> createState() => _SingleMonthCalendarState();
 }
 
 class _SingleMonthCalendarState extends State<SingleMonthCalendar> {
+String ?formattedDate;
   DateTime currentMonth = DateTime.now();
   DateTime? selectedDate;
 
@@ -20,7 +24,7 @@ class _SingleMonthCalendarState extends State<SingleMonthCalendar> {
   String? selectedMonthName;
   String? selectedDayNumber;
 
-  List<int> availableDays = [15,16,17,18,19,20];
+  List<int> availableDays = [20,21,22,23,24,25,26,27,28,29];
 
   final monthNames = [
     "",
@@ -91,6 +95,7 @@ class _SingleMonthCalendarState extends State<SingleMonthCalendar> {
                   selectedMonthName = null;
                   selectedDayNumber = null;
                 });
+            
               },
             ),
           ],
@@ -142,7 +147,20 @@ class _SingleMonthCalendarState extends State<SingleMonthCalendar> {
                           selectedDayName = getWeekdayName(date);
                           selectedMonthName = monthNames[currentMonth.month];
                           selectedDayNumber = day.toString();
+                          if(selectedDate!=null)
+                          {
+                            formattedDate=DateFormat('yyyy-MM-dd').format(selectedDate!);
+
+                          }
+                          else{
+  formattedDate=null;
+                          }
+                  
+                  
                         });
+                        
+                          widget.onSelectedDate?.call(formattedDate);
+
                       }
                     : null,
                 child: Container(

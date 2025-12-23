@@ -6,10 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
-    super.key, required this.buttonName, this.onPressed,
+    super.key, required this.buttonName, this.onPressed,this.loadingState=false
   });
 final String buttonName;
 final  Function()? onPressed;
+final bool loadingState;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -21,6 +22,6 @@ final  Function()? onPressed;
                    borderRadius: BorderRadius.circular(10)
                  )
                ),
-               onPressed:onPressed, child: Text(buttonName,style: AppTextStyles.montserratMedum16(context).copyWith(color: Colors.white),));
+               onPressed:onPressed, child:loadingState? const Center(child: CircularProgressIndicator(color: Colors.white,),): Text(buttonName,style: AppTextStyles.montserratMedum16(context).copyWith(color: Colors.white),));
   }
 }

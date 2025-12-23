@@ -1,6 +1,6 @@
 enum BookingEnum {
-  canceled,
+  cancelled,
+pending,
 completed,
-upcoming,
 
 }

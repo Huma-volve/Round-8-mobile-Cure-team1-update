@@ -8,11 +8,12 @@ import 'package:cure_team_1_update/features/Booking/presentation/widgets/support
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-dynamic  getbuttonBasedOnBookingStatus(BookingEnum bookingStatus){
+dynamic  getbuttonBasedOnBookingStatus({required  BookingEnum bookingStatus,required int bookId}){
+
   switch(bookingStatus)
   {
 
-    case BookingEnum.canceled:
+    case BookingEnum.cancelled:
        return  Row(
                 children: [const  Expanded(child: BookagainBottun()),SizedBox(width: 24.r,) ,const Expanded(child: SupportButton())],
               );
@@ -20,9 +21,9 @@ dynamic  getbuttonBasedOnBookingStatus(BookingEnum bookingStatus){
      return   Row(
                 children: [const Expanded(child: BookagainBottun()),SizedBox(width: 24.r,),const Expanded(child: FeedBackButton())],
               );
-    case BookingEnum.upcoming:
+    case BookingEnum.pending:
     return  Row(
-                children: [ const Expanded(child: CancelButton()),SizedBox(width: 24.r,),   Expanded(child: ReschedualButton(bookingStatus: bookingStatus,))],
+                children: [  Expanded(child: CancelButton(bookId: bookId,)),SizedBox(width: 24.r,),   Expanded(child: ReschedualButton(bookingStatus: bookingStatus,))],
               );
   }
 }
