@@ -44,5 +44,4 @@ class AppImages {
   static const backButton = 'assets/svg/arrow_back.svg';
   static const notificationIcon = 'assets/svg/notification_icon.svg';
   //Home
-
 }

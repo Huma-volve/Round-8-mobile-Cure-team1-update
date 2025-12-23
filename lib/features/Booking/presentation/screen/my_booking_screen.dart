@@ -13,7 +13,7 @@ class MyBookingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       body: BlocProvider(
-        create: (context) => BookingCubit(myBookRepo: getit<MyBookRepo>())..getBookingData(selectedData: '16'),
+        create: (context) => BookingCubit(myBookRepo: getIt<MyBookRepo>())..getBookingData(selectedData: '16'),
         child:const MyBookinScreenBody(),
       ),
     );

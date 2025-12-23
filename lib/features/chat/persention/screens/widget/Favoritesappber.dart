@@ -1,4 +1,7 @@
+import 'package:cure_team_1_update/core/utils/chattab.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Favoritesappber extends StatefulWidget {
   const Favoritesappber({super.key});
@@ -22,6 +25,13 @@ class _FavoritesappberState extends State<Favoritesappber> {
                 setState(() {
                   current_indx = index;
                 });
+                if (index == 1) {
+                  context.read<ChatCubit>().getconv(Chattab.unread);
+                } else if (index == 2) {
+                  context.read<ChatCubit>().getconv(Chattab.favorites);
+                } else {
+                  context.read<ChatCubit>().getconv(Chattab.all);
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),

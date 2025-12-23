@@ -79,3 +79,20 @@ class SharedPref {
     await sharedPreferences.clear();
   }
 }
+
+//نصيحه
+//يبنى ما كل دا فوق  اتعود تتأقلم على كود الناس متثبتش  دماغك عشان تتاقلم
+class Cachehelper {
+  static late SharedPreferences _shared;
+  static Future<void> init() async {
+    _shared = await SharedPreferences.getInstance();
+  }
+
+  static Future<void> cacheToken(token) async {
+    await _shared.setString("token", token);
+  }
+
+  static String? getToken() {
+    return _shared.getString("token");
+  }
+}

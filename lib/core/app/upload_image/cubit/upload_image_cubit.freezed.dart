@@ -96,6 +96,9 @@ class _$UploadImageStateCopyWithImpl<$Res, $Val extends UploadImageState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -112,6 +115,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -238,6 +244,9 @@ class __$$LoadingStateImplCopyWithImpl<$Res>
   __$$LoadingStateImplCopyWithImpl(
       _$LoadingStateImpl _value, $Res Function(_$LoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -367,6 +376,8 @@ class __$$LoadingListStateImplCopyWithImpl<$Res>
       $Res Function(_$LoadingListStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -405,7 +416,9 @@ class _$LoadingListStateImpl implements LoadingListState {
   @override
   int get hashCode => Object.hash(runtimeType, index);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadingListStateImplCopyWith<_$LoadingListStateImpl> get copyWith =>
@@ -503,7 +516,10 @@ abstract class LoadingListState implements UploadImageState {
   const factory LoadingListState(final int index) = _$LoadingListStateImpl;
 
   int get index;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadingListStateImplCopyWith<_$LoadingListStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -522,6 +538,9 @@ class __$$SuccessStateImplCopyWithImpl<$Res>
   __$$SuccessStateImplCopyWithImpl(
       _$SuccessStateImpl _value, $Res Function(_$SuccessStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -651,6 +670,8 @@ class __$$RemovemageStateImplCopyWithImpl<$Res>
       _$RemovemageStateImpl _value, $Res Function(_$RemovemageStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -690,7 +711,9 @@ class _$RemovemageStateImpl implements RemovemageState {
   @override
   int get hashCode => Object.hash(runtimeType, imageUrl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RemovemageStateImplCopyWith<_$RemovemageStateImpl> get copyWith =>
@@ -789,7 +812,10 @@ abstract class RemovemageState implements UploadImageState {
       _$RemovemageStateImpl;
 
   String get imageUrl;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RemovemageStateImplCopyWith<_$RemovemageStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -811,6 +837,8 @@ class __$$ErrorStateImplCopyWithImpl<$Res>
       _$ErrorStateImpl _value, $Res Function(_$ErrorStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -849,7 +877,9 @@ class _$ErrorStateImpl implements ErrorState {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>
@@ -946,7 +976,10 @@ abstract class ErrorState implements UploadImageState {
   const factory ErrorState({required final String error}) = _$ErrorStateImpl;
 
   String get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UploadImageState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,10 +1,13 @@
 /// Application-level constants
 class AppConstants {
   /// Application name
-  static const String appName = 'cure_team_1';
+  static const String appName = 'cure_team_1_update';
 
   /// API endpoints
-  static const String baseUrl = 'https://api.example.com';
+  /// //https://round8-backend-team-one.huma-volve.com/api/profile/edit
+  static const String baseUrl =
+      'https://round8-backend-team-one.huma-volve.com/api/';
+  static const String editProfileUrl = 'profile/edit';
 
   /// Storage keys
   static const String tokenKey = 'auth_token';

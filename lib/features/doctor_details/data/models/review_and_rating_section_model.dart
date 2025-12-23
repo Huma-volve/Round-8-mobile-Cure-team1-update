@@ -3,5 +3,6 @@ class ReviewAndRatingSectionModel {
   final double data;
   final String title;
 
-  ReviewAndRatingSectionModel({required this.image, required this.data, required this.title});
+  ReviewAndRatingSectionModel(
+      {required this.image, required this.data, required this.title});
 }

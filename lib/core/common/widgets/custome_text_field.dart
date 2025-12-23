@@ -9,19 +9,33 @@ class CustomeTextField extends StatefulWidget {
     this.perfixIcon,
     this.suffixIcon,
     this.focusnode,
+    this.function,
+    this.onfieldsumitted,
     required this.controller,
+    this.isPassword = false,
   });
   final String text;
   final Widget? perfixIcon;
   final Widget? suffixIcon;
   final FocusNode? focusnode;
   final TextEditingController controller;
+  final bool isPassword;
+  final void Function(String)? function;
+  final Function(String)? onfieldsumitted;
 
   @override
   State<CustomeTextField> createState() => _CustomeTextFieldState();
 }
 
 class _CustomeTextFieldState extends State<CustomeTextField> {
+  bool obscureText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    obscureText = widget.isPassword;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,16 +46,30 @@ class _CustomeTextFieldState extends State<CustomeTextField> {
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: TextFormField(
+          onFieldSubmitted: widget.onfieldsumitted,
+          onChanged: widget.function,
           focusNode: widget.focusnode,
           controller: widget.controller,
           keyboardType: TextInputType.emailAddress,
-          obscureText: false,
+          obscureText: obscureText,
           autofocus: false,
           decoration: InputDecoration(
             hintText: widget.text,
             hintStyle: AppTextStyles.styleLarge20(context),
             prefixIcon: widget.perfixIcon,
-            suffixIcon: widget.suffixIcon,
+            suffixIcon: widget.isPassword
+                ? IconButton(
+                    icon: Icon(
+                      obscureText ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
+                  )
+                : widget.suffixIcon,
             border: InputBorder.none,
             enabledBorder: InputBorder.none,
           ),

@@ -1,15 +1,20 @@
 import 'package:cure_team_1_update/core/common/widgets/custome_text_field.dart';
-import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 
 import 'package:cure_team_1_update/core/utils/assets.dart';
 
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/Favoritesappber.dart';
-import 'package:cure_team_1_update/core/widgets/customNavigationbar.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/customabppar.dart';
 
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/notificationmassage.dart';
+<<<<<<< HEAD
+import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
+=======
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+import 'package:dio/dio.dart';
+>>>>>>> mafdysaad
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_svg/svg.dart';
 
@@ -22,7 +27,7 @@ class Chat extends StatefulWidget {
 
 class _ChatState extends State<Chat> {
   TextEditingController controller = TextEditingController();
-  FocusNode _focus = FocusNode();
+  final FocusNode _focus = FocusNode();
   List<String> searchHistory = ["robert", "jessica"];
   bool isslected = false;
   @override
@@ -31,6 +36,9 @@ class _ChatState extends State<Chat> {
       setState(() {
         isslected = _focus.hasFocus;
       });
+    });
+    Future.microtask(() {
+      context.read<ChatCubit>();
     });
     super.initState();
   }
@@ -59,6 +67,9 @@ class _ChatState extends State<Chat> {
                 ),
               ),
               text: 'Search for chat, doctor',
+              function: (value) {
+                context.read<ChatCubit>().search(value);
+              },
               controller: controller,
             ),
             const SizedBox(

@@ -14,7 +14,7 @@ class YourAppointmentDateAndDoctorDetails extends StatelessWidget {
 final BookingEnum bookingStatus;
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         MyBookingItemHeader(bookingStatus: bookingStatus),
       const  CustomDivivder(),

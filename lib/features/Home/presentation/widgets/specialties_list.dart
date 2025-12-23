@@ -27,6 +27,7 @@ class _SpecialtiesListState extends State<SpecialtiesList> {
                   context,
                   MaterialPageRoute(
                     builder: (_) => DoctorsBySpecialtyScreen(
+                    //  specialtyId: spec.id,
                       specialtyName: spec.name,
                     ),
                   ),

@@ -12,8 +12,8 @@ class UpdateMyBookingScreenBody extends StatelessWidget {
 final BookingEnum bookingStatus;
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 16.r),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.r),
       child: Column(
         children: [
           SizedBox( 

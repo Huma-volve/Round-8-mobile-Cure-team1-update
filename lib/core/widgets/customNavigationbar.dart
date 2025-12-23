@@ -1,20 +1,21 @@
 // import 'package:cure_team_1_update/core/style/responsive_size.dart';
 // import 'package:cure_team_1_update/core/utils/assets.dart';
+// import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
+// import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
+// import 'package:cure_team_1_update/features/profile/screens/profile_screen.dart';
 // import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:flutter_svg/svg.dart';
-// import 'package:go_router/go_router.dart';
 
-// // class Customnavigationbar extends StatefulWidget {
-// //   const Customnavigationbar({super.key, required this.pages});
-// //   final List<String>? pages;
+// class Customnavigationbar extends StatefulWidget {
+//   const Customnavigationbar({super.key, required this.pages});
+//   final List<String>? pages;
 
-// //   @override
-// //   State<Customnavigationbar> createState() => _CustomnavigationbarState();
-// // }
+//   @override
+//   State<Customnavigationbar> createState() => _CustomnavigationbarState();
+// }
 
-// // class _CustomnavigationbarState extends State<Customnavigationbar> {
-// //   int currentitem = 0;
+// class _CustomnavigationbarState extends State<Customnavigationbar> {
+//   int currentitem = 0;
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -28,14 +29,15 @@
 //             ),
 //           );
 //         }
-//         if (index == 1) {
-//           Navigator.push(
-//             context,
-//             MaterialPageRoute(
-//               builder: (context) => const BookingSection(),
-//             ),
-//           );
-//         }
+//   //Do Navigate to Booking Section is commented out
+//         // if (index == 1) {
+//         //   Navigator.push(
+//         //     context,
+//         //     MaterialPageRoute(
+//         //       builder: (context) => const BookingSection(),
+//         //     ),
+//         //   );
+//         // }
 //         if (index == 2) {
 //           Navigator.push(
 //             context,

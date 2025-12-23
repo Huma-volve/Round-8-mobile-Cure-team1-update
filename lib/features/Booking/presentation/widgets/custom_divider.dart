@@ -1,6 +1,3 @@
-
-
-
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +12,6 @@ class CustomDivivder extends StatelessWidget {
       height: 16,
       color: ColorsLight.offWhite,
       thickness: 2,
-     
     );
   }
 }

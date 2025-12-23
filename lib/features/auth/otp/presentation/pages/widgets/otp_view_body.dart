@@ -29,7 +29,7 @@ class OtpViewBody extends StatelessWidget {
             'Code has been send to +02 010 *** **88',
             style: AppTextStyles.styleMedium16(context),
           ),
-          OtpItem(),
+          const OtpItem(),
           Column(
             children: [
               Text(

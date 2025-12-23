@@ -1,12 +1,23 @@
+<<<<<<< HEAD
+=======
+import 'package:cure_team_1_update/core/services/service_locator.dart';
+import 'package:cure_team_1_update/core/utils/chattab.dart';
 
+>>>>>>> mafdysaad
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
+import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
+<<<<<<< HEAD
+=======
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+>>>>>>> mafdysaad
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../core/style/responsive_size.dart';
 import '../../../../core/utils/assets.dart';
 import '../../../profile/screens/profile_screen.dart';
-
+import '../../Data/models/doctor_model.dart';
 import 'home_page.dart';
 
 class NavBar extends StatefulWidget {
@@ -20,7 +31,10 @@ class _HomePageState extends State<NavBar> {
   List<Widget> pages = [
     const HomePage(),
     const MyBookingScreen(),
-    const Chat(),
+    BlocProvider(
+      create: (context) => getIt.get<ChatCubit>(),
+      child: const Chat(),
+    ),
     const ProfileScreen()
   ];
   int currentitem = 0;

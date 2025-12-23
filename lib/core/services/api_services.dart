@@ -11,4 +11,26 @@ class ApiServices {
     ),);
     return respons.data;
   }
+
+  post(endpoint, Map data) async {
+    Response respons = await _dio.post('$basURL$endpoint', data: data);
+    return respons.data;
+  }
+
+  put(endpoint, Map data, token) async {
+    Response response = await _dio.put(
+      '$endpoint',
+      data: data,
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    return response.data;
+  }
+
+  delet(endpoint, Map data) async {
+    Response respons = await _dio.delete('$basURL$endpoint', data: data);
+    return respons.data;
+  }
+
 }

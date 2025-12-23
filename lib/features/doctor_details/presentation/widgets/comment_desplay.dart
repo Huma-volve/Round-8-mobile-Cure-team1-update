@@ -1,4 +1,3 @@
-
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/comment_user_info.dart';
@@ -13,16 +12,20 @@ class CommentDesplay extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.all(width: 4.r,color: ColorsLight.lightGray),
-        borderRadius: BorderRadius.circular(16.r)
-      ),
+          border: Border.all(width: 4.r, color: ColorsLight.lightGray),
+          borderRadius: BorderRadius.circular(16.r)),
       child: Padding(
-        padding:  EdgeInsets.symmetric(vertical: 14.r,horizontal: 12.r),
+        padding: EdgeInsets.symmetric(vertical: 14.r, horizontal: 12.r),
         child: Column(
           children: [
             const CommentUserInfo(),
-            SizedBox(height: 9.r,),
-            Text(comment,style: AppTextStyles.montserratMedum16(context),),
+            SizedBox(
+              height: 9.r,
+            ),
+            Text(
+              comment,
+              style: AppTextStyles.montserratMedum16(context),
+            ),
           ],
         ),
       ),
@@ -30,7 +33,5 @@ class CommentDesplay extends StatelessWidget {
   }
 }
 
-
-
-
-String comment='Excellent service! Dr. Jessica Turner was attentive and thorough. The clinic was clean, and the staff were friendly. Highly recommend for in-person care!';
+String comment =
+    'Excellent service! Dr. Jessica Turner was attentive and thorough. The clinic was clean, and the staff were friendly. Highly recommend for in-person care!';
