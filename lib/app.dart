@@ -21,13 +21,13 @@ class MyApp extends StatelessWidget {
           return MultiBlocProvider(
             providers: [
               BlocProvider<ChatCubit>(
-                create: (_) => getit.get<ChatCubit>(),
+                create: (_) => getIt.get<ChatCubit>(),
               ),
               BlocProvider(
-                create: (context) => getit<EditProfileBloc>(),
+                create: (context) => getIt<EditProfileBloc>(),
               ),
               BlocProvider(
-                create: (context) => getit<ChangePasswordBloc>(),
+                create: (context) => getIt<ChangePasswordBloc>(),
               ),
             ],
             child: OverlaySupport.global(
