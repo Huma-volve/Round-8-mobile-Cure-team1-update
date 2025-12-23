@@ -15,6 +15,11 @@ final class Successchat extends ChatState {
   const Successchat(this.conversionlist);
 }
 
+final class Successchatbody extends ChatState {
+  final List<Historymasseges> conversionlist;
+  const Successchatbody(this.conversionlist);
+}
+
 final class Fuailerchat extends ChatState {
   final Serverfailuer error;
   const Fuailerchat(this.error);

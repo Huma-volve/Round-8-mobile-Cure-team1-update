@@ -1,16 +1,27 @@
+<<<<<<< HEAD
+=======
+import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/services/service_locator.dart';
+>>>>>>> mafdysaad
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/prfiledatils.dart';
+import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/histroychat.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_cubit/cubit/chatbody_cubit.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class Notificationmassage extends StatelessWidget {
   const Notificationmassage({super.key});
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     List<Prfiledatils> allList = [
       Prfiledatils(Assets.resourceImagesJana, 'It’s been around six.....',
           'Dr,jana', '4:05'),
@@ -25,6 +36,8 @@ class Notificationmassage extends StatelessWidget {
       Prfiledatils(Assets.resourceImagesRobert, 'you: ok i will do it like...',
           'Dr,Robert', '4:05')
     ];
+=======
+>>>>>>> mafdysaad
     return BlocBuilder<ChatCubit, ChatState>(
       builder: (context, state) {
         if (state is Lodingchat) {
@@ -41,14 +54,28 @@ class Notificationmassage extends StatelessWidget {
           }
 
           return ListView.builder(
+<<<<<<< HEAD
               itemCount: allList.length,
               itemBuilder: (context, indx) => Histroychat(
                     massage: allList[indx],
+=======
+              itemCount: state.conversionlist.length,
+              itemBuilder: (context, indx) => Histroychat(
+                    massage: state.conversionlist[indx],
+>>>>>>> mafdysaad
                     fun: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Chatbody()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider(
+                            create: (_) =>
+                                ChatbodyCubit(getit.get<Repoimplement>())
+                                  ..getmassages(state.conversionlist[indx]),
+                            child:
+                                Chatbody(convers: state.conversionlist[indx]),
+                          ),
+                        ),
+                      );
                     },
                   ));
         }
