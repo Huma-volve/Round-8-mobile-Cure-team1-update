@@ -10,13 +10,8 @@ class LocationRepositoryImpl implements LocationRepository {
 
   @override
   Future<UserLocation> getUserLocation() async {
-    try {
-      final position = await dataSource.getCurrentLocation();
-      return UserLocation(lat: position.latitude, lng: position.longitude);
-    } catch (_) {
-      // Fallback location: Mansoura
-      return UserLocation(lat: 33.888, lng: 36.2222);
-    }
+    final position = await dataSource.getCurrentLocation();
+    return UserLocation(lat: position.latitude, lng: position.longitude);
   }
 
   @override
