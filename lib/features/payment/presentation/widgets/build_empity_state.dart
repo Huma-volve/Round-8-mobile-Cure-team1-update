@@ -23,7 +23,7 @@ Widget buildEmptyState({required BuildContext context}) {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 48.w),
           child: Text(
-            'Add your cards to make payment easier',
+            'Add your first card to make payments faster and easier.',
             textAlign: TextAlign.center,
             style: StyleTextHelper.textStyle12Regular(context),
           ),

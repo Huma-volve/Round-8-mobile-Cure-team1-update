@@ -26,7 +26,7 @@ class FAQsScreen extends StatelessWidget {
             const FAQExpansionTile(
               title: 'What is this app used for?',
               content:
-                  'This app allows you to search for doctors, book appointments, and consult in person easily from your phone.',
+                  'This app allows you to search for doctors, book appointments, and consult in person easily from your phone',
             ),
             SizedBox(height: 16.h),
             const FAQExpansionTile(

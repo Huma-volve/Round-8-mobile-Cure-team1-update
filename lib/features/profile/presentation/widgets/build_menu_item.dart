@@ -22,8 +22,8 @@ Widget buildMenuItem({
       onTap: onTap,
       leading: SvgPicture.asset(
         assetPath,
-        width: iconWidth ?? 10.w,
-        height: iconWidth ?? 10.w,
+        width: iconWidth ?? 14.w,
+        height: iconWidth ?? 14.w,
         colorFilter: const ColorFilter.mode(
           ColorsLight.textMain,
           BlendMode.srcIn,

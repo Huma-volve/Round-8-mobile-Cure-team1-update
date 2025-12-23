@@ -63,6 +63,9 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
                   _buildWalletItem(0, 'Apple Pay', Assets.paymentLogosApplePay),
                   Divider(height: 1.h, color: Colors.grey.shade200),
                   _buildWalletItem(1, 'Paypal', Assets.paymentIcOutlinePaypal),
+                  Divider(height: 1.h, color: Colors.grey.shade200),
+                  _buildWalletItem(
+                      1, 'mobile wallets ', Assets.profileGroupAddCard),
                 ],
               ),
             ),

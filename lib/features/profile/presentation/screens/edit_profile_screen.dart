@@ -53,6 +53,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           appBar: CustomAppBar(
             // title: 'Edit Profile',
             onPressed: () {
+              Navigator.pop(context);
               GoRouter.of(context).canPop() ? GoRouter.of(context).pop() : null;
             },
           ),
