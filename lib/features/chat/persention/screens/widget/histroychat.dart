@@ -1,13 +1,16 @@
+import 'package:cure_team_1_update/core/function/helperfunction.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
-import 'package:cure_team_1_update/features/chat/data/modle/prfiledatils.dart';
+import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
+
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/imageprofile.dart';
+
 import 'package:flutter/material.dart';
 
 class Histroychat extends StatelessWidget {
   const Histroychat({super.key, required this.massage, required this.fun});
-  final Prfiledatils? massage;
+  final Conversion? massage;
   final void Function()? fun;
 
   @override
@@ -24,41 +27,45 @@ class Histroychat extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: ListTile(
-              leading: Imageprofile(image: massage!.image),
+              leading: Imageprofile(image: massage!.otherUser!.avatar),
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    massage!.name,
+                    massage!.otherUser!.name!,
                     style: AppTextStyles.styleMedium20(context),
                   ),
                   Text(
-                    massage!.massage,
+                    massage!.lastMessage?.body ?? 'Strart massages',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.styleLarge16(context),
                   ),
                 ],
               ),
               trailing: Column(children: [
                 Text(
-                  massage!.time,
+                  formatTimeToHourMinute(massage!.updatedAt!),
                   style: AppTextStyles.styleLarge16(context),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: Container(
-                    height: 20,
-                    width: 20,
-                    decoration: const BoxDecoration(
-                      color: Colors.green,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '2',
-                        style: AppTextStyles.styleLarge16(context),
-                      ),
-                    ),
-                  ),
+                  child: massage!.unreadCount == 0
+                      ? const SizedBox.shrink()
+                      : Container(
+                          height: 20,
+                          width: 20,
+                          decoration: const BoxDecoration(
+                            color: Colors.green,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Text(
+                              '${massage!.unreadCount}',
+                              style: AppTextStyles.styleLarge16(context),
+                            ),
+                          ),
+                        ),
                 ),
               ]),
             ),

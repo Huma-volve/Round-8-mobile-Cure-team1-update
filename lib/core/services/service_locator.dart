@@ -5,6 +5,8 @@ import 'package:cure_team_1_update/features/Home/location/Data/repo/location_rep
 import 'package:cure_team_1_update/features/Home/location/Domin/repositories/location_repository.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/datasource/remotdata/remotdata.dart';
+import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -20,7 +22,6 @@ import '../../features/Home/location/presentation/cubit/location_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 
-
 final getIt = GetIt.instance;
 
 Future<void> setup() async {
@@ -33,33 +34,33 @@ Future<void> setup() async {
 
   // ApiServices
   getIt.registerLazySingleton<ApiServices>(
-        () => ApiServices(getIt<Dio>()),
+    () => ApiServices(getIt<Dio>()),
   );
 
   // Chat Feature
   getIt.registerLazySingleton<Remotdata>(
-        () => immplementRemotdata(getIt<ApiServices>()),
+    () => immplementRemotdata(getIt<ApiServices>()),
   );
 
   // Location Feature
   getIt.registerLazySingleton<LocationDataSource>(
-        () => LocationDataSource(),
+    () => LocationDataSource(),
   );
 
   getIt.registerLazySingleton<LocationRepository>(
-        () => LocationRepositoryImpl(getIt<LocationDataSource>()),
+    () => LocationRepositoryImpl(getIt<LocationDataSource>()),
   );
 
   getIt.registerLazySingleton<GetUserLocation>(
-        () => GetUserLocation(repo: getIt<LocationRepository>()),
+    () => GetUserLocation(repo: getIt<LocationRepository>()),
   );
 
   getIt.registerLazySingleton<GetUserAddress>(
-        () => GetUserAddress(repo: getIt<LocationRepository>()),
+    () => GetUserAddress(repo: getIt<LocationRepository>()),
   );
 
   getIt.registerLazySingleton<LocationCubit>(
-        () => LocationCubit(
+    () => LocationCubit(
       getIt<GetUserLocation>(),
       getIt<GetUserAddress>(),
     ),
@@ -67,30 +68,30 @@ Future<void> setup() async {
 
   // Doctors Feature
   getIt.registerLazySingleton<DoctorRemoteSourceData>(
-        () => DoctorRemoteSourceData(apiServices: getIt<ApiServices>()),
+    () => DoctorRemoteSourceData(apiServices: getIt<ApiServices>()),
   );
 
   getIt.registerLazySingleton<DoctorRepo>(
-        () => DoctorRepoImpl(remote: getIt<DoctorRemoteSourceData>()),
+    () => DoctorRepoImpl(remote: getIt<DoctorRemoteSourceData>()),
   );
 
   getIt.registerLazySingleton<DoctorUsecase>(
-        () => DoctorUsecase(repo: getIt<DoctorRepo>()),
+    () => DoctorUsecase(repo: getIt<DoctorRepo>()),
   );
 
   getIt.registerLazySingleton<GetDoctorsBySpecialtyUseCase>(
-        () => GetDoctorsBySpecialtyUseCase(repo: getIt<DoctorRepo>()),
+    () => GetDoctorsBySpecialtyUseCase(repo: getIt<DoctorRepo>()),
   );
 
   // **تحويل DoctorCubit و DoctorsBySpecialtyCubit إلى singleton**
   getIt.registerLazySingleton<DoctorCubit>(
-        () => DoctorCubit(
+    () => DoctorCubit(
       doctorUsecase: getIt<DoctorUsecase>(),
       getUserLocation: getIt<GetUserLocation>(),
     ),
   );
 
- // getIt.registerLazySingleton<DoctorsBySpecialtyCubit>(
- //       () => DoctorsBySpecialtyCubit(),
- // );
+  // getIt.registerLazySingleton<DoctorsBySpecialtyCubit>(
+  //       () => DoctorsBySpecialtyCubit(),
+  // );
 }
