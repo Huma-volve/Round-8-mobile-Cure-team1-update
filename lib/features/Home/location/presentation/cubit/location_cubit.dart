@@ -15,19 +15,15 @@ class LocationCubit extends Cubit<LocationState> {
     emit(LocationLoading());
 
     try {
+      print("Before getUserLocation");
       final location = await getUserLocation();
+      print("Location fetched: $location");
+      final address = await getUserAddress(lat: location.lat, lng: location.lng);
+      emit(LocationAddressLoaded(address: address, location: location));
 
-      final address = await getUserAddress(
-        lat: location.lat,
-        lng: location.lng,
-      );
 
-      emit(
-        LocationAddressLoaded(
-          address: address,
-          location: location,
-        ),
-      );
+      print("Address fetched: $address");
+
     } catch (e) {
       emit(LocationError("Failed to load location or address"));
     }

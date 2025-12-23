@@ -7,9 +7,14 @@ import '../../location/presentation/cubit/location_cubit.dart';
 import '../../location/presentation/state/location_state.dart';
 import '../pages/favorite_page.dart';
 
-class HomeTopSection extends StatelessWidget {
+class HomeTopSection extends StatefulWidget {
   const HomeTopSection({super.key});
 
+  @override
+  State<HomeTopSection> createState() => _HomeTopSectionState();
+}
+
+class _HomeTopSectionState extends State<HomeTopSection> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -29,48 +34,36 @@ class HomeTopSection extends StatelessWidget {
               const SizedBox(height: 4),
               BlocBuilder<LocationCubit, LocationState>(
                 builder: (context, state) {
-
-                  if(state is LoadingState){
-                    return const CircularProgressIndicator();
-                  }
-                  else if(state is LocationAddressLoaded){
+                  if (state is LoadingState) {
+                    return CircularProgressIndicator();
+                  } else if (state is LocationAddressLoaded) {
                     final address = state.address;
                     return Row(
-                    children: [
-                      const Icon(Icons.location_on_outlined, size: 16),
-                      const SizedBox(height: 4),
-                      TextButton(
-                        onPressed: () {
-    final cubitState = context.read<LocationCubit>().state;
-
-    if (cubitState is LocationAddressLoaded) {
-    GoRouter.of(context).push(
-    AppRoute.map,
-    extra: cubitState.location,
-    );
-    }
-
-                        },
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          minimumSize: const Size(0, 0),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        ),
-                        child: Text(
-                  "${address.street}, ${address.city}",
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                      ),
-                    ],
-                  );
-                }
-                  else if (state is LocationError) {
-                    return Text(state.message);
+                      children: [
+                        const Icon(Icons.location_on_outlined, size: 16),
+                        const SizedBox(width: 4),
+                        TextButton(
+                          onPressed: () { final cubitState = context.read<LocationCubit>().state;
+                            if (cubitState is LocationAddressLoaded)
+                            { GoRouter.of(context).push(
+                            AppRoute.map, extra: cubitState.location, ); } },
+                          style: TextButton.styleFrom( padding: EdgeInsets.zero,
+                            minimumSize: const Size(0, 0),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap, ),
+                          child: Text(
+                            "${address.street}, ${address.city}",
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ),                      ],
+                    );
+                  } else if (state is LocationError) {
+                    return Text("Failed to fetch address: ${state.message}");
+                  } else {
+                    return Text("Unexpected state: $state");
                   }
-                  return const SizedBox();
-                  },
-
+                },
               ),
+
             ],
           ),
         ),
