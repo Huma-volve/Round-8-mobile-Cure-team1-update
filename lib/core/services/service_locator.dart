@@ -3,7 +3,7 @@ import 'package:cure_team_1_update/core/services/network/apiInterceptor%20.dart'
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/datasource/remotdata/remotdata.dart';
 import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 

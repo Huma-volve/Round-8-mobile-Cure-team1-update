@@ -1,11 +1,19 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
+import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
+import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
+import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
+import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/widget/histroychat.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_cubit/cubit/chatbody_cubit.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/add_review_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/book_apointmennt_.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/doctor_details_screen.dart';
@@ -25,6 +33,7 @@ import 'package:cure_team_1_update/features/settings/screens/password_management
 import 'package:cure_team_1_update/features/settings/screens/privacy_policy_screen.dart';
 import 'package:cure_team_1_update/features/settings/screens/settings_screen.dart';
 import 'package:cure_team_1_update/features/splash/splash_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class Approutes {
@@ -89,7 +98,14 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.chatbody,
-        builder: (context, state) => const Chatbody(),
+        builder: (context, state) {
+          final conv = state.extra as Conversion;
+          return BlocProvider(
+            create: (context) =>
+                ChatCubit(getit.get<Chatrepoa>())..getmassages(conv),
+            child: Chatbody(convers: conv),
+          );
+        },
       ),
 
       // Notifications

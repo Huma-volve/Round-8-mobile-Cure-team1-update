@@ -1,9 +1,11 @@
+import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/core/utils/chattab.dart';
 import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
+import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,7 +26,10 @@ class _HomePageState extends State<NavBar> {
   List<Widget> pages = [
     const HomePage(),
     const MyBookingScreen(),
-    const Chat(),
+    BlocProvider(
+      create: (context) => getit.get<ChatCubit>(),
+      child: const Chat(),
+    ),
     const ProfileScreen()
   ];
   int currentitem = 0;

@@ -9,7 +9,7 @@ import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/hist
 abstract class Remotdata {
   Future<List<Conversion>> featchconversion(Chattab tab);
   Future<List<Conversion>> searchconversion(convName);
-  Future<List<Historymasseges>> getHistorymassages(int id);
+  Future<List<Historymasseges>> getHistorymassages(Conversion conv);
 }
 
 class immplementRemotdata extends Remotdata {
@@ -34,8 +34,10 @@ class immplementRemotdata extends Remotdata {
   }
 
   @override
-  Future<List<Historymasseges>> getHistorymassages(int id) async {
-    var respons = await apiServices.get("conversations/$id");
+  Future<List<Historymasseges>> getHistorymassages(conve) async {
+    print('beforrrrrrrrrrrrrrrr');
+    var respons = await apiServices.get("conversations/${conve.id}");
+    print('mmmmmmmmmmmmmmmmmmm${respons}');
     List<Historymasseges> massages =
         parseData<Historymasseges>(respons, Historymasseges.fromJson);
     return Future.value(massages);

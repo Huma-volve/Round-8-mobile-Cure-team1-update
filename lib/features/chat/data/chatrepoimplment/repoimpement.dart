@@ -7,12 +7,12 @@ import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/hist
 import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/rendering.dart';
 
 class Repoimplement extends Chatrepoa {
   Remotdata remotdata;
   Repoimplement(this.remotdata);
   List<Conversion> conv = [];
+  List<Historymasseges> massa = [];
   @override
   Future<Either<Serverfailuer, List<Conversion>>> featchconversion(
       Chattab tab) async {
@@ -45,10 +45,10 @@ class Repoimplement extends Chatrepoa {
 
   @override
   Future<Either<Serverfailuer, List<Historymasseges>>> getHistorymassages(
-      id) async {
+      conver) async {
     try {
-      List<Historymasseges> list = await remotdata.getHistorymassages(id);
-      return right(list);
+      massa = await remotdata.getHistorymassages(conver);
+      return right(massa);
     } catch (e) {
       if (e is DioException) {
         return left(Serverfailuer.forDioExcption(e));
