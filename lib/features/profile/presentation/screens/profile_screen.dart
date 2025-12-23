@@ -38,7 +38,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(children: [
               // User Info Card
               SizedBox(height: 12.h),
-
               Container(
                 decoration: BoxDecoration(
                     color: ColorsLight.inputFill,
@@ -71,6 +70,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ]),
                     trailing: InkWell(
                       onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => EditProfileScreen()));
                         GoRouter.of(context).push(AppRoute.editProfileScreen);
                       },
                       child: SvgPicture.asset(
@@ -191,8 +192,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                   leading: SvgPicture.asset(
                     Assets.profileLogout,
-                    width: 10.w,
-                    height: 10.w,
+                    width: 14.w,
+                    height: 14.w,
                     fit: BoxFit.contain,
                     colorFilter: const ColorFilter.mode(
                       ColorsLight.error,

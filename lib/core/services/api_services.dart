@@ -19,7 +19,7 @@ class ApiServices {
 
   put(endpoint, Map data, token) async {
     Response response = await _dio.put(
-      '$basURL$endpoint',
+      '$endpoint',
       data: data,
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
