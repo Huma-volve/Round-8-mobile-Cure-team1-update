@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/core/services/api_services.dart';
-import 'package:dio/dio.dart';
+import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/features/auth/sign_up/domain/signup_repo_impl.dart';
 import 'package:cure_team_1_update/features/auth/sign_up/presentation/manage/signuo_cubit.dart';
 
@@ -15,7 +15,7 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          SignupCubit(registerRepo: RegisterRepoImpl(ApiServices(Dio()))),
+          SignupCubit(registerRepo: RegisterRepoImpl(getit.get<ApiServices>())),
       child: BlocConsumer<SignupCubit, SignupState>(
         listener: (context, state) {
           if (state is SignupSuccess) {

@@ -84,6 +84,7 @@ class SharedPref {
 //يبنى ما كل دا فوق  اتعود تتأقلم على كود الناس متثبتش  دماغك عشان تتاقلم
 class Cachehelper {
   static late SharedPreferences _shared;
+  static const String _onboardingSeenKey = 'onboarding_seen';
   static Future<void> init() async {
     _shared = await SharedPreferences.getInstance();
   }
@@ -94,5 +95,13 @@ class Cachehelper {
 
   static String? getToken() {
     return _shared.getString("token");
+  }
+
+  static Future<void> cacheOnboardingSeen(bool seen) async {
+    await _shared.setBool(_onboardingSeenKey, seen);
+  }
+
+  static bool getOnboardingSeen() {
+    return _shared.getBool(_onboardingSeenKey) ?? false;
   }
 }

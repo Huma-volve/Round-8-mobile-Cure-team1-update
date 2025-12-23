@@ -1,7 +1,7 @@
 import 'package:cure_team_1_update/core/error/failures.dart';
 import 'package:cure_team_1_update/core/services/api_services.dart';
+import 'package:cure_team_1_update/features/auth/login/data/model/login_model.dart';
 import 'package:cure_team_1_update/features/auth/login/data/repo/login_repo.dart';
-import 'package:cure_team_1_update/features/auth/sign_up/data/model/signup_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -10,14 +10,16 @@ class LoginRepoImpl implements LoginRepo {
 
   LoginRepoImpl(this.apiServices);
   @override
-  Future<Either<Failuer, SignupModel>> loginUSer(
-      {required phoneNumber, required password}) async {
+  Future<Either<Failuer, LoginModel>> loginUSer({
+    required String phoneNumber,
+    required String password,
+  }) async {
     try {
       var data = await apiServices.post(
         'auth/login',
-        {'phoneNumber': phoneNumber, 'password': password},
+        {'phone': phoneNumber, 'password': password},
       );
-      return right(SignupModel.fromJson(data));
+      return right(LoginModel.fromJson(data));
     } catch (e) {
       if (e is DioException) {
         print('DioException: ${e.toString()}');

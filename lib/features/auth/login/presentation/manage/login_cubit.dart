@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cure_team_1_update/features/auth/login/data/repo/login_repo.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 part 'login_state.dart';
@@ -29,7 +30,10 @@ class LoginCubit extends Cubit<LoginState> {
       },
       (loginModel) {
         print(loginModel.message);
-        // You can access loginModel.data?.token here if you need to store the token.
+        final token = loginModel.data?.token;
+        if (token != null && token.isNotEmpty) {
+          Cachehelper.cacheToken(token);
+        }
         emit(LoginSuccess(message: loginModel.message ?? ''));
       },
     );

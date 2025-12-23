@@ -1,5 +1,6 @@
 import 'package:cure_team_1_update/core/common/widgets/custome_button.dart';
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/features/onboarding/data/onboarding_model.dart';
@@ -20,6 +21,8 @@ class OnboardingViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLastPage =
+        currentIndex == OnboardingModel.onboardingView.length - 1;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Column(
@@ -52,10 +55,11 @@ class OnboardingViewBody extends StatelessWidget {
             flex: 3,
           ),
           CustomeButton(
-              text: currentIndex == 1 ? 'Get Started' : 'Next',
+              text: isLastPage ? 'Get Started' : 'Next',
               color: ColorsLight.primaryColor,
               onTap: () {
-                if (currentIndex == 1) {
+                if (isLastPage) {
+                  Cachehelper.cacheOnboardingSeen(true);
                   GoRouter.of(context).pushReplacement(AppRoute.loginPage);
                 } else {
                   pageController.nextPage(

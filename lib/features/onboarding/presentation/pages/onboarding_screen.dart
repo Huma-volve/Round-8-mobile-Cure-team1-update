@@ -1,4 +1,5 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/features/onboarding/data/onboarding_model.dart';
 import 'package:cure_team_1_update/features/onboarding/presentation/pages/widgets/onboarding_view_body.dart';
@@ -15,6 +16,13 @@ class OnboaedingScreen extends StatefulWidget {
 class _OnboaedingScreenState extends State<OnboaedingScreen> {
   final PageController pageController = PageController();
   int currentIndex = 0;
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +30,7 @@ class _OnboaedingScreenState extends State<OnboaedingScreen> {
         actions: [
           TextButton(
               onPressed: () {
+                Cachehelper.cacheOnboardingSeen(true);
                 GoRouter.of(context).pushReplacement(AppRoute.loginPage);
               },
               child: Text(
@@ -45,7 +54,7 @@ class _OnboaedingScreenState extends State<OnboaedingScreen> {
                 return OnboardingViewBody(
                   screen: OnboardingModel.onboardingView[index],
                   pageController: pageController,
-                  currentIndex: index,
+                  currentIndex: currentIndex,
                 );
               },
             ),
