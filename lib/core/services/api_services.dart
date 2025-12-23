@@ -5,12 +5,31 @@ class ApiServices {
   final Dio _dio;
   const ApiServices(this._dio);
   get(endpoint) async {
-    Response respons = await _dio.get('$basURL$endpoint');
+    Response respons = await _dio.get(
+      '$basURL$endpoint',
+    );
+    print(respons.data);
     return respons.data;
   }
 
   post(endpoint, Map data) async {
     Response respons = await _dio.post('$basURL$endpoint', data: data);
+    return respons.data;
+  }
+
+  put(endpoint, Map data, token) async {
+    Response response = await _dio.put(
+      '$basURL$endpoint',
+      data: data,
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    return response.data;
+  }
+
+  delet(endpoint, Map data) async {
+    Response respons = await _dio.delete('$basURL$endpoint', data: data);
     return respons.data;
   }
 }

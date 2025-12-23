@@ -35,6 +35,9 @@ dependencies:
   smooth_page_indicator: ^2.0.1
   dartz: ^0.10.1
   dio: ^5.9.0
+  animate_do: ^4.2.0
+  overlay_support: ^2.1.0
+  geolocator: ^14.0.2
  
 
 dev_dependencies:

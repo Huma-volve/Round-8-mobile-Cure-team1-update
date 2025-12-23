@@ -1,4 +1,3 @@
-
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/select_payment_method_screen_body.dart';
 import 'package:flutter/material.dart';
 

@@ -5,7 +5,6 @@
 
 // singilton دا بيعمل انستنس علطول اول ماالابيليكيشن يفتح او على حسب هوا فين وبيفضل يستخدم الانستنس دا
 
-
 import 'package:cure_team_1_update/core/app/upload_image/cubit/upload_image_cubit.dart';
 import 'package:cure_team_1_update/core/app/upload_image/data_source/upload_image_data_source.dart';
 import 'package:cure_team_1_update/core/app/upload_image/repo/upload_image_repo.dart';

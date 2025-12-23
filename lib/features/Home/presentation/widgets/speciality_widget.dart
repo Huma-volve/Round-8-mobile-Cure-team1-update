@@ -17,9 +17,8 @@ class SpecialityWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => DoctorsBySpecialtyScreen(
-              specialtyName: specialty.name
-            ),
+            builder: (_) =>
+                DoctorsBySpecialtyScreen(specialtyName: specialty.name),
           ),
         );
       },
@@ -33,7 +32,8 @@ class SpecialityWidget extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(specialty.icon, size: 18, fontWeight: FontWeight.w400,color: Colors.black87),
+            Icon(specialty.icon,
+                size: 18, fontWeight: FontWeight.w400, color: Colors.black87),
             const SizedBox(width: 6),
             Text(
               specialty.name,
