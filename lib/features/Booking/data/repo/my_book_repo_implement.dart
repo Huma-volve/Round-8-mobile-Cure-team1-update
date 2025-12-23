@@ -22,4 +22,20 @@ class MyBookRepoImplement extends MyBookRepo {
       return left(Serverfailuer(error.toString()));
     }
   }
+  
+  @override
+  Future<Either<Failuer, void>> cancelMyBooking({required int bookId,required String body})async {
+   try{
+await bookingRemoteDataSource.cancelMyBooking(bookId: bookId, body: body);
+return right(null);
+   }catch (error)
+   {
+    if (error is DioException) {
+        return left(Serverfailuer.forDioExcption(error));
+      }
+
+      return left(Serverfailuer(error.toString()));
+     
+   }
+  }
 }

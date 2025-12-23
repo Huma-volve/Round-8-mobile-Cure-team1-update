@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
+<<<<<<< HEAD
     super.key,
     required this.buttonName,
     this.onPressed,
@@ -25,5 +26,24 @@ class CustomElevatedButton extends StatelessWidget {
           style: AppTextStyles.montserratMedum16(context)
               .copyWith(color: Colors.white),
         ));
+=======
+    super.key, required this.buttonName, this.onPressed,this.loadingState=false
+  });
+final String buttonName;
+final  Function()? onPressed;
+final bool loadingState;
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+               style: ElevatedButton.styleFrom(
+                 fixedSize:  Size(410.r, 44.r),
+                 backgroundColor:ColorsLight.royalBlue ,
+                 shape: RoundedRectangleBorder(
+                   
+                   borderRadius: BorderRadius.circular(10)
+                 )
+               ),
+               onPressed:onPressed, child:loadingState? const Center(child: CircularProgressIndicator(color: Colors.white,),): Text(buttonName,style: AppTextStyles.montserratMedum16(context).copyWith(color: Colors.white),));
+>>>>>>> shaban
   }
 }

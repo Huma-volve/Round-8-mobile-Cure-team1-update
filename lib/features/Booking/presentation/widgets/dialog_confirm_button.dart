@@ -5,9 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DialogConfirmButton extends StatelessWidget {
   const DialogConfirmButton({
-    super.key,
+    super.key,this.onPressed
   });
-
+final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -16,7 +16,7 @@ class DialogConfirmButton extends StatelessWidget {
             fixedSize: Size(245.w, 48.h),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50))),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           'yes,Cancel',
           style:

@@ -5,15 +5,15 @@ import 'package:cure_team_1_update/features/Booking/presentation/widgets/functio
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/my_booking_item_doctor_details.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/my_booking_item_header.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyBookingItem extends StatelessWidget {
   const MyBookingItem({
     super.key,
     required this.mybookItem,
   });
- final MyBookingEntity mybookItem;
+  final MyBookingEntity mybookItem;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,11 +30,16 @@ class MyBookingItem extends StatelessWidget {
               bookingStatus: mybookItem.bookingStatus,
             ),
             const CustomDivivder(),
-             MyBookingItemDoctorDetails(mybookItem: mybookItem,),
+            MyBookingItemDoctorDetails(
+              mybookItem: mybookItem,
+            ),
             SizedBox(
               height: 16.r,
             ),
-             getbuttonBasedOnBookingStatus(mybookItem.bookingStatus)
+            getbuttonBasedOnBookingStatus(
+                  bookingStatus: mybookItem.bookingStatus,
+                  bookId: mybookItem.bookId),
+            
           ],
         ),
       ),
