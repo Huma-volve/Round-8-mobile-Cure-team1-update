@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cure_team_1_update/features/profile/data/models/edit_profile/edit_profile_request_body.dart';
 import 'package:cure_team_1_update/features/profile/data/models/edit_profile/edit_profile_response.dart';
 import 'package:cure_team_1_update/features/profile/data/repos/edit_profile_repo.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -78,6 +79,10 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     result.when(
       success: (editProfileResponse) {
         print('Edit profile successful: $editProfileResponse');
+        final name = editProfileResponse.data.name.trim();
+        if (name.isNotEmpty) {
+          Cachehelper.cacheUserName(name);
+        }
         emit(
             EditProfileState.success(editProfileResponse: editProfileResponse));
       },

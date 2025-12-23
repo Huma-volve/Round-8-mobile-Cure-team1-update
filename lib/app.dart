@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
               child: MaterialApp.router(
                   title: 'cure_team_1',
                   theme: ThemeData(
+                    scaffoldBackgroundColor: Colors.white,
                     primarySwatch: Colors.blue,
                     useMaterial3: true,
                   ),

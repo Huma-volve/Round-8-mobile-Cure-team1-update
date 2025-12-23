@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cure_team_1_update/features/auth/sign_up/data/repo/signup_repo.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 part 'signup_state.dart';
@@ -35,6 +36,10 @@ class SignupCubit extends Cubit<SignupState> {
       },
       (signupModel) {
         print(signupModel.message);
+        final cachedName = nameController.text.trim();
+        if (cachedName.isNotEmpty) {
+          Cachehelper.cacheUserName(cachedName);
+        }
         emit(SignupSuccess(message: signupModel.message ?? 'Unknown message'));
       },
     );

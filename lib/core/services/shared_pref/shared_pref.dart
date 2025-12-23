@@ -85,6 +85,7 @@ class SharedPref {
 class Cachehelper {
   static late SharedPreferences _shared;
   static const String _onboardingSeenKey = 'onboarding_seen';
+  static const String _userNameKey = 'user_name';
   static Future<void> init() async {
     _shared = await SharedPreferences.getInstance();
   }
@@ -103,5 +104,13 @@ class Cachehelper {
 
   static bool getOnboardingSeen() {
     return _shared.getBool(_onboardingSeenKey) ?? false;
+  }
+
+  static Future<void> cacheUserName(String name) async {
+    await _shared.setString(_userNameKey, name);
+  }
+
+  static String? getUserName() {
+    return _shared.getString(_userNameKey);
   }
 }

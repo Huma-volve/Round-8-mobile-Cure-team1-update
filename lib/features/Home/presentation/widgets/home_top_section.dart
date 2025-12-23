@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/constants/app_route.dart';
+import '../../../../core/services/shared_pref/shared_pref.dart';
 import '../../location/Domin/entities/user_location.dart';
 import '../../location/presentation/cubit/location_cubit.dart';
 import '../../location/presentation/state/location_state.dart';
@@ -24,13 +26,23 @@ class HomeTopSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text("Welcome back, Rahma",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                "Welcome back, ${_resolveUserName()}",
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 4),
               BlocBuilder<LocationCubit, LocationState>(
                 builder: (context, state) {
                   if (state is LocationLoading) {
-                    return const CircularProgressIndicator();
+                    return Skeletonizer(
+                      child: Row(
+                        children: const [
+                          Icon(Icons.location_on_outlined, size: 16),
+                          SizedBox(width: 4),
+                          Text('Loading location'),
+                        ],
+                      ),
+                    );
                   } else if (state is LocationAddressLoaded) {
                     final address = state.address;
                     final formattedAddress = _formatAddress(address);
@@ -106,6 +118,14 @@ class HomeTopSection extends StatelessWidget {
       ],
     );
   }
+}
+
+String _resolveUserName() {
+  final name = Cachehelper.getUserName()?.trim();
+  if (name == null || name.isEmpty) {
+    return 'there';
+  }
+  return name;
 }
 
 String _formatAddress(UserAddress address) {
