@@ -11,7 +11,9 @@ import '../../location/Data/repo/location_repository_impl.dart';
 import '../../location/Domin/entities/user_location.dart';
 import 'map_widgets/map_address_card.dart';
 import 'map_widgets/map_app_bar.dart';
+import 'map_widgets/map_current_location_header.dart';
 import 'map_widgets/map_location_fab.dart';
+import 'map_widgets/map_loading_overlay.dart';
 import 'map_widgets/map_search_panel.dart';
 import 'map_widgets/map_top_fade.dart';
 import 'map_widgets/map_view.dart';
@@ -40,6 +42,8 @@ class _MapScreenState extends State<MapScreen> {
   UserAddress? _selectedAddress;
   bool _isResolving = false;
   bool _isSearching = false;
+  bool _showSearch = false;
+  bool _isConfirming = false;
   Timer? _debounce;
   List<PlaceSuggestion> _suggestions = [];
 
@@ -149,6 +153,7 @@ class _MapScreenState extends State<MapScreen> {
       _selectedLatLng = target;
       _searchController.text = suggestion.name;
       _suggestions = [];
+      _showSearch = false;
     });
     _searchFocusNode.unfocus();
     _mapController.move(target, 15);
@@ -190,7 +195,14 @@ class _MapScreenState extends State<MapScreen> {
       address: address,
     );
 
-    context.pop(result);
+    setState(() {
+      _isConfirming = true;
+    });
+
+    Future.delayed(const Duration(milliseconds: 800), () {
+      if (!mounted) return;
+      context.pop(result);
+    });
   }
 
   @override
@@ -221,14 +233,37 @@ class _MapScreenState extends State<MapScreen> {
             left: 16,
             right: 16,
             top: 16,
-            child: MapSearchPanel(
-              controller: _searchController,
-              focusNode: _searchFocusNode,
-              isSearching: _isSearching,
-              suggestions: _suggestions,
-              onChanged: _onSearchChanged,
-              onSuggestionTap: _selectSuggestion,
-            ),
+            child: _showSearch
+                ? MapSearchPanel(
+                    controller: _searchController,
+                    focusNode: _searchFocusNode,
+                    isSearching: _isSearching,
+                    suggestions: _suggestions,
+                    onChanged: _onSearchChanged,
+                    onSuggestionTap: _selectSuggestion,
+                    onClose: () {
+                      setState(() {
+                        _showSearch = false;
+                        _suggestions = [];
+                      });
+                      _searchFocusNode.unfocus();
+                    },
+                  )
+                : MapCurrentLocationHeader(
+                    addressText: addressText,
+                    isResolving: _isResolving,
+                    onBack: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      }
+                    },
+                    onSearch: () {
+                      setState(() {
+                        _showSearch = true;
+                      });
+                      _searchFocusNode.requestFocus();
+                    },
+                  ),
           ),
           Positioned(
             right: 16,
@@ -244,11 +279,11 @@ class _MapScreenState extends State<MapScreen> {
             bottom: 16,
             child: MapAddressCard(
               isResolving: _isResolving,
-              addressText: addressText,
               canConfirm: _selectedAddress != null,
               onConfirm: _confirmSelection,
             ),
           ),
+          if (_isConfirming) const MapLoadingOverlay(),
         ],
       ),
     );

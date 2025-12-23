@@ -3,7 +3,6 @@ import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
-import 'package:cure_team_1_update/features/payment/presentation/screens/cards_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -65,7 +64,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
                   _buildWalletItem(1, 'Paypal', Assets.paymentIcOutlinePaypal),
                   Divider(height: 1.h, color: Colors.grey.shade200),
                   _buildWalletItem(
-                      1, 'mobile wallets ', Assets.profileGroupAddCard),
+                      2, 'mobile wallets ', Assets.profileGroupAddCard),
                 ],
               ),
             ),
@@ -78,11 +77,6 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
   Widget _buildCardDisplay(String type, String title, bool isVisa) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return const CardsScreen();
-          },
-        ));
         GoRouter.of(context).push(AppRoute.cardsScreen);
       },
       child: Container(

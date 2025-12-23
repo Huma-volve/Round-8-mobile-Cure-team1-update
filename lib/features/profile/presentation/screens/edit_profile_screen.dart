@@ -24,13 +24,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   // Controllers
   // Controllers
 
-  late EditProfileBloc _bloc;
+  late final EditProfileBloc _bloc;
 
   @override
   void initState() {
     super.initState();
-
-    _bloc = context.read<EditProfileBloc>();
+    _bloc = getit<EditProfileBloc>();
   }
 
   @override
@@ -38,19 +37,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _bloc.nameController.dispose();
     _bloc.emailController.dispose();
     _bloc.phoneController.dispose();
+    _bloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => getit<EditProfileBloc>(),
+    return BlocProvider.value(
+        value: _bloc,
         child: Scaffold(
           backgroundColor: ColorsLight.scaffoldBackground,
           appBar: CustomAppBar(
             // title: 'Edit Profile',
             onPressed: () {
-              Navigator.pop(context);
               GoRouter.of(context).canPop() ? GoRouter.of(context).pop() : null;
             },
           ),

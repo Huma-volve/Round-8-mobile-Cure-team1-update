@@ -1,11 +1,8 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
-import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
-import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/map.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
-import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/add_review_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/book_apointmennt_.dart';
@@ -20,7 +17,6 @@ import 'package:cure_team_1_update/features/payment/presentation/screens/add_car
 import 'package:cure_team_1_update/features/payment/presentation/screens/cards_screen.dart';
 import 'package:cure_team_1_update/features/payment/presentation/screens/payment_methods_screen.dart';
 import 'package:cure_team_1_update/features/profile/presentation/screens/edit_profile_screen.dart';
-import 'package:cure_team_1_update/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cure_team_1_update/features/settings/presentation/screens/faqs_screen.dart';
 import 'package:cure_team_1_update/features/settings/presentation/screens/password_management_screen.dart';
 import 'package:cure_team_1_update/features/settings/presentation/screens/privacy_policy_screen.dart';
@@ -59,7 +55,7 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.myBookingScreen,
-        builder: (context, state) => const MyBookingScreen(),
+        builder: (context, state) => const NavBar(initialIndex: 1),
       ),
       GoRoute(
         path: AppRoute.myBookingitemSsceen,
@@ -88,7 +84,7 @@ abstract class Approutes {
       // Chat
       GoRoute(
         path: AppRoute.chat,
-        builder: (context, state) => const Chat(),
+        builder: (context, state) => const NavBar(initialIndex: 2),
       ),
       GoRoute(
         path: AppRoute.chatbody,
@@ -110,11 +106,11 @@ abstract class Approutes {
       // Nav & Home
       GoRoute(
         path: AppRoute.navBar,
-        builder: (context, state) => const NavBar(),
+        builder: (context, state) => const NavBar(initialIndex: 0),
       ),
       GoRoute(
         path: AppRoute.home,
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) => const NavBar(initialIndex: 0),
       ),
       GoRoute(
         path: AppRoute.map,
@@ -141,11 +137,11 @@ abstract class Approutes {
       // Profile
       GoRoute(
         path: AppRoute.ProfileScreen,
-        builder: (context, state) => const ProfileScreen(),
+        builder: (context, state) => const NavBar(initialIndex: 3),
       ),
       GoRoute(
         path: AppRoute.profileScreen,
-        builder: (context, state) => const ProfileScreen(),
+        builder: (context, state) => const NavBar(initialIndex: 3),
       ),
       GoRoute(
         path: AppRoute.editProfileScreen,

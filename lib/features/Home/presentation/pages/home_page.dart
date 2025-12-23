@@ -6,10 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../Data/models/doctor_model.dart';
-import '../../location/Data/DataSource/location_datasoucre.dart';
-import '../../location/Data/repo/location_repository_impl.dart';
 import '../../location/Domin/entities/user_location.dart';
-import '../../location/Domin/useCase/get_user_location.dart';
 import '../../location/presentation/cubit/location_cubit.dart';
 import '../../location/presentation/state/location_state.dart';
 import '../pages/doctors_list_page.dart';
@@ -22,17 +19,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) {
-        final dataSource = LocationDataSource();
-        final repo = LocationRepositoryImpl(dataSource);
-        return LocationCubit(
-          GetUserLocation(repo: repo),
-          GetUserAddress(repo: repo),
-        )..fetchLocationAndAddress();
-      },
-      child: const _HomePageContent(),
-    );
+    return const _HomePageContent();
   }
 }
 
@@ -54,8 +41,16 @@ class _HomePageContent extends StatelessWidget {
             ),
             TextFormField(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const SearchPage()));
+                final locationCubit = context.read<LocationCubit>();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                      value: locationCubit,
+                      child: const SearchPage(),
+                    ),
+                  ),
+                );
               },
               decoration: InputDecoration(
                   hintText: "Search for specialty, doctor..",
@@ -109,16 +104,9 @@ class _HomePageContent extends StatelessWidget {
               TextButton(
                   onPressed: () {
                     final state = context.read<LocationCubit>().state;
-                    if (state is! LocationAddressLoaded) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Location is not ready yet.'),
-                        ),
-                      );
-                      return;
-                    }
-
-                    final doctors = _nearbyDoctors(state.location);
+                    final doctors = state is LocationAddressLoaded
+                        ? _nearbyDoctors(state.location)
+                        : doctorsList;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -141,8 +129,7 @@ class _HomePageContent extends StatelessWidget {
                 } else if (state is LocationAddressLoaded) {
                   final doctors = _nearbyDoctors(state.location);
                   if (doctors.isEmpty) {
-                    return const Text(
-                        'No doctors found near this location.');
+                    return const Text('No doctors found.');
                   }
                   return ListView.separated(
                     shrinkWrap: true,
@@ -156,7 +143,21 @@ class _HomePageContent extends StatelessWidget {
                     },
                   );
                 } else if (state is LocationError) {
-                  return Text(state.message);
+                  final doctors = doctorsList;
+                  if (doctors.isEmpty) {
+                    return const Text('No doctors found.');
+                  }
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: doctors.length,
+                    itemBuilder: (context, index) {
+                      return DoctorItem(doctor: doctors[index]);
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(height: 12);
+                    },
+                  );
                 }
                 return const SizedBox();
               },
@@ -184,10 +185,16 @@ List<DoctorModel> _nearbyDoctors(UserLocation location) {
 
   doctorsWithDistance.sort((a, b) => a.distance.compareTo(b.distance));
 
-  return doctorsWithDistance
+  final nearby = doctorsWithDistance
       .where((entry) => entry.distance <= _maxNearbyDistanceKm)
       .map((entry) => entry.doctor)
       .toList();
+
+  if (nearby.isEmpty) {
+    return doctorsWithDistance.map((entry) => entry.doctor).toList();
+  }
+
+  return nearby;
 }
 
 double _distanceKm(double lat1, double lng1, double lat2, double lng2) {

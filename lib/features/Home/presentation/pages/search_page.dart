@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/constants/app_route.dart';
 import '../../Data/models/specialty_model.dart';
+import '../../location/Domin/entities/user_location.dart';
+import '../../location/presentation/cubit/location_cubit.dart';
+import '../../location/presentation/state/location_state.dart';
 import '../widgets/speciality_widget.dart';
 
 class SearchPage extends StatelessWidget {
@@ -35,16 +40,63 @@ class SearchPage extends StatelessWidget {
           ),
           Row(
             children: [
-              const Text(
-                "Search by your location",
-                style: TextStyle(fontSize: 17),
+              const Expanded(
+                child: Text(
+                  "Search by your location",
+                  style: TextStyle(fontSize: 17),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "129, El-Nasr Street, Cairo",
-                    style: TextStyle(color: Colors.blueAccent),
-                  )),
+              BlocBuilder<LocationCubit, LocationState>(
+                builder: (context, state) {
+                  final label = _locationLabel(state);
+                  return Flexible(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () async {
+                          final cubit = context.read<LocationCubit>();
+                          final currentState = cubit.state;
+                          if (currentState is! LocationAddressLoaded) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Location is not ready yet.'),
+                              ),
+                            );
+                            return;
+                          }
+
+                          final result =
+                              await context.push<SelectedLocation>(
+                            AppRoute.map,
+                            extra: currentState.location,
+                          );
+
+                          if (!context.mounted || result == null) {
+                            return;
+                          }
+
+                          cubit.setLocationAndAddress(
+                            location: result.location,
+                            address: result.address,
+                          );
+
+                          if (context.canPop()) {
+                            context.pop();
+                          }
+                        },
+                        child: Text(
+                          label,
+                          style: const TextStyle(color: Colors.blueAccent),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
           const Text(
@@ -68,4 +120,34 @@ class SearchPage extends StatelessWidget {
       ),
     );
   }
+}
+
+String _locationLabel(LocationState state) {
+  if (state is LocationLoading) {
+    return 'Fetching location...';
+  }
+
+  if (state is LocationAddressLoaded) {
+    final address = state.address;
+    final parts = <String>[
+      address.street,
+      address.city,
+      address.country,
+    ].where((part) {
+      final normalized = part.trim().toLowerCase();
+      return normalized.isNotEmpty && normalized != 'unknown';
+    }).toList();
+
+    if (parts.isEmpty) {
+      return 'Location unavailable';
+    }
+
+    return parts.join(', ');
+  }
+
+  if (state is LocationError) {
+    return 'Tap to set location';
+  }
+
+  return 'Tap to set location';
 }

@@ -23,7 +23,7 @@ class EditProfileButton extends StatelessWidget {
             colorText: ColorsLight.green,
             toastState: ToastStates.SUCCECC,
           );
-          GoRouter.of(context).pushReplacementNamed(AppRoute.profileScreen);
+          GoRouter.of(context).go(AppRoute.profileScreen);
         }, error: (message) {
           showToast(
             context: context,
@@ -37,24 +37,18 @@ class EditProfileButton extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           loading: () {
-            print('loading....');
             return CustomButton(
-              text: 'Edit Profile',
-              onPressed: () {
-                _validateThenDoSignUp(context);
-              },
+              text: 'Saving...',
+              onPressed: () {},
             );
           },
           orElse: () {
-            print('asdfasfdafaf....');
-
             return CustomFadeInRight(
               duration: 600,
               child: CustomButton(
                 text: 'Edit Profile',
                 onPressed: () {
-                  // Save Logic
-                  // _validateThenDoSignUp(context);
+                  _validateThenDoSignUp(context);
                 },
               ),
             );
@@ -65,16 +59,8 @@ class EditProfileButton extends StatelessWidget {
   }
 
   void _validateThenDoSignUp(BuildContext context) {
-    print('validate then do edit profile');
     final editProfileBloc = context.read<EditProfileBloc>();
 
-    // showToast(
-    //   context: context,
-    //   text: 'please fill all fields',
-    //   colorText: ColorsLight.offWhite,
-    //   toastState: ToastStates.ERROR,
-    // );
-    print('oooooooooooooooooooo');
     context.read<EditProfileBloc>().add(
           EditProfileEvent.editProfile(
             data: EditProfileRequestBody(

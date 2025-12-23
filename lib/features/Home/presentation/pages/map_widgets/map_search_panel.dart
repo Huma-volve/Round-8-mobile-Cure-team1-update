@@ -10,6 +10,7 @@ class MapSearchPanel extends StatelessWidget {
   final List<PlaceSuggestion> suggestions;
   final ValueChanged<String> onChanged;
   final ValueChanged<PlaceSuggestion> onSuggestionTap;
+  final VoidCallback onClose;
 
   const MapSearchPanel({
     super.key,
@@ -19,6 +20,7 @@ class MapSearchPanel extends StatelessWidget {
     required this.suggestions,
     required this.onChanged,
     required this.onSuggestionTap,
+    required this.onClose,
   });
 
   @override
@@ -35,18 +37,29 @@ class MapSearchPanel extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: mapBorderColor),
             ),
-            child: TextField(
-              controller: controller,
-              focusNode: focusNode,
-              onChanged: onChanged,
-              textInputAction: TextInputAction.search,
-              decoration: const InputDecoration(
-                hintText: 'Search for a place',
-                border: InputBorder.none,
-                prefixIcon: Icon(Icons.search),
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-              ),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: onClose,
+                  icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+                ),
+                Expanded(
+                  child: TextField(
+                    controller: controller,
+                    focusNode: focusNode,
+                    onChanged: onChanged,
+                    textInputAction: TextInputAction.search,
+                    decoration: const InputDecoration(
+                      hintText: 'Search for your location',
+                      border: InputBorder.none,
+                      prefixIcon: Icon(Icons.search),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

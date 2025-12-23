@@ -19,20 +19,27 @@ class PasswordManagementScreen extends StatefulWidget {
 }
 
 class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
-  late ChangePasswordBloc _bloc;
+  late final ChangePasswordBloc _bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc = getit<ChangePasswordBloc>();
+  }
 
   @override
   void dispose() {
     _bloc.currentPasswordController.dispose();
     _bloc.newPasswordController.dispose();
     _bloc.confirmPasswordController.dispose();
+    _bloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getit<ChangePasswordBloc>(),
+    return BlocProvider.value(
+      value: _bloc,
       child: Scaffold(
         backgroundColor: ColorsLight.scaffoldBackground,
         appBar: CustomAppBar(

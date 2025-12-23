@@ -8,10 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../settings/presentation/screens/settings_screen.dart';
-import '../../../payment/presentation/screens/payment_methods_screen.dart';
-import 'edit_profile_screen.dart';
-import '../../../settings/presentation/screens/privacy_policy_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -65,8 +61,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ]),
                     trailing: InkWell(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const EditProfileScreen()));
                         GoRouter.of(context).push(AppRoute.editProfileScreen);
                       },
                       child: SvgPicture.asset(
@@ -121,13 +115,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 iconWidth: 8.w,
                 title: 'Payment Method',
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const PaymentMethodsScreen();
-                    },
-                  ));
-                  // GoRouter.of(context)
-                  //     .push(AppRoute.paymentScreenpaymentScreen);
+                  GoRouter.of(context)
+                      .push(AppRoute.paymentScreenpaymentScreen);
                 },
               ),
               SizedBox(height: 16.h),
@@ -143,11 +132,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 assetPath: Assets.profileSettings,
                 title: 'Settings',
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const SettingsScreen();
-                    },
-                  ));
                   GoRouter.of(context).push(AppRoute.settingsScreen);
                 },
               ),
@@ -166,11 +150,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 assetPath: Assets.settingsLockKeyhole,
                 title: 'Privacy Policy',
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const PrivacyPolicyScreen();
-                    },
-                  ));
                   GoRouter.of(context).push(AppRoute.privacyPolicyScreen);
                 },
               ),
