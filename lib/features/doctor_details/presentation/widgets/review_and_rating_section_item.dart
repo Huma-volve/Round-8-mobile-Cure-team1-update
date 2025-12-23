@@ -12,7 +12,7 @@ class ReviewAndRatingSectionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 98.r,
       child: Row(
         children: [

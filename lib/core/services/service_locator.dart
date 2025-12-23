@@ -5,8 +5,6 @@ import 'package:cure_team_1_update/features/Home/location/Data/repo/location_rep
 import 'package:cure_team_1_update/features/Home/location/Domin/repositories/location_repository.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/datasource/remotdata/remotdata.dart';
-import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 

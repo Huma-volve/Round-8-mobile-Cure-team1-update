@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpItem extends StatelessWidget {
-  OtpItem({super.key});
+  const OtpItem({super.key});
 
   @override
   Widget build(BuildContext context) {

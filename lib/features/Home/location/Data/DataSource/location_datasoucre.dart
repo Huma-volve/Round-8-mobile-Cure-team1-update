@@ -6,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 class LocationDataSource {
   Future<Position> getCurrentLocation() async {
     if (!await Geolocator.isLocationServiceEnabled()) {
-      throw  LocationServiceDisabledException();
+      throw  const LocationServiceDisabledException();
     }
 
     LocationPermission permission = await Geolocator.checkPermission();

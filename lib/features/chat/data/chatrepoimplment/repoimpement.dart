@@ -27,8 +27,17 @@ class Repoimplement extends Chatrepoa {
   }
 
   @override
-  Future<Either<Serverfailuer, List<Conversion>>> searchconversion(convName) {
-    // TODO: implement searchconversion
-    throw UnimplementedError();
+  Future<Either<Serverfailuer, List<Conversion>>> searchconversion(
+      convName) async {
+    try {
+      conv = await remotdata.searchconversion(convName);
+      return right(conv);
+    } catch (e) {
+      if (e is DioException) {
+        return left(Serverfailuer.forDioExcption(e));
+      } else {
+        return left(Serverfailuer(e.toString()));
+      }
+    }
   }
 }

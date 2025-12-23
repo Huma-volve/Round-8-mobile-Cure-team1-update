@@ -1,8 +1,4 @@
 
-import '../../Data/DataSource/location_datasoucre.dart';
-import '../../Data/repo/location_repository_impl.dart';
-import '../../Domin/repositories/location_repository.dart';
-import '../../Domin/useCase/get_user_location.dart';
 
 
 //final sl = GetIt.instance;

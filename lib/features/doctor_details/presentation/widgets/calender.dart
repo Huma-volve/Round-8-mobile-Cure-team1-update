@@ -235,7 +235,7 @@ class SelectedAppointementWidget extends StatelessWidget {
                         .copyWith(color: ColorsLight.prussianBlue))
               ],
             ),
-          Spacer(),
+          const Spacer(),
           Image.asset(Assets.resourceImagesAltArrowDown),
         ],
       ),

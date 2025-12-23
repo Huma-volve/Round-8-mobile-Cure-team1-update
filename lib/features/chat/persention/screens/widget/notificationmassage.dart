@@ -1,4 +1,3 @@
-import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/prfiledatils.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
@@ -12,7 +11,7 @@ class Notificationmassage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Prfiledatils> all_list = [
+    List<Prfiledatils> allList = [
       Prfiledatils(Assets.resourceImagesJana, 'It’s been around six.....',
           'Dr,jana', '4:05'),
       Prfiledatils(Assets.resourceImagesJessica, 'It’s been around six.....',
@@ -42,9 +41,9 @@ class Notificationmassage extends StatelessWidget {
           }
 
           return ListView.builder(
-              itemCount: all_list.length,
+              itemCount: allList.length,
               itemBuilder: (context, indx) => Histroychat(
-                    massage: all_list[indx],
+                    massage: allList[indx],
                     fun: () {
                       Navigator.push(
                           context,
