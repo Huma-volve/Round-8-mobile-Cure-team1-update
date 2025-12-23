@@ -1,6 +1,6 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/features/Booking/domain/enums/booking_enum.dart';
-import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/screen/update_booking_screen.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
