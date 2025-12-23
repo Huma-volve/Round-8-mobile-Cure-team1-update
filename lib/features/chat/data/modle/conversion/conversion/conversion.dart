@@ -1,29 +1,51 @@
-import 'datum.dart';
-import 'links.dart';
-import 'meta.dart';
+import 'last_message.dart';
+import 'other_user.dart';
 
 class Conversion {
-  List<Datum>? data;
-  Links? links;
-  Meta? meta;
+  int id;
+  bool? isPrivate;
+  OtherUser? otherUser;
+  LastMessage? lastMessage;
+  int? unreadCount;
+  bool? isFavorite;
+  bool? isArchived;
+  String? updatedAt;
 
-  Conversion({this.data, this.links, this.meta});
+  Conversion({
+    required this.id,
+    this.isPrivate,
+    this.otherUser,
+    this.lastMessage,
+    this.unreadCount,
+    this.isFavorite,
+    this.isArchived,
+    this.updatedAt,
+  });
 
   factory Conversion.fromJson(Map<String, dynamic> json) => Conversion(
-        data: (json['data'] as List<dynamic>?)
-            ?.map((e) => Datum.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        links: json['links'] == null
+        id: json['id'] as int,
+        isPrivate: json['is_private'] as bool?,
+        otherUser: json['other_user'] == null
             ? null
-            : Links.fromJson(json['links'] as Map<String, dynamic>),
-        meta: json['meta'] == null
+            : OtherUser.fromJson(json['other_user'] as Map<String, dynamic>),
+        lastMessage: json['last_message'] == null
             ? null
-            : Meta.fromJson(json['meta'] as Map<String, dynamic>),
+            : LastMessage.fromJson(
+                json['last_message'] as Map<String, dynamic>),
+        unreadCount: json['unread_count'] as int?,
+        isFavorite: json['is_favorite'] as bool?,
+        isArchived: json['is_archived'] as bool?,
+        updatedAt: json['updated_at'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
-        'data': data?.map((e) => e.toJson()).toList(),
-        'links': links?.toJson(),
-        'meta': meta?.toJson(),
+        'id': id,
+        'is_private': isPrivate,
+        'other_user': otherUser?.toJson(),
+        'last_message': lastMessage?.toJson(),
+        'unread_count': unreadCount,
+        'is_favorite': isFavorite,
+        'is_archived': isArchived,
+        'updated_at': updatedAt,
       };
 }

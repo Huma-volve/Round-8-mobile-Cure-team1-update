@@ -1,7 +1,9 @@
 import 'package:cure_team_1_update/core/services/service_locator.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
+
 import 'package:cure_team_1_update/features/profile/presentation/bloc/bloc/edit_profile_bloc.dart';
 import 'package:cure_team_1_update/features/settings/presentation/bloc/bloc/change_password_bloc.dart';
+import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +12,8 @@ import 'package:overlay_support/overlay_support.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  get getIt => null;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +25,13 @@ class MyApp extends StatelessWidget {
           return MultiBlocProvider(
             providers: [
               BlocProvider<ChatCubit>(
-                create: (_) => getit.get<ChatCubit>(),
+                create: (_) => getIt.get<ChatCubit>(),
               ),
-              BlocProvider(
-                create: (context) => getit<EditProfileBloc>(),
+              BlocProvider<EditProfileBloc>(
+                create: (context) => getIt<EditProfileBloc>(),
               ),
-              BlocProvider(
-                create: (context) => getit<ChangePasswordBloc>(),
+              BlocProvider<ChangePasswordBloc>(
+                create: (context) => getIt<ChangePasswordBloc>(),
               ),
             ],
             child: OverlaySupport.global(
