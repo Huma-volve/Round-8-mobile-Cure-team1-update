@@ -1,14 +1,10 @@
-import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/veiw_all_specialties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/utils/assets.dart';
-import '../../Data/models/doctor_model.dart';
 import '../../location/presentation/cubit/location_cubit.dart';
 import '../../location/presentation/state/location_state.dart';
-import '../widgets/doctor_item.dart';
 import '../widgets/home_top_section.dart';
 import '../widgets/specialties_list.dart';
 
@@ -71,7 +67,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 5,
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Image.asset(
                 fit: BoxFit.fill,
@@ -95,14 +91,14 @@ class _HomePageState extends State<HomePage> {
           BlocBuilder<LocationCubit, LocationState>(
             builder: (context, state) {
               if (state is LocationLoading) {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               } else if (state is LocationAddressLoaded) {
                 return Text(
                     'Lat: ${state.location.lat}, Lng: ${state.location.lng}');
               } else if (state is LocationError) {
                 return Text(state.message);
               }
-              return SizedBox();
+              return const SizedBox();
             },
           )
         ]),

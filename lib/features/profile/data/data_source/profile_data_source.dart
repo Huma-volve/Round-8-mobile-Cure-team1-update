@@ -15,7 +15,7 @@ class EditProfileDataSource {
     try {
       print('before');
       final response = await _api.put(
-        '${AppConstants.editProfileUrl}',
+        AppConstants.editProfileUrl,
         {
           "name": "mankljjkhkjhar",
           "email": "manaralkjhlkli@gmail.com",

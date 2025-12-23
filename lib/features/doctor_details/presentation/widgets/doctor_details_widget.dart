@@ -15,7 +15,7 @@ class DoctorDetailsWidget extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(left: 16.r),
-          child: DoctorImage(),
+          child: const DoctorImage(),
         ),
         SizedBox(
           width: 16.r,

@@ -14,7 +14,7 @@ Future<dynamic> buildDialog(BuildContext context) {
                   BoxDecoration(borderRadius: BorderRadius.circular(48)),
               child: Column(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     'Thanks for your review',
                     style: AppTextStyles.georgiaRegular24(context),

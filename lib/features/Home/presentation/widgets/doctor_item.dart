@@ -67,23 +67,23 @@ class _DoctorItemState extends State<DoctorItem> {
                   const SizedBox(width: 4),
                   Text(
                     widget.doctor.rating.toString(),
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 17),
+                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 17),
                   ),
                   const SizedBox(width: 9),
-                  Icon(
+                  const Icon(
                     Icons.watch_later_outlined,
                     size: 18,
                   ),
                   const SizedBox(width: 4),
                   Text(
                     widget.doctor.date.toString(),
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 17),
+                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 17),
                   ),
                 ],
               ),
             ],
           ),
-          Expanded(child: Icon(Icons.favorite))
+          const Expanded(child: Icon(Icons.favorite))
         ],
       ),
     );

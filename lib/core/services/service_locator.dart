@@ -5,7 +5,6 @@ import 'package:cure_team_1_update/features/profile/data/repos/edit_profile_repo
 import 'package:cure_team_1_update/features/profile/presentation/bloc/bloc/edit_profile_bloc.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/datasource/remotdata/remotdata.dart';
-import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
 import 'package:cure_team_1_update/features/settings/data/data_source/change_password_data_source.dart';
 import 'package:cure_team_1_update/features/settings/data/repos/change_password_repo.dart';

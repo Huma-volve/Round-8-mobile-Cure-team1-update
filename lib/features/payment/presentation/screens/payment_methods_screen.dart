@@ -124,7 +124,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
         });
       },
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.transparent,
         ),
         child: ListTile(
@@ -144,7 +144,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
             ),
             // padding: EdgeInsets.all(2.r),
             child: isSelected
-                ? CircleAvatar(backgroundColor: ColorsLight.primaryColor)
+                ? const CircleAvatar(backgroundColor: ColorsLight.primaryColor)
                 : null,
           ),
         ),

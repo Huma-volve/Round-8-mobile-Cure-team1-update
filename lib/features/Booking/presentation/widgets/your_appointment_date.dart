@@ -38,7 +38,7 @@ class YourApointMentDateWidget extends StatelessWidget {
           if (selectedDayName != null)
             Row(
               children: [
-                Text('${selectedDayNumber},',
+                Text('$selectedDayNumber,',
                     style: AppTextStyles.montserratMedum14(context)
                         .copyWith(color: ColorsLight.prussianBlue)),
                 Text(selectedMonthName!,

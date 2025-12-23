@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 
 import '../../Domin/entities/user_location.dart';
 import '../../Domin/repositories/location_repository.dart';

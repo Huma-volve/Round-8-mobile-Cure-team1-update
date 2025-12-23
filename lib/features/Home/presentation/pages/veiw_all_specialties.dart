@@ -31,7 +31,7 @@ class ViewAllSpecialties extends StatelessWidget {
                 children: [
                   ...Specialty.specialties
                       .map((e) => SpecialityWidget(specialty: e))
-                      .toList()
+                      
                 ],
               )
             ],

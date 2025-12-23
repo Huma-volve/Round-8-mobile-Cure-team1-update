@@ -19,7 +19,7 @@ class PriceAndBookActionFooterButton extends StatelessWidget {
       right: 0,
       child: Card(
         elevation: 10,
-        child: Container(
+        child: SizedBox(
           height: 144.r,
           width: double.infinity,
           child: Padding(

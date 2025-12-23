@@ -7,7 +7,7 @@ class BookingConatner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Image.asset(
             fit: BoxFit.fill, height: 150.h, "assets/images/Mask_group.png"),
