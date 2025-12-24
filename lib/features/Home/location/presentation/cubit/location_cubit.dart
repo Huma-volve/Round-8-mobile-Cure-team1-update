@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cure_team_1_update/features/Home/location/Domin/entities/user_location.dart';
 import '../../Domin/useCase/get_user_location.dart';
 import '../state/location_state.dart';
 
@@ -15,17 +16,31 @@ class LocationCubit extends Cubit<LocationState> {
     emit(LocationLoading());
 
     try {
-      print("Before getUserLocation");
       final location = await getUserLocation();
-      print("Location fetched: $location");
-      final address = await getUserAddress(lat: location.lat, lng: location.lng);
-      emit(LocationAddressLoaded(address: address, location: location));
 
+      final address = await getUserAddress(
+        lat: location.lat,
+        lng: location.lng,
+      );
 
-      print("Address fetched: $address");
-
+      emit(
+        LocationAddressLoaded(
+          address: address,
+          location: location,
+        ),
+      );
     } catch (e) {
-      emit(LocationError("Failed to load location or address"));
+      final message = e.toString().replaceFirst('Exception: ', '');
+      emit(LocationError(message.isEmpty
+          ? "Failed to load location or address"
+          : message));
     }
+  }
+
+  void setLocationAndAddress({
+    required UserLocation location,
+    required UserAddress address,
+  }) {
+    emit(LocationAddressLoaded(address: address, location: location));
   }
 }

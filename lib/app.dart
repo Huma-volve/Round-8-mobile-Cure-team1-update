@@ -1,4 +1,5 @@
 import 'package:cure_team_1_update/core/services/service_locator.dart';
+import 'package:cure_team_1_update/features/Home/location/presentation/cubit/location_cubit.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
 import 'package:cure_team_1_update/features/profile/presentation/bloc/bloc/edit_profile_bloc.dart';
 import 'package:cure_team_1_update/features/settings/presentation/bloc/bloc/change_password_bloc.dart';
@@ -21,13 +22,16 @@ class MyApp extends StatelessWidget {
           return MultiBlocProvider(
             providers: [
               BlocProvider<ChatCubit>(
-                create: (_) => getit.get<ChatCubit>(),
+                create: (_) => getIt.get<ChatCubit>(),
               ),
               BlocProvider(
-                create: (context) => getit<EditProfileBloc>(),
+                create: (context) => getIt<EditProfileBloc>(),
               ),
               BlocProvider(
-                create: (context) => getit<ChangePasswordBloc>(),
+                create: (context) => getIt<ChangePasswordBloc>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<LocationCubit>(),
               ),
             ],
             child: OverlaySupport.global(

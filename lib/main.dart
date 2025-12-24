@@ -9,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Cachehelper.init();
+  await SharedPref().instantiatePreferences();
+
   Bloc.observer = AppBlocObserver();
   await setup();
 
