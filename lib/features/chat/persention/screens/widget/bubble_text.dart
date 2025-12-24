@@ -1,7 +1,5 @@
 import 'package:cure_team_1_update/core/function/helperfunction.dart';
-import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
-import 'package:cure_team_1_update/features/chat/data/modle/massagemodel/messagemodle.dart';
 import 'package:flutter/material.dart';
 
 class BubbleText extends StatelessWidget {

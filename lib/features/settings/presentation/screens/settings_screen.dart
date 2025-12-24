@@ -3,11 +3,12 @@ import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/features/profile/presentation/widgets/build_menu_item.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view/screens/password_management_screen.dart';
 import 'package:cure_team_1_update/features/settings/presentation/widgets/show_logout_dialog_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'password_management_screen.dart'; // Placeholder
+
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

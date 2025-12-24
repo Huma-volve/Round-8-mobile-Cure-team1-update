@@ -39,9 +39,6 @@ class LocationDataSource {
     print(street);
     print(place);
     print(city);
-
-    final placeMarks = await placemarkFromCoordinates(lat, lng);
-    final place = placeMarks.first;
     return place;
   }
 }

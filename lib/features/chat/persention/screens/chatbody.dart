@@ -1,13 +1,10 @@
 import 'package:cure_team_1_update/core/common/widgets/custome_text_field.dart';
-import 'package:cure_team_1_update/core/extensions/context_extension.dart';
-import 'package:cure_team_1_update/core/style/responsive_size.dart';
-import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
+
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/abpperchatbody.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/chatmassges.dart';
 
-import 'package:cure_team_1_update/features/chat/persention/screens/widget/imageprofile.dart';
 
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_cubit/cubit/chatbody_cubit.dart';
 import 'package:flutter/material.dart';
