@@ -6,7 +6,20 @@ import 'package:cure_team_1_update/features/Home/location/Domin/repositories/loc
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/datasource/remotdata/remotdata.dart';
 import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/settings/data/data_source/change_password_data_source.dart';
+import 'package:cure_team_1_update/features/settings/data/data_source/delete_account/delete_account_data_source.dart';
+import 'package:cure_team_1_update/features/settings/data/data_source/faqs/faqs_data_source.dart';
+import 'package:cure_team_1_update/features/settings/data/data_source/logout/logout_data_source.dart';
+import 'package:cure_team_1_update/features/settings/data/repos/change_password_repo.dart';
+import 'package:cure_team_1_update/features/settings/data/repos/delete_account/delete_accuont_repo.dart';
+import 'package:cure_team_1_update/features/settings/data/repos/faqs/faqs_repo.dart';
+import 'package:cure_team_1_update/features/settings/data/repos/logout/logout_repo.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/bloc/change_password_bloc.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/delete_account/delete_account_bloc.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/faqs_bloc/faqs_bloc.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/logout/logout_bloc.dart';
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -25,73 +38,42 @@ import 'package:dio/dio.dart';
 final getIt = GetIt.instance;
 
 Future<void> setup() async {
-  // Dio
-  getIt.registerLazySingleton<Dio>(() {
-    final dio = Dio();
-    dio.interceptors.add(ApiInterceptor());
-    return dio;
-  });
+  //Hive
 
-  // ApiServices
-  getIt.registerLazySingleton<ApiServices>(
-    () => ApiServices(getIt<Dio>()),
-  );
+  //....Hive
+  //object from dio
+  //pass heder to dio object
+  getit.registerSingleton<Dio>(Dio());
+  //object from ApiServices
+  getit.registerSingleton<ApiServices>(
+      ApiServices(getit.get<Dio>()..interceptors.add(ApiInterceptor())));
+  getit.registerSingleton<Repoimplement>(
+      Repoimplement(immplementRemotdata(getit.get<ApiServices>())));
+  getit.registerSingleton<ChatCubit>(ChatCubit(getit.get<Repoimplement>()));
 
-  // Chat Feature
-  getIt.registerLazySingleton<Remotdata>(
-    () => immplementRemotdata(getIt<ApiServices>()),
-  );
-
-  // Location Feature
-  getIt.registerLazySingleton<LocationDataSource>(
-    () => LocationDataSource(),
-  );
-
-  getIt.registerLazySingleton<LocationRepository>(
-    () => LocationRepositoryImpl(getIt<LocationDataSource>()),
-  );
-
-  getIt.registerLazySingleton<GetUserLocation>(
-    () => GetUserLocation(repo: getIt<LocationRepository>()),
-  );
-
-  getIt.registerLazySingleton<GetUserAddress>(
-    () => GetUserAddress(repo: getIt<LocationRepository>()),
-  );
-
-  getIt.registerLazySingleton<LocationCubit>(
-    () => LocationCubit(
-      getIt<GetUserLocation>(),
-      getIt<GetUserAddress>(),
-    ),
-  );
-
-  // Doctors Feature
-  getIt.registerLazySingleton<DoctorRemoteSourceData>(
-    () => DoctorRemoteSourceData(apiServices: getIt<ApiServices>()),
-  );
-
-  getIt.registerLazySingleton<DoctorRepo>(
-    () => DoctorRepoImpl(remote: getIt<DoctorRemoteSourceData>()),
-  );
-
-  getIt.registerLazySingleton<DoctorUsecase>(
-    () => DoctorUsecase(repo: getIt<DoctorRepo>()),
-  );
-
-  getIt.registerLazySingleton<GetDoctorsBySpecialtyUseCase>(
-    () => GetDoctorsBySpecialtyUseCase(repo: getIt<DoctorRepo>()),
-  );
-
-  // **تحويل DoctorCubit و DoctorsBySpecialtyCubit إلى singleton**
-  getIt.registerLazySingleton<DoctorCubit>(
-    () => DoctorCubit(
-      doctorUsecase: getIt<DoctorUsecase>(),
-      getUserLocation: getIt<GetUserLocation>(),
-    ),
-  );
-
-  // getIt.registerLazySingleton<DoctorsBySpecialtyCubit>(
-  //       () => DoctorsBySpecialtyCubit(),
-  // );
+  //edit profile
+  getit
+    ..registerFactory(() => EditProfileBloc(getit()))
+    ..registerLazySingleton(() => EditProfileRepo(getit()))
+    ..registerLazySingleton(() => EditProfileDataSource(getit()));
+  //Password change
+  getit
+    ..registerFactory(() => ChangePasswordBloc(getit()))
+    ..registerLazySingleton(() => ChangePasswordRepo(getit()))
+    ..registerLazySingleton(() => ChangePasswordDataSource(getit()));
+  //FAQS
+  getit
+    ..registerFactory(() => FaqsBloc(getit()))
+    ..registerLazySingleton(() => FaqsRepo(getit()))
+    ..registerLazySingleton(() => FaqsDataSource(getit()));
+  //Delete Account
+  getit
+    ..registerFactory(() => DeleteAccountBloc(getit()))
+    ..registerLazySingleton(() => DeleteAccuontRepo(getit()))
+    ..registerLazySingleton(() => DeleteAccounteDataSource(getit()));
+  //Logout
+  getit
+    ..registerFactory(() => LogoutBloc(getit()))
+    ..registerLazySingleton(() => LogoutRepo(getit()))
+    ..registerLazySingleton(() => LogoutDataSource(getit()));
 }
