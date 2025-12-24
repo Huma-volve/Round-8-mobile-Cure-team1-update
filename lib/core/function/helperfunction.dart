@@ -21,6 +21,13 @@ List<T> parseData<T>(
   return (response['data'] as List).map((item) => fromJson(item)).toList();
 }
 
+T parseDatawithoutlist<T>(
+  Map<String, dynamic> response,
+  T Function(Map<String, dynamic>) fromJson,
+) {
+  return fromJson(response);
+}
+
 String formatTimeToHourMinute(String time) {
   final dateTime = DateTime.parse(time);
 

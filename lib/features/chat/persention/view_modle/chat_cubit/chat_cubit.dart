@@ -18,7 +18,7 @@ class ChatCubit extends Cubit<ChatState> {
   }
   Future<void> getconv(Chattab tab) async {
     await Cachehelper.cacheToken(
-        "143|COK84V3PZxTMqmxQBuDD3uknSrLNbn9IzfqSRJlj9ba1ec85");
+        "253|VxSP5Ki4JdYXVV8iOsCEPgp3C917iT0HaWmQVwV18e08fcfb");
     emit(Lodingchat());
     var result = await chatrepoa.featchconversion(tab);
     result.fold((faluir) => emit(Fuailerchat(faluir)),
@@ -33,8 +33,6 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   Future<void> getmassages(Conversion conver) async {
-    print('chatbodydtaild chatbodydtailds');
-    emit(Lodingchat());
     var reslut = await chatrepoa.getHistorymassages(conver);
     print('chatbodydtaild chatbodydtailds $reslut');
     reslut.fold((faluir) => emit(Fuailerchat(faluir)),
