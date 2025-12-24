@@ -2,6 +2,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationDataSource {
+  static bool _localeInitialized = false;
+
   Future<Position> getCurrentLocation() async {
     if (!await Geolocator.isLocationServiceEnabled()) {
       throw const LocationServiceDisabledException();
@@ -13,8 +15,12 @@ class LocationDataSource {
       permission = await Geolocator.requestPermission();
     }
 
+    if (permission == LocationPermission.denied) {
+      throw Exception('Location permission denied');
+    }
+
     if (permission == LocationPermission.deniedForever) {
-      // throw LocationPermissionDeniedException();
+      throw Exception('Location permission permanently denied');
     }
 
     final position = await Geolocator.getCurrentPosition(
@@ -34,6 +40,8 @@ class LocationDataSource {
     print(place);
     print(city);
 
+    final placeMarks = await placemarkFromCoordinates(lat, lng);
+    final place = placeMarks.first;
     return place;
   }
 }

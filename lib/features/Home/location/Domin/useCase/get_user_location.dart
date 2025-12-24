@@ -3,6 +3,7 @@ import '../repositories/location_repository.dart';
 
 class GetUserLocation {
   final LocationRepository repo;
+
   GetUserLocation({required this.repo});
 
   Future<UserLocation> call() {
