@@ -4,11 +4,14 @@ import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/features/settings/data/models/edit_profile/change_password_request_body.dart';
 import 'package:cure_team_1_update/features/settings/presentation/bloc/bloc/change_password_bloc.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/bloc/change_password_bloc.dart'
+    show ChangePasswordBloc;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/custom_widgets.dart';
+import '../view_model/bloc/change_password_bloc.dart';
 
 class PasswordManagementScreen extends StatefulWidget {
   const PasswordManagementScreen({super.key});
@@ -23,9 +26,9 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
 
   @override
   void dispose() {
-    _bloc.currentPasswordController.dispose();
+   _bloc.currentPasswordController.dispose();
     _bloc.newPasswordController.dispose();
-    _bloc.confirmPasswordController.dispose();
+   _bloc.confirmPasswordController.dispose();
     super.dispose();
   }
 

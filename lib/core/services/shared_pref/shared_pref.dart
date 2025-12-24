@@ -1,3 +1,4 @@
+import 'package:cure_team_1_update/core/services/shared_pref/pref_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
@@ -78,12 +79,25 @@ class SharedPref {
   Future<dynamic> clearPreferences() async {
     await sharedPreferences.clear();
   }
+  //
+  static Future<bool> setStringList(String key, List<String> value) async {
+    return await sharedPreferences.setStringList(key, value);
+  }
+
+  static List<String>? getStringList(String key) {
+    return sharedPreferences.getStringList(key);
+  }
+
+  static bool containsKey(String key) {
+    return sharedPreferences.containsKey(key);
+  }
 }
 
 //نصيحه
 //يبنى ما كل دا فوق  اتعود تتأقلم على كود الناس متثبتش  دماغك عشان تتاقلم
 class Cachehelper {
   static late SharedPreferences _shared;
+  static const String _userNameKey = 'user_name';
   static Future<void> init() async {
     _shared = await SharedPreferences.getInstance();
   }
@@ -91,8 +105,40 @@ class Cachehelper {
   static Future<void> cacheToken(token) async {
     await _shared.setString("token", token);
   }
+  static Future<void> cacheUserName(String name) async {
+    await _shared.setString(_userNameKey, name);
+  }
+
+  static String? getUserName() {
+    return _shared.getString(_userNameKey);
+  }
+
 
   static String? getToken() {
     return _shared.getString("token");
   }
-}
+   /////////
+
+  static const _favoritesKey = PrefKeys.favoriteDoctorIds;
+
+
+  static void cacheFavoriteIds(Set<int> ids) {
+  final list = ids.toList();
+  SharedPref.setStringList(
+  _favoritesKey,
+  list.map((e) => e.toString()).toList(),
+  );
+  }
+
+  static Set<int> getFavoriteIds() {
+  final list = SharedPref.getStringList(_favoritesKey);
+  if (list == null) return {};
+  return list.map(int.parse).toSet();
+  }
+
+  static bool hasFavoriteIds() {
+  return SharedPref.containsKey(_favoritesKey);
+  }
+  }
+
+

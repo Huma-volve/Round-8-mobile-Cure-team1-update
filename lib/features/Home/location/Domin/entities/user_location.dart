@@ -10,6 +10,16 @@ class UserLocation {
      this.address,
   });
 }
+
+class SelectedLocation {
+  final UserLocation location;
+  final UserAddress address;
+
+  const SelectedLocation({
+    required this.location,
+    required this.address,
+  });
+}
 class UserAddress {
   final String street;
   final String city;

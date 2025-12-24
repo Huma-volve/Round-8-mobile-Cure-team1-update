@@ -21,38 +21,41 @@ class _SpecialtiesListState extends State<SpecialtiesList> {
           itemBuilder: (context, index) {
             final spec = Specialty.specialties[index];
 
-            return InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => DoctorsBySpecialtyScreen(
-                    //  specialtyId: spec.id,
-                      specialtyName: spec.name,
+            return Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => DoctorsBySpecialtyScreen(
+                        specialtyName: spec.name,
+                      ),
                     ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
                   ),
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey.withOpacity(0.25),
-                    width: 0.8,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.withOpacity(0.25),
+                      width: 0.8,
+                    ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(spec.icon, size: 16),
-                    const SizedBox(width: 4),
-                    Text(spec.name),
-                  ],
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(spec.icon, size: 16),
+                      const SizedBox(width: 4),
+                      Text(spec.name),
+                    ],
+                  ),
                 ),
               ),
             );

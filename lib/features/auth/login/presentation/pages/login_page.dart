@@ -18,7 +18,9 @@ class LoginPage extends StatelessWidget {
           LoginCubit(loginRepo: LoginRepoImpl(ApiServices(Dio()))),
       child: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
         if (state is LoginSuccess) {
-          GoRouter.of(context).push(AppRoute.home);
+          GoRouter.of(context).push(
+            AppRoute.home,
+          );
         } else if (state is LoginError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.error)),
