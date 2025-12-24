@@ -8,6 +8,8 @@ import 'package:dartz/dartz.dart' show Either;
 
 abstract class Chatrepoa {
   Future<Either<Serverfailuer, List<Conversion>>> featchconversion(Chattab tab);
+  Future<Either<Serverfailuer, List<Conversion>>> refreshConversations(
+      Chattab tab);
   Future<Either<Serverfailuer, List<Conversion>>> searchconversion(convName);
   Future<Either<Serverfailuer, List<Historymasseges>>> getHistorymassages(
       Conversion conv);

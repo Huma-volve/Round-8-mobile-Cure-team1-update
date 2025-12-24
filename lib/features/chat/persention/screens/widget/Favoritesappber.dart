@@ -26,11 +26,17 @@ class _FavoritesappberState extends State<Favoritesappber> {
                   current_indx = index;
                 });
                 if (index == 1) {
-                  context.read<ChatCubit>().getconv(Chattab.unread);
+                  context
+                      .read<ChatCubit>()
+                      .getconv(Chattab.unread, forceRefresh: true);
                 } else if (index == 2) {
-                  context.read<ChatCubit>().getconv(Chattab.favorites);
+                  context
+                      .read<ChatCubit>()
+                      .getconv(Chattab.favorites, forceRefresh: true);
                 } else {
-                  context.read<ChatCubit>().getconv(Chattab.all);
+                  context
+                      .read<ChatCubit>()
+                      .getconv(Chattab.all, forceRefresh: true);
                 }
               },
               child: Padding(

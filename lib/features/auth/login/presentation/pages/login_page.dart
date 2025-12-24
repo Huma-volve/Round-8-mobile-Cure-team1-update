@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
           LoginCubit(loginRepo: LoginRepoImpl(getit.get<ApiServices>())),
       child: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
         if (state is LoginSuccess) {
-          GoRouter.of(context).push(AppRoute.home);
+          GoRouter.of(context).go(AppRoute.home);
         } else if (state is LoginError) {
           AppToast.show(context, state.error);
         }

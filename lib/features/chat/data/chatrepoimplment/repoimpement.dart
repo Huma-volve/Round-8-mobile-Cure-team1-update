@@ -20,6 +20,26 @@ class Repoimplement extends Chatrepoa {
       Chattab tab) async {
     try {
       conv = await _retryOnTimeout(() => remotdata.featchconversion(tab));
+      final cached = _conversationsCache[tab];
+      if (conv.isEmpty && cached != null && cached.isNotEmpty) {
+        return right(cached);
+      }
+      _conversationsCache[tab] = conv;
+      return right(conv);
+    } catch (e) {
+      if (e is DioException) {
+        return left(Serverfailuer.forDioExcption(e));
+      } else {
+        return left(Serverfailuer(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Serverfailuer, List<Conversion>>> refreshConversations(
+      Chattab tab) async {
+    try {
+      conv = await _retryOnTimeout(() => remotdata.featchconversion(tab));
       _conversationsCache[tab] = conv;
       return right(conv);
     } catch (e) {

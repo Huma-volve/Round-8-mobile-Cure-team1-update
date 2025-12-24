@@ -15,16 +15,18 @@ class ChatCubit extends Cubit<ChatState> {
   ChatCubit(this.chatrepoa) : super(ChatCubitInitial()) {
     getconv(Chattab.all);
   }
-  Future<void> getconv(Chattab tab) async {
+  Future<void> getconv(Chattab tab, {bool forceRefresh = false}) async {
     final requestId = ++_requestId;
     final cached = chatrepoa.getCachedConversations(tab);
     final hasCache = cached != null && cached.isNotEmpty;
-    if (hasCache) {
+    if (!forceRefresh && hasCache) {
       emit(Successchat(List<Conversion>.from(cached)));
     } else {
       emit(Lodingchat());
     }
-    var result = await chatrepoa.featchconversion(tab);
+    final result = forceRefresh
+        ? await chatrepoa.refreshConversations(tab)
+        : await chatrepoa.featchconversion(tab);
     if (requestId != _requestId) {
       return;
     }
