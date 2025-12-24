@@ -8,6 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/widgets/custom_widgets.dart';
+import '../../../settings/presentation/view/screens/settings_screen.dart';
+import '../../../payment/presentation/screens/payment_methods_screen.dart';
+import 'edit_profile_screen.dart';
+import '../../../settings/presentation/view/screens/faqs_screen.dart';
+import '../../../settings/presentation/view/screens/privacy_policy_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -141,6 +147,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 assetPath: Assets.profileChat,
                 title: 'FAQs',
                 onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const FaqsScreen()));
                   GoRouter.of(context).push(AppRoute.faqsScreen);
                 },
               ),

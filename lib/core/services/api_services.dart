@@ -16,19 +16,33 @@ class ApiServices {
   }
 
   post(endpoint, Map data) async {
-    Response respons = await _dio.post('$basURL$endpoint', data: data);
+    Response respons = await _dio.post('$endpoint', data: data);
     return respons.data;
   }
 
-  put(endpoint, Map data, token) async {
+  postForLogout(
+    endpoint,
+  ) async {
+    Response respons = await _dio.post(
+      'https://round8-backend-team-one.huma-volve.com/api/profile/logout',
+    );
+    return respons.data;
+  }
+
+  put(
+    endpoint,
+    Map data,
+  ) async {
     Response response = await _dio.put(
       '$endpoint',
       data: data,
-      options: Options(
-        headers: {'Authorization': 'Bearer $token'},
-      ),
     );
     return response.data;
+  }
+
+  delete(endpoint) async {
+    Response respons = await _dio.delete('$basURL$endpoint');
+    return respons.data;
   }
 
   delet(endpoint, Map data) async {
