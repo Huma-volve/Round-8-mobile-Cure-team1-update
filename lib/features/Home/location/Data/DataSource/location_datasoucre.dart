@@ -2,7 +2,6 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationDataSource {
-  static bool _localeInitialized = false;
 
   Future<Position> getCurrentLocation() async {
     if (!await Geolocator.isLocationServiceEnabled()) {
@@ -31,13 +30,16 @@ class LocationDataSource {
   }
 
   Future<Placemark> buildAddress(double lat, double lng) async {
-    if (!_localeInitialized) {
-      await setLocaleIdentifier('en');
-      _localeInitialized = true;
-    }
-
-    final placeMarks = await placemarkFromCoordinates(lat, lng);
+    List placeMarks = await placemarkFromCoordinates(lat, lng);
     final place = placeMarks.first;
+    final street = place.street ?? "";
+    final area = place.subLocality ?? "";
+    final city = place.locality ?? "";
+    print(street);
+    print(place);
+    print(city);
+
+    await placemarkFromCoordinates(lat, lng);
     return place;
   }
 }

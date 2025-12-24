@@ -36,7 +36,7 @@ class FavoriteStore {
 
   static Future<FavoriteToggleResult> toggleRemote(DoctorModel doctor) async {
     try {
-      final api = getit<ApiServices>();
+      final api = getIt<ApiServices>();
       final response = await api.post('doctors/${doctor.id}/favorite', {});
       final isFavorite = response?['data']?['is_favorite'];
       if (isFavorite is bool) {

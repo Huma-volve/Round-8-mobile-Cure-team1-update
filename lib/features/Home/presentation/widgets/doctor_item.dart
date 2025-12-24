@@ -23,7 +23,8 @@ class DoctorItem extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () {
-          context.push(AppRoute.doctorDetails);
+          context.push(AppRoute.doctorDetails ,
+          extra: doctor);
         },
         child: Container(
           width: double.infinity,

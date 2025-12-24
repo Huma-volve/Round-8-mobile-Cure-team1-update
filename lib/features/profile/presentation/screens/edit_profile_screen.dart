@@ -1,11 +1,14 @@
 import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
+import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
+import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/features/profile/presentation/bloc/bloc/edit_profile_bloc.dart';
 import 'package:cure_team_1_update/features/profile/presentation/widgets/build_dropdown.dart';
 import 'package:cure_team_1_update/features/profile/presentation/widgets/edit_profile_button.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -43,13 +46,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-        value: _bloc,
+    return BlocProvider(
+        create: (context) => getIt<EditProfileBloc>(),
         child: Scaffold(
           backgroundColor: ColorsLight.scaffoldBackground,
           appBar: CustomAppBar(
             // title: 'Edit Profile',
             onPressed: () {
+              Navigator.pop(context);
+
               GoRouter.of(context).canPop() ? GoRouter.of(context).pop() : null;
             },
           ),

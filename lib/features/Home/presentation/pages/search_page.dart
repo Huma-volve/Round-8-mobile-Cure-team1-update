@@ -112,8 +112,7 @@ class SearchPage extends StatelessWidget {
             runSpacing: 10, // مسافة بين السطور
             children: [
               ...Specialty.specialties
-                  .map((e) => SpecialityWidget(specialty: e))
-                  ,
+                  .map((e) => SpecialityWidget(specialty: e)),
             ],
           )
         ]),

@@ -1,3 +1,4 @@
+import 'package:cure_team_1_update/core/services/shared_pref/pref_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
@@ -78,6 +79,18 @@ class SharedPref {
   Future<dynamic> clearPreferences() async {
     await sharedPreferences.clear();
   }
+  //
+  static Future<bool> setStringList(String key, List<String> value) async {
+    return await sharedPreferences.setStringList(key, value);
+  }
+
+  static List<String>? getStringList(String key) {
+    return sharedPreferences.getStringList(key);
+  }
+
+  static bool containsKey(String key) {
+    return sharedPreferences.containsKey(key);
+  }
 }
 
 //نصيحه
@@ -97,6 +110,14 @@ class Cachehelper {
   static Future<void> cacheToken(token) async {
     await _shared.setString("token", token);
   }
+  static Future<void> cacheUserName(String name) async {
+    await _shared.setString(_userNameKey, name);
+  }
+
+  static String? getUserName() {
+    return _shared.getString(_userNameKey);
+  }
+
 
   static String? getToken() {
     return _shared.getString("token");
@@ -120,15 +141,6 @@ class Cachehelper {
   static bool getOnboardingSeen() {
     return _shared.getBool(_onboardingSeenKey) ?? false;
   }
-
-  static Future<void> cacheUserName(String name) async {
-    await _shared.setString(_userNameKey, name);
-  }
-
-  static String? getUserName() {
-    return _shared.getString(_userNameKey);
-  }
-
   static Future<void> cacheUserEmail(String email) async {
     await _shared.setString(_userEmailKey, email);
   }
@@ -169,4 +181,6 @@ class Cachehelper {
     }
     return values.map(int.parse).toSet();
   }
-}
+  }
+
+

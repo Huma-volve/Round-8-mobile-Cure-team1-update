@@ -34,9 +34,9 @@ class HomeTopSection extends StatelessWidget {
               BlocBuilder<LocationCubit, LocationState>(
                 builder: (context, state) {
                   if (state is LocationLoading) {
-                    return const Skeletonizer(
+                    return Skeletonizer(
                       child: Row(
-                        children: [
+                        children: const [
                           Icon(Icons.location_on_outlined, size: 16),
                           SizedBox(width: 4),
                           Text('Loading location'),
@@ -100,8 +100,10 @@ class HomeTopSection extends StatelessWidget {
         _ActionIcon(
           icon: Icons.favorite_border,
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const FavoritePage()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FavoritePage()));
           },
         ),
         const SizedBox(

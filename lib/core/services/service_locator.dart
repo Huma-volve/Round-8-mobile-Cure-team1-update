@@ -1,13 +1,12 @@
 import 'package:cure_team_1_update/core/services/api_services.dart';
 import 'package:cure_team_1_update/core/constants/app_constants.dart';
 import 'package:cure_team_1_update/core/services/network/apiInterceptor%20.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
-import 'package:cure_team_1_update/features/profile/data/data_source/profile_data_source.dart';
-import 'package:cure_team_1_update/features/profile/data/repos/edit_profile_repo.dart';
-import 'package:cure_team_1_update/features/profile/presentation/bloc/bloc/edit_profile_bloc.dart';
+import 'package:cure_team_1_update/features/Home/location/Data/repo/location_repository_impl.dart';
+import 'package:cure_team_1_update/features/Home/location/Domin/repositories/location_repository.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/datasource/remotdata/remotdata.dart';
 import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:cure_team_1_update/features/settings/data/data_source/change_password_data_source.dart';
 import 'package:cure_team_1_update/features/settings/data/data_source/delete_account/delete_account_data_source.dart';
 import 'package:cure_team_1_update/features/settings/data/data_source/faqs/faqs_data_source.dart';
@@ -23,6 +22,12 @@ import 'package:cure_team_1_update/features/settings/presentation/view_model/log
 
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+
+import '../../features/Home/location/Data/DataSource/location_datasoucre.dart';
+import '../../features/Home/location/Domin/useCase/get_user_location.dart';
+import '../../features/Home/location/presentation/cubit/location_cubit.dart';
+
+final getIt = GetIt.instance;
 
 var getit = GetIt.instance;
 Future<void> setup() async {
@@ -41,29 +46,28 @@ Future<void> setup() async {
       Repoimplement(immplementRemotdata(getit.get<ApiServices>())));
   getit.registerSingleton<ChatCubit>(ChatCubit(getit.get<Repoimplement>()));
 
-  //edit profile
-  getit
-    ..registerFactory(() => EditProfileBloc(getit()))
-    ..registerLazySingleton(() => EditProfileRepo(getit()))
-    ..registerLazySingleton(() => EditProfileDataSource(getit()));
-  //Password change
-  getit
-    ..registerFactory(() => ChangePasswordBloc(getit()))
-    ..registerLazySingleton(() => ChangePasswordRepo(getit()))
-    ..registerLazySingleton(() => ChangePasswordDataSource(getit()));
-  //FAQS
-  getit
-    ..registerFactory(() => FaqsBloc(getit()))
-    ..registerLazySingleton(() => FaqsRepo(getit()))
-    ..registerLazySingleton(() => FaqsDataSource(getit()));
-  //Delete Account
-  getit
-    ..registerFactory(() => DeleteAccountBloc(getit()))
-    ..registerLazySingleton(() => DeleteAccuontRepo(getit()))
-    ..registerLazySingleton(() => DeleteAccounteDataSource(getit()));
-  //Logout
-  getit
-    ..registerFactory(() => LogoutBloc(getit()))
-    ..registerLazySingleton(() => LogoutRepo(getit()))
-    ..registerLazySingleton(() => LogoutDataSource(getit()));
+  /// Location Feature
+  getIt.registerSingleton<LocationDataSource>(
+    LocationDataSource(),
+  );
+
+  getIt.registerSingleton<LocationRepository>(
+    LocationRepositoryImpl(getIt<LocationDataSource>()),
+  );
+
+  getIt.registerSingleton<GetUserLocation>(
+    GetUserLocation(repo: getIt<LocationRepository>()),
+  );
+
+  getIt.registerSingleton<GetUserAddress>(
+    GetUserAddress(repo: getIt<LocationRepository>()),
+  );
+
+  getIt.registerSingleton<LocationCubit>(
+    LocationCubit(
+      getIt<GetUserLocation>(),
+      getIt<GetUserAddress>(),
+    ),
+  );
+
 }

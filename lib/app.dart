@@ -1,16 +1,17 @@
+import 'package:cure_team_1_update/core/services/api_services.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
-
+import 'package:cure_team_1_update/features/Home/location/presentation/cubit/location_cubit.dart';
+import 'package:cure_team_1_update/features/auth/login/presentation/manage/login_cubit.dart';
+import 'package:cure_team_1_update/features/auth/otp/presentation/manage/otp_cubit.dart';
 import 'package:cure_team_1_update/features/profile/presentation/bloc/bloc/edit_profile_bloc.dart';
-import 'package:cure_team_1_update/features/profile/presentation/screens/profile_screen.dart';
-import 'package:cure_team_1_update/features/settings/presentation/view_model/bloc/change_password_bloc.dart';
-import 'package:cure_team_1_update/features/settings/presentation/view_model/delete_account/delete_account_bloc.dart';
-import 'package:cure_team_1_update/features/settings/presentation/view_model/logout/logout_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cure_team_1_update/core/constants/go_route.dart';
 import 'package:overlay_support/overlay_support.dart';
+
+import 'features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+import 'features/settings/presentation/view_model/bloc/change_password_bloc.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,34 +19,34 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
+        designSize: const Size(
+            375, 812), // You can adjust this based on your design specs
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
           return MultiBlocProvider(
             providers: [
               BlocProvider<ChatCubit>(
-                create: (_) => getit.get<ChatCubit>(),
+                create: (_) => getIt.get<ChatCubit>(),
               ),
               BlocProvider(
-                create: (context) => getit<EditProfileBloc>(),
+                create: (context) => getIt<EditProfileBloc>(),
               ),
               BlocProvider(
-                create: (context) => getit<ChangePasswordBloc>(),
+                create: (context) => getIt<ChangePasswordBloc>(),
               ),
               BlocProvider(
-                create: (context) => getit<DeleteAccountBloc>(),
+                create: (context) => getIt<LocationCubit>(),
               ),
-              BlocProvider(
-                create: (context) => getit<ChangePasswordBloc>(),
+              BlocProvider<LoginCubit>(
+                create: (_) => getIt.get<LoginCubit>(),
               ),
-              BlocProvider(
-                create: (context) => getit<LogoutBloc>(),
+              BlocProvider<OtpCubit>(
+                create: (_) => getIt.get<OtpCubit>(),
               ),
             ],
             child: OverlaySupport.global(
               child: MaterialApp.router(
-                  // child: MaterialApp(
                   title: 'cure_team_1',
                   theme: ThemeData(
                     scaffoldBackgroundColor: Colors.white,
@@ -53,7 +54,6 @@ class MyApp extends StatelessWidget {
                     useMaterial3: true,
                   ),
                   debugShowCheckedModeBanner: false,
-                  // home: ProfileScreen(),
                   routerConfig: Approutes.router),
             ),
           );
