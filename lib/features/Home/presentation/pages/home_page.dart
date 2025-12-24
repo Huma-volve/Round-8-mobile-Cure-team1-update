@@ -1,16 +1,9 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:cure_team_1_update/core/constants/app_route.dart';
+
 import 'package:cure_team_1_update/features/Home/presentation/pages/search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/veiw_all_specialties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../../../core/utils/assets.dart';
-import '../../Data/models/doctor_model.dart';
 import '../../Doctor/Presentation/cubit/doctor_cubit.dart';
 import '../../Doctor/Presentation/state/doctor_state.dart';
 import '../../location/presentation/cubit/location_cubit.dart';

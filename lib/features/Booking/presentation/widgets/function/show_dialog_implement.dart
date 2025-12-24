@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
-import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
-import 'package:cure_team_1_update/features/Booking/presentation/widgets/dialog_alert_widget.dart';
-=======
 import 'dart:developer';
 
 // import 'package:cure_team_1_update/core/extensions/context_extension.dart';
@@ -13,7 +8,6 @@ import 'package:cure_team_1_update/features/Booking/presentation/manager/cancel_
 import 'package:cure_team_1_update/features/Booking/presentation/manager/cancel_book/cubit/cancel_boking_state.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/cancel_reason_widget.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/cancel_warning_section.dart';
->>>>>>> shaban
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/dialog_confirm_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +24,7 @@ Future<dynamic> showDialogImplement(
       context: context,
       builder: (dialogContext) => BlocProvider(
             create: (context) =>
-                CancelMyBookingCubit(myBookRepo: getit<MyBookRepo>()),
+                CancelMyBookingCubit(myBookRepo: getIt<MyBookRepo>()),
             child: BlocListener<CancelMyBookingCubit, CancelMyBookingState>(
               listener: (context, state) {
           if(state is CancelMyBookingSuccessState)

@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
->>>>>>> mafdysaad
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/prfiledatils.dart';
@@ -21,23 +18,6 @@ class Notificationmassage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    List<Prfiledatils> allList = [
-      Prfiledatils(Assets.resourceImagesJana, 'It’s been around six.....',
-          'Dr,jana', '4:05'),
-      Prfiledatils(Assets.resourceImagesJessica, 'It’s been around six.....',
-          'Dr,Jessica', '4:05'),
-      Prfiledatils(Assets.resourceImagesRobert, 'you: ok i will do it like...',
-          'Dr,Robert', '4:05'),
-      Prfiledatils(Assets.resourceImagesJana, 'It’s been around six.....',
-          'Dr,jana', '4:05'),
-      Prfiledatils(Assets.resourceImagesJessica, 'It’s been around six.....',
-          'Dr,Jessica', '4:05'),
-      Prfiledatils(Assets.resourceImagesRobert, 'you: ok i will do it like...',
-          'Dr,Robert', '4:05')
-    ];
-=======
->>>>>>> mafdysaad
     return BlocBuilder<ChatCubit, ChatState>(
       builder: (context, state) {
         if (state is Lodingchat) {
@@ -54,22 +34,16 @@ class Notificationmassage extends StatelessWidget {
           }
 
           return ListView.builder(
-<<<<<<< HEAD
-              itemCount: allList.length,
-              itemBuilder: (context, indx) => Histroychat(
-                    massage: allList[indx],
-=======
               itemCount: state.conversionlist.length,
               itemBuilder: (context, indx) => Histroychat(
                     massage: state.conversionlist[indx],
->>>>>>> mafdysaad
                     fun: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (_) => BlocProvider(
                             create: (_) =>
-                                ChatbodyCubit(getit.get<Repoimplement>())
+                                ChatbodyCubit(getIt.get<Repoimplement>())
                                   ..getmassages(state.conversionlist[indx]),
                             child:
                                 Chatbody(convers: state.conversionlist[indx]),

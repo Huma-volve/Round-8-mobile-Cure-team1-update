@@ -26,12 +26,6 @@ class _BookApointmentBodyState extends State<BookApointmentBody> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-<<<<<<< HEAD
-        const BookAppointementScrollableContent(),
-        PriceAndBookActionFooterButton(
-          buttonName: 'Continue to Pay',
-          onPressed: () => context.push(AppRoute.selectPaymentMethodScreen),
-=======
         BookAppointementScrollableContent(
           onSelectBookTime: (selectedTime) {
             setState(() {
@@ -74,7 +68,6 @@ class _BookApointmentBodyState extends State<BookApointmentBody> {
                   }
                 });
           },
->>>>>>> shaban
         )
       ],
     );

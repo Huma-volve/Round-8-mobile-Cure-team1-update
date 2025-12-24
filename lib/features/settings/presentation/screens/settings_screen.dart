@@ -18,7 +18,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getit<ChangePasswordBloc>(),
+      create: (context) => getIt<ChangePasswordBloc>(),
       child: Scaffold(
         backgroundColor: ColorsLight.scaffoldBackground,
         appBar: CustomAppBar(

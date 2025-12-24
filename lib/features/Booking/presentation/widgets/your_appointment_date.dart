@@ -46,26 +46,9 @@ class _YourApointMentDateWidgetState extends State<YourApointMentDateWidget> {
           SizedBox(
             width: 8.r,
           ),
-<<<<<<< HEAD
          Text(formatedDate ??'',
                     style: AppTextStyles.montserratMedum14(context)
                         .copyWith(color: ColorsLight.prussianBlue)),
-=======
-          if (widget.selectedDayName != null)
-            Row(
-              children: [
-                Text('${widget.selectedDayNumber},',
-                    style: AppTextStyles.montserratMedum14(context)
-                        .copyWith(color: ColorsLight.prussianBlue)),
-                Text(widget.selectedMonthName!,
-                    style: AppTextStyles.montserratMedum14(context)
-                        .copyWith(color: ColorsLight.prussianBlue)),
-                Text(widget.selectedDayName!,
-                    style: AppTextStyles.montserratMedum14(context)
-                        .copyWith(color: ColorsLight.prussianBlue)),
-              ],
-            ),
->>>>>>> shaban
           const Spacer(),
           GestureDetector(
             onTap: () async {

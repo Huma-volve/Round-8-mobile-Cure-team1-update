@@ -7,12 +7,7 @@ import 'package:cure_team_1_update/features/chat/persention/screens/widget/Favor
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/customabppar.dart';
 
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/notificationmassage.dart';
-<<<<<<< HEAD
-import 'package:cure_team_1_update/features/chat/persention/view_modle/cubit/chat_cubit.dart';
-=======
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
-import 'package:dio/dio.dart';
->>>>>>> mafdysaad
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
