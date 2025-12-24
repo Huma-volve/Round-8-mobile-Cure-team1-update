@@ -1,6 +1,5 @@
 import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
-import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/core/widgets/custom_widgets.dart';
 import 'package:cure_team_1_update/features/profile/presentation/screens/profile_screen.dart';

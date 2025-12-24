@@ -1,23 +1,13 @@
-
 import 'package:cure_team_1_update/core/services/service_locator.dart';
-import 'package:cure_team_1_update/core/utils/chattab.dart';
-<<<<<<< HEAD
-
->>>>>>> mafdysaad
-=======
-import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
-import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
->>>>>>> 43e6a4d661d8da2aa9dacd0bba7a98bb4f273ab3
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../core/style/responsive_size.dart';
 import '../../../../core/utils/assets.dart';
-import '../../../profile/screens/profile_screen.dart';
-import '../../Data/models/doctor_model.dart';
 import 'home_page.dart';
 
 class NavBar extends StatefulWidget {

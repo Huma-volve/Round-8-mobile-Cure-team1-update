@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../core/widgets/custom_widgets.dart';
 import 'password_management_screen.dart'; // Placeholder
 
 class SettingsScreen extends StatelessWidget {

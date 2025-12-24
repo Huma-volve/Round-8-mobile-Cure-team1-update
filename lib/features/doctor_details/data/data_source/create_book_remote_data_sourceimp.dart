@@ -11,7 +11,7 @@ class CreateBookRemoteDataSourceImp extends CreateBookRemoteDataSource{
     };
   @override
   Future<void> createBook({required int doctorId,required String appointmentDate,required String appointmentTime}) async{
-  var result=  await  ApiServices(Dio()).post(endpoint: 'bookings', body: {
+  var result=  await  ApiServices(Dio()).post2(endpoint: 'bookings', body: {
     "doctor_id": doctorId,
     "appointment_date":appointmentDate,
     "appointment_time":appointmentTime,

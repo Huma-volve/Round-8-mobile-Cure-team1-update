@@ -1,17 +1,13 @@
 import 'package:cure_team_1_update/core/common/toast/show_toast.dart';
 import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
-import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
-
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/features/settings/data/models/edit_profile/change_password_request_body.dart';
-import 'package:cure_team_1_update/features/settings/data/models/edit_profile/change_password_response.dart';
 import 'package:cure_team_1_update/features/settings/presentation/view_model/bloc/change_password_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import '../../../../../core/widgets/custom_widgets.dart';
 
 class PasswordManagementScreen extends StatefulWidget {

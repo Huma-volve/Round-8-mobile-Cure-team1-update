@@ -26,7 +26,7 @@ class BookingRemoteDataSourceImpl extends BookingRemoteDataSource {
   @override
   Future<void> cancelMyBooking({required int bookId,required String body}) async{
    
-  await ApiServices(dio).post(endpoint:"bookings/$bookId/cancel", body: {"cancellation_reason": body}, headers: headers);
+  await ApiServices(dio).post2(endpoint:"bookings/$bookId/cancel", body: {"cancellation_reason": body}, headers: headers);
 
   }
 }
