@@ -15,7 +15,7 @@ class FaqsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getit<FaqsBloc>()..add(const EventFaqs()),
+      create: (context) => getIt<FaqsBloc>()..add(const EventFaqs()),
       child: Scaffold(
         backgroundColor: ColorsLight.scaffoldBackground,
         appBar: CustomAppBar(

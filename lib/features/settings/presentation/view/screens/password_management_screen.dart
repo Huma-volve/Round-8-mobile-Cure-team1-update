@@ -47,7 +47,7 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getit<ChangePasswordBloc>(),
+      create: (context) => getIt<ChangePasswordBloc>(),
       child: BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
         listener: (context, state) {
           state.whenOrNull(success: (changePasswordResponse) {

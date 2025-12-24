@@ -13,7 +13,7 @@ void showLogoutDialogSettings(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) => BlocProvider(
-      create: (context) => getit<DeleteAccountBloc>(),
+      create: (context) => getIt<DeleteAccountBloc>(),
       child: Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.r),
