@@ -1,42 +1,22 @@
 import 'package:cure_team_1_update/core/services/service_locator.dart';
-import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
-import 'package:cure_team_1_update/features/chat/data/modle/prfiledatils.dart';
-import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/histroychat.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_cubit/cubit/chatbody_cubit.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class Notificationmassage extends StatelessWidget {
   const Notificationmassage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Prfiledatils> allList = [
-      Prfiledatils(Assets.resourceImagesJana, 'It’s been around six.....',
-          'Dr,jana', '4:05'),
-      Prfiledatils(Assets.resourceImagesJessica, 'It’s been around six.....',
-          'Dr,Jessica', '4:05'),
-      Prfiledatils(Assets.resourceImagesRobert, 'you: ok i will do it like...',
-          'Dr,Robert', '4:05'),
-      Prfiledatils(Assets.resourceImagesJana, 'It’s been around six.....',
-          'Dr,jana', '4:05'),
-      Prfiledatils(Assets.resourceImagesJessica, 'It’s been around six.....',
-          'Dr,Jessica', '4:05'),
-      Prfiledatils(Assets.resourceImagesRobert, 'you: ok i will do it like...',
-          'Dr,Robert', '4:05')
-    ];
     return BlocBuilder<ChatCubit, ChatState>(
       builder: (context, state) {
         if (state is Lodingchat) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const _ChatListSkeleton();
         }
 
         if (state is Successchat) {
@@ -74,6 +54,36 @@ class Notificationmassage extends StatelessWidget {
         }
         return const SizedBox.shrink();
       },
+    );
+  }
+}
+
+class _ChatListSkeleton extends StatelessWidget {
+  const _ChatListSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Skeletonizer(
+      enabled: true,
+      child: ListView.separated(
+        itemCount: 6,
+        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        itemBuilder: (context, index) {
+          return Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF6F7F9),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const ListTile(
+              leading: CircleAvatar(radius: 24),
+              title: Text('Loading name'),
+              subtitle: Text('Loading message preview'),
+              trailing: Text('00:00'),
+            ),
+          );
+        },
+      ),
     );
   }
 }

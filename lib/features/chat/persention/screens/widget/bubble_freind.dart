@@ -8,6 +8,8 @@ class BubbleFreind extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final body = message.body ?? '';
+    final timeText = _safeTime(message.createdAt);
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
@@ -26,18 +28,30 @@ class BubbleFreind extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Wrap(children: [
             Text(
-              message.body!,
+              body,
               textAlign: TextAlign.start,
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
-            Text(
-              textAlign: TextAlign.start,
-              formatTimeToHourMinute(message.createdAt!),
-              style: const TextStyle(color: Colors.white),
-            )
+            if (timeText.isNotEmpty)
+              Text(
+                textAlign: TextAlign.start,
+                timeText,
+                style: const TextStyle(color: Colors.white),
+              )
           ]),
         ),
       ),
     );
   }
+}
+
+String _safeTime(String? value) {
+  if (value == null || value.isEmpty) {
+    return '';
+  }
+  final parsed = DateTime.tryParse(value);
+  if (parsed == null) {
+    return '';
+  }
+  return formatTimeToHourMinute(value);
 }

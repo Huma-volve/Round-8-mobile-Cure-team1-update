@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cure_team_1_update/core/utils/app_toast.dart';
 
 import '../../../../core/constants/app_route.dart';
 import '../../Data/models/specialty_model.dart';
@@ -59,10 +60,9 @@ class SearchPage extends StatelessWidget {
                           final cubit = context.read<LocationCubit>();
                           final currentState = cubit.state;
                           if (currentState is! LocationAddressLoaded) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Location is not ready yet.'),
-                              ),
+                            AppToast.show(
+                              context,
+                              'Location is not ready yet.',
                             );
                             return;
                           }

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class Histroychat extends StatelessWidget {
   const Histroychat({super.key, required this.massage, required this.fun});
-  final Conversion? massage;
+  final Conversion massage;
   final void Function()? fun;
 
   @override
@@ -27,16 +27,16 @@ class Histroychat extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: ListTile(
-              leading: Imageprofile(image: massage!.otherUser!.avatar),
+              leading: Imageprofile(image: massage.otherUser?.avatar),
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    massage!.otherUser!.name!,
+                    massage.otherUser?.name ?? 'Unknown',
                     style: AppTextStyles.styleMedium20(context),
                   ),
                   Text(
-                    massage!.lastMessage?.body ?? 'Strart massages',
+                    massage.lastMessage?.body ?? 'Start messages',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.styleLarge16(context),
@@ -45,12 +45,12 @@ class Histroychat extends StatelessWidget {
               ),
               trailing: Column(children: [
                 Text(
-                  formatTimeToHourMinute(massage!.updatedAt!),
+                  _safeTime(massage.updatedAt),
                   style: AppTextStyles.styleLarge16(context),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: massage!.unreadCount == 0
+                  child: (massage.unreadCount ?? 0) == 0
                       ? const SizedBox.shrink()
                       : Container(
                           height: 20,
@@ -61,7 +61,7 @@ class Histroychat extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              '${massage!.unreadCount}',
+                              '${massage.unreadCount}',
                               style: AppTextStyles.styleLarge16(context),
                             ),
                           ),
@@ -74,4 +74,15 @@ class Histroychat extends StatelessWidget {
       ),
     );
   }
+}
+
+String _safeTime(String? value) {
+  if (value == null || value.isEmpty) {
+    return '--';
+  }
+  final parsed = DateTime.tryParse(value);
+  if (parsed == null) {
+    return '--';
+  }
+  return formatTimeToHourMinute(value);
 }

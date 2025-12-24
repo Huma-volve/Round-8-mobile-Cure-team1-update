@@ -1,7 +1,5 @@
 import 'package:cure_team_1_update/core/function/helperfunction.dart';
-import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
-import 'package:cure_team_1_update/features/chat/data/modle/massagemodel/messagemodle.dart';
 import 'package:flutter/material.dart';
 
 class BubbleText extends StatelessWidget {
@@ -10,6 +8,8 @@ class BubbleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final body = conversion.body ?? '';
+    final timeText = _safeTime(conversion.createdAt);
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
@@ -28,18 +28,30 @@ class BubbleText extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Wrap(children: [
             Text(
-              conversion.body!,
+              body,
               textAlign: TextAlign.start,
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
-            Text(
-              textAlign: TextAlign.start,
-              formatTimeToHourMinute(conversion.createdAt!),
-              style: const TextStyle(color: Colors.white),
-            )
+            if (timeText.isNotEmpty)
+              Text(
+                textAlign: TextAlign.start,
+                timeText,
+                style: const TextStyle(color: Colors.white),
+              )
           ]),
         ),
       ),
     );
   }
+}
+
+String _safeTime(String? value) {
+  if (value == null || value.isEmpty) {
+    return '';
+  }
+  final parsed = DateTime.tryParse(value);
+  if (parsed == null) {
+    return '';
+  }
+  return formatTimeToHourMinute(value);
 }

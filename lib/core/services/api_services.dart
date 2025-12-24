@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class ApiServices {
   static String basURL = "https://round8-backend-team-one.huma-volve.com/api/";
@@ -8,7 +9,9 @@ class ApiServices {
     Response respons = await _dio.get(
       '$basURL$endpoint',
     );
-    print(respons.data);
+    if (kDebugMode) {
+      print(respons.data);
+    }
     return respons.data;
   }
 

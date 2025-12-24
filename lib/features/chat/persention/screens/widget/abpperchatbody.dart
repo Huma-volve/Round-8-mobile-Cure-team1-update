@@ -12,6 +12,8 @@ class Abpperchatbody extends StatelessWidget {
   final Conversion convers;
   @override
   Widget build(BuildContext context) {
+    final otherUser = convers.otherUser;
+    final name = otherUser?.name ?? 'Unknown';
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
@@ -28,13 +30,13 @@ class Abpperchatbody extends StatelessWidget {
             width: 20,
           ),
           Imageprofile(
-            image: convers.otherUser!.avatar,
+            image: otherUser?.avatar,
           ),
           const SizedBox(
             width: 15,
           ),
           Text(
-            convers.otherUser!.name!,
+            name,
             style: AppTextStyles.styleLarge20(context)
                 .copyWith(fontSize: responsive_size(context, fontsize: 20)),
           ),

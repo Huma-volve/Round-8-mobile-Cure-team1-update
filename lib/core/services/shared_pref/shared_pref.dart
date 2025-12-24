@@ -86,6 +86,7 @@ class Cachehelper {
   static late SharedPreferences _shared;
   static const String _onboardingSeenKey = 'onboarding_seen';
   static const String _userNameKey = 'user_name';
+  static const String _favoriteIdsKey = 'favorite_doctor_ids';
   static Future<void> init() async {
     _shared = await SharedPreferences.getInstance();
   }
@@ -112,5 +113,22 @@ class Cachehelper {
 
   static String? getUserName() {
     return _shared.getString(_userNameKey);
+  }
+
+  static bool hasFavoriteIds() {
+    return _shared.getStringList(_favoriteIdsKey) != null;
+  }
+
+  static Future<void> cacheFavoriteIds(Iterable<int> ids) async {
+    final values = ids.map((id) => id.toString()).toList();
+    await _shared.setStringList(_favoriteIdsKey, values);
+  }
+
+  static Set<int> getFavoriteIds() {
+    final values = _shared.getStringList(_favoriteIdsKey);
+    if (values == null) {
+      return <int>{};
+    }
+    return values.map(int.parse).toSet();
   }
 }

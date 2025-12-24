@@ -1,5 +1,6 @@
 import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
+import 'package:cure_team_1_update/core/utils/app_toast.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -77,9 +78,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
         _expiryMonthController.text.isEmpty ||
         _expiryYearController.text.isEmpty ||
         _cvvController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill in all fields')),
-      );
+      AppToast.show(context, 'Please fill in all fields');
       return;
     }
 

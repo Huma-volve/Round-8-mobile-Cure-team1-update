@@ -43,6 +43,7 @@ dependencies:
   dio: ^5.9.0
   animate_do: ^4.2.0
   overlay_support: ^2.1.0
+  fluttertoast: ^9.0.0
 
 dev_dependencies:
   device_preview: 1.2.0

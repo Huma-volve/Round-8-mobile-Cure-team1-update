@@ -1,6 +1,7 @@
 import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
+import 'package:cure_team_1_update/core/utils/app_toast.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/features/settings/data/models/edit_profile/change_password_request_body.dart';
 import 'package:cure_team_1_update/features/settings/presentation/bloc/bloc/change_password_bloc.dart';
@@ -179,9 +180,7 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
             ),
           );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Password changed successfully')),
-      );
+      AppToast.show(context, 'Password changed successfully');
       GoRouter.of(context).canPop() ? GoRouter.of(context).pop() : null;
     }
   }

@@ -21,7 +21,6 @@ class immplementRemotdata extends Remotdata {
   Future<List<Conversion>> featchconversion(tab) async {
     String endpoint = _endpointbytab(tab);
     var repons = await apiServices.get(endpoint);
-    print('---------------------all data');
     List<Conversion> conv = parseData<Conversion>(repons, Conversion.fromJson);
     return Future.value(conv);
   }
@@ -35,9 +34,7 @@ class immplementRemotdata extends Remotdata {
 
   @override
   Future<List<Historymasseges>> getHistorymassages(conve) async {
-    print('beforrrrrrrrrrrrrrrr');
     var respons = await apiServices.get("conversations/${conve.id}");
-    print('mmmmmmmmmmmmmmmmmmm${respons}');
     List<Historymasseges> massages =
         parseData<Historymasseges>(respons, Historymasseges.fromJson);
     return Future.value(massages);

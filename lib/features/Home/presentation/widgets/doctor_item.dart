@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cure_team_1_update/core/utils/app_toast.dart';
 
 import '../../../../core/constants/app_route.dart';
 import '../../Data/models/doctor_model.dart';
@@ -129,16 +130,11 @@ class DoctorItem extends StatelessWidget {
                           await FavoriteStore.toggleRemote(doctor);
                       if (result.isFavorite == null) {
                         FavoriteStore.setFavorite(doctor, previous);
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                result.message ??
-                                    'Failed to update favorite status.',
-                              ),
-                            ),
-                          );
-                        }
+                        AppToast.show(
+                          context,
+                          result.message ??
+                              'Failed to update favorite status.',
+                        );
                       }
                     },
                     icon: Icon(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class VoiceMessageWidget extends StatelessWidget {
   final String audioUrl;
 
-  const VoiceMessageWidget({required this.audioUrl});
+  const VoiceMessageWidget({super.key, required this.audioUrl});
 
   @override
   Widget build(BuildContext context) {

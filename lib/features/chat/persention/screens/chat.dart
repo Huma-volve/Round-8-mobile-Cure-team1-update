@@ -1,14 +1,16 @@
+import 'dart:async';
+
 import 'package:cure_team_1_update/core/common/widgets/custome_text_field.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/core/utils/chattab.dart';
 
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/Favoritesappber.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/customabppar.dart';
 
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/notificationmassage.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,6 +28,7 @@ class _ChatState extends State<Chat> {
   final FocusNode _focus = FocusNode();
   List<String> searchHistory = ["robert", "jessica"];
   bool isslected = false;
+  Timer? _searchDebounce;
   @override
   void initState() {
     _focus.addListener(() {
@@ -64,7 +67,7 @@ class _ChatState extends State<Chat> {
               ),
               text: 'Search for chat, doctor',
               function: (value) {
-                context.read<ChatCubit>().search(value);
+                _onSearchChanged(value);
               },
               controller: controller,
             ),
@@ -93,6 +96,23 @@ class _ChatState extends State<Chat> {
   @override
   void dispose() {
     controller.dispose();
+    _focus.dispose();
+    _searchDebounce?.cancel();
     super.dispose();
+  }
+
+  void _onSearchChanged(String value) {
+    _searchDebounce?.cancel();
+    final query = value.trim();
+    _searchDebounce = Timer(const Duration(milliseconds: 400), () {
+      if (!mounted) {
+        return;
+      }
+      if (query.isEmpty) {
+        context.read<ChatCubit>().getconv(Chattab.all);
+      } else {
+        context.read<ChatCubit>().search(query);
+      }
+    });
   }
 }

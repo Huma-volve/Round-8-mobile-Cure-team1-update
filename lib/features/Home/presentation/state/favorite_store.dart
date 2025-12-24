@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+
 import '../../../../core/services/api_services.dart';
 import '../../../../core/services/service_locator.dart';
+import '../../../../core/services/shared_pref/shared_pref.dart';
 import '../../Data/models/doctor_model.dart';
 
 class FavoriteStore {
@@ -19,7 +21,7 @@ class FavoriteStore {
     } else {
       updated.add(doctor.id);
     }
-    favorites.value = updated;
+    _updateFavorites(updated);
   }
 
   static void setFavorite(DoctorModel doctor, bool isFavorite) {
@@ -29,15 +31,13 @@ class FavoriteStore {
     } else {
       updated.remove(doctor.id);
     }
-    favorites.value = updated;
+    _updateFavorites(updated);
   }
 
-  static Future<FavoriteToggleResult> toggleRemote(
-      DoctorModel doctor) async {
+  static Future<FavoriteToggleResult> toggleRemote(DoctorModel doctor) async {
     try {
       final api = getit<ApiServices>();
-      final response =
-          await api.post('doctors/${doctor.id}/favorite', {});
+      final response = await api.post('doctors/${doctor.id}/favorite', {});
       final isFavorite = response?['data']?['is_favorite'];
       if (isFavorite is bool) {
         setFavorite(doctor, isFavorite);
@@ -73,10 +73,19 @@ class FavoriteStore {
   }
 
   static Set<int> _initialFavorites() {
+    if (Cachehelper.hasFavoriteIds()) {
+      return Cachehelper.getFavoriteIds();
+    }
+
     return doctorsList
         .where((doctor) => doctor.isFavorite)
         .map((doctor) => doctor.id)
         .toSet();
+  }
+
+  static void _updateFavorites(Set<int> updated) {
+    favorites.value = updated;
+    Cachehelper.cacheFavoriteIds(updated);
   }
 }
 
@@ -86,9 +95,7 @@ class FavoriteToggleResult {
 
   const FavoriteToggleResult._({this.isFavorite, this.message});
 
-  const FavoriteToggleResult.success(bool value)
-      : this._(isFavorite: value);
+  const FavoriteToggleResult.success(bool value) : this._(isFavorite: value);
 
-  const FavoriteToggleResult.failure(String message)
-      : this._(message: message);
+  const FavoriteToggleResult.failure(String message) : this._(message: message);
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ImageMessageWidget extends StatelessWidget {
   final String imageUrl;
 
-  const ImageMessageWidget({required this.imageUrl});
+  const ImageMessageWidget({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {

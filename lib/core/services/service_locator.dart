@@ -20,7 +20,13 @@ Future<void> setup() async {
   //....Hive
   //object from dio
   //pass heder to dio object
-  getit.registerSingleton<Dio>(Dio());
+  getit.registerSingleton<Dio>(Dio(
+    BaseOptions(
+      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 20),
+      sendTimeout: const Duration(seconds: 20),
+    ),
+  ));
   //object from ApiServices
   getit.registerSingleton<ApiServices>(
       ApiServices(getit.get<Dio>()..interceptors.add(ApiInterceptor())));

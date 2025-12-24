@@ -1,19 +1,14 @@
-import 'package:cure_team_1_update/core/services/service_locator.dart';
-import 'package:cure_team_1_update/core/utils/chattab.dart';
-import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
-import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
-import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:cure_team_1_update/core/utils/chattab.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import '../../location/Data/DataSource/location_datasoucre.dart';
 import '../../location/Data/repo/location_repository_impl.dart';
 import '../../location/Domin/useCase/get_user_location.dart';
 import '../../location/presentation/cubit/location_cubit.dart';
-import 'package:flutter_svg/svg.dart';
 import '../../../../core/style/responsive_size.dart';
 import '../../../../core/utils/assets.dart';
 import '../../../profile/presentation/screens/profile_screen.dart';
@@ -32,10 +27,7 @@ class _HomePageState extends State<NavBar> {
   final List<Widget> pages = [
     const HomePage(),
     const MyBookingScreen(),
-    BlocProvider(
-      create: (context) => getit.get<ChatCubit>(),
-      child: const Chat(),
-    ),
+    const Chat(),
     const ProfileScreen()
   ];
   late int currentitem;
@@ -92,6 +84,9 @@ class _HomePageState extends State<NavBar> {
                   setState(() {
                     currentitem = index;
                   });
+                  if (index == 2) {
+                    context.read<ChatCubit>().getconv(Chattab.all);
+                  }
                 },
                 currentIndex: currentitem,
                 type: BottomNavigationBarType.fixed,
