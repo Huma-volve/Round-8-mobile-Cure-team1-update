@@ -34,11 +34,23 @@ class SignupCubit extends Cubit<SignupState> {
       (failure) {
         emit(SignupError(error: failure.errormessage));
       },
-      (signupModel) {
+      (signupModel) async {
         print(signupModel.message);
+        final token = signupModel.token;
+        if (token != null && token.isNotEmpty) {
+          await Cachehelper.cacheToken(token);
+        }
         final cachedName = nameController.text.trim();
         if (cachedName.isNotEmpty) {
           Cachehelper.cacheUserName(cachedName);
+        }
+        final cachedEmail = emailController.text.trim();
+        if (cachedEmail.isNotEmpty) {
+          Cachehelper.cacheUserEmail(cachedEmail);
+        }
+        final cachedPhone = phoneController.text.trim();
+        if (cachedPhone.isNotEmpty) {
+          Cachehelper.cacheUserPhone(cachedPhone);
         }
         emit(SignupSuccess(message: signupModel.message ?? 'Unknown message'));
       },

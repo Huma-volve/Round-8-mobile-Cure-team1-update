@@ -100,10 +100,8 @@ class HomeTopSection extends StatelessWidget {
         _ActionIcon(
           icon: Icons.favorite_border,
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const FavoritePage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const FavoritePage()));
           },
         ),
         const SizedBox(

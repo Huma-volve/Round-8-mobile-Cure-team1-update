@@ -27,11 +27,7 @@ class ChangePasswordBloc
     Emitter<ChangePasswordState> emit,
   ) async {
     emit(const ChangePasswordState.loading());
-    print('lllllllllllllllllll ');
-
     final result = await _repo.changePassword(event.data);
-    print('sssssssssssssssss');
-
     result.when(
       success: (ChangePasswordResponse) {
         print('change password successful: $ChangePasswordResponse');

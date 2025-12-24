@@ -86,6 +86,9 @@ class Cachehelper {
   static late SharedPreferences _shared;
   static const String _onboardingSeenKey = 'onboarding_seen';
   static const String _userNameKey = 'user_name';
+  static const String _userEmailKey = 'user_email';
+  static const String _userPhoneKey = 'user_phone';
+  static const String _userBirthdateKey = 'user_birthdate';
   static const String _favoriteIdsKey = 'favorite_doctor_ids';
   static Future<void> init() async {
     _shared = await SharedPreferences.getInstance();
@@ -97,6 +100,17 @@ class Cachehelper {
 
   static String? getToken() {
     return _shared.getString("token");
+  }
+
+  static Future<void> clearToken() async {
+    await _shared.remove("token");
+  }
+
+  static Future<void> clearUserProfile() async {
+    await _shared.remove(_userNameKey);
+    await _shared.remove(_userEmailKey);
+    await _shared.remove(_userPhoneKey);
+    await _shared.remove(_userBirthdateKey);
   }
 
   static Future<void> cacheOnboardingSeen(bool seen) async {
@@ -113,6 +127,30 @@ class Cachehelper {
 
   static String? getUserName() {
     return _shared.getString(_userNameKey);
+  }
+
+  static Future<void> cacheUserEmail(String email) async {
+    await _shared.setString(_userEmailKey, email);
+  }
+
+  static String? getUserEmail() {
+    return _shared.getString(_userEmailKey);
+  }
+
+  static Future<void> cacheUserPhone(String phone) async {
+    await _shared.setString(_userPhoneKey, phone);
+  }
+
+  static String? getUserPhone() {
+    return _shared.getString(_userPhoneKey);
+  }
+
+  static Future<void> cacheUserBirthdate(String birthdate) async {
+    await _shared.setString(_userBirthdateKey, birthdate);
+  }
+
+  static String? getUserBirthdate() {
+    return _shared.getString(_userBirthdateKey);
   }
 
   static bool hasFavoriteIds() {

@@ -1,4 +1,5 @@
 import 'package:cure_team_1_update/core/services/api_services.dart';
+import 'package:cure_team_1_update/core/constants/app_constants.dart';
 import 'package:cure_team_1_update/core/services/network/apiInterceptor%20.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:cure_team_1_update/features/profile/data/data_source/profile_data_source.dart';
@@ -30,7 +31,9 @@ Future<void> setup() async {
   //....Hive
   //object from dio
   //pass heder to dio object
-  getit.registerSingleton<Dio>(Dio());
+  getit.registerSingleton<Dio>(
+    Dio(BaseOptions(baseUrl: AppConstants.baseUrl)),
+  );
   //object from ApiServices
   getit.registerSingleton<ApiServices>(
       ApiServices(getit.get<Dio>()..interceptors.add(ApiInterceptor())));

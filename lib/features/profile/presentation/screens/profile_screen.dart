@@ -1,4 +1,5 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
@@ -27,6 +28,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cachedName = Cachehelper.getUserName();
+    final displayName = (cachedName != null && cachedName.trim().isNotEmpty)
+        ? cachedName.trim()
+        : 'Your profile';
+    final cachedEmail = Cachehelper.getUserEmail();
+    final cachedPhone = Cachehelper.getUserPhone();
+    final subtitleText = (cachedEmail != null && cachedEmail.isNotEmpty)
+        ? cachedEmail
+        : (cachedPhone != null && cachedPhone.isNotEmpty ? cachedPhone : null);
+    final subtitleIcon = (cachedEmail != null && cachedEmail.isNotEmpty)
+        ? Icons.email_outlined
+        : (cachedPhone != null && cachedPhone.isNotEmpty
+            ? Icons.phone
+            : null);
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorsLight.scaffoldBackground,
@@ -50,21 +65,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ), // Placeholder
                       backgroundColor: Colors.grey,
                     ),
-                    title: Text('Seif Mohamed',
-                        style: StyleTextHelper.textStyle20Regular(context)
-                            .copyWith(fontFamily: 'georgia')),
-                    subtitle: Row(children: [
-                      Icon(
-                        Icons.location_on,
-                        size: 8.sp,
-                        color: ColorsLight.textGrey,
-                      ),
-                      Text(
-                        '129,El-Nasr Street, Cairo',
-                        style: StyleTextHelper.textStyle12Regular(context)
-                            .copyWith(color: ColorsLight.blueGray),
-                      ),
-                    ]),
+                    subtitle: subtitleText != null && subtitleIcon != null
+                        ? Row(children: [
+                            Icon(
+                              subtitleIcon,
+                              size: 8.sp,
+                              color: ColorsLight.textGrey,
+                            ),
+                            SizedBox(width: 4.w),
+                            Text(
+                              subtitleText,
+                              style: StyleTextHelper.textStyle12Regular(context)
+                                  .copyWith(color: ColorsLight.blueGray),
+                            ),
+                          ])
+                        : null,
+                    title: Text(
+                      displayName,
+                      style: StyleTextHelper.textStyle20Regular(context)
+                          .copyWith(fontFamily: 'georgia'),
+                    ),
                     trailing: InkWell(
                       onTap: () {
                         GoRouter.of(context).push(AppRoute.editProfileScreen);

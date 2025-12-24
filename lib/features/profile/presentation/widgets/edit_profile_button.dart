@@ -35,24 +35,26 @@ class EditProfileButton extends StatelessWidget {
         });
       },
       builder: (context, state) {
-        return state.maybeWhen(
-          loading: () {
-            return CustomButton(
-              text: 'Saving...',
-              onPressed: () {},
+        final bloc = context.read<EditProfileBloc>();
+        final isLoading = bloc.hasRequested &&
+            state.maybeWhen(
+              loading: () => true,
+              orElse: () => false,
             );
-          },
-          orElse: () {
-            return CustomFadeInRight(
-              duration: 600,
-              child: CustomButton(
-                text: 'Edit Profile',
-                onPressed: () {
-                  _validateThenDoSignUp(context);
-                },
-              ),
-            );
-          },
+        if (isLoading) {
+          return CustomButton(
+            text: 'Saving...',
+            onPressed: () {},
+          );
+        }
+        return CustomFadeInRight(
+          duration: 600,
+          child: CustomButton(
+            text: 'Edit Profile',
+            onPressed: () {
+              _validateThenDoSignUp(context);
+            },
+          ),
         );
       },
     );
@@ -60,13 +62,24 @@ class EditProfileButton extends StatelessWidget {
 
   void _validateThenDoSignUp(BuildContext context) {
     final editProfileBloc = context.read<EditProfileBloc>();
+    if (editProfileBloc.selectedDay == null ||
+        editProfileBloc.selectedMonth == null ||
+        editProfileBloc.selectedYear == null) {
+      showToast(
+        context: context,
+        text: 'Please select your birthday',
+        colorText: ColorsLight.error,
+        toastState: ToastStates.ERROR,
+      );
+      return;
+    }
 
     context.read<EditProfileBloc>().add(
           EditProfileEvent.editProfile(
             data: EditProfileRequestBody(
-              name: editProfileBloc.nameController.text,
-              email: editProfileBloc.emailController.text,
-              phone: editProfileBloc.phoneController.text,
+              name: editProfileBloc.nameController.text.trim(),
+              email: editProfileBloc.emailController.text.trim(),
+              phone: editProfileBloc.phoneController.text.trim(),
               birthdate: editProfileBloc.getFormattedBirthDate(
                 day: editProfileBloc.selectedDay!,
                 month: editProfileBloc.selectedMonth!,

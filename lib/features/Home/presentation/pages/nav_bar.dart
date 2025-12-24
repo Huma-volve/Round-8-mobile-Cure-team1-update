@@ -85,9 +85,7 @@ class _HomePageState extends State<NavBar> {
                     currentitem = index;
                   });
                   if (index == 2) {
-                    context
-                        .read<ChatCubit>()
-                        .getconv(Chattab.all, forceRefresh: true);
+                    context.read<ChatCubit>().getconv(Chattab.all);
                   }
                 },
                 currentIndex: currentitem,

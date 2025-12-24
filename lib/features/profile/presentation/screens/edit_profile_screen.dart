@@ -87,24 +87,51 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   SizedBox(height: 10.h),
 
                   // User Info
-                  Text('Seif Mohamed',
-                      style:
-                          StyleTextHelper.textStyle20Regular(context).copyWith(
-                        fontFamily: 'georgia',
-                      )),
+                  ValueListenableBuilder<TextEditingValue>(
+                    valueListenable: _bloc.nameController,
+                    builder: (context, value, child) {
+                      final name = value.text.trim().isNotEmpty
+                          ? value.text.trim()
+                          : 'Your name';
+                      return Text(
+                        name,
+                        style:
+                            StyleTextHelper.textStyle20Regular(context).copyWith(
+                          fontFamily: 'georgia',
+                        ),
+                      );
+                    },
+                  ),
                   SizedBox(height: 4.h),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Icon(
-                      Icons.location_on,
-                      size: 8.sp,
-                      color: ColorsLight.textGrey,
-                    ),
-                    Text(
-                      '129,El-Nasr Street, Cairo',
-                      style: StyleTextHelper.textStyle12Regular(context)
-                          .copyWith(color: ColorsLight.blueGray),
-                    ),
-                  ]),
+                  Builder(
+                    builder: (context) {
+                      final subtitle = _bloc.emailController.text.isNotEmpty
+                          ? _bloc.emailController.text
+                          : _bloc.phoneController.text;
+                      if (subtitle.isEmpty) {
+                        return const SizedBox.shrink();
+                      }
+                      final icon = _bloc.emailController.text.isNotEmpty
+                          ? Icons.email_outlined
+                          : Icons.phone;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            icon,
+                            size: 8.sp,
+                            color: ColorsLight.textGrey,
+                          ),
+                          SizedBox(width: 4.w),
+                          Text(
+                            subtitle,
+                            style: StyleTextHelper.textStyle12Regular(context)
+                                .copyWith(color: ColorsLight.blueGray),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                   SizedBox(height: 40.h),
 
                   // Form Fields

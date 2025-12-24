@@ -8,6 +8,9 @@ class AppConstants {
   static const String baseUrl =
       'https://round8-backend-team-one.huma-volve.com/api/';
   static const String editProfileUrl = 'profile/edit';
+  static const String changePasswordUrl = 'profile/change-password';
+  static const String deleteAccountUrl = 'profile/delete';
+  static const String logoutUrl = 'profile/logout';
 
   /// Storage keys
   static const String tokenKey = 'auth_token';

@@ -28,11 +28,24 @@ class LoginCubit extends Cubit<LoginState> {
       (failure) {
         emit(LoginError(error: failure.errormessage));
       },
-      (loginModel) {
+      (loginModel) async {
         print(loginModel.message);
-        final token = loginModel.data?.token;
+        final token = loginModel.token ?? loginModel.data?.token;
         if (token != null && token.isNotEmpty) {
-          Cachehelper.cacheToken(token);
+          await Cachehelper.cacheToken(token);
+        }
+        final userData = loginModel.data;
+        final name = userData?.name;
+        if (name != null && name.isNotEmpty) {
+          Cachehelper.cacheUserName(name);
+        }
+        final email = userData?.email;
+        if (email != null && email.isNotEmpty) {
+          Cachehelper.cacheUserEmail(email);
+        }
+        final phone = userData?.phone;
+        if (phone != null && phone.isNotEmpty) {
+          Cachehelper.cacheUserPhone(phone);
         }
         emit(LoginSuccess(message: loginModel.message ?? ''));
       },
