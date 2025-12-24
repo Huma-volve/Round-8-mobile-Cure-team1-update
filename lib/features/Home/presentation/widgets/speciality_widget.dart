@@ -21,27 +21,26 @@ class _SpecialityWidgetState extends State<SpecialityWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () {
-          final cubit = context.read<DoctorCubit>();
+      onTap: () {
+        final cubit = context.read<DoctorCubit>();
 
-          if (cubit.allDoctors.isEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('جاري تحميل الدكاترة...')),
-            );
-            return;
-          }
-
-          cubit.filterBySpecialty(widget.specialty.id);
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => DoctorsBySpecialtyScreen(
-                specialtyName: widget.specialty.name,
-              ),
-            ),
+        if (cubit.allDoctors.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('جاري تحميل الدكاترة...')),
           );
+          return;
+        }
 
+        cubit.filterBySpecialty(widget.specialty.id);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => DoctorsBySpecialtyScreen(
+              specialtyName: widget.specialty.name,
+            ),
+          ),
+        );
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),

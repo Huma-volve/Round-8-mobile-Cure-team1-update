@@ -27,134 +27,132 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void initState() {
     super.initState();
     context.read<LocationCubit>().fetchLocationAndAddress();
-
-
   }
-
 
   @override
   Widget build(BuildContext context) {
+    context.read<LocationCubit>().fetchLocationAndAddress();
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 27),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const HomeTopSection(),
-              const SizedBox(
-                height: 23,
-              ),
-              TextFormField(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SearchPage()));
-                },
-                decoration: InputDecoration(
-                    hintText: "Search for specialty, doctor..",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    )),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(children: [
-                const Expanded(
-                  child: Text(
-                    "Specialties",
-                    style: TextStyle(fontSize: 20),
-                  ),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const HomeTopSection(),
+            const SizedBox(
+              height: 23,
+            ),
+            TextFormField(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SearchPage()));
+              },
+              decoration: InputDecoration(
+                  hintText: "Search for specialty, doctor..",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  )),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(children: [
+              const Expanded(
+                child: Text(
+                  "Specialties",
+                  style: TextStyle(fontSize: 20),
                 ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ViewAllSpecialties()));
-                    },
-                    child: const Text(
-                      "View all",
-                      style: TextStyle(fontSize: 18, color: Colors.blue),
-                    )),
-              ]),
-              const SizedBox(
-                height: 6,
               ),
-              const SpecialtiesList(),
-              const SizedBox(
-                height: 5,
-              ),
-              Container(
-                width: double.infinity,
-                child: Image.asset(
-                    fit: BoxFit.fill,
-                    height: 150.h,
-                    "assets/images/Mask_group.png"),
-              ),
-              Row(children: [
-                const Expanded(
-                  child: Text(
-                    "Doctors near you",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Veiw all",
-                      style: TextStyle(fontSize: 18, color: Colors.blue),
-                    )),
-              ]),
-              BlocListener<LocationCubit, LocationState>(
-                listener: (context, state) {
-                  if (state is LocationAddressLoaded) {
-                    final lat = state.location.lat;
-                    final lng = state.location.lng;
-                    context.read<DoctorCubit>().loadDoctor();
-                  }
-                },
-                child: BlocBuilder<DoctorCubit, DoctorState>(
-                  builder: (context, state) {
-                    if (state is DoctorLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (state is DoctorLoaded) {
-                      final doctors = state.doctors;
-                      if (doctors.isEmpty) {
-                        return const Center(child: Text("No doctors found"));
-                      }
-                      return SizedBox(
-                        height: 350,
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: doctors.length,
-                          itemBuilder: (context, index) {
-                            final doc = doctors[index];
-                            return DoctorItem(doctor: doc,);
-                          }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 10,); },
-                        ),
-                      );
-                    } else if (state is DoctorError) {
-                      return Center(child: Text(state.message));
-                    }
-                    return const SizedBox();
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ViewAllSpecialties()));
                   },
+                  child: const Text(
+                    "View all",
+                    style: TextStyle(fontSize: 18, color: Colors.blue),
+                  )),
+            ]),
+            const SizedBox(
+              height: 6,
+            ),
+            const SpecialtiesList(),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              width: double.infinity,
+              child: Image.asset(
+                  fit: BoxFit.fill,
+                  height: 150.h,
+                  "assets/images/Mask_group.png"),
+            ),
+            Row(children: [
+              const Expanded(
+                child: Text(
+                  "Doctors near you",
+                  style: TextStyle(fontSize: 20),
                 ),
-              )
-          
-          
-          
-          
-            ]
-          ),
+              ),
+              TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Veiw all",
+                    style: TextStyle(fontSize: 18, color: Colors.blue),
+                  )),
+            ]),
+            BlocListener<LocationCubit, LocationState>(
+              listener: (context, state) {
+                if (state is LocationAddressLoaded) {
+                  final lat = state.location.lat;
+                  final lng = state.location.lng;
+                  context.read<DoctorCubit>().loadDoctor();
+                }
+              },
+              child: BlocBuilder<DoctorCubit, DoctorState>(
+                builder: (context, state) {
+                  if (state is DoctorLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is DoctorLoaded) {
+                    final doctors = state.doctors;
+                    if (doctors.isEmpty) {
+                      return const Center(child: Text("No doctors found"));
+                    }
+                    return SizedBox(
+                      height: 350,
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: doctors.length,
+                        itemBuilder: (context, index) {
+                          final doc = doctors[index];
+                          return DoctorItem(
+                            doctor: doc,
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: 10,
+                          );
+                        },
+                      ),
+                    );
+                  } else if (state is DoctorError) {
+                    return Center(child: Text(state.message));
+                  }
+                  return const SizedBox();
+                },
+              ),
+            )
+          ]),
         ),
       ),
     );

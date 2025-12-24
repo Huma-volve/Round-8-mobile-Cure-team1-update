@@ -23,84 +23,89 @@ class LoginViewBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Form(
         key: cubit.formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(child: Image.asset(Assets.resourceImagesLogin)),
-            SizedBox(
-              height: 32.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'Enter your phone number',
-                  style: AppTextStyles.styleLarge24(context),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 32.h,
-            ),
-            PhoneInputExample(
-              controller: cubit.phoneController,
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            CustomeTextField(
-              text: 'Password',
-              isPassword: true,
-              perfixIcon: const Icon(
-                Icons.password_outlined,
-                color: Colors.grey,
-                size: 26,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 60,
               ),
-              controller: cubit.passwordController,
-            ),
-            SizedBox(
-              height: 32.h,
-            ),
-            CustomeButton(
-                text: 'Sign in with your Phone Number',
-                color: ColorsLight.primaryColor,
-                onTap: () {
-                  cubit.logUser();
-                }),
-            SizedBox(
-              height: 16.h,
-            ),
-            const DividerLogin(),
-            SizedBox(
-              height: 16.h,
-            ),
-            ButtonWithGoogle(
-              onTap: () {
-                context.go(AppRoute.navBar);
-              },
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Don’t have an account?   ',
-                  style: AppTextStyles.styleLarge16(context),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    GoRouter.of(context).pushReplacement(AppRoute.signupPage);
-                  },
-                  child: const Text(
-                    'Sign up',
-                    style: TextStyle(color: ColorsLight.primaryColor),
+              Center(child: Image.asset(Assets.resourceImagesLogin)),
+              SizedBox(
+                height: 32.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Enter your phone number',
+                    style: AppTextStyles.styleLarge24(context),
                   ),
-                )
-              ],
-            )
-          ],
+                ],
+              ),
+              SizedBox(
+                height: 32.h,
+              ),
+              PhoneInputExample(
+                controller: cubit.phoneController,
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              CustomeTextField(
+                text: 'Password',
+                isPassword: true,
+                perfixIcon: const Icon(
+                  Icons.password_outlined,
+                  color: Colors.grey,
+                  size: 26,
+                ),
+                controller: cubit.passwordController,
+              ),
+              SizedBox(
+                height: 32.h,
+              ),
+              CustomeButton(
+                  text: 'Sign in with your Phone Number',
+                  color: ColorsLight.primaryColor,
+                  onTap: () {
+                    cubit.logUser();
+                  }),
+              SizedBox(
+                height: 16.h,
+              ),
+              const DividerLogin(),
+              SizedBox(
+                height: 16.h,
+              ),
+              ButtonWithGoogle(
+                onTap: () {
+                  context.go(AppRoute.navBar);
+                },
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Don’t have an account?   ',
+                    style: AppTextStyles.styleLarge16(context),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      GoRouter.of(context).pushReplacement(AppRoute.signupPage);
+                    },
+                    child: const Text(
+                      'Sign up',
+                      style: TextStyle(color: ColorsLight.primaryColor),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -7,9 +7,9 @@ class LocationCubit extends Cubit<LocationState> {
   final GetUserAddress getUserAddress;
 
   LocationCubit(
-      this.getUserLocation,
-      this.getUserAddress,
-      ) : super(LocationInitial());
+    this.getUserLocation,
+    this.getUserAddress,
+  ) : super(LocationInitial());
 
   Future<void> fetchLocationAndAddress() async {
     emit(LocationLoading());
@@ -18,12 +18,11 @@ class LocationCubit extends Cubit<LocationState> {
       print("Before getUserLocation");
       final location = await getUserLocation();
       print("Location fetched: $location");
-      final address = await getUserAddress(lat: location.lat, lng: location.lng);
+      final address =
+          await getUserAddress(lat: location.lat, lng: location.lng);
       emit(LocationAddressLoaded(address: address, location: location));
 
-
       print("Address fetched: $address");
-
     } catch (e) {
       emit(LocationError("Failed to load location or address"));
     }

@@ -43,18 +43,27 @@ class _HomeTopSectionState extends State<HomeTopSection> {
                         const Icon(Icons.location_on_outlined, size: 16),
                         const SizedBox(width: 4),
                         TextButton(
-                          onPressed: () { final cubitState = context.read<LocationCubit>().state;
-                            if (cubitState is LocationAddressLoaded)
-                            { GoRouter.of(context).push(
-                            AppRoute.map, extra: cubitState.location, ); } },
-                          style: TextButton.styleFrom( padding: EdgeInsets.zero,
+                          onPressed: () {
+                            final cubitState =
+                                context.read<LocationCubit>().state;
+                            if (cubitState is LocationAddressLoaded) {
+                              GoRouter.of(context).push(
+                                AppRoute.map,
+                                extra: cubitState.location,
+                              );
+                            }
+                          },
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
                             minimumSize: const Size(0, 0),
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap, ),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
                           child: Text(
                             "${address.street}, ${address.city}",
                             style: const TextStyle(fontSize: 14),
                           ),
-                        ),                      ],
+                        ),
+                      ],
                     );
                   } else if (state is LocationError) {
                     return Text("Failed to fetch address: ${state.message}");
@@ -63,7 +72,6 @@ class _HomeTopSectionState extends State<HomeTopSection> {
                   }
                 },
               ),
-
             ],
           ),
         ),
