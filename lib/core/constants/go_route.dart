@@ -1,12 +1,20 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/map.dart' hide HomePage;
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
+import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
+import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
+import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
+import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/widget/histroychat.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_cubit/cubit/chatbody_cubit.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/add_review_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/book_apointmennt_.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/doctor_details_screen.dart';
@@ -21,11 +29,12 @@ import 'package:cure_team_1_update/features/payment/presentation/screens/cards_s
 import 'package:cure_team_1_update/features/payment/presentation/screens/payment_methods_screen.dart';
 import 'package:cure_team_1_update/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:cure_team_1_update/features/profile/presentation/screens/profile_screen.dart';
-import 'package:cure_team_1_update/features/settings/presentation/screens/faqs_screen.dart';
-import 'package:cure_team_1_update/features/settings/presentation/screens/password_management_screen.dart';
-import 'package:cure_team_1_update/features/settings/presentation/screens/privacy_policy_screen.dart';
-import 'package:cure_team_1_update/features/settings/presentation/screens/settings_screen.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view/screens/faqs_screen.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view/screens/password_management_screen.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view/screens/privacy_policy_screen.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view/screens/settings_screen.dart';
 import 'package:cure_team_1_update/features/splash/splash_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/Home/location/Domin/entities/user_location.dart';
@@ -92,7 +101,14 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.chatbody,
-        builder: (context, state) => const Chatbody(),
+        builder: (context, state) {
+          final conv = state.extra as Conversion;
+          return BlocProvider(
+            create: (context) =>
+                ChatCubit(getIt.get<Chatrepoa>())..getmassages(conv),
+            child: Chatbody(convers: conv),
+          );
+        },
       ),
 
       // Notifications
@@ -163,7 +179,7 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.faqsScreen,
-        builder: (context, state) => const FAQsScreen(),
+        builder: (context, state) => const FaqsScreen(),
       ),
       GoRoute(
         path: AppRoute.privacyPolicyScreen,

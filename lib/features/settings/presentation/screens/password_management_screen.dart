@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/custom_widgets.dart';
+import '../view_model/bloc/change_password_bloc.dart';
 
 class PasswordManagementScreen extends StatefulWidget {
   const PasswordManagementScreen({super.key});
@@ -23,9 +24,9 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
 
   @override
   void dispose() {
-    _bloc.currentPasswordController.dispose();
+   _bloc.currentPasswordController.dispose();
     _bloc.newPasswordController.dispose();
-    _bloc.confirmPasswordController.dispose();
+   _bloc.confirmPasswordController.dispose();
     super.dispose();
   }
 

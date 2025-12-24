@@ -1,14 +1,8 @@
 import 'dart:async';
-import 'package:cure_team_1_update/features/settings/data/models/edit_profile/change_password_request_body.dart';
-import 'package:cure_team_1_update/features/settings/data/models/edit_profile/change_password_response.dart';
 import 'package:cure_team_1_update/features/settings/data/repos/change_password_repo.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/bloc/change_password_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'change_password_event.dart';
-part 'change_password_state.dart';
-part 'change_password_bloc.freezed.dart';
 
 class ChangePasswordBloc
     extends Bloc<ChangePasswordEvent, ChangePasswordState> {
@@ -17,9 +11,6 @@ class ChangePasswordBloc
   }
 
   final ChangePasswordRepo _repo;
-  final currentPasswordController = TextEditingController();
-  final newPasswordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
   bool obscureCurrent = true;
   bool obscureNew = true;
   bool obscureConfirm = true;
@@ -37,7 +28,7 @@ class ChangePasswordBloc
 
     result.when(
       success: (ChangePasswordResponse) {
-        print('Edit profile successful: $ChangePasswordResponse');
+        print('change password successful: $ChangePasswordResponse');
         emit(ChangePasswordState.success(
             changePasswordResponse: ChangePasswordResponse));
       },
