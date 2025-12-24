@@ -20,9 +20,6 @@ class ChangePasswordBloc
   }
 
   final ChangePasswordRepo _repo;
-  final currentPasswordController = TextEditingController();
-  final newPasswordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
   bool obscureCurrent = true;
   bool obscureNew = true;
   bool obscureConfirm = true;
@@ -40,7 +37,7 @@ class ChangePasswordBloc
 
     result.when(
       success: (ChangePasswordResponse) {
-        print('Edit profile successful: $ChangePasswordResponse');
+        print('change password successful: $ChangePasswordResponse');
         emit(ChangePasswordState.success(
             changePasswordResponse: ChangePasswordResponse));
       },

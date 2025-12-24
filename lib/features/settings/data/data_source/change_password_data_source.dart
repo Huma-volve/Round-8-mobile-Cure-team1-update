@@ -16,19 +16,12 @@ class ChangePasswordDataSource {
     try {
       print('before');
       final response = await _api.put(
-        'https://round8-backend-team-one.huma-volve.com/api/profile/change-password',
-        {
-          "current_password": "12345678Aa@",
-          "new_password": "12345678aA@",
-          "new_password_confirmation": "12345678aA@"
-        },
-        // data.toJson(),
-        '86|DRpQSFEkDdBRnUvu07X4NL9EkpltLRonwzhofApD6a519424',
-      );
+          'https://round8-backend-team-one.huma-volve.com/api/profile/change-password',
+          data.toJson());
       print(
-          'EditProfileDataSource: Sending edit profile request with data: ${response.toString()}');
+          'ChangePasswordDataSource: Sending change password request with data: ${response.toString()}');
 
-      return response;
+      return ChangePasswordResponse.fromJson(response);
     } catch (e) {
       print(e);
     }

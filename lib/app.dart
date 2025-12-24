@@ -36,16 +36,16 @@ class MyApp extends StatelessWidget {
               ),
             ],
             child: OverlaySupport.global(
-              child: MaterialApp.router(
-              // child: MaterialApp(
+              // child: MaterialApp.router(
+              child: MaterialApp(
                 title: 'cure_team_1',
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                   useMaterial3: true,
                 ),
                 debugShowCheckedModeBanner: false,
-                // home: ProfileScreen(),
-                routerConfig: Approutes.router
+                home: ProfileScreen(),
+                // routerConfig: Approutes.router
               ),
             ),
           );

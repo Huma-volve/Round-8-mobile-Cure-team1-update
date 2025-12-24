@@ -8,7 +8,8 @@ class ApiInterceptor extends Interceptor {
     String? token = Cachehelper.getToken();
     print('-9899999999999$token');
     if (token != null) {
-      options.headers['Authorization'] = 'Bearer $token';
+      options.headers['Authorization'] =
+          'Bearer 206|lV3C5fm4Tp5NwBunQcDcVGRN3CsB6Lov1uSPXwF4d4622b42';
     }
     options.headers['Accept'] = 'application/json';
     handler.next(options);

@@ -13,17 +13,17 @@ class ApiServices {
   }
 
   post(endpoint, Map data) async {
-    Response respons = await _dio.post('$basURL$endpoint', data: data);
+    Response respons = await _dio.post('$endpoint', data: data);
     return respons.data;
   }
 
-  put(endpoint, Map data, token) async {
+  put(
+    endpoint,
+    Map data,
+  ) async {
     Response response = await _dio.put(
       '$endpoint',
       data: data,
-      options: Options(
-        headers: {'Authorization': 'Bearer $token'},
-      ),
     );
     return response.data;
   }

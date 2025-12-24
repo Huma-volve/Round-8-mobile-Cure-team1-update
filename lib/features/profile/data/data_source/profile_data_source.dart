@@ -22,8 +22,6 @@ class EditProfileDataSource {
           "phone": "+201125345129",
           "birthdate": "01-01-2002"
         },
-        // data.toJson(),
-        '126|DvafudnkSIrLEmqMQmjKaZeeEbw2ta3bheNYuk4K7ddecb6d',
       );
       print(
           'EditProfileDataSource: Sending edit profile request with data: ${response.toString()}');
