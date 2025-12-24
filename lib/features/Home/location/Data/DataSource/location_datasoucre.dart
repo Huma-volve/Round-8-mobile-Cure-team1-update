@@ -31,10 +31,14 @@ class LocationDataSource {
   }
 
   Future<Placemark> buildAddress(double lat, double lng) async {
-    if (!_localeInitialized) {
-      await setLocaleIdentifier('en');
-      _localeInitialized = true;
-    }
+    List placeMarks = await placemarkFromCoordinates(lat, lng);
+    final place = placeMarks.first;
+    final street = place.street ?? "";
+    final area = place.subLocality ?? "";
+    final city = place.locality ?? "";
+    print(street);
+    print(place);
+    print(city);
 
     final placeMarks = await placemarkFromCoordinates(lat, lng);
     final place = placeMarks.first;

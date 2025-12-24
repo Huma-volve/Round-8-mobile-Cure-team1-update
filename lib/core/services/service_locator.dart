@@ -2,6 +2,8 @@ import 'package:cure_team_1_update/core/services/api_services.dart';
 import 'package:cure_team_1_update/core/services/network/apiInterceptor%20.dart';
 import 'package:cure_team_1_update/features/Home/location/Data/repo/location_repository_impl.dart';
 import 'package:cure_team_1_update/features/Home/location/Domin/repositories/location_repository.dart';
+import 'package:cure_team_1_update/features/auth/login/domain/login_repo_impl.dart';
+import 'package:cure_team_1_update/features/auth/login/presentation/manage/login_cubit.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/datasource/remotdata/remotdata.dart';
 import 'package:dio/dio.dart';
@@ -52,4 +54,5 @@ Future<void> setup() async {
       getIt<GetUserAddress>(),
     ),
   );
+
 }

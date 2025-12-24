@@ -9,11 +9,19 @@ import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/custom_widgets.dart';
+<<<<<<< HEAD
 import '../../../settings/presentation/view/screens/settings_screen.dart';
 import '../../../payment/presentation/screens/payment_methods_screen.dart';
 import 'edit_profile_screen.dart';
 import '../../../settings/presentation/view/screens/faqs_screen.dart';
 import '../../../settings/presentation/view/screens/privacy_policy_screen.dart';
+=======
+import '../../../settings/presentation/screens/settings_screen.dart';
+import '../../../payment/presentation/screens/payment_methods_screen.dart';
+import 'edit_profile_screen.dart';
+import '../../../settings/presentation/screens/faqs_screen.dart';
+import '../../../settings/presentation/screens/privacy_policy_screen.dart';
+>>>>>>> origin/yasser
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

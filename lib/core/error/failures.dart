@@ -29,17 +29,30 @@ class Serverfailuer extends Failuer {
     }
   }
   factory Serverfailuer.badRespons(int statusCode, dynamic respons) {
-    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+    if (statusCode == 400 ||
+        statusCode == 401 ||
+        statusCode == 403 ||
+        statusCode == 422) {
       if (respons is String) {
         return Serverfailuer(respons);
       }
-      return Serverfailuer(respons['error']['message']);
+      if (respons is Map) {
+        if (respons.containsKey('message')) {
+          return Serverfailuer(respons['message']);
+        }
+        if (respons.containsKey('error') &&
+            respons['error'] is Map &&
+            respons['error'].containsKey('message')) {
+          return Serverfailuer(respons['error']['message']);
+        }
+      }
+      return Serverfailuer('Opps There was an Error,please try again!');
     } else if (statusCode == 404) {
-      return Serverfailuer('Your request not found,plase try later!');
+      return Serverfailuer('Your request not found,please try later!');
     } else if (statusCode == 500) {
-      return Serverfailuer('Internal Server error,plase try later!');
+      return Serverfailuer('Internal Server error,please try later!');
     } else {
-      return Serverfailuer('Opps There was an Error,plase try again!');
+      return Serverfailuer('Opps There was an Error,please try again!');
     }
   }
 }

@@ -87,7 +87,10 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.otpPage,
-        builder: (context, state) => const OtpPage(),
+        builder: (context, state) {
+          final phoneNum = state.extra as String;
+          return OtpPage(phoneNum: phoneNum);
+        },
       ),
       GoRoute(
         path: AppRoute.loginPage,
