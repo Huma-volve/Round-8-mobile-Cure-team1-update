@@ -21,10 +21,10 @@ import 'package:cure_team_1_update/features/payment/presentation/screens/cards_s
 import 'package:cure_team_1_update/features/payment/presentation/screens/payment_methods_screen.dart';
 import 'package:cure_team_1_update/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:cure_team_1_update/features/profile/presentation/screens/profile_screen.dart';
-import 'package:cure_team_1_update/features/settings/presentation/screens/faqs_screen.dart';
-import 'package:cure_team_1_update/features/settings/presentation/screens/password_management_screen.dart';
-import 'package:cure_team_1_update/features/settings/presentation/screens/privacy_policy_screen.dart';
-import 'package:cure_team_1_update/features/settings/presentation/screens/settings_screen.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view/screens/faqs_screen.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view/screens/password_management_screen.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view/screens/privacy_policy_screen.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view/screens/settings_screen.dart';
 import 'package:cure_team_1_update/features/splash/splash_screen.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
@@ -125,7 +125,6 @@ abstract class Approutes {
         },
       ),
 
-
       // Payment
       GoRoute(
         path: AppRoute.paymentScreenpaymentScreen,
@@ -165,7 +164,7 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.faqsScreen,
-        builder: (context, state) => const FAQsScreen(),
+        builder: (context, state) => const FaqsScreen(),
       ),
       GoRoute(
         path: AppRoute.privacyPolicyScreen,

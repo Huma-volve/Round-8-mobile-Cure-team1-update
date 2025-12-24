@@ -17,6 +17,15 @@ class ApiServices {
     return respons.data;
   }
 
+  postForLogout(
+    endpoint,
+  ) async {
+    Response respons = await _dio.post(
+      'https://round8-backend-team-one.huma-volve.com/api/profile/logout',
+    );
+    return respons.data;
+  }
+
   put(
     endpoint,
     Map data,
@@ -26,6 +35,11 @@ class ApiServices {
       data: data,
     );
     return response.data;
+  }
+
+  delete(endpoint) async {
+    Response respons = await _dio.delete('$basURL$endpoint');
+    return respons.data;
   }
 
   delet(endpoint, Map data) async {

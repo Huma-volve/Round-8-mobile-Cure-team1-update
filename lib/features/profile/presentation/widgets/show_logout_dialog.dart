@@ -2,7 +2,9 @@ import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/core/widgets/custom_widgets.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/logout/logout_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void showLogoutDialog(BuildContext context) {
@@ -47,7 +49,10 @@ void showLogoutDialog(BuildContext context) {
                   child: CustomButton(
                     text: 'Yes, Logout',
                     onPressed: () {
-                      Navigator.pop(context);
+                      context.read<LogoutBloc>().add(
+                            const EventLogout(),
+                          );
+                      // Navigator.pop(context);
                       // Perform logout implementation
                     },
                   ),
