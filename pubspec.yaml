@@ -9,6 +9,7 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
+  animate_do: ^4.2.0
   awesome_dialog: ^3.3.0
   bloc: ^8.1.2
   cached_network_image: ^3.4.1
@@ -16,7 +17,7 @@ dependencies:
   cross_file: ^0.3.5+1
   dartz: ^0.10.1
   date_picker_timeline: ^1.2.7
-
+  dio: ^5.9.0
   easy_date_timeline: ^2.0.9
   equatable: ^2.0.7
   flutter:
@@ -34,26 +35,25 @@ dependencies:
   intl: ^0.20.2
   intl_phone_number_input: ^0.7.5
   mobkit_dashed_border: ^0.0.8
+  overlay_support: ^2.1.0
   permission_handler: ^12.0.1
   pinput: ^6.0.1
   shared_preferences: ^2.5.4
   shimmer: ^3.0.0
   smooth_page_indicator: ^2.0.1
-  dio: ^5.9.0
-  animate_do: ^4.2.0
-  overlay_support: ^2.1.0
   skeletonizer: ^2.1.2
  
+  video_player: ^2.10.1
 
 dev_dependencies:
+  build_runner: ^2.4.8
   device_preview: 1.2.0
   flutter_lints: ^3.0.0
-  json_serializable: ^6.8.0
-
-  freezed: ^2.4.7
-  build_runner: ^2.4.8
   flutter_test:
     sdk: flutter
+
+  freezed: ^2.4.7
+  json_serializable: ^6.8.0
 
   very_good_analysis: ^5.1.0
 

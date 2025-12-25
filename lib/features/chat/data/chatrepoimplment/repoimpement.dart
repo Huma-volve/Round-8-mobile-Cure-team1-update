@@ -12,7 +12,7 @@ class Repoimplement extends Chatrepoa {
   Remotdata remotdata;
   Repoimplement(this.remotdata);
   List<Conversion> conv = [];
-  List<Historymasseges> massa = [];
+
   @override
   Future<Either<Serverfailuer, List<Conversion>>> featchconversion(
       Chattab tab) async {
@@ -47,8 +47,23 @@ class Repoimplement extends Chatrepoa {
   Future<Either<Serverfailuer, List<Historymasseges>>> getHistorymassages(
       conver) async {
     try {
-      massa = await remotdata.getHistorymassages(conver);
+      var massa = await remotdata.getHistorymassages(conver);
       return right(massa);
+    } catch (e) {
+      if (e is DioException) {
+        return left(Serverfailuer.forDioExcption(e));
+      } else {
+        return left(Serverfailuer(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Serverfailuer, List<Historymasseges>>> sendmassages(
+      conversion_id, data) async {
+    try {
+      var respons = await remotdata.sendmassages(conversion_id, data);
+      return right(respons);
     } catch (e) {
       if (e is DioException) {
         return left(Serverfailuer.forDioExcption(e));

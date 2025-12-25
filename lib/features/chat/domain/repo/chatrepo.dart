@@ -11,4 +11,6 @@ abstract class Chatrepoa {
   Future<Either<Serverfailuer, List<Conversion>>> searchconversion(convName);
   Future<Either<Serverfailuer, List<Historymasseges>>> getHistorymassages(
       Conversion conv);
+  Future<Either<Serverfailuer, List<Historymasseges>>> sendmassages(
+      conversion_id, body);
 }

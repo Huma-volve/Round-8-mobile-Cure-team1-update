@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 
 import 'package:cure_team_1_update/core/services/service_locator.dart';
+=======
+import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/services/service_locator.dart';
+import 'package:cure_team_1_update/core/utils/assets.dart';
+>>>>>>> mafdysaad
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/histroychat.dart';
@@ -40,7 +46,11 @@ class Notificationmassage extends StatelessWidget {
                           builder: (_) => BlocProvider(
                             create: (_) =>
                                 ChatbodyCubit(getIt.get<Repoimplement>())
+<<<<<<< HEAD
                                   ..getmassages(state.conversionlist[indx]),
+=======
+                                  ..startPolling(state.conversionlist[indx]),
+>>>>>>> mafdysaad
                             child:
                                 Chatbody(convers: state.conversionlist[indx]),
                           ),

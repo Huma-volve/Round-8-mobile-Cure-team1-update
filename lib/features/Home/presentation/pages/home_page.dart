@@ -1,12 +1,21 @@
+<<<<<<< HEAD
 import 'dart:math' as math;
+=======
+>>>>>>> mafdysaad
 import 'package:cure_team_1_update/features/Home/presentation/pages/search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/veiw_all_specialties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+<<<<<<< HEAD
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../Data/models/doctor_model.dart';
 import '../../location/Domin/entities/user_location.dart';
+=======
+
+import '../../Doctor/Presentation/cubit/doctor_cubit.dart';
+import '../../Doctor/Presentation/state/doctor_state.dart';
+>>>>>>> mafdysaad
 import '../../location/presentation/cubit/location_cubit.dart';
 import '../../location/presentation/state/location_state.dart';
 import '../pages/doctors_list_page.dart';
@@ -23,8 +32,17 @@ class HomePage extends StatelessWidget {
   }
 }
 
+<<<<<<< HEAD
 class _HomePageContent extends StatelessWidget {
   const _HomePageContent();
+=======
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<LocationCubit>().fetchLocationAndAddress();
+  }
+>>>>>>> mafdysaad
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +50,10 @@ class _HomePageContent extends StatelessWidget {
       color: Colors.white,
       child: SafeArea(
         child: SingleChildScrollView(
+<<<<<<< HEAD
           padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 27),
+=======
+>>>>>>> mafdysaad
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const HomeTopSection(),
@@ -41,6 +62,7 @@ class _HomePageContent extends StatelessWidget {
             ),
             TextFormField(
               onTap: () {
+<<<<<<< HEAD
                 final locationCubit = context.read<LocationCubit>();
                 Navigator.push(
                   context,
@@ -51,6 +73,12 @@ class _HomePageContent extends StatelessWidget {
                     ),
                   ),
                 );
+=======
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SearchPage()));
+>>>>>>> mafdysaad
               },
               decoration: InputDecoration(
                   hintText: "Search for specialty, doctor..",
@@ -74,6 +102,7 @@ class _HomePageContent extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const ViewAllSpecialties()));
+<<<<<<< HEAD
                   },
                   child: const Text(
                     "View all",
@@ -118,10 +147,43 @@ class _HomePageContent extends StatelessWidget {
                     );
                   },
                   child: const Text(
+=======
+                  },
+                  child: const Text(
+                    "View all",
+                    style: TextStyle(fontSize: 18, color: Colors.blue),
+                  )),
+            ]),
+            const SizedBox(
+              height: 6,
+            ),
+            const SpecialtiesList(),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              width: double.infinity,
+              child: Image.asset(
+                  fit: BoxFit.fill,
+                  height: 150.h,
+                  "assets/images/Mask_group.png"),
+            ),
+            Row(children: [
+              const Expanded(
+                child: Text(
+                  "Doctors near you",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              TextButton(
+                  onPressed: () {},
+                  child: const Text(
+>>>>>>> mafdysaad
                     "Veiw all",
                     style: TextStyle(fontSize: 18, color: Colors.blue),
                   )),
             ]),
+<<<<<<< HEAD
             BlocBuilder<LocationCubit, LocationState>(
               builder: (context, state) {
                 if (state is LocationLoading) {
@@ -161,6 +223,50 @@ class _HomePageContent extends StatelessWidget {
                 }
                 return const SizedBox();
               },
+=======
+            BlocListener<LocationCubit, LocationState>(
+              listener: (context, state) {
+                if (state is LocationAddressLoaded) {
+                  final lat = state.location.lat;
+                  final lng = state.location.lng;
+                  context.read<DoctorCubit>().loadDoctor();
+                }
+              },
+              child: BlocBuilder<DoctorCubit, DoctorState>(
+                builder: (context, state) {
+                  if (state is DoctorLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is DoctorLoaded) {
+                    final doctors = state.doctors;
+                    if (doctors.isEmpty) {
+                      return const Center(child: Text("No doctors found"));
+                    }
+                    return SizedBox(
+                      height: 350,
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: doctors.length,
+                        itemBuilder: (context, index) {
+                          final doc = doctors[index];
+                          return DoctorItem(
+                            doctor: doc,
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(
+                            height: 10,
+                          );
+                        },
+                      ),
+                    );
+                  } else if (state is DoctorError) {
+                    return Center(child: Text(state.message));
+                  }
+                  return const SizedBox();
+                },
+              ),
+>>>>>>> mafdysaad
             )
           ]),
         ),

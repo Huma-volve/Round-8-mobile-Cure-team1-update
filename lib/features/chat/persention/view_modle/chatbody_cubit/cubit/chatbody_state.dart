@@ -13,9 +13,13 @@ final class Lodinghistory extends ChatbodyState {}
 final class Successhistory extends ChatbodyState {
   final List<Historymasseges> historymassages;
   const Successhistory(this.historymassages);
+  @override
+  List<Object> get props => [historymassages];
 }
 
 final class Fuailerhistory extends ChatbodyState {
   final Serverfailuer error;
   const Fuailerhistory(this.error);
+  @override
+  List<Object> get props => [];
 }

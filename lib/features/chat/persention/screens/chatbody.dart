@@ -5,6 +5,11 @@ import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversio
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/abpperchatbody.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/chatmassges.dart';
 
+<<<<<<< HEAD
+=======
+import 'package:cure_team_1_update/features/chat/persention/screens/widget/imageprofile.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+>>>>>>> mafdysaad
 
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_cubit/cubit/chatbody_cubit.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +82,14 @@ class _ChatbodyState extends State<Chatbody> {
                                   ],
                                 ),
                               ),
-                              onfieldsumitted: (value) {
+                              onfieldsumitted: (value) async {
+                                context.read<ChatbodyCubit>().sendmassge(
+                                    widget.convers.id,
+                                    {"body": value, "type": "text"});
+                                context
+                                    .read<ChatbodyCubit>()
+                                    .getmassages(widget.convers);
+
                                 controller.clear();
                                 scroll.animateTo(0,
                                     duration: const Duration(seconds: 1),

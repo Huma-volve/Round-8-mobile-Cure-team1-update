@@ -3,7 +3,7 @@ import 'package:cure_team_1_update/features/Booking/data/remote_data_source/book
 import 'package:cure_team_1_update/features/Booking/data/remote_data_source/booking_remote_data_source_impl.dart';
 import 'package:cure_team_1_update/features/Booking/data/repo/my_book_repo_implement.dart';
 import 'package:cure_team_1_update/features/Booking/domain/repo/my_book_repo.dart';
-// import 'package:cure_team_1_update/core/services/network/apiInterceptor%20.dart';
+
 import 'package:cure_team_1_update/features/Home/location/Data/repo/location_repository_impl.dart';
 import 'package:cure_team_1_update/features/Home/location/Domin/repositories/location_repository.dart';
 import 'package:cure_team_1_update/features/chat/data/datasource/remotdata/remotdata.dart';
@@ -13,19 +13,31 @@ import 'package:cure_team_1_update/features/doctor_details/data/repo/create_book
 import 'package:cure_team_1_update/features/doctor_details/domain/repo/create_book_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:cure_team_1_update/features/auth/login/domain/login_repo_impl.dart';
+import 'package:cure_team_1_update/features/auth/login/presentation/manage/login_cubit.dart';
+import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
+import 'package:cure_team_1_update/features/chat/data/datasource/remotdata/remotdata.dart';
+import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/profile/data/data_source/profile_data_source.dart';
+import 'package:cure_team_1_update/features/profile/data/repos/edit_profile_repo.dart';
+import 'package:cure_team_1_update/features/profile/presentation/bloc/bloc/edit_profile_bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+
 import '../../features/Home/location/Data/DataSource/location_datasoucre.dart';
 import '../../features/Home/location/Domin/useCase/get_user_location.dart';
 import '../../features/Home/location/presentation/cubit/location_cubit.dart';
 
-
 final getIt = GetIt.instance;
 
 Future<void> setup() async {
-
   getIt.registerSingleton<Dio>(Dio());
   getIt.registerSingleton<ApiServices>(ApiServices(getIt.get<Dio>()));
- getIt.registerSingleton<BookingRemoteDataSource>(BookingRemoteDataSourceImpl(dio: getIt<Dio>()));
-   getIt.registerSingleton<MyBookRepo>(MyBookRepoImplement(bookingRemoteDataSource: getIt<BookingRemoteDataSource>()));
+  getIt.registerSingleton<BookingRemoteDataSource>(
+      BookingRemoteDataSourceImpl(dio: getIt<Dio>()));
+  getIt.registerSingleton<MyBookRepo>(MyBookRepoImplement(
+      bookingRemoteDataSource: getIt<BookingRemoteDataSource>()));
   // Dio
   // getIt.registerLazySingleton<Dio>(() {
   //   final dio = Dio();
@@ -38,11 +50,27 @@ Future<void> setup() async {
   //   () => ApiServices(getIt<Dio>()),
   // );
 
-  // Chat Feature
-  getIt.registerLazySingleton<Remotdata>(
-    () => immplementRemotdata(getIt<ApiServices>()),
-  );
+  //object from ApiServices
+  getIt.registerSingleton<ApiServices>(
+      ApiServices(getIt.get<Dio>()..interceptors.add(ApiInterceptor())));
+  getIt.registerSingleton<Repoimplement>(
+      Repoimplement(immplementRemotdata(getIt.get<ApiServices>())));
+  getIt.registerSingleton<ChatCubit>(ChatCubit(getIt.get<Repoimplement>()));
+  getIt.registerSingleton<LoginRepoImpl>(
+      LoginRepoImpl(getIt.get<ApiServices>()));
 
+  getIt.registerSingleton<LoginCubit>(
+      LoginCubit(loginRepo: getIt.get<LoginRepoImpl>()));
+
+  // getIt.registerSingleton<OtpRepo>(OtpRepoImpl(getIt.get<ApiServices>()));
+  // getIt
+  //     .registerFactory<OtpCubit>(() => OtpCubit(otpRepo: getIt.get<OtpRepo>()));
+
+  //edit profile
+  getIt
+    ..registerFactory(() => EditProfileBloc(getIt()))
+    ..registerLazySingleton(() => EditProfileRepo(getIt()))
+    ..registerLazySingleton(() => EditProfileDataSource(getIt()));
   // Location Feature
   getIt.registerLazySingleton<LocationDataSource>(
     () => LocationDataSource(),
@@ -67,13 +95,12 @@ Future<void> setup() async {
     ),
   );
 
-  
-
-  
   // getIt.registerSingleton<Dio>(Dio());
   // getIt.registerSingleton<ApiServices>(ApiServices(getIt.get<Dio>()));
 //  getIt.registerSingleton<BookingRemoteDataSource>(BookingRemoteDataSourceImpl(dio: getIt<Dio>()));
   //  getIt.registerSingleton<MyBookRepo>(MyBookRepoImplement(bookingRemoteDataSource: getIt<BookingRemoteDataSource>()));
-    getIt.registerSingleton<CreateBookRemoteDataSource>(CreateBookRemoteDataSourceImp());
-   getIt.registerSingleton<CreateBookRepo>(CreateBookRepoImp(createBookRemoteDataSource: getIt<CreateBookRemoteDataSource>()));
+  getIt.registerSingleton<CreateBookRemoteDataSource>(
+      CreateBookRemoteDataSourceImp());
+  getIt.registerSingleton<CreateBookRepo>(CreateBookRepoImp(
+      createBookRemoteDataSource: getIt<CreateBookRemoteDataSource>()));
 }
