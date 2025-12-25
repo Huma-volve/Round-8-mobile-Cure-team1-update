@@ -5,7 +5,6 @@ import 'package:cure_team_1_update/core/utils/chattab.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
 import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_cubit/cubit/chatbody_cubit.dart';
 
 import 'package:equatable/equatable.dart';
 
@@ -18,7 +17,7 @@ class ChatCubit extends Cubit<ChatState> {
   }
   Future<void> getconv(Chattab tab) async {
     await Cachehelper.cacheToken(
-        "253|VxSP5Ki4JdYXVV8iOsCEPgp3C917iT0HaWmQVwV18e08fcfb");
+        "6|U5sBIM9yoiYrdqFr6gPIGYtR7LtF68QwfQLZXhs84a531f34");
     emit(Lodingchat());
     var result = await chatrepoa.featchconversion(tab);
     result.fold((faluir) => emit(Fuailerchat(faluir)),
