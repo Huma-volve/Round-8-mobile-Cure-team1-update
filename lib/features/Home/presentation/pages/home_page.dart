@@ -1,21 +1,13 @@
-<<<<<<< HEAD
 import 'dart:math' as math;
-=======
->>>>>>> mafdysaad
+
+import 'package:cure_team_1_update/features/Home/Data/models/doctor_model.dart';
+import 'package:cure_team_1_update/features/Home/location/Domin/entities/user_location.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/veiw_all_specialties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-<<<<<<< HEAD
 import 'package:skeletonizer/skeletonizer.dart';
-import '../../Data/models/doctor_model.dart';
-import '../../location/Domin/entities/user_location.dart';
-=======
-
-import '../../Doctor/Presentation/cubit/doctor_cubit.dart';
-import '../../Doctor/Presentation/state/doctor_state.dart';
->>>>>>> mafdysaad
 import '../../location/presentation/cubit/location_cubit.dart';
 import '../../location/presentation/state/location_state.dart';
 import '../pages/doctors_list_page.dart';
@@ -32,17 +24,12 @@ class HomePage extends StatelessWidget {
   }
 }
 
-<<<<<<< HEAD
-class _HomePageContent extends StatelessWidget {
-  const _HomePageContent();
-=======
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
     context.read<LocationCubit>().fetchLocationAndAddress();
   }
->>>>>>> mafdysaad
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +37,6 @@ class _HomePageState extends State<HomePage> {
       color: Colors.white,
       child: SafeArea(
         child: SingleChildScrollView(
-<<<<<<< HEAD
-          padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 27),
-=======
->>>>>>> mafdysaad
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const HomeTopSection(),
@@ -62,23 +45,10 @@ class _HomePageState extends State<HomePage> {
             ),
             TextFormField(
               onTap: () {
-<<<<<<< HEAD
-                final locationCubit = context.read<LocationCubit>();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => BlocProvider.value(
-                      value: locationCubit,
-                      child: const SearchPage(),
-                    ),
-                  ),
-                );
-=======
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const SearchPage()));
->>>>>>> mafdysaad
               },
               decoration: InputDecoration(
                   hintText: "Search for specialty, doctor..",
@@ -102,52 +72,6 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const ViewAllSpecialties()));
-<<<<<<< HEAD
-                  },
-                  child: const Text(
-                    "View all",
-                    style: TextStyle(fontSize: 18, color: Colors.blue),
-                  )),
-            ]),
-            const SizedBox(
-              height: 6,
-            ),
-            const SpecialtiesList(),
-            const SizedBox(
-              height: 5,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Image.asset(
-                  fit: BoxFit.fill,
-                  height: 150.h,
-                  "assets/images/Mask_group.png"),
-            ),
-            Row(children: [
-              const Expanded(
-                child: Text(
-                  "Doctors near you",
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              TextButton(
-                  onPressed: () {
-                    final state = context.read<LocationCubit>().state;
-                    final doctors = state is LocationAddressLoaded
-                        ? _nearbyDoctors(state.location)
-                        : doctorsList;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => DoctorsListPage(
-                          title: 'Doctors near you',
-                          doctors: doctors,
-                        ),
-                      ),
-                    );
-                  },
-                  child: const Text(
-=======
                   },
                   child: const Text(
                     "View all",
@@ -178,52 +102,10 @@ class _HomePageState extends State<HomePage> {
               TextButton(
                   onPressed: () {},
                   child: const Text(
->>>>>>> mafdysaad
                     "Veiw all",
                     style: TextStyle(fontSize: 18, color: Colors.blue),
                   )),
             ]),
-<<<<<<< HEAD
-            BlocBuilder<LocationCubit, LocationState>(
-              builder: (context, state) {
-                if (state is LocationLoading) {
-                  return const _DoctorSkeletonList();
-                } else if (state is LocationAddressLoaded) {
-                  final doctors = _nearbyDoctors(state.location);
-                  if (doctors.isEmpty) {
-                    return const Text('No doctors found.');
-                  }
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: doctors.length,
-                    itemBuilder: (context, index) {
-                      return DoctorItem(doctor: doctors[index]);
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 12);
-                    },
-                  );
-                } else if (state is LocationError) {
-                  final doctors = doctorsList;
-                  if (doctors.isEmpty) {
-                    return const Text('No doctors found.');
-                  }
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: doctors.length,
-                    itemBuilder: (context, index) {
-                      return DoctorItem(doctor: doctors[index]);
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 12);
-                    },
-                  );
-                }
-                return const SizedBox();
-              },
-=======
             BlocListener<LocationCubit, LocationState>(
               listener: (context, state) {
                 if (state is LocationAddressLoaded) {
@@ -266,7 +148,6 @@ class _HomePageState extends State<HomePage> {
                   return const SizedBox();
                 },
               ),
->>>>>>> mafdysaad
             )
           ]),
         ),

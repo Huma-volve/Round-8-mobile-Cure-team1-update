@@ -5,10 +5,6 @@ import 'package:cure_team_1_update/core/utils/chattab.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
 import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
-<<<<<<< HEAD
-
-=======
->>>>>>> mafdysaad
 
 import 'package:equatable/equatable.dart';
 
