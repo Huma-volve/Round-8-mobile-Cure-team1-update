@@ -34,9 +34,9 @@ class HomeTopSection extends StatelessWidget {
               BlocBuilder<LocationCubit, LocationState>(
                 builder: (context, state) {
                   if (state is LocationLoading) {
-                    return Skeletonizer(
+                    return const Skeletonizer(
                       child: Row(
-                        children: const [
+                        children: [
                           Icon(Icons.location_on_outlined, size: 16),
                           SizedBox(width: 4),
                           Text('Loading location'),

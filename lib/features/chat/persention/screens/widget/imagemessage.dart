@@ -1,15 +1,16 @@
+import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
 import 'package:flutter/material.dart';
 
 class ImageMessageWidget extends StatelessWidget {
-  final String imageUrl;
+  final Historymasseges message;
 
-  const ImageMessageWidget({super.key, required this.imageUrl});
+  const ImageMessageWidget({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
-      child: Image.network(imageUrl),
+      child: Image.network(message.body!),
     );
   }
 }

@@ -17,6 +17,7 @@ class Chatmassges extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        reverse: true,
         controller: scroll,
         itemCount: list.length,
         itemBuilder: (context, index) {

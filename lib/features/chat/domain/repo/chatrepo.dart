@@ -13,6 +13,6 @@ abstract class Chatrepoa {
   Future<Either<Serverfailuer, List<Conversion>>> searchconversion(convName);
   Future<Either<Serverfailuer, List<Historymasseges>>> getHistorymassages(
       Conversion conv);
-  List<Conversion>? getCachedConversations(Chattab tab);
-  List<Historymasseges>? getCachedMessages(int conversationId);
+  Future<Either<Serverfailuer, List<Historymasseges>>> sendmassages(
+      conversionId, body);
 }

@@ -38,8 +38,6 @@ class LocationDataSource {
     print(street);
     print(place);
     print(city);
-
-    await placemarkFromCoordinates(lat, lng);
     return place;
   }
 }

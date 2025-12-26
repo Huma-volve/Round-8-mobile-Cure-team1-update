@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cure_team_1_update/core/error/failures.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
 import 'package:cure_team_1_update/core/utils/chattab.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
@@ -13,28 +14,15 @@ class ChatCubit extends Cubit<ChatState> {
   Chatrepoa chatrepoa;
   int _requestId = 0;
   ChatCubit(this.chatrepoa) : super(ChatCubitInitial()) {
-    getconv(Chattab.all);
+    getconv(Chattab.all, forceRefresh: true);
   }
-  Future<void> getconv(Chattab tab, {bool forceRefresh = false}) async {
-    final requestId = ++_requestId;
-    final cached = chatrepoa.getCachedConversations(tab);
-    final hasCache = cached != null && cached.isNotEmpty;
-    if (!forceRefresh && hasCache) {
-      emit(Successchat(List<Conversion>.from(cached)));
-    } else {
-      emit(Lodingchat());
-    }
-    final result = forceRefresh
-        ? await chatrepoa.refreshConversations(tab)
-        : await chatrepoa.featchconversion(tab);
-    if (requestId != _requestId) {
-      return;
-    }
-    result.fold((faluir) {
-      if (!hasCache) {
-        emit(Fuailerchat(faluir));
-      }
-    }, (conv) => emit(Successchat(conv)));
+  Future<void> getconv(Chattab tab, {required bool forceRefresh}) async {
+    await Cachehelper.cacheToken(
+        "6|U5sBIM9yoiYrdqFr6gPIGYtR7LtF68QwfQLZXhs84a531f34");
+    emit(Lodingchat());
+    var result = await chatrepoa.featchconversion(tab);
+    result.fold((faluir) => emit(Fuailerchat(faluir)),
+        (conv) => emit(Successchat(conv)));
   }
 
   Future<void> search(String nameconv) async {
@@ -49,7 +37,6 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   Future<void> getmassages(Conversion conver) async {
-    emit(Lodingchat());
     var reslut = await chatrepoa.getHistorymassages(conver);
     reslut.fold((faluir) => emit(Fuailerchat(faluir)),
         (conv) => emit(Successchatbody(conv)));

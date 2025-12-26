@@ -1,12 +1,14 @@
+
 import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/histroychat.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_cubit/cubit/chatbody_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../../view_modle/chat_cubit/chat_cubit.dart';
-import '../chatbody.dart';
+
 
 class Notificationmassage extends StatelessWidget {
   const Notificationmassage({super.key});

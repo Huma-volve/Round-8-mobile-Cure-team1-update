@@ -10,6 +10,8 @@ abstract class Remotdata {
   Future<List<Conversion>> featchconversion(Chattab tab);
   Future<List<Conversion>> searchconversion(convName);
   Future<List<Historymasseges>> getHistorymassages(Conversion conv);
+  Future<List<Historymasseges>> sendmassages(
+      int conversionId, Map<String, dynamic> data);
 }
 
 class immplementRemotdata extends Remotdata {
@@ -17,6 +19,7 @@ class immplementRemotdata extends Remotdata {
   immplementRemotdata(
     this.apiServices,
   );
+  List<Historymasseges> messages = [];
   @override
   Future<List<Conversion>> featchconversion(tab) async {
     String endpoint = _endpointbytab(tab);
@@ -35,9 +38,20 @@ class immplementRemotdata extends Remotdata {
   @override
   Future<List<Historymasseges>> getHistorymassages(conve) async {
     var respons = await apiServices.get("conversations/${conve.id}");
-    List<Historymasseges> massages =
-        parseData<Historymasseges>(respons, Historymasseges.fromJson);
-    return Future.value(massages);
+    print('mmmmmmmmmmmmmmmmmmm$respons');
+    messages.clear();
+    messages
+        .addAll(parseData<Historymasseges>(respons, Historymasseges.fromJson));
+    return Future.value(messages);
+  }
+
+  @override
+  Future<List<Historymasseges>> sendmassages(conversionId, data) async {
+    print('beforrrrrrrrrrrrrrrr');
+
+    await apiServices.post("conversations/$conversionId/messages", data);
+
+    return Future.value(messages);
   }
 }
 

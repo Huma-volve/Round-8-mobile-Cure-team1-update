@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 double responsive_size(context, {required fontsize}) {
   double scalfactor = get_scalfactor(context);
   double responsiveSize = fontsize * scalfactor;
-  double lowerLimit = fontsize * .6;
+  double lowerLimit = fontsize * .8;
   double upperLimit = fontsize * 1.2;
   return responsiveSize.clamp(lowerLimit, upperLimit);
 }

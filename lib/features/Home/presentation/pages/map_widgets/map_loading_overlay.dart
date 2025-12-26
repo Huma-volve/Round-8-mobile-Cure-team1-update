@@ -8,22 +8,22 @@ class MapLoadingOverlay extends StatelessWidget {
     return Positioned.fill(
       child: Container(
         color: Colors.white.withOpacity(0.9),
-        child: Center(
+        child: const Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 36,
                 backgroundColor: Color(0xFFE7E7E7),
                 child: Icon(Icons.person, size: 32, color: Colors.white),
               ),
-              const SizedBox(height: 16),
-              const Text(
+              SizedBox(height: 16),
+              Text(
                 'Loading location',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
-              const SizedBox(height: 12),
-              const SizedBox(
+              SizedBox(height: 12),
+              SizedBox(
                 width: 28,
                 height: 28,
                 child: CircularProgressIndicator(strokeWidth: 2),

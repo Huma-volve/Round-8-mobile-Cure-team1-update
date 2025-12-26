@@ -1,5 +1,8 @@
 import 'package:cure_team_1_update/core/function/helperfunction.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/widget/imagemessage.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/widget/textmessage.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/widget/videomessage.dart';
 import 'package:flutter/material.dart';
 
 class BubbleFreind extends StatelessWidget {
@@ -25,21 +28,16 @@ class BubbleFreind extends StatelessWidget {
                 topRight: Radius.circular(28),
                 bottomLeft: Radius.circular(28))),
         child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Wrap(children: [
-            Text(
-              body,
-              textAlign: TextAlign.start,
-              style: const TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            if (timeText.isNotEmpty)
-              Text(
-                textAlign: TextAlign.start,
-                timeText,
-                style: const TextStyle(color: Colors.white),
-              )
-          ]),
-        ),
+            padding: const EdgeInsets.all(10),
+            child: message.type == 'text'
+                ? Textmessage(
+                    message: message,
+                  )
+                : message.type == 'video'
+                    ? BubbleVideo(
+                        message: message,
+                      )
+                    : ImageMessageWidget(message: message)),
       ),
     );
   }

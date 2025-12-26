@@ -1,11 +1,14 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/features/Booking/domain/enums/booking_enum.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
-import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
-import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/screen/update_booking_screen.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
+import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/map.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
 import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
+import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/add_review_screen.dart';
@@ -61,16 +64,15 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.myBookingScreen,
-        builder: (context, state) => const NavBar(initialIndex: 1),
+        builder: (context, state) => const MyBookingScreen(),
       ),
       GoRoute(
-        path: AppRoute.myBookingitemSsceen,
+        path: AppRoute.updateMyBookingSceen,
         builder: (context, state) {
-          final mybokkingModel = state.extra as MybookingModel;
-          return MyBookItemScreen(
-            mybookingModel: mybokkingModel,
-          );
-        },
+          BookingEnum bookingStatus =state.extra as BookingEnum;
+        return  UpdateMyBookingScreen(bookingStatus: bookingStatus );
+        }
+        
       ),
 
       // Auth
@@ -93,7 +95,7 @@ abstract class Approutes {
       // Chat
       GoRoute(
         path: AppRoute.chat,
-        builder: (context, state) => const NavBar(initialIndex: 2),
+        builder: (context, state) => const Chat(),
       ),
       GoRoute(
         path: AppRoute.chatbody,
@@ -101,7 +103,7 @@ abstract class Approutes {
           final conv = state.extra as Conversion;
           return BlocProvider(
             create: (context) =>
-                ChatCubit(getit.get<Chatrepoa>())..getmassages(conv),
+                ChatCubit(getIt.get<Chatrepoa>())..getmassages(conv),
             child: Chatbody(convers: conv),
           );
         },
@@ -122,11 +124,11 @@ abstract class Approutes {
       // Nav & Home
       GoRoute(
         path: AppRoute.navBar,
-        builder: (context, state) => const NavBar(initialIndex: 0),
+        builder: (context, state) => const NavBar(),
       ),
       GoRoute(
         path: AppRoute.home,
-        builder: (context, state) => const NavBar(initialIndex: 0),
+        builder: (context, state) => const HomePage(),
       ),
       GoRoute(
         path: AppRoute.map,
@@ -153,11 +155,11 @@ abstract class Approutes {
       // Profile
       GoRoute(
         path: AppRoute.ProfileScreen,
-        builder: (context, state) => const NavBar(initialIndex: 3),
+        builder: (context, state) => const ProfileScreen(),
       ),
       GoRoute(
         path: AppRoute.profileScreen,
-        builder: (context, state) => const NavBar(initialIndex: 3),
+        builder: (context, state) => const ProfileScreen(),
       ),
       GoRoute(
         path: AppRoute.editProfileScreen,
