@@ -31,11 +31,8 @@ class RegisterRepoImpl implements SignupRepo {
       return right(SignupModel.fromJson(data));
     } catch (e) {
       if (e is DioException) {
-        print('DioException: ${e.toString()}');
-        print('DioException response data: ${e.response?.data}');
         return left(Serverfailuer.forDioExcption(e));
       }
-      print('Generic Exception: ${e.toString()}');
       return left(Serverfailuer(e.toString()));
     }
   }

@@ -90,7 +90,7 @@ class LoginViewBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Don’t have an account?   ',
+                    "Don't have an account?   ",
                     style: AppTextStyles.styleLarge16(context),
                   ),
                   GestureDetector(

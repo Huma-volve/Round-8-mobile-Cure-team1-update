@@ -18,11 +18,11 @@ class SignupCubit extends Cubit<SignupState> {
   SignupCubit({required this.registerRepo}) : super(SignupInitial());
 
   Future<void> registUser() async {
-    if (!formKey.currentState!.validate()) return;
+    if (formKey.currentState?.validate() != true) return;
 
     emit(SignupLoading());
 
-    var result = await registerRepo.signupUser(
+    final result = await registerRepo.signupUser(
       fullName: nameController.text.trim(),
       phoneNumber: phoneController.text.trim(),
       email: emailController.text.trim(),
@@ -35,25 +35,34 @@ class SignupCubit extends Cubit<SignupState> {
         emit(SignupError(error: failure.errormessage));
       },
       (signupModel) async {
-        print(signupModel.message);
         final token = signupModel.token;
         if (token != null && token.isNotEmpty) {
           await Cachehelper.cacheToken(token);
         }
         final cachedName = nameController.text.trim();
         if (cachedName.isNotEmpty) {
-          Cachehelper.cacheUserName(cachedName);
+          await Cachehelper.cacheUserName(cachedName);
         }
         final cachedEmail = emailController.text.trim();
         if (cachedEmail.isNotEmpty) {
-          Cachehelper.cacheUserEmail(cachedEmail);
+          await Cachehelper.cacheUserEmail(cachedEmail);
         }
         final cachedPhone = phoneController.text.trim();
         if (cachedPhone.isNotEmpty) {
-          Cachehelper.cacheUserPhone(cachedPhone);
+          await Cachehelper.cacheUserPhone(cachedPhone);
         }
         emit(SignupSuccess(message: signupModel.message ?? 'Unknown message'));
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    phoneController.dispose();
+    emailController.dispose();
+    nameController.dispose();
+    passwordController.dispose();
+    passwordConfirmController.dispose();
+    return super.close();
   }
 }

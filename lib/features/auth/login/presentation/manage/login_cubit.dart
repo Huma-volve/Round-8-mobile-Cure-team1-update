@@ -15,11 +15,10 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({required this.loginRepo}) : super(LoginInitial());
 
   Future<void> logUser() async {
-    if (!formKey.currentState!.validate()) return;
-    print("Sending phone number: ${phoneController.text.trim()}");
+    if (formKey.currentState?.validate() != true) return;
     emit(LoginLoading());
 
-    var result = await loginRepo.loginUSer(
+    final result = await loginRepo.loginUSer(
       phoneNumber: phoneController.text.trim(),
       password: passwordController.text.trim(),
     );
@@ -29,7 +28,6 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginError(error: failure.errormessage));
       },
       (loginModel) async {
-        print(loginModel.message);
         final token = loginModel.token ?? loginModel.data?.token;
         if (token != null && token.isNotEmpty) {
           await Cachehelper.cacheToken(token);
@@ -37,18 +35,25 @@ class LoginCubit extends Cubit<LoginState> {
         final userData = loginModel.data;
         final name = userData?.name;
         if (name != null && name.isNotEmpty) {
-          Cachehelper.cacheUserName(name);
+          await Cachehelper.cacheUserName(name);
         }
         final email = userData?.email;
         if (email != null && email.isNotEmpty) {
-          Cachehelper.cacheUserEmail(email);
+          await Cachehelper.cacheUserEmail(email);
         }
         final phone = userData?.phone;
         if (phone != null && phone.isNotEmpty) {
-          Cachehelper.cacheUserPhone(phone);
+          await Cachehelper.cacheUserPhone(phone);
         }
         emit(LoginSuccess(message: loginModel.message ?? ''));
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    phoneController.dispose();
+    passwordController.dispose();
+    return super.close();
   }
 }

@@ -131,6 +131,7 @@ class Cachehelper {
     await _shared.remove(_userEmailKey);
     await _shared.remove(_userPhoneKey);
     await _shared.remove(_userBirthdateKey);
+    await _shared.remove(_favoriteIdsKey);
   }
 
   static Future<void> cacheOnboardingSeen(bool seen) async {

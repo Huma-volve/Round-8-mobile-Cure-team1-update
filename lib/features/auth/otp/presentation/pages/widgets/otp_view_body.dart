@@ -21,7 +21,8 @@ class _OtpViewBodyState extends State<OtpViewBody> {
   @override
   void initState() {
     super.initState();
-    otpCubit = BlocProvider.of<OtpCubit>(context);
+    otpCubit = context.read<OtpCubit>();
+    otpCubit.phoneNumController.text = widget.phoneNum;
   }
 
   @override
@@ -88,7 +89,6 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 text: 'Verify',
                 color: ColorsLight.primaryColor,
                 onTap: () {
-                  otpCubit.phoneNumController.text = widget.phoneNum;
                   otpCubit.registUser();
                 }),
             SizedBox(height: 10.h),
