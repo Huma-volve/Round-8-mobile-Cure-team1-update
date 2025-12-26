@@ -49,6 +49,8 @@ Future<void> setup() async {
     ..registerLazySingleton(() => ChangePasswordRepo(getit()))
     ..registerLazySingleton(() => ChangePasswordDataSource(getit()));
   //FAQS
+  //change
+
   getit
     ..registerFactory(() => FaqsBloc(getit()))
     ..registerLazySingleton(() => FaqsRepo(getit()))

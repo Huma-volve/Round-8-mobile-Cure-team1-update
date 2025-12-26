@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
               BlocProvider(
                 create: (context) => getit<ChangePasswordBloc>(),
               ),
+              //change
               BlocProvider(
                 create: (context) => getit<LogoutBloc>(),
               ),
