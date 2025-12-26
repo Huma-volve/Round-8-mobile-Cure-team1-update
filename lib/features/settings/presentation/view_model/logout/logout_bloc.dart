@@ -18,24 +18,20 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
   }
 
   final LogoutRepo _repo;
-
+//يارب  يامسهل
   FutureOr<void> _logout(
     EventLogout event,
     Emitter<LogoutState> emit,
   ) async {
     emit(const LogoutState.loading());
-    print('lllllllllllllllllll ');
 
     final result = await _repo.logout();
-    print('sssssssssssssssss');
 
     result.when(
       success: (logoutResponse) {
-        print('delete account successful: $logoutResponse');
         emit(LogoutState.success(logoutResponse: logoutResponse));
       },
       failure: (error) {
-        print('Error in LogoutBloc: $error');
         emit(LogoutState.error(error: error));
       },
     );
