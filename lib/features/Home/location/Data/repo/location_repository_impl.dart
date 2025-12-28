@@ -1,6 +1,3 @@
-import 'package:flutter/foundation.dart';
-import 'package:geocoding/geocoding.dart';
-
 import '../../Domin/entities/user_location.dart';
 import '../../Domin/repositories/location_repository.dart';
 import '../DataSource/location_datasoucre.dart';
@@ -12,14 +9,10 @@ class LocationRepositoryImpl implements LocationRepository {
 
   @override
   Future<UserLocation> getUserLocation() async {
-    try {
-      final position = await dataSource.getCurrentLocation();
-      return UserLocation(lat: position.latitude, lng: position.longitude);
-    } catch (_) {
-      // Fallback location: Mansoura
-      return UserLocation(lat: 33.888, lng: 36.2222);
-    }
+    final position = await dataSource.getCurrentLocation();
+    return UserLocation(lat: position.latitude, lng: position.longitude);
   }
+
   @override
   Future<UserAddress> getUserAddress({
     required double lat,

@@ -21,7 +21,6 @@ class FaqsScreen extends StatelessWidget {
         appBar: CustomAppBar(
           title: 'FAQs',
           onPressed: () {
-            Navigator.pop(context);
             GoRouter.of(context).canPop() ? GoRouter.of(context).pop() : null;
           },
         ),
@@ -33,9 +32,9 @@ class FaqsScreen extends StatelessWidget {
             return state.maybeWhen(
               loading: () {
                 print('loading....');
-                return Center(
+                return const Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(8),
+                    padding: EdgeInsets.all(8),
                     child: CircularProgressIndicator(),
                   ),
                 );
@@ -55,8 +54,8 @@ class FaqsScreen extends StatelessWidget {
                     itemCount: faqsResponse.data.length);
               },
               orElse: () {
-                return Padding(
-                  padding: const EdgeInsets.all(8),
+                return const Padding(
+                  padding: EdgeInsets.all(8),
                   child: CircularProgressIndicator(
                     color: ColorsLight.error,
                   ),

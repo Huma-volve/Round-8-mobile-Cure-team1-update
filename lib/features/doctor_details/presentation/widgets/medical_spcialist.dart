@@ -1,38 +1,20 @@
-import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
-import 'package:cure_team_1_update/core/style/images/app_images.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MedicalSpecialty extends StatelessWidget {
+  final String? title;
   const MedicalSpecialty({
     super.key,
+    this.title,
   });
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.sizeOf(context).width;
-    return SizedBox(
-      width: width - 210.r,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            'Pulmonologist',
-            style: AppTextStyles.montserratRegular14(context),
-          ),
-          const Spacer(),
-          Container(
-            height: 40.r,
-            width: 40.r,
-            decoration: BoxDecoration(
-                image: const DecorationImage(
-                    image: AssetImage(AppImages.favorite)),
-                border: Border.all(width: 3.r, color: ColorsLight.offWhite),
-                borderRadius: BorderRadius.circular(40)),
-          ),
-        ],
-      ),
+    return Text(
+      title?.isNotEmpty == true ? title! : 'Specialty',
+      style: AppTextStyles.montserratRegular14(context),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

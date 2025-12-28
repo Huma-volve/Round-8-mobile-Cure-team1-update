@@ -9,9 +9,11 @@ class DoctorDetailsAppBar extends StatelessWidget {
     super.key,
     required this.title,
     this.ismessageIconEnable = false,
+    this.onMessageTap,
   });
   final String title;
   final bool ismessageIconEnable;
+  final VoidCallback? onMessageTap;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -36,7 +38,14 @@ class DoctorDetailsAppBar extends StatelessWidget {
         const Spacer(),
         Visibility(
             visible: ismessageIconEnable,
-            child: Image.asset(Assets.resourceImagesMessage)),
+            child: GestureDetector(
+              onTap: onMessageTap,
+              child: SizedBox(
+                height: 24.h,
+                width: 24.w,
+                child: Image.asset(Assets.resourceImagesMessage),
+              ),
+            )),
       ],
     );
   }

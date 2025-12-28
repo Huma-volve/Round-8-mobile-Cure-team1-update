@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +34,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(const Duration(seconds: 3), () async {
       if (!mounted) return;
-      GoRouter.of(context).go(AppRoute.loginPage);
+      final hasToken = Cachehelper.getToken()?.isNotEmpty ?? false;
+      final hasSeenOnboarding = Cachehelper.getOnboardingSeen();
+      final nextRoute = hasSeenOnboarding
+          ? (hasToken ? AppRoute.home : AppRoute.loginPage)
+          : AppRoute.onBoarding;
+      GoRouter.of(context).go(nextRoute);
     });
   }
 

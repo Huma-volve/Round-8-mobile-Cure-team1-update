@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class PhoneInputExample extends StatelessWidget {
-  const PhoneInputExample({super.key});
+  const PhoneInputExample({super.key, this.controller});
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class PhoneInputExample extends StatelessWidget {
       ignoreBlank: false,
       autoValidateMode: AutovalidateMode.disabled,
       initialValue: number,
-      textFieldController: TextEditingController(),
+      textFieldController: controller,
       formatInput: false,
       inputDecoration: const InputDecoration(
         hintText: 'Enter your number',

@@ -1,22 +1,15 @@
-import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
-import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
-import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/features/profile/presentation/widgets/build_menu_item.dart';
 import 'package:cure_team_1_update/features/profile/presentation/widgets/show_logout_dialog.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view/screens/faqs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/widgets/custom_widgets.dart';
-import '../../../settings/presentation/view/screens/settings_screen.dart';
-import '../../../payment/presentation/screens/payment_methods_screen.dart';
-import 'edit_profile_screen.dart';
-import '../../../settings/presentation/view/screens/faqs_screen.dart';
-import '../../../settings/presentation/view/screens/privacy_policy_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -30,6 +23,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cachedName = Cachehelper.getUserName();
+    final displayName = (cachedName != null && cachedName.trim().isNotEmpty)
+        ? cachedName.trim()
+        : 'Your profile';
+    final cachedEmail = Cachehelper.getUserEmail();
+    final cachedPhone = Cachehelper.getUserPhone();
+    final subtitleText = (cachedEmail != null && cachedEmail.isNotEmpty)
+        ? cachedEmail
+        : (cachedPhone != null && cachedPhone.isNotEmpty ? cachedPhone : null);
+    final subtitleIcon = (cachedEmail != null && cachedEmail.isNotEmpty)
+        ? Icons.email_outlined
+        : (cachedPhone != null && cachedPhone.isNotEmpty
+            ? Icons.phone
+            : null);
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorsLight.scaffoldBackground,
@@ -53,25 +60,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ), // Placeholder
                       backgroundColor: Colors.grey,
                     ),
-                    title: Text('Seif Mohamed',
-                        style: StyleTextHelper.textStyle20Regular(context)
-                            .copyWith(fontFamily: 'georgia')),
-                    subtitle: Row(children: [
-                      Icon(
-                        Icons.location_on,
-                        size: 8.sp,
-                        color: ColorsLight.textGrey,
-                      ),
-                      Text(
-                        '129,El-Nasr Street, Cairo',
-                        style: StyleTextHelper.textStyle12Regular(context)
-                            .copyWith(color: ColorsLight.blueGray),
-                      ),
-                    ]),
+                    subtitle: subtitleText != null && subtitleIcon != null
+                        ? Row(children: [
+                            Icon(
+                              subtitleIcon,
+                              size: 8.sp,
+                              color: ColorsLight.textGrey,
+                            ),
+                            SizedBox(width: 4.w),
+                            Text(
+                              subtitleText,
+                              style: StyleTextHelper.textStyle12Regular(context)
+                                  .copyWith(color: ColorsLight.blueGray),
+                            ),
+                          ])
+                        : null,
+                    title: Text(
+                      displayName,
+                      style: StyleTextHelper.textStyle20Regular(context)
+                          .copyWith(fontFamily: 'georgia'),
+                    ),
                     trailing: InkWell(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EditProfileScreen()));
                         GoRouter.of(context).push(AppRoute.editProfileScreen);
                       },
                       child: SvgPicture.asset(
@@ -107,7 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   title: Text('Notification',
                       style: StyleTextHelper.textStyle16Regular(context)),
                   value: _notificationEnabled,
-                  activeColor: ColorsLight.offWhite, // As per design
+                  activeThumbColor: ColorsLight.offWhite, // As per design
                   // activeThumbColor: ColorsLight.,
                   activeTrackColor: ColorsLight.green,
 
@@ -126,13 +136,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 iconWidth: 8.w,
                 title: 'Payment Method',
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const PaymentMethodsScreen();
-                    },
-                  ));
-                  // GoRouter.of(context)
-                  //     .push(AppRoute.paymentScreenpaymentScreen);
+                  GoRouter.of(context)
+                      .push(AppRoute.paymentScreenpaymentScreen);
                 },
               ),
               SizedBox(height: 16.h),
@@ -148,11 +153,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 assetPath: Assets.profileSettings,
                 title: 'Settings',
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const SettingsScreen();
-                    },
-                  ));
                   GoRouter.of(context).push(AppRoute.settingsScreen);
                 },
               ),
@@ -173,11 +173,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 assetPath: Assets.settingsLockKeyhole,
                 title: 'Privacy Policy',
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const PrivacyPolicyScreen();
-                    },
-                  ));
                   GoRouter.of(context).push(AppRoute.privacyPolicyScreen);
                 },
               ),

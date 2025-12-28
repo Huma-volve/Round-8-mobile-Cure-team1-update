@@ -1,17 +1,13 @@
-import 'package:cure_team_1_update/core/common/toast/show_toast.dart';
 import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
-import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
-
+import 'package:cure_team_1_update/core/utils/app_toast.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/features/settings/data/models/edit_profile/change_password_request_body.dart';
-import 'package:cure_team_1_update/features/settings/data/models/edit_profile/change_password_response.dart';
 import 'package:cure_team_1_update/features/settings/presentation/view_model/bloc/change_password_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import '../../../../../core/widgets/custom_widgets.dart';
 
 class PasswordManagementScreen extends StatefulWidget {
@@ -23,17 +19,17 @@ class PasswordManagementScreen extends StatefulWidget {
 }
 
 class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
-  late ChangePasswordBloc _bloc;
+  late final ChangePasswordBloc _bloc;
   late final TextEditingController currentPasswordController;
   late final TextEditingController newPasswordController;
   late final TextEditingController confirmPasswordController;
   @override
   void initState() {
     super.initState();
+    _bloc = getit<ChangePasswordBloc>();
     currentPasswordController = TextEditingController();
     newPasswordController = TextEditingController();
     confirmPasswordController = TextEditingController();
-    _bloc = context.read<ChangePasswordBloc>();
   }
 
   @override
@@ -41,34 +37,28 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
     currentPasswordController.dispose();
     newPasswordController.dispose();
     confirmPasswordController.dispose();
+    _bloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getit<ChangePasswordBloc>(),
+    return BlocProvider.value(
+      value: _bloc,
       child: BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
         listener: (context, state) {
           state.whenOrNull(success: (changePasswordResponse) {
-            showToast(
-              context: context,
-              text: '${changePasswordResponse.message} \n',
-              colorText: ColorsLight.green,
-              toastState: ToastStates.SUCCECC,
+            AppToast.show(
+              context,
+              changePasswordResponse.message,
+              backgroundColor: ColorsLight.green,
             );
             Navigator.of(context).pop();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Password changed successfully!'),
-              ),
-            );
           }, error: (message) {
-            showToast(
-              context: context,
-              text: message,
-              colorText: ColorsLight.error,
-              toastState: ToastStates.ERROR,
+            AppToast.show(
+              context,
+              message,
+              backgroundColor: ColorsLight.error,
             );
             print('listener state: $state');
           });
@@ -108,9 +98,9 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
                           size: 10.sp,
                         ),
                         onPressed: () {
-                          // setState(() {
-                          //   _bloc.obscureCurrent = !_bloc.obscureCurrent;
-                          // });
+                          setState(() {
+                            _bloc.obscureCurrent = !_bloc.obscureCurrent;
+                          });
                         },
                       ),
                       validator: (value) {
@@ -139,9 +129,9 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
                           size: 10.sp,
                         ),
                         onPressed: () {
-                          // setState(() {
-                          //   _bloc.obscureNew = !_bloc.obscureNew;
-                          // });
+                          setState(() {
+                            _bloc.obscureNew = !_bloc.obscureNew;
+                          });
                         },
                       ),
                       validator: (value) {
@@ -173,9 +163,9 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
                           size: 10.sp,
                         ),
                         onPressed: () {
-                          // setState(() {
-                          //   _bloc.obscureConfirm = !_bloc.obscureConfirm;
-                          // });
+                          setState(() {
+                            _bloc.obscureConfirm = !_bloc.obscureConfirm;
+                          });
                         },
                       ),
                       validator: (value) {
@@ -209,15 +199,15 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
     if (_bloc.formKey.currentState!.validate()) {
       // Mock API call
 
-      context.read<ChangePasswordBloc>().add(
-            ChangePasswordEvent.changePassword(
-              data: ChangePasswordRequestBody(
-                current_password: currentPasswordController.text,
-                new_password: newPasswordController.text,
-                new_password_confirmation: confirmPasswordController.text,
-              ),
-            ),
-          );
+      _bloc.add(
+        ChangePasswordEvent.changePassword(
+          data: ChangePasswordRequestBody(
+            current_password: currentPasswordController.text.trim(),
+            new_password: newPasswordController.text.trim(),
+            new_password_confirmation: confirmPasswordController.text.trim(),
+          ),
+        ),
+      );
     }
   }
 }

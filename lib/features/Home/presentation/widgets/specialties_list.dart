@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../Data/models/specialty_model.dart';
-import '../pages/doctors.dart';
+import '../pages/doctors_search_page.dart';
 
-class SpecialtiesList extends StatefulWidget {
+class SpecialtiesList extends StatelessWidget {
   const SpecialtiesList({super.key});
 
-  @override
-  State<SpecialtiesList> createState() => _SpecialtiesListState();
-}
-
-class _SpecialtiesListState extends State<SpecialtiesList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -21,37 +16,40 @@ class _SpecialtiesListState extends State<SpecialtiesList> {
           itemBuilder: (context, index) {
             final spec = Specialty.specialties[index];
 
-            return InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => DoctorsBySpecialtyScreen(
-                      specialtyName: spec.name,
+            return Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          DoctorsSearchPage(initialSpecialty: spec.name),
                     ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
                   ),
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey.withOpacity(0.25),
-                    width: 0.8,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.withOpacity(0.25),
+                      width: 0.8,
+                    ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(spec.icon, size: 16),
-                    const SizedBox(width: 4),
-                    Text(spec.name),
-                  ],
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(spec.icon, size: 16),
+                      const SizedBox(width: 4),
+                      Text(spec.name),
+                    ],
+                  ),
                 ),
               ),
             );

@@ -3,8 +3,10 @@ import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class AboutMeSection extends StatefulWidget {
+  final String? aboutMe;
   const AboutMeSection({
     super.key,
+    this.aboutMe,
   });
 
   @override
@@ -12,9 +14,18 @@ class AboutMeSection extends StatefulWidget {
 }
 
 class _AboutMeSectionState extends State<AboutMeSection> {
+  static const int _maxPreviewLength = 120;
   bool fullText = false;
+
   @override
   Widget build(BuildContext context) {
+    final text = (widget.aboutMe ?? '').trim();
+    final hasContent = text.isNotEmpty;
+    final preview = hasContent && text.length > _maxPreviewLength
+        ? '${text.substring(0, _maxPreviewLength)}...'
+        : text;
+    final showReadMore = hasContent && text.length > _maxPreviewLength;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,30 +36,26 @@ class _AboutMeSectionState extends State<AboutMeSection> {
         Wrap(
           children: [
             Text(
-              fullText == true ? longText : shortText,
+              hasContent ? (fullText ? text : preview) : 'No description yet.',
               style: AppTextStyles.georgiaRegular14(context)
                   .copyWith(color: ColorsLight.blueGray),
             ),
-            if (!fullText)
+            if (showReadMore && !fullText)
               GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      fullText = !fullText;
-                    });
-                  },
-                  child: Text(
-                    'Read more',
-                    style: AppTextStyles.georgiaRegular14(context)
-                        .copyWith(color: ColorsLight.royalBlue),
-                  ))
+                onTap: () {
+                  setState(() {
+                    fullText = true;
+                  });
+                },
+                child: Text(
+                  ' Read more',
+                  style: AppTextStyles.georgiaRegular14(context)
+                      .copyWith(color: ColorsLight.royalBlue),
+                ),
+              )
           ],
         )
       ],
     );
   }
 }
-
-String shortText =
-    'Dr. Jessica Turner, a board-certified Pulmonologist with over 8 years of experience in diagnosing and treating a';
-String longText =
-    'Dr. Jessica Turner, a board-certified Pulmonologist with over 8 years of experience in diagnosing and treating a wide range of respiratory and ';

@@ -1,12 +1,10 @@
-
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-
 
 class LocationDataSource {
   Future<Position> getCurrentLocation() async {
     if (!await Geolocator.isLocationServiceEnabled()) {
-      throw  LocationServiceDisabledException();
+      throw const LocationServiceDisabledException();
     }
 
     LocationPermission permission = await Geolocator.checkPermission();
@@ -15,26 +13,22 @@ class LocationDataSource {
       permission = await Geolocator.requestPermission();
     }
 
-    if (permission == LocationPermission.deniedForever) {
-      // throw LocationPermissionDeniedException();
+    if (permission == LocationPermission.denied) {
+      throw Exception('Location permission denied');
     }
 
-    final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    print("Position fetched: ${position.latitude}, ${position.longitude}"); // هنا كمان نتاكد
-    return position;
+    if (permission == LocationPermission.deniedForever) {
+      throw Exception('Location permission permanently denied');
+    }
+
+    return Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
   }
 
-  Future<Placemark> buildAddress (double lat, double lng ) async{
-    List placeMarks = await placemarkFromCoordinates(lat,lng);
-    final place =placeMarks.first;
-    final street = place.street ?? "";
-    final area = place.subLocality ?? "";
-    final city = place.locality ?? "";
-    print(street);
-    print(place);
-    print(city);
-
-    return place;
+  Future<Placemark> buildAddress(double lat, double lng) async {
+    final List<Placemark> placeMarks =
+        await placemarkFromCoordinates(lat, lng);
+    return placeMarks.first;
   }
 }

@@ -3,7 +3,6 @@ import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
-import 'package:cure_team_1_update/features/payment/presentation/screens/cards_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,11 +40,10 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
             SizedBox(height: 16.h),
             _buildCardDisplay(
               'VISA',
-              'Bank Name',
               true,
             ), // Default to Visa for now
             SizedBox(height: 16.h),
-            _buildCardDisplay('MasterCard', 'Bank Name', false),
+            _buildCardDisplay('MasterCard', false),
             SizedBox(height: 32.h),
             Text('More Payment Options',
                 style: StyleTextHelper.textStyle20Regular(context).copyWith(
@@ -65,7 +63,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
                   _buildWalletItem(1, 'Paypal', Assets.paymentIcOutlinePaypal),
                   Divider(height: 1.h, color: Colors.grey.shade200),
                   _buildWalletItem(
-                      1, 'mobile wallets ', Assets.profileGroupAddCard),
+                      2, 'mobile wallets ', Assets.profileGroupAddCard),
                 ],
               ),
             ),
@@ -75,14 +73,9 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
     );
   }
 
-  Widget _buildCardDisplay(String type, String title, bool isVisa) {
+  Widget _buildCardDisplay(String type, bool isVisa) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return const CardsScreen();
-          },
-        ));
         GoRouter.of(context).push(AppRoute.cardsScreen);
       },
       child: Container(
@@ -124,7 +117,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
         });
       },
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.transparent,
         ),
         child: ListTile(
@@ -144,7 +137,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
             ),
             // padding: EdgeInsets.all(2.r),
             child: isSelected
-                ? CircleAvatar(backgroundColor: ColorsLight.primaryColor)
+                ? const CircleAvatar(backgroundColor: ColorsLight.primaryColor)
                 : null,
           ),
         ),

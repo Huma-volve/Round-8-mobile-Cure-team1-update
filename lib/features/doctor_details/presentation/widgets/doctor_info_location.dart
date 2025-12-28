@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DoctorInfoLocation extends StatelessWidget {
+  final String? location;
   const DoctorInfoLocation({
     super.key,
+    this.location,
   });
 
   @override
@@ -20,9 +22,14 @@ class DoctorInfoLocation extends StatelessWidget {
               image: DecorationImage(
                   image: AssetImage(Assets.resourceImagesLocation))),
         ),
-        Text(
-          '129,El-Nasr Street, Cairo ',
-          style: AppTextStyles.montserratRegular14(context),
+        SizedBox(width: 6.r),
+        Expanded(
+          child: Text(
+            location?.isNotEmpty == true ? location! : 'Location unavailable',
+            style: AppTextStyles.montserratRegular14(context),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ],
     );

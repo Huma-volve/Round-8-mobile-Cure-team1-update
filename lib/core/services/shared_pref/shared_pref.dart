@@ -78,12 +78,30 @@ class SharedPref {
   Future<dynamic> clearPreferences() async {
     await sharedPreferences.clear();
   }
+  //
+  static Future<bool> setStringList(String key, List<String> value) async {
+    return await sharedPreferences.setStringList(key, value);
+  }
+
+  static List<String>? getStringList(String key) {
+    return sharedPreferences.getStringList(key);
+  }
+
+  static bool containsKey(String key) {
+    return sharedPreferences.containsKey(key);
+  }
 }
 
 //نصيحه
 //يبنى ما كل دا فوق  اتعود تتأقلم على كود الناس متثبتش  دماغك عشان تتاقلم
 class Cachehelper {
   static late SharedPreferences _shared;
+  static const String _onboardingSeenKey = 'onboarding_seen';
+  static const String _userNameKey = 'user_name';
+  static const String _userEmailKey = 'user_email';
+  static const String _userPhoneKey = 'user_phone';
+  static const String _userBirthdateKey = 'user_birthdate';
+  static const String _favoriteIdsKey = 'favorite_doctor_ids';
   static Future<void> init() async {
     _shared = await SharedPreferences.getInstance();
   }
@@ -91,8 +109,78 @@ class Cachehelper {
   static Future<void> cacheToken(token) async {
     await _shared.setString("token", token);
   }
+  static Future<void> cacheUserName(String name) async {
+    await _shared.setString(_userNameKey, name);
+  }
+
+  static String? getUserName() {
+    return _shared.getString(_userNameKey);
+  }
+
 
   static String? getToken() {
     return _shared.getString("token");
   }
-}
+
+  static Future<void> clearToken() async {
+    await _shared.remove("token");
+  }
+
+  static Future<void> clearUserProfile() async {
+    await _shared.remove(_userNameKey);
+    await _shared.remove(_userEmailKey);
+    await _shared.remove(_userPhoneKey);
+    await _shared.remove(_userBirthdateKey);
+    await _shared.remove(_favoriteIdsKey);
+  }
+
+  static Future<void> cacheOnboardingSeen(bool seen) async {
+    await _shared.setBool(_onboardingSeenKey, seen);
+  }
+
+  static bool getOnboardingSeen() {
+    return _shared.getBool(_onboardingSeenKey) ?? false;
+  }
+  static Future<void> cacheUserEmail(String email) async {
+    await _shared.setString(_userEmailKey, email);
+  }
+
+  static String? getUserEmail() {
+    return _shared.getString(_userEmailKey);
+  }
+
+  static Future<void> cacheUserPhone(String phone) async {
+    await _shared.setString(_userPhoneKey, phone);
+  }
+
+  static String? getUserPhone() {
+    return _shared.getString(_userPhoneKey);
+  }
+
+  static Future<void> cacheUserBirthdate(String birthdate) async {
+    await _shared.setString(_userBirthdateKey, birthdate);
+  }
+
+  static String? getUserBirthdate() {
+    return _shared.getString(_userBirthdateKey);
+  }
+
+  static bool hasFavoriteIds() {
+    return _shared.getStringList(_favoriteIdsKey) != null;
+  }
+
+  static Future<void> cacheFavoriteIds(Iterable<int> ids) async {
+    final values = ids.map((id) => id.toString()).toList();
+    await _shared.setStringList(_favoriteIdsKey, values);
+  }
+
+  static Set<int> getFavoriteIds() {
+    final values = _shared.getStringList(_favoriteIdsKey);
+    if (values == null) {
+      return <int>{};
+    }
+    return values.map(int.parse).toSet();
+  }
+  }
+
+

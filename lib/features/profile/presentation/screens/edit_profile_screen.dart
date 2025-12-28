@@ -1,14 +1,13 @@
 import 'package:cure_team_1_update/core/common/widgets/custom_app_bar.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
-import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
-import 'package:cure_team_1_update/core/style/theme/app_theme.dart';
+
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/features/profile/presentation/bloc/bloc/edit_profile_bloc.dart';
 import 'package:cure_team_1_update/features/profile/presentation/widgets/build_dropdown.dart';
 import 'package:cure_team_1_update/features/profile/presentation/widgets/edit_profile_button.dart';
-import 'package:dio/dio.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,13 +26,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   // Controllers
   // Controllers
 
-  late EditProfileBloc _bloc;
+  late final EditProfileBloc _bloc;
 
   @override
   void initState() {
     super.initState();
-
-    _bloc = context.read<EditProfileBloc>();
+    _bloc = getit<EditProfileBloc>();
   }
 
   @override
@@ -41,19 +39,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _bloc.nameController.dispose();
     _bloc.emailController.dispose();
     _bloc.phoneController.dispose();
+    _bloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => getit<EditProfileBloc>(),
+    return BlocProvider.value(
+        value: _bloc,
         child: Scaffold(
           backgroundColor: ColorsLight.scaffoldBackground,
           appBar: CustomAppBar(
             // title: 'Edit Profile',
             onPressed: () {
-              Navigator.pop(context);
               GoRouter.of(context).canPop() ? GoRouter.of(context).pop() : null;
             },
           ),
@@ -91,24 +89,51 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   SizedBox(height: 10.h),
 
                   // User Info
-                  Text('Seif Mohamed',
-                      style:
-                          StyleTextHelper.textStyle20Regular(context).copyWith(
-                        fontFamily: 'georgia',
-                      )),
+                  ValueListenableBuilder<TextEditingValue>(
+                    valueListenable: _bloc.nameController,
+                    builder: (context, value, child) {
+                      final name = value.text.trim().isNotEmpty
+                          ? value.text.trim()
+                          : 'Your name';
+                      return Text(
+                        name,
+                        style:
+                            StyleTextHelper.textStyle20Regular(context).copyWith(
+                          fontFamily: 'georgia',
+                        ),
+                      );
+                    },
+                  ),
                   SizedBox(height: 4.h),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Icon(
-                      Icons.location_on,
-                      size: 8.sp,
-                      color: ColorsLight.textGrey,
-                    ),
-                    Text(
-                      '129,El-Nasr Street, Cairo',
-                      style: StyleTextHelper.textStyle12Regular(context)
-                          .copyWith(color: ColorsLight.blueGray),
-                    ),
-                  ]),
+                  Builder(
+                    builder: (context) {
+                      final subtitle = _bloc.emailController.text.isNotEmpty
+                          ? _bloc.emailController.text
+                          : _bloc.phoneController.text;
+                      if (subtitle.isEmpty) {
+                        return const SizedBox.shrink();
+                      }
+                      final icon = _bloc.emailController.text.isNotEmpty
+                          ? Icons.email_outlined
+                          : Icons.phone;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            icon,
+                            size: 8.sp,
+                            color: ColorsLight.textGrey,
+                          ),
+                          SizedBox(width: 4.w),
+                          Text(
+                            subtitle,
+                            style: StyleTextHelper.textStyle12Regular(context)
+                                .copyWith(color: ColorsLight.blueGray),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                   SizedBox(height: 40.h),
 
                   // Form Fields

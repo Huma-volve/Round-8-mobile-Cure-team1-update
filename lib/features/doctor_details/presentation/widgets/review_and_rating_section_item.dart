@@ -12,11 +12,13 @@ class ReviewAndRatingSectionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 98.r,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 height: 30.55.r,
@@ -29,7 +31,8 @@ class ReviewAndRatingSectionItem extends StatelessWidget {
                 height: 14.r,
               ),
               Text(
-                reviewAndRatingSectionModel.data.toString(),
+                reviewAndRatingSectionModel.displayValue ??
+                    reviewAndRatingSectionModel.data.toString(),
                 style: AppTextStyles.georgiaSemiBold14(context),
               ),
               Text(

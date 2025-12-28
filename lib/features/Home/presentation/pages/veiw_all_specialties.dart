@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../Data/models/specialty_model.dart';
 import '../widgets/speciality_widget.dart';
@@ -16,7 +15,7 @@ class ViewAllSpecialties extends StatelessWidget {
         title: const Text("All Specialties"),
         leading: InkWell(
             onTap: () {
-              GoRouter.of(context).pop();
+              Navigator.pop(context);
             },
             child: const Icon(Icons.arrow_back_ios)),
       ),
@@ -31,7 +30,6 @@ class ViewAllSpecialties extends StatelessWidget {
                 children: [
                   ...Specialty.specialties
                       .map((e) => SpecialityWidget(specialty: e))
-                      .toList()
                 ],
               )
             ],
