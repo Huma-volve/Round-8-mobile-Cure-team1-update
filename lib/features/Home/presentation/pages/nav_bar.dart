@@ -85,100 +85,67 @@ class _HomePageState extends State<NavBar> {
           index: _currentIndex,
           children: pages,
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-            _openPendingConversation();
-          },
-          currentIndex: _currentIndex,
-          type: BottomNavigationBarType.fixed,
-          elevation: 0,
-          selectedFontSize: responsive_size(context, fontsize: 16),
-          unselectedFontSize: responsive_size(context, fontsize: 16),
-          selectedIconTheme: const IconThemeData(size: 50),
-          unselectedIconTheme: const IconThemeData(size: 50),
-          selectedLabelStyle: TextStyle(
-            color: Colors.blue,
-            fontSize: responsive_size(context, fontsize: 16),
-            fontWeight: FontWeight.bold,
+        bottomNavigationBar: Theme(
+          data: Theme.of(context).copyWith(
+            splashFactory: NoSplash.splashFactory,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            focusColor: Colors.transparent,
           ),
-          unselectedLabelStyle: TextStyle(
-            color: Colors.grey,
-            fontSize: responsive_size(context, fontsize: 14),
+          child: BottomNavigationBar(
+            backgroundColor: Colors.white,
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+              _openPendingConversation();
+            },
+            currentIndex: _currentIndex,
+            type: BottomNavigationBarType.fixed,
+            elevation: 0,
+            selectedFontSize: responsive_size(context, fontsize: 16),
+            unselectedFontSize: responsive_size(context, fontsize: 16),
+            selectedLabelStyle: TextStyle(
+              color: Colors.blue,
+              fontSize: responsive_size(context, fontsize: 16),
+              fontWeight: FontWeight.bold,
+            ),
+            unselectedLabelStyle: TextStyle(
+              color: Colors.grey,
+              fontSize: responsive_size(context, fontsize: 14),
+            ),
+            items: [
+              BottomNavigationBarItem(
+                icon: _NavItemIcon(
+                  asset: Assets.resourceImagesHome,
+                  isActive: _currentIndex == 0,
+                ),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: _NavItemIcon(
+                  asset: Assets.resourceImagesCalendar,
+                  isActive: _currentIndex == 1,
+                ),
+                label: 'Booking',
+              ),
+              BottomNavigationBarItem(
+                icon: _NavItemIcon(
+                  asset: Assets.resourceImagesChat,
+                  isActive: _currentIndex == 2,
+                ),
+                label: 'Chat',
+              ),
+              BottomNavigationBarItem(
+                icon: _NavItemIcon(
+                  asset: Assets.resourceImagesProfile,
+                  isActive: _currentIndex == 3,
+                ),
+                label: 'Profile',
+              ),
+            ],
           ),
-          items: [
-            BottomNavigationBarItem(
-              icon: Center(
-                child: SvgPicture.asset(
-                  Assets.resourceImagesHome,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
-                ),
-              ),
-              activeIcon: Center(
-                child: SvgPicture.asset(
-                  Assets.resourceImagesHome,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
-                ),
-              ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Center(
-                child: SvgPicture.asset(
-                  Assets.resourceImagesCalendar,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
-                ),
-              ),
-              activeIcon: Center(
-                child: SvgPicture.asset(
-                  Assets.resourceImagesCalendar,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
-                ),
-              ),
-              label: 'Booking',
-            ),
-            BottomNavigationBarItem(
-              icon: Center(
-                child: SvgPicture.asset(
-                  Assets.resourceImagesChat,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
-                ),
-              ),
-              activeIcon: Center(
-                child: SvgPicture.asset(
-                  Assets.resourceImagesChat,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
-                ),
-              ),
-              label: 'Chat',
-            ),
-            BottomNavigationBarItem(
-              icon: Center(
-                child: SvgPicture.asset(
-                  Assets.resourceImagesProfile,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
-                ),
-              ),
-              activeIcon: Center(
-                child: SvgPicture.asset(
-                  Assets.resourceImagesProfile,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
-                ),
-              ),
-              label: 'Profile',
-            ),
-          ],
         ));
   }
 }
@@ -188,4 +155,44 @@ class NavBarArgs {
   final Conversion? conversation;
 
   const NavBarArgs({this.index = 0, this.conversation});
+}
+
+class _NavItemIcon extends StatelessWidget {
+  const _NavItemIcon({
+    required this.asset,
+    required this.isActive,
+  });
+
+  final String asset;
+  final bool isActive;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = isActive ? Colors.blue : Colors.grey;
+    final background =
+        isActive ? Colors.blue.withOpacity(0.12) : Colors.transparent;
+    return TweenAnimationBuilder<double>(
+      duration: const Duration(milliseconds: 180),
+      curve: Curves.easeOut,
+      tween: Tween(begin: 1, end: isActive ? 1.05 : 1),
+      builder: (context, scale, child) {
+        return Transform.scale(scale: scale, child: child);
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        curve: Curves.easeOut,
+        padding: const EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: background,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: SvgPicture.asset(
+          asset,
+          width: 22,
+          height: 22,
+          colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+        ),
+      ),
+    );
+  }
 }

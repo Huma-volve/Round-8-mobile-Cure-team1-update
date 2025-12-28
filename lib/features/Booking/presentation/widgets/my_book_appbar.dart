@@ -15,24 +15,43 @@ class MyBookAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        GestureDetector(
+        InkWell(
+          borderRadius: BorderRadius.circular(20.r),
           onTap: () {
-            context.pop();
+            if (context.canPop()) {
+              context.pop();
+              return;
+            }
+            Navigator.of(context).maybePop();
           },
-          child: Container(
-            height: 24.r,
-            width: 24.r,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(Assets.resourceImagesArrowImage))),
+          child: Padding(
+            padding: EdgeInsets.all(8.r),
+            child: SizedBox(
+              height: 24.r,
+              width: 24.r,
+              child: const DecoratedBox(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(Assets.resourceImagesArrowImage),
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
         SizedBox(
-          width: 77.r,
+          width: 12.r,
         ),
-        Text(
-          title,
-          style: AppTextStyles.georgiaRegular24(context),
+        Expanded(
+          child: Center(
+            child: Text(
+              title,
+              style: AppTextStyles.georgiaRegular24(context),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 44.r,
         ),
       ],
     );

@@ -17,6 +17,7 @@ import 'package:cure_team_1_update/features/doctor_details/presentation/screens/
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/doctor_details_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/select_payment_method_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/models/booking_flow_data.dart';
+import 'package:cure_team_1_update/features/doctor_details/presentation/models/add_review_args.dart';
 import 'package:cure_team_1_update/features/auth/login/presentation/pages/login_page.dart';
 import 'package:cure_team_1_update/features/auth/otp/presentation/pages/otp_page.dart';
 import 'package:cure_team_1_update/features/auth/sign_up/presentation/pages/sign_up_page.dart';
@@ -66,7 +67,11 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.addReviewScreen,
-        builder: (context, state) => const AddReviewScreen(),
+        builder: (context, state) {
+          final args =
+              state.extra is AddReviewArgs ? state.extra as AddReviewArgs : null;
+          return AddReviewScreen(args: args);
+        },
       ),
       GoRoute(
         path: AppRoute.doctorDetails,

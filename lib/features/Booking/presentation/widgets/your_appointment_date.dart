@@ -12,10 +12,12 @@ class YourApointMentDateWidget extends StatefulWidget {
     super.key,
     this.initialDate,
     this.onDateSelected,
+    this.availableDates = const {},
   });
 
   final String? initialDate;
   final ValueChanged<String>? onDateSelected;
+  final Set<String> availableDates;
 
   @override
   State<YourApointMentDateWidget> createState() =>
@@ -31,6 +33,14 @@ class _YourApointMentDateWidgetState extends State<YourApointMentDateWidget> {
   void initState() {
     super.initState();
     _setInitialDate(widget.initialDate);
+  }
+
+  @override
+  void didUpdateWidget(covariant YourApointMentDateWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialDate != widget.initialDate) {
+      _setInitialDate(widget.initialDate);
+    }
   }
 
   void _setInitialDate(String? date) {
@@ -80,6 +90,12 @@ class _YourApointMentDateWidgetState extends State<YourApointMentDateWidget> {
                   initialDate: DateTime.now(),
                   firstDate: DateTime.now(),
                   lastDate: DateTime(2027),
+                  selectableDayPredicate: widget.availableDates.isEmpty
+                      ? null
+                      : (date) {
+                          final key = DateFormat('yyyy-MM-dd').format(date);
+                          return widget.availableDates.contains(key);
+                        },
                 );
                 if(selectedDateTime!=null)
                 {

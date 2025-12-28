@@ -30,6 +30,12 @@ import 'package:cure_team_1_update/features/settings/presentation/view_model/faq
 import 'package:cure_team_1_update/features/settings/data/data_source/logout/logout_data_source.dart';
 import 'package:cure_team_1_update/features/settings/data/repos/logout/logout_repo.dart';
 import 'package:cure_team_1_update/features/settings/presentation/view_model/logout/logout_bloc.dart';
+import 'package:cure_team_1_update/features/settings/data/data_source/change_password_data_source.dart';
+import 'package:cure_team_1_update/features/settings/data/repos/change_password_repo.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/bloc/change_password_bloc.dart';
+import 'package:cure_team_1_update/features/settings/data/data_source/delete_account/delete_account_data_source.dart';
+import 'package:cure_team_1_update/features/settings/data/repos/delete_account/delete_accuont_repo.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/delete_account/delete_account_bloc.dart';
 
 import '../../features/Home/location/Data/DataSource/location_datasoucre.dart';
 import '../../features/Home/location/Domin/useCase/get_user_location.dart';
@@ -89,6 +95,20 @@ Future<void> setup() async {
     ..registerLazySingleton(() => LogoutDataSource(getIt<ApiServices>()))
     ..registerLazySingleton(() => LogoutRepo(getIt<LogoutDataSource>()))
     ..registerFactory(() => LogoutBloc(getIt<LogoutRepo>()));
+
+  // Change password
+  getIt
+    ..registerLazySingleton(() => ChangePasswordDataSource(getIt<ApiServices>()))
+    ..registerLazySingleton(() => ChangePasswordRepo(getIt<ChangePasswordDataSource>()))
+    ..registerFactory(() => ChangePasswordBloc(getIt<ChangePasswordRepo>()));
+
+  // Delete account
+  getIt
+    ..registerLazySingleton(
+        () => DeleteAccounteDataSource(getIt<ApiServices>()))
+    ..registerLazySingleton(
+        () => DeleteAccuontRepo(getIt<DeleteAccounteDataSource>()))
+    ..registerFactory(() => DeleteAccountBloc(getIt<DeleteAccuontRepo>()));
   // Location Feature
   getIt.registerLazySingleton<LocationDataSource>(
     () => LocationDataSource(),

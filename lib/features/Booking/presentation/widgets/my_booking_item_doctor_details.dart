@@ -32,11 +32,21 @@ final MyBookingEntity mybookItem;
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    mybookItem.docName,
-                    style: AppTextStyles.georgiaRegular16(context),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          mybookItem.docName,
+                          style: AppTextStyles.georgiaRegular16(context),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      if (mybookItem.bookId > 0) ...[
+                        SizedBox(width: 8.r),
+                        _BookingIdBadge(id: mybookItem.bookId),
+                      ],
+                    ],
                   ),
                   SizedBox(height: 4.r),
                   Text(
@@ -67,4 +77,29 @@ ImageProvider _resolveImage(String? url) {
     return AssetImage(url);
   }
   return NetworkImage(url);
+}
+
+class _BookingIdBadge extends StatelessWidget {
+  const _BookingIdBadge({required this.id});
+
+  final int id;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.r, vertical: 3.r),
+      decoration: BoxDecoration(
+        color: ColorsLight.royalBlue.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(10.r),
+        border: Border.all(color: ColorsLight.royalBlue.withOpacity(0.2)),
+      ),
+      child: Text(
+        'ID #$id',
+        style: AppTextStyles.montserratMedum12(context).copyWith(
+          color: ColorsLight.royalBlue,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
 }

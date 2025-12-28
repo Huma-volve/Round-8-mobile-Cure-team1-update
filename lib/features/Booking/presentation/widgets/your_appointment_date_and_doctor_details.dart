@@ -14,10 +14,22 @@ class YourAppointmentDateAndDoctorDetails extends StatelessWidget {
     required this.booking,
     this.onDateSelected,
     this.onTimeSelected,
+    this.selectedDate,
+    this.selectedTime,
+    this.availableDates = const {},
+    this.availableTimes = const [],
+    this.isAvailabilityLoading = false,
+    this.availabilityError,
   });
   final MyBookingEntity booking;
   final ValueChanged<String>? onDateSelected;
   final ValueChanged<String>? onTimeSelected;
+  final String? selectedDate;
+  final String? selectedTime;
+  final Set<String> availableDates;
+  final List<String> availableTimes;
+  final bool isAvailabilityLoading;
+  final String? availabilityError;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,16 +40,31 @@ class YourAppointmentDateAndDoctorDetails extends StatelessWidget {
     YourAppointmentDoctorDetails(booking: booking),
     SizedBox(height: 24.r,),
     YourApointMentDateWidget(
-      initialDate: booking.bookDate,
+      initialDate: selectedDate ?? booking.bookDate,
       onDateSelected: onDateSelected,
+      availableDates: availableDates,
     ),
 
-  Expanded(
-    child: HourGrideView(
-      initialTime: booking.bookHour,
-      onTimeSelected: onTimeSelected,
-    ),
-  ),
+    SizedBox(height: 16.r),
+    if (isAvailabilityLoading)
+      Padding(
+        padding: EdgeInsets.only(top: 16.r),
+        child: const Center(child: CircularProgressIndicator()),
+      )
+    else if (availabilityError != null)
+      Padding(
+        padding: EdgeInsets.only(top: 16.r),
+        child: Text(availabilityError!),
+      )
+    else
+      Expanded(
+        child: HourGrideView(
+          initialTime: selectedTime ?? booking.bookHour,
+          times: availableTimes,
+          emptyMessage: 'No available times for this day.',
+          onTimeSelected: onTimeSelected,
+        ),
+      ),
 
       ],
     );

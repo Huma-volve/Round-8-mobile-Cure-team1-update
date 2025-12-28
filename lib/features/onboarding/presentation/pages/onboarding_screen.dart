@@ -27,6 +27,7 @@ class _OnboaedingScreenState extends State<OnboaedingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         actions: [
           TextButton(
               onPressed: () {

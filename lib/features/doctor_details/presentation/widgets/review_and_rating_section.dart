@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 class ReviewAndRatingSection extends StatelessWidget {
   final int? experienceYears;
   final double? rating;
+  final int? reviewsCount;
   const ReviewAndRatingSection({
     super.key,
     this.experienceYears,
     this.rating,
+    this.reviewsCount,
   });
 
   @override
@@ -19,7 +21,8 @@ class ReviewAndRatingSection extends StatelessWidget {
     final ratingLabel =
         rating != null ? rating!.toStringAsFixed(1) : '--';
     final patientsLabel = _formatCount(2000, addPlus: true);
-    final reviewsLabel = _formatCount(1872);
+    final reviewsLabel =
+        reviewsCount != null ? _formatCount(reviewsCount!) : '--';
 
     return Row(
       children: [
@@ -57,7 +60,7 @@ class ReviewAndRatingSection extends StatelessWidget {
           child: ReviewAndRatingSectionItem(
             reviewAndRatingSectionModel: ReviewAndRatingSectionModel(
               image: Assets.resourceImagesReviews,
-              data: 1872,
+              data: reviewsCount?.toDouble() ?? 0,
               title: 'reviews',
               displayValue: reviewsLabel,
             ),

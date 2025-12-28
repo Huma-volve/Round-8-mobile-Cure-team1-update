@@ -115,7 +115,11 @@ static  BookingEnum getStatus(dynamic status) {
 
 static PaymentStatus getPaymentStatus(dynamic status) {
   final normalized = status?.toString().toLowerCase() ?? '';
-  if (normalized == 'unpaid' || normalized == 'pending') {
+  if (normalized == 'unpaid' ||
+      normalized == 'pending' ||
+      normalized == 'failed' ||
+      normalized == 'canceled' ||
+      normalized == 'cancelled') {
     return PaymentStatus.unpaid;
   }
   if (normalized == 'paid' || normalized == 'completed') {

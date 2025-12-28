@@ -7,10 +7,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CommentDisplayRate extends StatelessWidget {
   const CommentDisplayRate({
     super.key,
+    required this.rating,
   });
+
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
+    final ratingLabel = rating > 0 ? rating.toStringAsFixed(1) : '--';
     return Padding(
       padding: EdgeInsets.only(right: 8.r),
       child: Container(
@@ -31,7 +35,7 @@ class CommentDisplayRate extends StatelessWidget {
                 width: 2.r,
               ),
               Text(
-                '4.5',
+                ratingLabel,
                 style: AppTextStyles.plusJakartaSansbold16(context)
                     .copyWith(color: ColorsLight.vividYellow),
               )

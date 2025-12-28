@@ -7,10 +7,9 @@ import 'package:cure_team_1_update/features/Home/Data/models/api_doctor.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/calender.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/doctor_details_screen_appbar.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/doctor_details_widget.dart';
-import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/select_time_widget.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/widgets/hour_gride_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 class BookAppointementScrollableContent extends StatelessWidget {
   BookAppointementScrollableContent({
@@ -18,12 +17,23 @@ class BookAppointementScrollableContent extends StatelessWidget {
     this.doctor,
     this.onSelectedBookData,
     this.onSelectBookTime,
+    this.availableDates = const {},
+    this.availableTimes = const [],
+    this.isLoadingAvailability = false,
+    this.availabilityError,
+    this.initialSelectedDate,
+    this.initialSelectedTime,
   });
   final ApiDoctor? doctor;
   final Function(String ?selectedDate)?onSelectedBookData;
   final Function(String selectedTime)?onSelectBookTime;
+  final Set<String> availableDates;
+  final List<String> availableTimes;
+  final bool isLoadingAvailability;
+  final String? availabilityError;
+  final String? initialSelectedDate;
+  final String? initialSelectedTime;
 
-  final String formattedTime = DateFormat('HH:mm:ss').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,17 +64,51 @@ class BookAppointementScrollableContent extends StatelessWidget {
               SizedBox(
                 height: 12.r,
               ),
-              
-               SingleMonthCalendar(onSelectedDate: (selectedDate) {
-                 onSelectedBookData?.call(selectedDate);
-               },
-                
-              ),
-            
-                   SelectTimeWidget(onTimeSelected: (timeOfDay) {
-                   onSelectBookTime?.call(timeOfDay);
-                 }
-                 ,),
+              if (isLoadingAvailability)
+                const Center(child: CircularProgressIndicator())
+              else if (availabilityError != null)
+                Text(
+                  availabilityError!,
+                  style: AppTextStyles.montserratMedum16(context),
+                )
+              else
+                SingleMonthCalendar(
+                  availableDates: availableDates,
+                  initialSelectedDate: initialSelectedDate,
+                  onSelectedDate: (selectedDate) {
+                    onSelectedBookData?.call(selectedDate);
+                  },
+                ),
+              if (!isLoadingAvailability &&
+                  availabilityError == null &&
+                  availableDates.isEmpty)
+                Padding(
+                  padding: EdgeInsets.only(top: 12.r),
+                  child: Text(
+                    'No available dates for this doctor.',
+                    style: AppTextStyles.montserratMedum16(context),
+                  ),
+                ),
+              if (!isLoadingAvailability && availabilityError == null) ...[
+                SizedBox(
+                  height: 24.r,
+                ),
+                Text(
+                  'Select a Time',
+                  style: AppTextStyles.georgiaRegular20(context),
+                ),
+                SizedBox(
+                  height: 12.r,
+                ),
+                HourGrideView(
+                  times: availableTimes,
+                  initialTime: initialSelectedTime,
+                  emptyMessage: 'No available times for this day.',
+                  onTimeSelected: (timeOfDay) {
+                    onSelectBookTime?.call(timeOfDay);
+                  },
+                ),
+              ],
               SizedBox(
                 height: 130.r,
               ),

@@ -6,9 +6,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class SingleMonthCalendar extends StatefulWidget {
-  const SingleMonthCalendar({super.key, this.onSelectedDate});
+  const SingleMonthCalendar({
+    super.key,
+    this.onSelectedDate,
+    this.availableDates = const {},
+    this.initialSelectedDate,
+  });
 
   final Function(String? selectedDate)? onSelectedDate;
+  final Set<String> availableDates;
+  final String? initialSelectedDate;
 
   @override
   State<SingleMonthCalendar> createState() => _SingleMonthCalendarState();
@@ -22,8 +29,6 @@ class _SingleMonthCalendarState extends State<SingleMonthCalendar> {
   String? selectedDayName;
   String? selectedMonthName;
   String? selectedDayNumber;
-
-  List<int> availableDays = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
 
   final monthNames = [
     "",
@@ -54,6 +59,33 @@ class _SingleMonthCalendarState extends State<SingleMonthCalendar> {
       "Sunday"
     ];
     return names[date.weekday - 1];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _applyInitialSelectedDate(widget.initialSelectedDate);
+  }
+
+  @override
+  void didUpdateWidget(covariant SingleMonthCalendar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialSelectedDate != widget.initialSelectedDate) {
+      _applyInitialSelectedDate(widget.initialSelectedDate);
+    }
+    if (selectedDate != null) {
+      final selectedKey =
+          DateFormat('yyyy-MM-dd').format(selectedDate!);
+      if (!widget.availableDates.contains(selectedKey)) {
+        setState(() {
+          selectedDate = null;
+          selectedDayName = null;
+          selectedMonthName = null;
+          selectedDayNumber = null;
+          formattedDate = null;
+        });
+      }
+    }
   }
 
   @override
@@ -147,6 +179,8 @@ class _SingleMonthCalendarState extends State<SingleMonthCalendar> {
               /// ---------- DAYS GRID ----------
               Expanded(
                 child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.all(8),
                   gridDelegate:
                       const SliverGridDelegateWithFixedCrossAxisCount(
@@ -163,8 +197,10 @@ class _SingleMonthCalendarState extends State<SingleMonthCalendar> {
                       day,
                     );
 
+                    final formattedKey =
+                        DateFormat('yyyy-MM-dd').format(date);
                     final bool isAvailable =
-                        availableDays.contains(day);
+                        widget.availableDates.contains(formattedKey);
 
                     return GestureDetector(
                       onTap: isAvailable
@@ -222,6 +258,28 @@ class _SingleMonthCalendarState extends State<SingleMonthCalendar> {
         ),
       ],
     );
+  }
+
+  void _applyInitialSelectedDate(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return;
+    }
+    final parsed = DateTime.tryParse(value);
+    if (parsed == null) {
+      return;
+    }
+    final formattedKey = DateFormat('yyyy-MM-dd').format(parsed);
+    if (!widget.availableDates.contains(formattedKey)) {
+      return;
+    }
+    setState(() {
+      selectedDate = parsed;
+      currentMonth = DateTime(parsed.year, parsed.month);
+      selectedDayName = getWeekdayName(parsed);
+      selectedMonthName = monthNames[parsed.month];
+      selectedDayNumber = parsed.day.toString();
+      formattedDate = formattedKey;
+    });
   }
 }
 

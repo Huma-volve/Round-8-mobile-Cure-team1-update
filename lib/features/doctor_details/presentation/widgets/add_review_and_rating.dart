@@ -6,17 +6,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AddReviewAndRating extends StatelessWidget {
   const AddReviewAndRating({
     super.key,
+    this.rating,
+    this.reviewsCount,
+    this.onAddReview,
   });
+
+  final double? rating;
+  final int? reviewsCount;
+  final VoidCallback? onAddReview;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const AddReview(),
+        AddReview(onPressed: onAddReview),
         SizedBox(
           height: 24.h,
         ),
-        const Rating()
+        Rating(
+          rating: rating,
+          reviewsCount: reviewsCount,
+        )
       ],
     );
   }

@@ -9,7 +9,10 @@ import 'package:go_router/go_router.dart';
 class AddReview extends StatelessWidget {
   const AddReview({
     super.key,
+    this.onPressed,
   });
+
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +32,10 @@ class AddReview extends StatelessWidget {
         ),
         TextButton(
           style: TextButton.styleFrom(padding: EdgeInsets.zero),
-          onPressed: () {
-            context.go(AppRoute.addReviewScreen);
-          },
+          onPressed: onPressed ??
+              () {
+                context.go(AppRoute.addReviewScreen);
+              },
           child: Text(
             'add review',
             style: AppTextStyles.montserratRegular14(context)
