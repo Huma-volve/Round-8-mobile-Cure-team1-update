@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../Data/models/specialty_model.dart';
-import '../pages/doctors.dart';
+import '../pages/doctors_search_page.dart';
 
-class SpecialtiesList extends StatefulWidget {
+class SpecialtiesList extends StatelessWidget {
   const SpecialtiesList({super.key});
 
-  @override
-  State<SpecialtiesList> createState() => _SpecialtiesListState();
-}
-
-class _SpecialtiesListState extends State<SpecialtiesList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -29,9 +24,8 @@ class _SpecialtiesListState extends State<SpecialtiesList> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => DoctorsBySpecialtyScreen(
-                        specialtyName: spec.name,
-                      ),
+                      builder: (_) =>
+                          DoctorsSearchPage(initialSpecialty: spec.name),
                     ),
                   );
                 },

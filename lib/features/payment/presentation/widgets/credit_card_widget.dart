@@ -9,6 +9,7 @@ class CreditCardWidget extends StatelessWidget {
   final String cardNumber; // e.g. "6789 4567 5432 8903"
   final String cardHolder;
   final String expiryDate; // e.g. "12/22"
+  final String brand;
   final Color startColor;
   final Color endColor;
 
@@ -17,6 +18,7 @@ class CreditCardWidget extends StatelessWidget {
     required this.cardNumber,
     required this.cardHolder,
     required this.expiryDate,
+    required this.brand,
     this.startColor = const Color(0xFF00C9FF), // Cyan-ish
     this.endColor = const Color(0xFF92FE9D), // Green-ish
   });
@@ -48,7 +50,7 @@ class CreditCardWidget extends StatelessWidget {
               SvgPicture.asset(
                   Assets.profileGroupAddCard), // Placeholder for "Spenny" logo
               Text(
-                'VISA',
+                brand.toUpperCase(),
                 style: StyleTextHelper.textStyle30Regular(context)
                     .copyWith(color: ColorsLight.offWhite),
               ),

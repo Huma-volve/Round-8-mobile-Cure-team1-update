@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DoctorImage extends StatelessWidget {
+  final String? imageUrl;
+
   const DoctorImage({
     super.key,
+    this.imageUrl,
   });
 
   @override
@@ -16,9 +19,12 @@ class DoctorImage extends StatelessWidget {
           height: 113.r,
           width: 113.r,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(60),
-              image: const DecorationImage(
-                  image: AssetImage(Assets.resourceImagesDoctor))),
+            borderRadius: BorderRadius.circular(60),
+            image: DecorationImage(
+              image: _resolveImageProvider(),
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
         Positioned(
           bottom: 5.r,
@@ -33,5 +39,16 @@ class DoctorImage extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  ImageProvider _resolveImageProvider() {
+    final url = imageUrl;
+    if (url == null || url.isEmpty) {
+      return const AssetImage(Assets.resourceImagesDoctor);
+    }
+    if (!url.startsWith('http')) {
+      return AssetImage(url);
+    }
+    return NetworkImage(url);
   }
 }

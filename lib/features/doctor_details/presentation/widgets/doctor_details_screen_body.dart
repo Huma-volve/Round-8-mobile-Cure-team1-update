@@ -1,22 +1,27 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/features/Home/Data/models/api_doctor.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/doctor_details_screen_scrallable_content.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/price_and_action_footer_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class DoctorDetailsScreenBody extends StatelessWidget {
+  final ApiDoctor? doctor;
   const DoctorDetailsScreenBody({
     super.key,
+    this.doctor,
   });
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const DoctorDetailsScreenScrollableContent(),
+        DoctorDetailsScreenScrollableContent(doctor: doctor),
         PriceAndBookActionFooterButton(
           buttonName: 'Book Appointment',
-          onPressed: () => context.push(AppRoute.bookappointment),
+          price: doctor?.sessionPrice,
+          onPressed: () =>
+              context.push(AppRoute.bookappointment, extra: doctor),
         )
       ],
     );

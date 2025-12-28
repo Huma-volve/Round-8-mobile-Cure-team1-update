@@ -8,11 +8,17 @@ class CreateBookRepoImp extends CreateBookRepo {
   CreateBookRemoteDataSource createBookRemoteDataSource;
   CreateBookRepoImp({required this.createBookRemoteDataSource});
   @override
-  Future<Either<Failuer, void>> createBook({required int doctorId,required String appointmentDate,required String appointmentTime})async {
+  Future<Either<Failuer, int>> createBook(
+      {required int doctorId,
+      required String appointmentDate,
+      required String appointmentTime}) async {
 
     try{
-  await createBookRemoteDataSource.createBook(doctorId: doctorId, appointmentDate: appointmentDate, appointmentTime: appointmentTime);
-  return right(null);
+  final bookingId = await createBookRemoteDataSource.createBook(
+      doctorId: doctorId,
+      appointmentDate: appointmentDate,
+      appointmentTime: appointmentTime);
+  return right(bookingId);
     }catch (error)
     {
 if (error is DioException)

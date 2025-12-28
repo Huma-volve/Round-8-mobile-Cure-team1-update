@@ -1,23 +1,26 @@
-import 'package:cure_team_1_update/core/function/helperfunction.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
 import 'package:flutter/material.dart';
 
 class Textmessage extends StatelessWidget {
-  const Textmessage({super.key, required this.message});
+  const Textmessage({
+    super.key,
+    required this.message,
+    required this.isOutgoing,
+  });
+
   final Historymasseges message;
+  final bool isOutgoing;
+
   @override
   Widget build(BuildContext context) {
-    return Wrap(children: [
-      Text(
-        message.body!,
-        textAlign: TextAlign.start,
-        style: const TextStyle(color: Colors.white, fontSize: 18),
+    return Text(
+      message.body ?? '',
+      textAlign: TextAlign.start,
+      style: TextStyle(
+        color: isOutgoing ? Colors.white : const Color(0xFF1F2937),
+        fontSize: 14,
+        height: 1.3,
       ),
-      Text(
-        textAlign: TextAlign.start,
-        formatTimeToHourMinute(message.createdAt!),
-        style: const TextStyle(color: Colors.white),
-      )
-    ]);
+    );
   }
 }

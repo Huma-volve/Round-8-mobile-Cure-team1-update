@@ -11,7 +11,7 @@
 
 
     <application
-        android:label="cure_team_1_update"
+        android:label="Cure"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

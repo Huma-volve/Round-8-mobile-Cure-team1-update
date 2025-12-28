@@ -1,20 +1,22 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
-import 'package:cure_team_1_update/features/Booking/domain/enums/booking_enum.dart';
+import 'package:cure_team_1_update/features/Booking/domain/entites/my_booking_entity.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/update_booking_screen.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
-import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/map.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
+import 'package:cure_team_1_update/features/Home/Data/models/api_doctor.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
-import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
+import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_cubit/cubit/chatbody_cubit.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/add_review_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/book_apointmennt_.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/doctor_details_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/select_payment_method_screen.dart';
+import 'package:cure_team_1_update/features/doctor_details/presentation/models/booking_flow_data.dart';
 import 'package:cure_team_1_update/features/auth/login/presentation/pages/login_page.dart';
 import 'package:cure_team_1_update/features/auth/otp/presentation/pages/otp_page.dart';
 import 'package:cure_team_1_update/features/auth/sign_up/presentation/pages/sign_up_page.dart';
@@ -48,11 +50,19 @@ abstract class Approutes {
       // Booking
       GoRoute(
         path: AppRoute.bookappointment,
-        builder: (context, state) => const Bookappointment(),
+        builder: (context, state) {
+          final doctor =
+              state.extra is ApiDoctor ? state.extra as ApiDoctor : null;
+          return Bookappointment(doctor: doctor);
+        },
       ),
       GoRoute(
         path: AppRoute.selectPaymentMethodScreen,
-        builder: (context, state) => const SelectPaymentMethodScreen(),
+        builder: (context, state) {
+          final data =
+              state.extra is BookingFlowData ? state.extra as BookingFlowData : null;
+          return SelectPaymentMethodScreen(data: data);
+        },
       ),
       GoRoute(
         path: AppRoute.addReviewScreen,
@@ -60,20 +70,24 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.doctorDetails,
-        builder: (context, state) => const DoctorDetailsScreen(),
+        builder: (context, state) {
+          final doctor =
+              state.extra is ApiDoctor ? state.extra as ApiDoctor : null;
+          return DoctorDetailsScreen(doctor: doctor);
+        },
       ),
       GoRoute(
         path: AppRoute.myBookingScreen,
-        builder: (context, state) => const MyBookingScreen(),
+        builder: (context, state) => const MyBookingScreen(
+          isActive: true,
+        ),
       ),
       GoRoute(
-        path: AppRoute.updateMyBookingSceen,
-        builder: (context, state) {
-          BookingEnum bookingStatus =state.extra as BookingEnum;
-        return  UpdateMyBookingScreen(bookingStatus: bookingStatus );
-        }
-        
-      ),
+          path: AppRoute.updateMyBookingSceen,
+          builder: (context, state) {
+            final booking = state.extra as MyBookingEntity;
+            return UpdateMyBookingScreen(booking: booking);
+          }),
 
       // Auth
       GoRoute(
@@ -95,7 +109,10 @@ abstract class Approutes {
       // Chat
       GoRoute(
         path: AppRoute.chat,
-        builder: (context, state) => const Chat(),
+        builder: (context, state) => BlocProvider.value(
+          value: getIt.get<ChatCubit>(),
+          child: const Chat(),
+        ),
       ),
       GoRoute(
         path: AppRoute.chatbody,
@@ -103,7 +120,7 @@ abstract class Approutes {
           final conv = state.extra as Conversion;
           return BlocProvider(
             create: (context) =>
-                ChatCubit(getIt.get<Chatrepoa>())..getmassages(conv),
+                ChatbodyCubit(getIt.get<Repoimplement>())..getmassages(conv),
             child: Chatbody(convers: conv),
           );
         },
@@ -124,11 +141,21 @@ abstract class Approutes {
       // Nav & Home
       GoRoute(
         path: AppRoute.navBar,
-        builder: (context, state) => const NavBar(),
+        builder: (context, state) {
+          final extra = state.extra;
+          if (extra is NavBarArgs) {
+            return NavBar(
+              initialIndex: extra.index,
+              initialConversation: extra.conversation,
+            );
+          }
+          final index = extra is int ? extra : 0;
+          return NavBar(initialIndex: index);
+        },
       ),
       GoRoute(
         path: AppRoute.home,
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) => const NavBar(),
       ),
       GoRoute(
         path: AppRoute.map,

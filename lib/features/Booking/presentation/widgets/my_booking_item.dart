@@ -19,26 +19,31 @@ class MyBookingItem extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-          border: Border.all(width: 3, color: ColorsLight.offWhite),
-          borderRadius: BorderRadius.circular(20)),
+          color: Colors.white,
+          border: Border.all(width: 1, color: ColorsLight.offWhite),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            )
+          ]),
       child: Padding(
         padding:
-            EdgeInsets.only(top: 13.h, bottom: 16.h, left: 16.w, right: 16.w),
+            EdgeInsets.only(top: 14.h, bottom: 16.h, left: 16.w, right: 16.w),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MyBookingItemHeader(
-              bookingStatus: mybookItem.bookingStatus,
-            ),
+            MyBookingItemHeader(booking: mybookItem),
             const CustomDivivder(),
             MyBookingItemDoctorDetails(
               mybookItem: mybookItem,
             ),
             SizedBox(
-              height: 16.r,
+              height: 12.r,
             ),
-            getbuttonBasedOnBookingStatus(
-                  bookingStatus: mybookItem.bookingStatus,
-                  bookId: mybookItem.bookId),
+            getbuttonBasedOnBookingStatus(booking: mybookItem),
             
           ],
         ),

@@ -3,7 +3,13 @@ import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/
 import 'package:flutter/material.dart';
 
 class PaymentMethodItemsImplement extends StatefulWidget {
-  const PaymentMethodItemsImplement({super.key});
+  final int initialIndex;
+  final ValueChanged<PaymentMethodModel>? onSelected;
+  const PaymentMethodItemsImplement({
+    super.key,
+    this.initialIndex = 0,
+    this.onSelected,
+  });
 
   @override
   State<PaymentMethodItemsImplement> createState() =>
@@ -12,7 +18,13 @@ class PaymentMethodItemsImplement extends StatefulWidget {
 
 class _PaymentMethodItemsImplementState
     extends State<PaymentMethodItemsImplement> {
-  int selecteditem = 0;
+  late int selecteditem;
+
+  @override
+  void initState() {
+    super.initState();
+    selecteditem = widget.initialIndex;
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,6 +36,7 @@ class _PaymentMethodItemsImplementState
               setState(() {
                 selecteditem = e.key;
               });
+              widget.onSelected?.call(e.value);
             },
             child: PaymentItem(
               paymendata: e.value,

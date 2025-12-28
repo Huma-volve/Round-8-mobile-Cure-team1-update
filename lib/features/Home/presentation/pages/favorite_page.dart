@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../Data/models/api_doctor.dart';
 import '../state/favorite_store.dart';
-import '../widgets/doctor_item.dart';
+import '../widgets/api_doctor_item.dart';
 
-class FavoritePage extends StatefulWidget {
+class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
-
-  @override
-  State<FavoritePage> createState() => _FavoritePageState();
-}
-
-class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
+    FavoriteStore.ensureSynced();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your favorite"),
@@ -22,10 +18,9 @@ class _FavoritePageState extends State<FavoritePage> {
             },
             child: const Icon(Icons.arrow_back_ios)),
       ),
-      body: ValueListenableBuilder<Set<int>>(
-        valueListenable: FavoriteStore.favorites,
-        builder: (context, favorites, child) {
-          final doctors = FavoriteStore.currentFavorites();
+      body: ValueListenableBuilder<List<ApiDoctor>>(
+        valueListenable: FavoriteStore.favoriteDoctors,
+        builder: (context, doctors, child) {
           if (doctors.isEmpty) {
             return Center(
               child: Column(
@@ -52,7 +47,7 @@ class _FavoritePageState extends State<FavoritePage> {
               return const SizedBox(height: 12);
             },
             itemBuilder: (context, index) {
-              return DoctorItem(doctor: doctors[index]);
+              return ApiDoctorItem(doctor: doctors[index]);
             },
           );
         },

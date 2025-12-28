@@ -73,6 +73,21 @@ class Repoimplement extends Chatrepoa {
       }
     }
   }
+
+  @override
+  Future<Either<Serverfailuer, Conversion>> startConversation(
+      int doctorId) async {
+    try {
+      final conversation = await remotdata.startConversation(doctorId);
+      return right(conversation);
+    } catch (e) {
+      if (e is DioException) {
+        return left(Serverfailuer.forDioExcption(e));
+      } else {
+        return left(Serverfailuer(e.toString()));
+      }
+    }
+  }
   
   @override
   Future<Either<Serverfailuer, List<Conversion>>> refreshConversations(Chattab tab) {

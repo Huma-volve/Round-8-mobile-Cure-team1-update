@@ -3,9 +3,11 @@ import 'dart:developer';
 // import 'package:cure_team_1_update/core/extensions/context_extension.dart';
 import 'package:cure_team_1_update/core/extensions/context_extension.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
+import 'package:cure_team_1_update/core/utils/app_toast.dart';
 import 'package:cure_team_1_update/features/Booking/domain/repo/my_book_repo.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/manager/cancel_book/cubit/cancel_boking_cubit.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/manager/cancel_book/cubit/cancel_boking_state.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/manager/get_book/cubit/booking_cubit.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/cancel_reason_widget.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/cancel_warning_section.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/widgets/dialog_confirm_button.dart';
@@ -16,6 +18,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 Future<dynamic> showDialogImplement(
     {required BuildContext context, required int bookId}) {
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  BookingCubit? bookingCubit;
+  try {
+    bookingCubit = context.read<BookingCubit>();
+  } catch (_) {
+    bookingCubit = null;
+  }
 
   ValueNotifier<bool> confirmCancel = ValueNotifier<bool>(false);
   ValueNotifier<String?> cancelReason = ValueNotifier<String?>(null);
@@ -29,7 +37,11 @@ Future<dynamic> showDialogImplement(
               listener: (context, state) {
           if(state is CancelMyBookingSuccessState)
           {
-  dialogContext.pop();
+            AppToast.show(context, 'Booking canceled successfully.');
+            bookingCubit?.getBookingData();
+            dialogContext.pop();
+          } else if (state is CancelMyBookingFailureState) {
+            AppToast.show(context, state.errorMessage);
           }
               },
               child: Dialog(

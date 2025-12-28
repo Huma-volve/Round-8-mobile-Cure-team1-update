@@ -15,4 +15,5 @@ abstract class Chatrepoa {
       Conversion conv);
   Future<Either<Serverfailuer, List<Historymasseges>>> sendmassages(
       conversionId, body);
+  Future<Either<Serverfailuer, Conversion>> startConversation(int doctorId);
 }

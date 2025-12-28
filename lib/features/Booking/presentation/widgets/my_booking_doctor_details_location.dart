@@ -11,13 +11,28 @@ class MyBookingDoctorDetailsLocation extends StatelessWidget {
 final String docAddress;
   @override
   Widget build(BuildContext context) {
+    final resolved = docAddress.trim().isEmpty
+        ? 'Location unavailable'
+        : docAddress;
     return Row(
       children: [
        SizedBox(
-         height: 20.h,
-         width: 20.w,
-         child: Image.asset(Assets.resourceImagesLocation,color: ColorsLight.blueGray,)),
-        Text(docAddress,style: AppTextStyles.montserratRegular14(context),),
+         height: 18.h,
+         width: 18.w,
+         child: Image.asset(
+           Assets.resourceImagesLocation,
+           color: ColorsLight.blueGray,
+         )),
+        SizedBox(width: 6.w),
+        Expanded(
+          child: Text(
+            resolved,
+            style: AppTextStyles.montserratRegular14(context)
+                .copyWith(color: ColorsLight.blueGray),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ],
     );
   }

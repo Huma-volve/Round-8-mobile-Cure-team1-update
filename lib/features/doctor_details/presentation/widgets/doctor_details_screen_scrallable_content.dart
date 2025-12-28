@@ -1,3 +1,9 @@
+import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/services/service_locator.dart';
+import 'package:cure_team_1_update/core/utils/app_toast.dart';
+import 'package:cure_team_1_update/features/Home/Data/models/api_doctor.dart';
+import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
+import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/about_me_section.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/add_review_and_rating.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/comment_desplay.dart';
@@ -6,10 +12,13 @@ import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/
 import 'package:cure_team_1_update/features/doctor_details/presentation/widgets/review_and_rating_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class DoctorDetailsScreenScrollableContent extends StatelessWidget {
+  final ApiDoctor? doctor;
   const DoctorDetailsScreenScrollableContent({
     super.key,
+    this.doctor,
   });
 
   @override
@@ -24,18 +33,26 @@ class DoctorDetailsScreenScrollableContent extends StatelessWidget {
                 SizedBox(
                   height: 16.r,
                 ),
-                const DoctorDetailsAppBar(
+                DoctorDetailsAppBar(
                   title: 'Doctor Details',
+                  ismessageIconEnable: true,
+                  onMessageTap: () => _startChat(context),
                 ),
-                const DoctorDetailsWidget(),
                 SizedBox(
-                  height: 16.r,
+                  height: 20.r,
                 ),
-                const ReviewAndRatingSection(),
+                DoctorDetailsWidget(doctor: doctor),
                 SizedBox(
-                  height: 41.r,
+                  height: 20.r,
                 ),
-                const AboutMeSection(),
+                ReviewAndRatingSection(
+                  experienceYears: doctor?.experienceYears,
+                  rating: doctor?.rating,
+                ),
+                SizedBox(
+                  height: 28.r,
+                ),
+                AboutMeSection(aboutMe: doctor?.aboutMe),
                 SizedBox(
                   height: 24.r,
                 ),
@@ -49,5 +66,29 @@ class DoctorDetailsScreenScrollableContent extends StatelessWidget {
             ),
           ],
         ));
+  }
+
+  Future<void> _startChat(BuildContext context) async {
+    final doctor = this.doctor;
+    if (doctor == null || doctor.id == 0) {
+      AppToast.show(context, 'Doctor data is missing.');
+      return;
+    }
+    final chatCubit = getIt.get<ChatCubit>();
+    final conversation = await chatCubit.startConversationWithDoctor(
+      doctorId: doctor.id,
+      doctorName: doctor.name,
+    );
+    if (!context.mounted) {
+      return;
+    }
+    if (conversation == null) {
+      AppToast.show(context, 'Unable to start chat. Try again.');
+      return;
+    }
+    context.go(
+      AppRoute.navBar,
+      extra: NavBarArgs(index: 2, conversation: conversation),
+    );
   }
 }

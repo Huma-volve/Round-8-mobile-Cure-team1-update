@@ -9,34 +9,47 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class DateTimeWidge extends StatefulWidget {
   const DateTimeWidge({
     super.key,
+    this.initialSelectedDate,
+    this.onDateSelected,
   });
+  final DateTime? initialSelectedDate;
+  final ValueChanged<DateTime>? onDateSelected;
 
   @override
   State<DateTimeWidge> createState() => _DateTimeWidgeState();
 }
 
 class _DateTimeWidgeState extends State<DateTimeWidge> {
- DateTime selectedValue=DateTime.now();
+ DateTime selectedValue = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    selectedValue = widget.initialSelectedDate ?? DateTime.now();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return DatePicker(
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: DatePicker(
         DateTime.now(),
-        width: 50.r,
+        height: 78.r,
+        width: 52.r,
         initialSelectedDate: selectedValue,
-    
         selectedTextColor: Colors.white,
-        
         monthTextStyle: const TextStyle(fontSize: 0),
-         selectionColor: ColorsLight.royalBlue,    
-        dateTextStyle: AppTextStyles.montserratMedum16(context),
-        dayTextStyle: AppTextStyles.montserratMedum14(context),
+        selectionColor: ColorsLight.royalBlue,
+        dateTextStyle: AppTextStyles.montserratMedum16(context)
+            .copyWith(color: ColorsLight.coolGrey),
+        dayTextStyle: AppTextStyles.montserratMedum12(context)
+            .copyWith(color: ColorsLight.coolGrey),
         onDateChange: (date) {
           setState(() {
             selectedValue = date;
-
-            
           });
+          widget.onDateSelected?.call(date);
         },
-      );
+      ),
+    );
   }}

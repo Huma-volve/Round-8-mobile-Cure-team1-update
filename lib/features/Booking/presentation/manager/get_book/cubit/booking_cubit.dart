@@ -10,7 +10,7 @@ class BookingCubit extends Cubit<BookingState> {
   final MyBookRepo myBookRepo;
  
   BookingCubit({required this.myBookRepo}) : super(BookingIntialState());
-Future<void>  getBookingData({required String selectedData})async{
+Future<void> getBookingData() async {
   emit(BookingLoadingState());
 var result=  await myBookRepo.getMyBooking();
 result.fold((failuer){

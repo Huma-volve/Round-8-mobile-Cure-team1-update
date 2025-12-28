@@ -5,11 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PriceAndBookActionFooterButton extends StatelessWidget {
   const PriceAndBookActionFooterButton({
-    super.key, required this.buttonName, this.onPressed,this.loadingState=false
+    super.key,
+    required this.buttonName,
+    this.onPressed,
+    this.loadingState = false,
+    this.price,
   });
 final String buttonName;
 final  Function()? onPressed;
 final bool loadingState;
+final double? price;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -25,7 +30,7 @@ final bool loadingState;
           padding:  EdgeInsets.only(top: 17.r,left: 24.r,right: 24.r),
           child: Column(
            children: [
-         const    PriceWidget(),
+             PriceWidget(price: price),
          SizedBox(height: 15.r,),
               CustomElevatedButton(onPressed:  onPressed, buttonName: buttonName,loadingState: loadingState,)      
            ],

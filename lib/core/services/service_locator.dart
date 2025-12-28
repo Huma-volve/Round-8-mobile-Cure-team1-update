@@ -16,11 +16,20 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:cure_team_1_update/features/auth/login/domain/login_repo_impl.dart';
 import 'package:cure_team_1_update/features/auth/login/presentation/manage/login_cubit.dart';
+import 'package:cure_team_1_update/features/auth/otp/data/repo/otp_repo.dart';
+import 'package:cure_team_1_update/features/auth/otp/domain/otp_repo_impl.dart';
+import 'package:cure_team_1_update/features/auth/otp/presentation/manage/otp_cubit.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
 import 'package:cure_team_1_update/features/profile/data/data_source/profile_data_source.dart';
 import 'package:cure_team_1_update/features/profile/data/repos/edit_profile_repo.dart';
 import 'package:cure_team_1_update/features/profile/presentation/bloc/bloc/edit_profile_bloc.dart';
+import 'package:cure_team_1_update/features/settings/data/data_source/faqs/faqs_data_source.dart';
+import 'package:cure_team_1_update/features/settings/data/repos/faqs/faqs_repo.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/faqs_bloc/faqs_bloc.dart';
+import 'package:cure_team_1_update/features/settings/data/data_source/logout/logout_data_source.dart';
+import 'package:cure_team_1_update/features/settings/data/repos/logout/logout_repo.dart';
+import 'package:cure_team_1_update/features/settings/presentation/view_model/logout/logout_bloc.dart';
 
 import '../../features/Home/location/Data/DataSource/location_datasoucre.dart';
 import '../../features/Home/location/Domin/useCase/get_user_location.dart';
@@ -31,7 +40,6 @@ final getIt = GetIt.instance;
 var getit = GetIt.instance;
 Future<void> setup() async {
   getIt.registerSingleton<Dio>(Dio());
-  getIt.registerSingleton<ApiServices>(ApiServices(getIt.get<Dio>()));
   getIt.registerSingleton<BookingRemoteDataSource>(
       BookingRemoteDataSourceImpl(dio: getIt<Dio>()));
   getIt.registerSingleton<MyBookRepo>(MyBookRepoImplement(
@@ -60,15 +68,27 @@ Future<void> setup() async {
   getIt.registerSingleton<LoginCubit>(
       LoginCubit(loginRepo: getIt.get<LoginRepoImpl>()));
 
-  // getIt.registerSingleton<OtpRepo>(OtpRepoImpl(getIt.get<ApiServices>()));
-  // getIt
-  //     .registerFactory<OtpCubit>(() => OtpCubit(otpRepo: getIt.get<OtpRepo>()));
+  getIt.registerSingleton<OtpRepo>(OtpRepoImpl(getIt.get<ApiServices>()));
+  getIt
+      .registerFactory<OtpCubit>(() => OtpCubit(otpRepo: getIt.get<OtpRepo>()));
 
   //edit profile
   getIt
     ..registerFactory(() => EditProfileBloc(getIt()))
     ..registerLazySingleton(() => EditProfileRepo(getIt()))
     ..registerLazySingleton(() => EditProfileDataSource(getIt()));
+
+  // FAQs
+  getIt
+    ..registerLazySingleton(() => FaqsDataSource(getIt<ApiServices>()))
+    ..registerLazySingleton(() => FaqsRepo(getIt<FaqsDataSource>()))
+    ..registerFactory(() => FaqsBloc(getIt<FaqsRepo>()));
+
+  // Logout
+  getIt
+    ..registerLazySingleton(() => LogoutDataSource(getIt<ApiServices>()))
+    ..registerLazySingleton(() => LogoutRepo(getIt<LogoutDataSource>()))
+    ..registerFactory(() => LogoutBloc(getIt<LogoutRepo>()));
   // Location Feature
   getIt.registerLazySingleton<LocationDataSource>(
     () => LocationDataSource(),
@@ -86,7 +106,7 @@ Future<void> setup() async {
     () => GetUserAddress(repo: getIt<LocationRepository>()),
   );
 
-  getIt.registerLazySingleton<LocationCubit>(
+  getIt.registerFactory<LocationCubit>(
     () => LocationCubit(
       getIt<GetUserLocation>(),
       getIt<GetUserAddress>(),
@@ -98,7 +118,7 @@ Future<void> setup() async {
 //  getIt.registerSingleton<BookingRemoteDataSource>(BookingRemoteDataSourceImpl(dio: getIt<Dio>()));
   //  getIt.registerSingleton<MyBookRepo>(MyBookRepoImplement(bookingRemoteDataSource: getIt<BookingRemoteDataSource>()));
   getIt.registerSingleton<CreateBookRemoteDataSource>(
-      CreateBookRemoteDataSourceImp());
+      CreateBookRemoteDataSourceImp(apiServices: getIt<ApiServices>()));
   getIt.registerSingleton<CreateBookRepo>(CreateBookRepoImp(
       createBookRemoteDataSource: getIt<CreateBookRemoteDataSource>()));
 }

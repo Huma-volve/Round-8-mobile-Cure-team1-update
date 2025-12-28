@@ -45,8 +45,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => getIt<EditProfileBloc>(),
+    return BlocProvider.value(
+        value: _bloc,
         child: Scaffold(
           backgroundColor: ColorsLight.scaffoldBackground,
           appBar: CustomAppBar(

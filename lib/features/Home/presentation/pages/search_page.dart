@@ -8,10 +8,37 @@ import '../../Data/models/specialty_model.dart';
 import '../../location/Domin/entities/user_location.dart';
 import '../../location/presentation/cubit/location_cubit.dart';
 import '../../location/presentation/state/location_state.dart';
+import 'doctors_search_page.dart';
 import '../widgets/speciality_widget.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
+
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _submitSearch() {
+    final query = _searchController.text.trim();
+    if (query.isEmpty) {
+      return;
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => DoctorsSearchPage(initialQuery: query),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +49,7 @@ class SearchPage extends StatelessWidget {
         title: const Text("Search"),
         leading: InkWell(
             onTap: () {
-              GoRouter.of(context).pop();
+              Navigator.pop(context);
             },
             child: const Icon(Icons.arrow_back_ios)),
       ),
@@ -30,10 +57,17 @@ class SearchPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 20),
         child: Column(children: [
           TextFormField(
+            controller: _searchController,
+            onFieldSubmitted: (_) => _submitSearch(),
             decoration: InputDecoration(
                 hintText: "Search for specialty, doctor..",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                ),
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: IconButton(
+                  onPressed: _submitSearch,
+                  icon: const Icon(Icons.arrow_forward),
                 )),
           ),
           const SizedBox(
@@ -108,8 +142,8 @@ class SearchPage extends StatelessWidget {
             height: 14,
           ),
           Wrap(
-            spacing: 14, // مسافة بين العناصر
-            runSpacing: 10, // مسافة بين السطور
+            spacing: 14,
+            runSpacing: 10,
             children: [
               ...Specialty.specialties
                   .map((e) => SpecialityWidget(specialty: e)),

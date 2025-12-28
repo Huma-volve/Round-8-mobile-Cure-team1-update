@@ -1,14 +1,15 @@
+import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/core/utils/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:cure_team_1_update/core/utils/app_toast.dart';
 
-import '../../../../core/constants/app_route.dart';
-import '../../Data/models/doctor_model.dart';
+import '../../Data/models/api_doctor.dart';
 import '../state/favorite_store.dart';
 
-class DoctorItem extends StatelessWidget {
-  final DoctorModel doctor;
-  const DoctorItem({super.key, required this.doctor});
+class ApiDoctorItem extends StatelessWidget {
+  final ApiDoctor doctor;
+  final VoidCallback? onTap;
+  const ApiDoctorItem({super.key, required this.doctor, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +23,10 @@ class DoctorItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: () {
-          context.push(AppRoute.doctorDetails ,
-          extra: doctor);
-        },
+        onTap: onTap ??
+            () {
+              context.push(AppRoute.doctorDetails, extra: doctor);
+            },
         child: Container(
           width: double.infinity,
           height: 90,
@@ -44,10 +45,7 @@ class DoctorItem extends StatelessWidget {
                 child: SizedBox(
                   height: double.infinity,
                   width: 88,
-                  child: Image.asset(
-                    doctor.image,
-                    fit: BoxFit.cover,
-                  ),
+                  child: _DoctorImage(url: doctor.profilePhoto),
                 ),
               ),
               Container(
@@ -73,7 +71,7 @@ class DoctorItem extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      "${doctor.specialty} | ${doctor.hospital}",
+                      _subtitleText(doctor),
                       style: const TextStyle(
                         fontSize: 13,
                         color: subtitleColor,
@@ -91,25 +89,10 @@ class DoctorItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          doctor.rating.toString(),
+                          doctor.rating.toStringAsFixed(1),
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 14,
-                            color: textColor,
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        const Icon(
-                          Icons.watch_later_outlined,
-                          size: 18,
-                          color: subtitleColor,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          doctor.date,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 13,
                             color: textColor,
                           ),
                         ),
@@ -126,15 +109,13 @@ class DoctorItem extends StatelessWidget {
                   return IconButton(
                     onPressed: () async {
                       final previous = isFavorite;
-                      FavoriteStore.setFavorite(doctor, !previous);
-                      final result =
-                          await FavoriteStore.toggleRemote(doctor);
+                      FavoriteStore.setFavoriteById(doctor.id, !previous);
+                      final result = await FavoriteStore.toggleRemoteApi(doctor);
                       if (result.isFavorite == null) {
-                        FavoriteStore.setFavorite(doctor, previous);
+                        FavoriteStore.setFavoriteById(doctor.id, previous);
                         AppToast.show(
                           context,
-                          result.message ??
-                              'Failed to update favorite status.',
+                          result.message ?? 'Failed to update favorite status.',
                         );
                       }
                     },
@@ -153,4 +134,60 @@ class DoctorItem extends StatelessWidget {
       ),
     );
   }
+}
+
+class _DoctorImage extends StatelessWidget {
+  final String? url;
+
+  const _DoctorImage({this.url});
+
+  @override
+  Widget build(BuildContext context) {
+    if (url == null || url!.isEmpty) {
+      return const _ImagePlaceholder();
+    }
+    if (!url!.startsWith('http')) {
+      return Image.asset(
+        url!,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => const _ImagePlaceholder(),
+      );
+    }
+    return Image.network(
+      url!,
+      fit: BoxFit.cover,
+      errorBuilder: (_, __, ___) => const _ImagePlaceholder(),
+      loadingBuilder: (context, child, progress) {
+        if (progress == null) {
+          return child;
+        }
+        return const _ImagePlaceholder();
+      },
+    );
+  }
+}
+
+class _ImagePlaceholder extends StatelessWidget {
+  const _ImagePlaceholder();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color(0xFFF1F3F6),
+      child: const Icon(
+        Icons.person,
+        color: Color(0xFF9AA0A6),
+        size: 36,
+      ),
+    );
+  }
+}
+
+String _subtitleText(ApiDoctor doctor) {
+  final specialty = doctor.specialty;
+  final address = doctor.address;
+  if (address.isEmpty) {
+    return specialty;
+  }
+  return '$specialty | $address';
 }

@@ -18,12 +18,9 @@ class _RatingState extends State<Rating> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Padding(
-          padding: EdgeInsets.only(left: 21.5.w),
-          child: Text(
-            '$rate/5',
-            style: AppTextStyles.georgiaRegular40(context),
-          ),
+        Text(
+          '$rate/5',
+          style: AppTextStyles.georgiaRegular40(context),
         ),
         const Spacer(),
         Column(

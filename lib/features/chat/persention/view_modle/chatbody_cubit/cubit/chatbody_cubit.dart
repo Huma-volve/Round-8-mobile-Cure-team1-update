@@ -33,7 +33,7 @@ class ChatbodyCubit extends Cubit<ChatbodyState> {
     });
   }
 
-  Future<void> sendmassge(int conversionId, Map<String, dynamic> data) async {
+  Future<void> sendmassge(int conversionId, Object data) async {
     print('chatbodydtaild chatbodydtailds');
 
     var reslut = await chatrepoa.sendmassages(conversionId, data);

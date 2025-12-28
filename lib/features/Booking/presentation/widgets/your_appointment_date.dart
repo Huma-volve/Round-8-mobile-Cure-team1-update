@@ -10,14 +10,12 @@ import 'package:intl/intl.dart';
 class YourApointMentDateWidget extends StatefulWidget {
   const YourApointMentDateWidget({
     super.key,
-    required this.selectedDayName,
-    required this.selectedMonthName,
-    required this.selectedDayNumber,
+    this.initialDate,
+    this.onDateSelected,
   });
 
-  final String? selectedDayName;
-  final String? selectedMonthName;
-  final String? selectedDayNumber;
+  final String? initialDate;
+  final ValueChanged<String>? onDateSelected;
 
   @override
   State<YourApointMentDateWidget> createState() =>
@@ -27,6 +25,27 @@ class YourApointMentDateWidget extends StatefulWidget {
 class _YourApointMentDateWidgetState extends State<YourApointMentDateWidget> {
   bool activeCalender = false;
   String? formatedDate;
+  String? apiDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _setInitialDate(widget.initialDate);
+  }
+
+  void _setInitialDate(String? date) {
+    if (date == null || date.trim().isEmpty) {
+      return;
+    }
+    final parsed = DateTime.tryParse(date);
+    if (parsed != null) {
+      formatedDate = DateFormat('EEEE,MMMM d').format(parsed);
+      apiDate = DateFormat('yyyy-MM-dd').format(parsed);
+    } else {
+      formatedDate = date;
+      apiDate = date;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -65,7 +84,11 @@ class _YourApointMentDateWidgetState extends State<YourApointMentDateWidget> {
                 if(selectedDateTime!=null)
                 {
                 formatedDate=DateFormat('EEEE,MMMM d').format(selectedDateTime);
+                apiDate = DateFormat('yyyy-MM-dd').format(selectedDateTime);
                   log(formatedDate!);
+                if (apiDate != null) {
+                  widget.onDateSelected?.call(apiDate!);
+                }
                 }
               }
             },

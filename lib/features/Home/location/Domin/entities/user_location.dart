@@ -1,4 +1,3 @@
-//الداتا اللي هتعامل بيها او هستخدمها بعد كدا
 class UserLocation {
   final double lat;
   final double lng;
@@ -7,7 +6,7 @@ class UserLocation {
   UserLocation({
     required this.lat,
     required this.lng,
-     this.address,
+    this.address,
   });
 }
 
@@ -20,6 +19,7 @@ class SelectedLocation {
     required this.address,
   });
 }
+
 class UserAddress {
   final String street;
   final String city;

@@ -40,11 +40,10 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
             SizedBox(height: 16.h),
             _buildCardDisplay(
               'VISA',
-              'Bank Name',
               true,
             ), // Default to Visa for now
             SizedBox(height: 16.h),
-            _buildCardDisplay('MasterCard', 'Bank Name', false),
+            _buildCardDisplay('MasterCard', false),
             SizedBox(height: 32.h),
             Text('More Payment Options',
                 style: StyleTextHelper.textStyle20Regular(context).copyWith(
@@ -74,7 +73,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
     );
   }
 
-  Widget _buildCardDisplay(String type, String title, bool isVisa) {
+  Widget _buildCardDisplay(String type, bool isVisa) {
     return InkWell(
       onTap: () {
         GoRouter.of(context).push(AppRoute.cardsScreen);

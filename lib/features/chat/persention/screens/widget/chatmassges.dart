@@ -17,18 +17,20 @@ class Chatmassges extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        reverse: true,
-        controller: scroll,
-        itemCount: list.length,
-        itemBuilder: (context, index) {
-          final message = list[index];
-          final senderId = message.senderId;
-          final isCurrentUser = _isCurrentUser(senderId, otherUserId, message);
+      reverse: true,
+      controller: scroll,
+      physics: const BouncingScrollPhysics(),
+      itemCount: list.length,
+      itemBuilder: (context, index) {
+        final message = list[index];
+        final senderId = message.senderId;
+        final isCurrentUser = _isCurrentUser(senderId, otherUserId, message);
 
-          return isCurrentUser
-              ? BubbleFreind(message: message)
-              : BubbleText(conversion: message);
-        });
+        return isCurrentUser
+            ? BubbleFreind(message: message)
+            : BubbleText(conversion: message);
+      },
+    );
   }
 
   bool _isCurrentUser(
@@ -36,6 +38,9 @@ class Chatmassges extends StatelessWidget {
     int? otherUserId,
     Historymasseges message,
   ) {
+    if (message.isMine != null) {
+      return message.isMine!;
+    }
     if (senderId != null && otherUserId != null) {
       return senderId != otherUserId;
     }

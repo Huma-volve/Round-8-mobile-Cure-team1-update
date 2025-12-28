@@ -4,14 +4,20 @@ import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class ApointMentAndReschedualWidget extends StatelessWidget {
+  final String? appointmentDate;
+  final String? appointmentTime;
   const ApointMentAndReschedualWidget({
     super.key,
+    this.appointmentDate,
+    this.appointmentTime,
   });
 
   @override
   Widget build(BuildContext context) {
+    final formatted = _formatAppointment(appointmentDate, appointmentTime);
     return Row(
       children: [
         SizedBox(
@@ -22,7 +28,7 @@ class ApointMentAndReschedualWidget extends StatelessWidget {
           width: 8.w,
         ),
         Text(
-          'Friday,July17-4:00pm',
+          formatted,
           style: AppTextStyles.montserratMedum14(context)
               .copyWith(color: ColorsLight.prussianBlue),
         ),
@@ -39,4 +45,30 @@ class ApointMentAndReschedualWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+String _formatAppointment(String? date, String? time) {
+  final trimmedDate = date?.trim();
+  final trimmedTime = time?.trim();
+  String? formattedDate;
+
+  if (trimmedDate != null && trimmedDate.isNotEmpty) {
+    final parsed = DateTime.tryParse(trimmedDate);
+    formattedDate = parsed != null
+        ? DateFormat('EEEE,MMMM d').format(parsed)
+        : trimmedDate;
+  }
+
+  if (formattedDate != null && formattedDate.isNotEmpty) {
+    if (trimmedTime != null && trimmedTime.isNotEmpty) {
+      return '$formattedDate - $trimmedTime';
+    }
+    return formattedDate;
+  }
+
+  if (trimmedTime != null && trimmedTime.isNotEmpty) {
+    return trimmedTime;
+  }
+
+  return 'Select appointment';
 }

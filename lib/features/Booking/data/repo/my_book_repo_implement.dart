@@ -38,4 +38,24 @@ return right(null);
      
    }
   }
+
+  @override
+  Future<Either<Failuer, void>> updateMyBooking(
+      {required int bookId,
+      required String appointmentDate,
+      required String appointmentTime}) async {
+    try {
+      await bookingRemoteDataSource.updateMyBooking(
+        bookId: bookId,
+        appointmentDate: appointmentDate,
+        appointmentTime: appointmentTime,
+      );
+      return right(null);
+    } catch (error) {
+      if (error is DioException) {
+        return left(Serverfailuer.forDioExcption(error));
+      }
+      return left(Serverfailuer(error.toString()));
+    }
+  }
 }

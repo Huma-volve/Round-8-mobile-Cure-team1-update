@@ -12,7 +12,7 @@ class CommentDesplay extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-          border: Border.all(width: 4.r, color: ColorsLight.lightGray),
+          border: Border.all(width: 1.r, color: ColorsLight.border),
           borderRadius: BorderRadius.circular(16.r)),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 14.r, horizontal: 12.r),
