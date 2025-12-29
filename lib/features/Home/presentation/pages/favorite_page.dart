@@ -11,6 +11,7 @@ class FavoritePage extends StatelessWidget {
     FavoriteStore.ensureSynced();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: const Text("Your favorite"),
         leading: InkWell(
             onTap: () {

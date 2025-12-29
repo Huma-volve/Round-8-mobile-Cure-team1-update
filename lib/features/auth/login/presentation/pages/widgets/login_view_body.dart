@@ -5,16 +5,32 @@ import 'package:cure_team_1_update/core/common/widgets/phone_input.dart';
 import 'package:cure_team_1_update/core/constants/app_route.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
+import 'package:cure_team_1_update/core/utils/app_toast.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
+import 'package:cure_team_1_update/core/services/shared_pref/shared_pref.dart';
+import 'package:cure_team_1_update/features/auth/google_services/google_auth_service.dart';
 import 'package:cure_team_1_update/features/auth/login/presentation/manage/login_cubit.dart';
 import 'package:cure_team_1_update/features/auth/login/presentation/pages/widgets/divider_login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});
+
+  String _googleErrorMessage(Object error) {
+    if (error is FirebaseAuthException) {
+      return error.message ?? error.code;
+    }
+    if (error is PlatformException) {
+      return error.message ?? error.code;
+    }
+    return error.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +95,43 @@ class LoginViewBody extends StatelessWidget {
                 height: 16.h,
               ),
               ButtonWithGoogle(
-                onTap: () {
-                  context.go(AppRoute.navBar);
+                onTap: () async {
+                  try {
+                    final userCredential =
+                        await GoogleAuthService().signInWithGoogle();
+
+                    if (userCredential.user == null) {
+                      AppToast.show(context, 'Google sign-in failed.');
+                      return;
+                    }
+                    final user = userCredential.user!;
+                    final idToken = await user.getIdToken();
+                    if (idToken!.isNotEmpty) {
+                      await Cachehelper.cacheToken(idToken);
+                    }
+                    final displayName = user.displayName?.trim();
+                    if (displayName != null && displayName.isNotEmpty) {
+                      await Cachehelper.cacheUserName(displayName);
+                    } else {
+                      final emailName = user.email?.split('@').first.trim();
+                      if (emailName != null && emailName.isNotEmpty) {
+                        await Cachehelper.cacheUserName(emailName);
+                      }
+                    }
+                    final email = user.email?.trim();
+                    if (email != null && email.isNotEmpty) {
+                      await Cachehelper.cacheUserEmail(email);
+                    }
+                    final phone = user.phoneNumber?.trim();
+                    if (phone != null && phone.isNotEmpty) {
+                      await Cachehelper.cacheUserPhone(phone);
+                    }
+                    GoRouter.of(context).go(AppRoute.home);
+                  } catch (e) {
+                    final message = _googleErrorMessage(e);
+                    debugPrint('Google Sign-In error: $message');
+                    AppToast.show(context, message);
+                  }
                 },
               ),
               SizedBox(

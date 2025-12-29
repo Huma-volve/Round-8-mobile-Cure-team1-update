@@ -45,6 +45,7 @@ void showDeleteAccountDialogSettings(BuildContext context) {
                 orElse: () => false,
               );
           return Dialog(
+            backgroundColor: Colors.white,
             insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24.r),
@@ -115,7 +116,8 @@ void showDeleteAccountDialogSettings(BuildContext context) {
                                         SizedBox(
                                           width: 16.r,
                                           height: 16.r,
-                                          child: const CircularProgressIndicator(
+                                          child:
+                                              const CircularProgressIndicator(
                                             strokeWidth: 2,
                                             valueColor:
                                                 AlwaysStoppedAnimation<Color>(
@@ -127,7 +129,7 @@ void showDeleteAccountDialogSettings(BuildContext context) {
                                         Text(
                                           'Deleting...',
                                           style: StyleTextHelper
-                                              .textStyle16Regular(context)
+                                                  .textStyle16Regular(context)
                                               .copyWith(
                                             color: ColorsLight.offWhite,
                                           ),
@@ -137,8 +139,7 @@ void showDeleteAccountDialogSettings(BuildContext context) {
                                   : Text(
                                       'Yes, delete',
                                       key: const ValueKey('ready'),
-                                      style:
-                                          StyleTextHelper.textStyle16Regular(
+                                      style: StyleTextHelper.textStyle16Regular(
                                         context,
                                       ).copyWith(
                                         color: ColorsLight.offWhite,

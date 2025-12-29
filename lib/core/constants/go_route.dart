@@ -5,6 +5,7 @@ import 'package:cure_team_1_update/features/Booking/presentation/screen/update_b
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/map.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
+import 'package:cure_team_1_update/features/Home/presentation/pages/favorite_page.dart';
 import 'package:cure_team_1_update/features/Home/Data/models/api_doctor.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
@@ -168,6 +169,10 @@ abstract class Approutes {
           final location = state.extra as UserLocation;
           return MapScreen(location: location);
         },
+      ),
+      GoRoute(
+        path: AppRoute.favorite,
+        builder: (context, state) => const FavoritePage(),
       ),
 
       // Payment

@@ -145,7 +145,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 context: context,
                 assetPath: Assets.profileHeart,
                 title: 'Favorite',
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).push(AppRoute.favorite);
+                },
               ),
               SizedBox(height: 16.h),
               buildMenuItem(

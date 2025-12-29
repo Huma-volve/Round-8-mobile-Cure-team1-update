@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1057479599774",
+    "project_id": "cure-cf8bf",
+    "storage_bucket": "cure-cf8bf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057479599774:android:129dc3c2b32d6dade67d8f",
+        "android_client_info": {
+          "package_name": "com.example.cure_team_1_update"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057479599774-msi4ark9c6527pntpu3se9eb45bf8mfa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cure_team_1_update",
+            "certificate_hash": "3f314c1c59deb9968fe3b6081790fa368f2a3a57"
+          }
+        },
+        {
+          "client_id": "1057479599774-fq0f4tkfcdajsqa9fj7gem1c9fqq0m13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqSleXXC6Lr2aU2Nhx23NwoxyVYSWBcms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057479599774-fq0f4tkfcdajsqa9fj7gem1c9fqq0m13.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

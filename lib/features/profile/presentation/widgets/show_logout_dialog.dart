@@ -55,6 +55,7 @@ void showLogoutDialog(BuildContext context) {
                 orElse: () => false,
               );
           return Dialog(
+            backgroundColor: Colors.white,
             insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24.r),
@@ -133,7 +134,8 @@ void showLogoutDialog(BuildContext context) {
                                         SizedBox(
                                           width: 16.r,
                                           height: 16.r,
-                                          child: const CircularProgressIndicator(
+                                          child:
+                                              const CircularProgressIndicator(
                                             strokeWidth: 2,
                                             valueColor:
                                                 AlwaysStoppedAnimation<Color>(
@@ -145,7 +147,7 @@ void showLogoutDialog(BuildContext context) {
                                         Text(
                                           'Logging out...',
                                           style: StyleTextHelper
-                                              .textStyle16Regular(context)
+                                                  .textStyle16Regular(context)
                                               .copyWith(
                                             color: ColorsLight.offWhite,
                                           ),
@@ -155,8 +157,7 @@ void showLogoutDialog(BuildContext context) {
                                   : Text(
                                       'Yes, logout',
                                       key: const ValueKey('ready'),
-                                      style:
-                                          StyleTextHelper.textStyle16Regular(
+                                      style: StyleTextHelper.textStyle16Regular(
                                         context,
                                       ).copyWith(
                                         color: ColorsLight.offWhite,
