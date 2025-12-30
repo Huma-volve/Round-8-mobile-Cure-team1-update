@@ -60,9 +60,9 @@ class Repoimplement extends Chatrepoa {
 
   @override
   Future<Either<Serverfailuer, List<Historymasseges>>> sendmassages(
-      conversion_id, data) async {
+      conversionId, data) async {
     try {
-      var respons = await remotdata.sendmassages(conversion_id, data);
+      var respons = await remotdata.sendmassages(conversionId, data);
       return right(respons);
     } catch (e) {
       if (e is DioException) {
@@ -71,5 +71,27 @@ class Repoimplement extends Chatrepoa {
         return left(Serverfailuer(e.toString()));
       }
     }
+  }
+
+  @override
+  Future<Either<Serverfailuer, Conversion>> startConversation(
+      int doctorId) async {
+    try {
+      final conversation = await remotdata.startConversation(doctorId);
+      return right(conversation);
+    } catch (e) {
+      if (e is DioException) {
+        return left(Serverfailuer.forDioExcption(e));
+      } else {
+        return left(Serverfailuer(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Serverfailuer, List<Conversion>>> refreshConversations(
+      Chattab tab) {
+    // TODO: implement refreshConversations
+    throw UnimplementedError();
   }
 }

@@ -33,10 +33,10 @@ class ChatbodyCubit extends Cubit<ChatbodyState> {
     });
   }
 
-  Future<void> sendmassge(int conversion_id, Map<String, dynamic> data) async {
+  Future<void> sendmassge(int conversionId, Object data) async {
     print('chatbodydtaild chatbodydtailds');
 
-    var reslut = await chatrepoa.sendmassages(conversion_id, data);
+    var reslut = await chatrepoa.sendmassages(conversionId, data);
     print('chatbodydtaild chatbodydtailds $reslut');
     reslut.fold((faluir) => emit(Fuailerhistory(faluir)),
         (conv) => emit(Successhistory(List<Historymasseges>.from(conv))));
