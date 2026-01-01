@@ -8,9 +8,9 @@ class LocationCubit extends Cubit<LocationState> {
   final GetUserAddress getUserAddress;
 
   LocationCubit(
-      this.getUserLocation,
-      this.getUserAddress,
-      ) : super(LocationInitial());
+    this.getUserLocation,
+    this.getUserAddress,
+  ) : super(LocationInitial());
 
   Future<void> fetchLocationAndAddress() async {
     emit(LocationLoading());

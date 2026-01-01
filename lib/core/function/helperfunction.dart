@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
 import 'package:intl/intl.dart';
 
 checkinternet() async {
@@ -19,6 +18,13 @@ List<T> parseData<T>(
   T Function(Map<String, dynamic>) fromJson,
 ) {
   return (response['data'] as List).map((item) => fromJson(item)).toList();
+}
+
+T parseDatawithoutlist<T>(
+  Map<String, dynamic> response,
+  T Function(Map<String, dynamic>) fromJson,
+) {
+  return fromJson(response);
 }
 
 String formatTimeToHourMinute(String time) {

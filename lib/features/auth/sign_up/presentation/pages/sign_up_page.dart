@@ -19,7 +19,9 @@ class SignUpPage extends StatelessWidget {
       child: BlocConsumer<SignupCubit, SignupState>(
         listener: (context, state) {
           if (state is SignupSuccess) {
-            GoRouter.of(context).push(AppRoute.otpPage);
+            GoRouter.of(context).push(AppRoute.otpPage,
+                extra:
+                    BlocProvider.of<SignupCubit>(context).phoneController.text);
           } else if (state is SignupError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.error)),

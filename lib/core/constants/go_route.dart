@@ -1,20 +1,16 @@
 import 'package:cure_team_1_update/core/constants/app_route.dart';
+import 'package:cure_team_1_update/features/Booking/domain/enums/booking_enum.dart';
 import 'package:cure_team_1_update/core/services/service_locator.dart';
-import 'package:cure_team_1_update/features/Booking/data/models/myBooking_model.dart';
-import 'package:cure_team_1_update/features/Booking/presentation/screen/my_book_item_screen.dart';
+import 'package:cure_team_1_update/features/Booking/presentation/screen/update_booking_screen.dart';
 import 'package:cure_team_1_update/features/Booking/presentation/screen/my_booking_screen.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/home_page.dart';
-import 'package:cure_team_1_update/features/Home/presentation/pages/map.dart' hide HomePage;
+import 'package:cure_team_1_update/features/Home/presentation/pages/map.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/nav_bar.dart';
-import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
-import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
 import 'package:cure_team_1_update/features/chat/domain/repo/chatrepo.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chat.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
-import 'package:cure_team_1_update/features/chat/persention/screens/widget/histroychat.dart';
 import 'package:cure_team_1_update/features/chat/persention/view_modle/chat_cubit/chat_cubit.dart';
-import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_cubit/cubit/chatbody_cubit.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/add_review_screen.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/book_apointmennt_.dart';
 import 'package:cure_team_1_update/features/doctor_details/presentation/screens/doctor_details_screen.dart';
@@ -71,13 +67,12 @@ abstract class Approutes {
         builder: (context, state) => const MyBookingScreen(),
       ),
       GoRoute(
-        path: AppRoute.myBookingitemSsceen,
+        path: AppRoute.updateMyBookingSceen,
         builder: (context, state) {
-          final mybokkingModel = state.extra as MybookingModel;
-          return MyBookItemScreen(
-            mybookingModel: mybokkingModel,
-          );
-        },
+          BookingEnum bookingStatus =state.extra as BookingEnum;
+        return  UpdateMyBookingScreen(bookingStatus: bookingStatus );
+        }
+        
       ),
 
       // Auth
@@ -87,7 +82,10 @@ abstract class Approutes {
       ),
       GoRoute(
         path: AppRoute.otpPage,
-        builder: (context, state) => const OtpPage(),
+        builder: (context, state) {
+          final phoneNum = state.extra as String;
+          return OtpPage(phoneNum: phoneNum);
+        },
       ),
       GoRoute(
         path: AppRoute.loginPage,

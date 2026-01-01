@@ -13,10 +13,8 @@ class LoginRepoImpl implements LoginRepo {
   Future<Either<Failuer, SignupModel>> loginUSer(
       {required phoneNumber, required password}) async {
     try {
-      var data = await apiServices.post(
-        'auth/login',
-        {'phoneNumber': phoneNumber, 'password': password},
-      );
+    
+       var data = await apiServices.post('auth/login',{'phoneNumber': phoneNumber, 'password': password});
       return right(SignupModel.fromJson(data));
     } catch (e) {
       if (e is DioException) {

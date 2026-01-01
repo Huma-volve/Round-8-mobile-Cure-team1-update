@@ -1,10 +1,13 @@
+import 'dart:developer';
+
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/style/theme/app_text_styles.dart';
 import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
-class YourApointMentDateWidget extends StatelessWidget {
+class YourApointMentDateWidget extends StatefulWidget {
   const YourApointMentDateWidget({
     super.key,
     required this.selectedDayName,
@@ -16,6 +19,14 @@ class YourApointMentDateWidget extends StatelessWidget {
   final String? selectedMonthName;
   final String? selectedDayNumber;
 
+  @override
+  State<YourApointMentDateWidget> createState() =>
+      _YourApointMentDateWidgetState();
+}
+
+class _YourApointMentDateWidgetState extends State<YourApointMentDateWidget> {
+  bool activeCalender = false;
+  String? formatedDate;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,22 +46,36 @@ class YourApointMentDateWidget extends StatelessWidget {
           SizedBox(
             width: 8.r,
           ),
-          if (selectedDayName != null)
-            Row(
-              children: [
-                Text('$selectedDayNumber,',
+         Text(formatedDate ??'',
                     style: AppTextStyles.montserratMedum14(context)
                         .copyWith(color: ColorsLight.prussianBlue)),
-                Text(selectedMonthName!,
-                    style: AppTextStyles.montserratMedum14(context)
-                        .copyWith(color: ColorsLight.prussianBlue)),
-                Text(selectedDayName!,
-                    style: AppTextStyles.montserratMedum14(context)
-                        .copyWith(color: ColorsLight.prussianBlue)),
-              ],
-            ),
           const Spacer(),
-          Image.asset(Assets.resourceImagesDownArrow),
+          GestureDetector(
+            onTap: () async {
+              setState(() {
+                activeCalender = !activeCalender;
+              });
+              if (activeCalender) {
+                DateTime? selectedDateTime = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime(2027),
+                );
+                if(selectedDateTime!=null)
+                {
+                formatedDate=DateFormat('EEEE,MMMM d').format(selectedDateTime);
+                  log(formatedDate!);
+                }
+              }
+            },
+            child: SizedBox(
+                height: 24.r,
+                width: 24.r,
+                child: Image.asset(activeCalender == true
+                    ? Assets.resourceImagesDownArrow
+                    : Assets.resourceImagesAltArrowDown)),
+          ),
         ],
       ),
     );

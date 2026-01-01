@@ -6,24 +6,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyBookingDoctorDetailsLocation extends StatelessWidget {
   const MyBookingDoctorDetailsLocation({
-    super.key,
+    super.key,required this.docAddress
   });
-
+final String docAddress;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-            height: 20.h,
-            width: 20.w,
-            child: Image.asset(
-              Assets.resourceImagesLocation,
-              color: ColorsLight.blueGray,
-            )),
-        Text(
-          '129,El-Nasr Street, Cairo, Egypt ',
-          style: AppTextStyles.montserratRegular14(context),
-        ),
+       SizedBox(
+         height: 20.h,
+         width: 20.w,
+         child: Image.asset(Assets.resourceImagesLocation,color: ColorsLight.blueGray,)),
+        Text(docAddress,style: AppTextStyles.montserratRegular14(context),),
       ],
     );
   }

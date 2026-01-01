@@ -12,7 +12,7 @@ class Repoimplement extends Chatrepoa {
   Remotdata remotdata;
   Repoimplement(this.remotdata);
   List<Conversion> conv = [];
-  List<Historymasseges> massa = [];
+
   @override
   Future<Either<Serverfailuer, List<Conversion>>> featchconversion(
       Chattab tab) async {
@@ -47,7 +47,7 @@ class Repoimplement extends Chatrepoa {
   Future<Either<Serverfailuer, List<Historymasseges>>> getHistorymassages(
       conver) async {
     try {
-      massa = await remotdata.getHistorymassages(conver);
+      var massa = await remotdata.getHistorymassages(conver);
       return right(massa);
     } catch (e) {
       if (e is DioException) {
@@ -56,5 +56,42 @@ class Repoimplement extends Chatrepoa {
         return left(Serverfailuer(e.toString()));
       }
     }
+  }
+
+  @override
+  Future<Either<Serverfailuer, List<Historymasseges>>> sendmassages(
+      conversionId, data) async {
+    try {
+      var respons = await remotdata.sendmassages(conversionId, data);
+      return right(respons);
+    } catch (e) {
+      if (e is DioException) {
+        return left(Serverfailuer.forDioExcption(e));
+      } else {
+        return left(Serverfailuer(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Serverfailuer, Conversion>> startConversation(
+      int doctorId) async {
+    try {
+      final conversation = await remotdata.startConversation(doctorId);
+      return right(conversation);
+    } catch (e) {
+      if (e is DioException) {
+        return left(Serverfailuer.forDioExcption(e));
+      } else {
+        return left(Serverfailuer(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Serverfailuer, List<Conversion>>> refreshConversations(
+      Chattab tab) {
+    // TODO: implement refreshConversations
+    throw UnimplementedError();
   }
 }
