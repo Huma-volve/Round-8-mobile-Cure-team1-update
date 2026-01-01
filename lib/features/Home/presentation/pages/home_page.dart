@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import '../../../../core/services/api_services.dart';
+import '../../../../core/services/service_locator.dart';
+import '../../Data/models/doctor_api_model.dart';
 import '../../Data/models/doctor_model.dart';
 import '../../location/Domin/entities/user_location.dart';
 import '../../location/presentation/cubit/location_cubit.dart';
@@ -13,19 +16,76 @@ import '../pages/doctors_list_page.dart';
 import '../widgets/doctor_item.dart';
 import '../widgets/home_top_section.dart';
 import '../widgets/specialties_list.dart';
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const _HomePageContent();
+    return BlocProvider<LocationCubit>(
+      create: (_) => getIt<LocationCubit>()..fetchLocationAndAddress(),
+      child: const _HomePageContent(),
+    );
   }
 }
 
-class _HomePageContent extends StatelessWidget {
+class _HomePageContent extends StatefulWidget {
   const _HomePageContent();
 
+  @override
+  State<_HomePageContent> createState() => _HomePageContentState();
+}
+
+class _HomePageContentState extends State<_HomePageContent> {
+  bool _isLoading = false;
+  String? _error;
+  List<ApiDoctor> _doctors = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchDoctors();
+    print('Doctors count: ${_doctors.length}');
+
+  }
+
+  Future<void> _fetchDoctors() async {
+    setState(() {
+      _isLoading = true;
+      _error = null;
+    });
+
+    try {
+      final api = getIt<ApiServices>();
+      final response = await api.get('api/doctors?latitude=30.0444&longitude=31.2357&radius=10');
+
+      print('0'
+          '.00 TYPE: ${response.runtimeType}');
+      print('RESPONSE VALUE: $response');
+
+      final doctors = _parseDoctors(response);
+
+      setState(() {
+        _doctors = doctors;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('ERRORRRRR: $e');
+      rethrow;
+    }}
+
+
+    List<ApiDoctor> _parseDoctors(dynamic response) {
+    if (response is Map<String, dynamic>) {
+      final data = response['data'];
+      if (data is List) {
+        return data
+            .whereType<Map<String, dynamic>>()
+            .map(ApiDoctor.fromJson)
+            .toList();
+      }
+    }
+    return <ApiDoctor>[];
+  }
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -34,7 +94,7 @@ class _HomePageContent extends StatelessWidget {
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 27),
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const HomeTopSection(),
             const SizedBox(
               height: 23,
@@ -47,7 +107,7 @@ class _HomePageContent extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (_) => BlocProvider.value(
                       value: locationCubit,
-                      child: const SearchPage(),
+                      child: const DoctorsSearchPage(),
                     ),
                   ),
                 );
@@ -105,8 +165,8 @@ class _HomePageContent extends StatelessWidget {
                   onPressed: () {
                     final state = context.read<LocationCubit>().state;
                     final doctors = state is LocationAddressLoaded
-                        ? _nearbyDoctors(state.location)
-                        : doctorsList;
+                        ? _nearbyDoctors(state.location, _doctors)
+                        : _doctors;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -118,48 +178,34 @@ class _HomePageContent extends StatelessWidget {
                     );
                   },
                   child: const Text(
-                    "Veiw all",
+                    "View all",
                     style: TextStyle(fontSize: 18, color: Colors.blue),
                   )),
             ]),
             BlocBuilder<LocationCubit, LocationState>(
               builder: (context, state) {
-                if (state is LocationLoading) {
+                if (_isLoading || state is LocationLoading) {
                   return const _DoctorSkeletonList();
-                } else if (state is LocationAddressLoaded) {
-                  final doctors = _nearbyDoctors(state.location);
-                  if (doctors.isEmpty) {
-                    return const Text('No doctors found.');
-                  }
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: doctors.length,
-                    itemBuilder: (context, index) {
-                      return DoctorItem(doctor: doctors[index]);
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 12);
-                    },
-                  );
-                } else if (state is LocationError) {
-                  final doctors = doctorsList;
-                  if (doctors.isEmpty) {
-                    return const Text('No doctors found.');
-                  }
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: doctors.length,
-                    itemBuilder: (context, index) {
-                      return DoctorItem(doctor: doctors[index]);
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 12);
-                    },
-                  );
+                }  if (_error != null) {
+                  return Text(_error!);
                 }
-                return const SizedBox();
+                if (_doctors.isEmpty) {
+                  return const Text('No doctors found.');
+                }
+                final doctors = state is LocationAddressLoaded
+                    ? _nearbyDoctors(state.location, _doctors)
+                    : _doctors;
+                return ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: doctors.length,
+                  itemBuilder: (context, index) {
+                    return ApiDoctorItem(doctor: doctors[index]);
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(height: 12);
+                  },
+                );
               },
             )
           ]),
@@ -172,14 +218,22 @@ class _HomePageContent extends StatelessWidget {
 const double _earthRadiusKm = 6371;
 const double _maxNearbyDistanceKm = 50;
 
-List<DoctorModel> _nearbyDoctors(UserLocation location) {
-  final doctorsWithDistance = doctorsList.map((doctor) {
-    final distance = _distanceKm(
+
+List<ApiDoctor> _nearbyDoctors(
+    UserLocation location,
+    List<ApiDoctor> doctors,
+    ) {
+  final doctorsWithDistance = doctors.map((doctor) {
+    final lat = doctor.latitude;
+    final lng = doctor.longitude;
+    final distance = lat != null && lng != null
+        ? _distanceKm(
       location.lat,
       location.lng,
-      doctor.lat,
-      doctor.lng,
-    );
+      lat,
+      lng,
+    )
+        : double.infinity;
     return (doctor: doctor, distance: distance);
   }).toList();
 

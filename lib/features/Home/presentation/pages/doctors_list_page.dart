@@ -1,3 +1,4 @@
+import 'package:cure_team_1_update/features/Home/Data/models/doctor_api_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../Data/models/doctor_model.dart';
@@ -5,7 +6,7 @@ import '../widgets/doctor_item.dart';
 
 class DoctorsListPage extends StatelessWidget {
   final String title;
-  final List<DoctorModel> doctors;
+  final List<ApiDoctor> doctors;
 
   const DoctorsListPage({
     super.key,
@@ -26,8 +27,7 @@ class DoctorsListPage extends StatelessWidget {
                 return const SizedBox(height: 12);
               },
               itemBuilder: (context, index) {
-                return DoctorItem(doctor: doctors[index]);
-              },
+                return ApiDoctorItem(doctor: doctors[index]);              },
             ),
     );
   }

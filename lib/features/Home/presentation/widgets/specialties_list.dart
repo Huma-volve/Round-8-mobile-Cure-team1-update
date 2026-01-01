@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Data/models/specialty_model.dart';
-import '../pages/doctors.dart';
+import '../pages/search_page.dart';
 
 class SpecialtiesList extends StatefulWidget {
   const SpecialtiesList({super.key});
@@ -29,9 +29,9 @@ class _SpecialtiesListState extends State<SpecialtiesList> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => DoctorsBySpecialtyScreen(
-                        specialtyName: spec.name,
-                      ),
+                      builder: (_) =>
+                          DoctorsSearchPage(initialSpecialty: spec.name),
+
                     ),
                   );
                 },

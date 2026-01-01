@@ -3,7 +3,6 @@ import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:cure_team_1_update/core/style/colors/colors_light.dart';
 import 'package:cure_team_1_update/core/utils/styles_text_manager.dart';
 import 'package:cure_team_1_update/features/settings/data/models/edit_profile/change_password_request_body.dart';
-import 'package:cure_team_1_update/features/settings/presentation/bloc/bloc/change_password_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,12 +22,12 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
   late ChangePasswordBloc _bloc;
 
   @override
-  void dispose() {
-   _bloc.currentPasswordController.dispose();
-    _bloc.newPasswordController.dispose();
-   _bloc.confirmPasswordController.dispose();
-    super.dispose();
-  }
+  //void dispose() {
+  // _bloc.currentPasswordController.dispose();
+  //  _bloc.newPasswordController.dispose();
+  // _bloc.confirmPasswordController.dispose();
+  //  super.dispose();
+ // }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +53,7 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
                 CustomTextField(
                   hintText: '********',
                   obscureText: _bloc.obscureCurrent,
-                  controller: _bloc.currentPasswordController,
+                 // controller: _bloc.currentPasswordController,
                   suffixIcon: IconButton(
                     icon: Icon(
                       _bloc.obscureCurrent
@@ -85,7 +84,7 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
                 CustomTextField(
                   hintText: '********',
                   obscureText: _bloc.obscureNew,
-                  controller: _bloc.newPasswordController,
+                 // controller: _bloc.newPasswordController,
                   suffixIcon: IconButton(
                     icon: Icon(
                       _bloc.obscureNew
@@ -119,7 +118,7 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
                 CustomTextField(
                   hintText: '********',
                   obscureText: _bloc.obscureConfirm,
-                  controller: _bloc.confirmPasswordController,
+               //   controller: _bloc.confirmPasswordController,
                   suffixIcon: IconButton(
                     icon: Icon(
                       _bloc.obscureConfirm
@@ -138,11 +137,11 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Please confirm new password';
                     }
-                    if (value != _bloc.newPasswordController.text) {
+                  //  if (value != _bloc.newPasswordController.text) {
                       return 'Passwords do not match';
                     }
-                    return null;
-                  },
+                  //  return null;
+               //   },
                 ),
 
                 SizedBox(height: 48.h), // Added spacing
@@ -163,15 +162,15 @@ class _PasswordManagementScreenState extends State<PasswordManagementScreen> {
     if (_bloc.formKey.currentState!.validate()) {
       // Mock API call
 
-      context.read<ChangePasswordBloc>().add(
-            ChangePasswordEvent.changePassword(
-              data: ChangePasswordRequestBody(
-                current_password: _bloc.currentPasswordController.text,
-                new_password: _bloc.newPasswordController.text,
-                new_password_confirmation: _bloc.confirmPasswordController.text,
-              ),
-            ),
-          );
+     // context.read<ChangePasswordBloc>().add(
+           // ChangePasswordEvent.changePassword(
+              //data: ChangePasswordRequestBody(
+              //  current_password: _bloc.currentPasswordController.text,
+              //  new_password: _bloc.newPasswordController.text,
+              //  new_password_confirmation: _bloc.confirmPasswordController.text,
+          //    ),
+         //   ),
+       //   );
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Password changed successfully')),

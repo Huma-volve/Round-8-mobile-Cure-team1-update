@@ -6,7 +6,18 @@ class ApiServices {
   const ApiServices(this._dio);
   get(endpoint) async {
     Response respons = await _dio.get(
-      '$basURL$endpoint',
+      '$basURL$endpoint ',
+      options: Options(
+
+        headers: {
+
+          'Authorization': 'Bearer 262|Yc7tFty5QIDdRCA1n96Qpgk86jB15uXi5m4WUk80f8d9c075',
+
+          'Accept': 'application/json',
+
+        },
+
+      ),
     );
     print(respons.data);
     return respons.data;
