@@ -15,8 +15,7 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
   }
 
   final LogoutRepo _repo;
-  bool hasRequested = false;
-
+//يارب  يامسهل
   FutureOr<void> _logout(
     EventLogout event,
     Emitter<LogoutState> emit,

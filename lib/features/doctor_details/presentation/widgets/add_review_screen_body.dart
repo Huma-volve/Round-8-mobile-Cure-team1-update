@@ -49,6 +49,8 @@ class _AddReviewScreenBodyState extends State<AddReviewScreenBody> {
   @override
   Widget build(BuildContext context) {
     final ratingLabel = _rating > 0 ? '$_rating/5' : '--/5';
+    final showBookingIdField =
+        widget.args?.bookingId == null || widget.args!.bookingId! <= 0;
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -97,31 +99,33 @@ class _AddReviewScreenBodyState extends State<AddReviewScreenBody> {
                     SizedBox(
                       height: 24.h,
                     ),
-                    Text(
-                      'Booking ID',
-                      style: AppTextStyles.georgiaRegular16(context),
-                    ),
-                    SizedBox(
-                      height: 12.h,
-                    ),
-                    TextField(
-                      controller: _bookingIdController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        hintText: 'Enter booking ID',
-                        hintStyle: AppTextStyles.montserratMedum14(context),
-                        border: buildOutlineInputBorder(),
-                        enabledBorder: buildOutlineInputBorder(),
-                        focusedBorder: buildOutlineInputBorder(),
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 14.w,
-                          vertical: 12.h,
+                    if (showBookingIdField) ...[
+                      Text(
+                        'Booking ID',
+                        style: AppTextStyles.georgiaRegular16(context),
+                      ),
+                      SizedBox(
+                        height: 12.h,
+                      ),
+                      TextField(
+                        controller: _bookingIdController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: 'Enter booking ID',
+                          hintStyle: AppTextStyles.montserratMedum14(context),
+                          border: buildOutlineInputBorder(),
+                          enabledBorder: buildOutlineInputBorder(),
+                          focusedBorder: buildOutlineInputBorder(),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 14.w,
+                            vertical: 12.h,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 24.h,
-                    ),
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                    ],
                     Text(
                       'Your review',
                       style: AppTextStyles.georgiaRegular20(context),

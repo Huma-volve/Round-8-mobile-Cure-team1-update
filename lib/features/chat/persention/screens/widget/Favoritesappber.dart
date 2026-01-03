@@ -58,8 +58,7 @@ class _FavoritesappberState extends State<Favoritesappber> {
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Montserrat',
                 fontSize: 14,
-                color:
-                    selected ? Colors.white : const Color(0xff99A2AB),
+                color: selected ? Colors.white : const Color(0xff99A2AB),
               ),
             ),
           ),

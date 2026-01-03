@@ -1,4 +1,3 @@
-
 import 'package:cure_team_1_update/core/error/failures.dart';
 import 'package:cure_team_1_update/core/utils/chattab.dart';
 
@@ -88,9 +87,10 @@ class Repoimplement extends Chatrepoa {
       }
     }
   }
-  
+
   @override
-  Future<Either<Serverfailuer, List<Conversion>>> refreshConversations(Chattab tab) {
+  Future<Either<Serverfailuer, List<Conversion>>> refreshConversations(
+      Chattab tab) {
     // TODO: implement refreshConversations
     throw UnimplementedError();
   }
