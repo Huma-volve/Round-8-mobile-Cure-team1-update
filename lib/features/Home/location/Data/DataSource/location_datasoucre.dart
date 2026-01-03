@@ -23,22 +23,13 @@ class LocationDataSource {
       throw Exception('Location permission permanently denied');
     }
 
-    final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    print(
-        "Position fetched: ${position.latitude}, ${position.longitude}"); // هنا كمان نتاكد
-    return position;
-  }
+    return Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );}
 
   Future<Placemark> buildAddress(double lat, double lng) async {
-    List placeMarks = await placemarkFromCoordinates(lat, lng);
-    final place = placeMarks.first;
-    final street = place.street ?? "";
-    final area = place.subLocality ?? "";
-    final city = place.locality ?? "";
-    print(street);
-    print(place);
-    print(city);
-    return place;
+    final List<Placemark> placeMarks =
+    await placemarkFromCoordinates(lat, lng);
+    return placeMarks.first;
   }
 }

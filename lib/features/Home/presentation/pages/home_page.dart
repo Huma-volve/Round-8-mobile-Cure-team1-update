@@ -1,54 +1,117 @@
 import 'dart:math' as math;
-
-import 'package:cure_team_1_update/features/Home/Data/models/doctor_model.dart';
-import 'package:cure_team_1_update/features/Home/location/Domin/entities/user_location.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/veiw_all_specialties.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import '../../../../core/services/api_services.dart';
+import '../../../../core/services/service_locator.dart';
+import '../../Data/models/doctor_api_model.dart';
+import '../../Data/models/doctor_model.dart';
+import '../../location/Domin/entities/user_location.dart';
 import '../../location/presentation/cubit/location_cubit.dart';
 import '../../location/presentation/state/location_state.dart';
 import '../pages/doctors_list_page.dart';
 import '../widgets/doctor_item.dart';
 import '../widgets/home_top_section.dart';
 import '../widgets/specialties_list.dart';
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const _HomePageContent();
+    return BlocProvider<LocationCubit>(
+      create: (_) => getIt<LocationCubit>()..fetchLocationAndAddress(),
+      child: const _HomePageContent(),
+    );
   }
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageContent extends StatefulWidget {
+  const _HomePageContent();
+
+  @override
+  State<_HomePageContent> createState() => _HomePageContentState();
+}
+
+class _HomePageContentState extends State<_HomePageContent> {
+  bool _isLoading = false;
+  String? _error;
+  List<ApiDoctor> _doctors = [];
+
   @override
   void initState() {
     super.initState();
-    context.read<LocationCubit>().fetchLocationAndAddress();
+    _fetchDoctors();
+    print('Doctors count: ${_doctors.length}');
+
   }
 
+  Future<void> _fetchDoctors() async {
+    setState(() {
+      _isLoading = true;
+      _error = null;
+    });
+
+    try {
+      final api = getIt<ApiServices>();
+      final response = await api.get('doctors');
+      final doctors = _parseDoctors(response);
+      if (!mounted) return;
+      setState(() {
+        _doctors = doctors;
+        _isLoading = false;
+      });
+    } catch (error, stackTrace) {
+      print("Error loading doctors: $error");
+      print("StackTrace: $stackTrace");
+      if (!mounted) return;
+      setState(() {
+        _error = 'Failed to load doctors. Try again.';
+        _isLoading = false;
+      });
+    }
+  }
+
+
+  List<ApiDoctor> _parseDoctors(Response response) {
+    if (response.statusCode == 200) {
+      final data = response.data;
+      if (data['success'] == true && data['data'] is List) {
+        return (data['data'] as List)
+            .map((json) => ApiDoctor.fromJson(json))
+            .toList();
+      }
+    }
+    throw Exception("Invalid response format");
+  }
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
       child: SafeArea(
         child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 27),
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const HomeTopSection(),
             const SizedBox(
               height: 23,
             ),
             TextFormField(
               onTap: () {
+                final locationCubit = context.read<LocationCubit>();
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SearchPage()));
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                      value: locationCubit,
+                      child: const DoctorsSearchPage(),
+                    ),
+                  ),
+                );
               },
               decoration: InputDecoration(
                   hintText: "Search for specialty, doctor..",
@@ -85,7 +148,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 5,
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Image.asset(
                   fit: BoxFit.fill,
@@ -100,54 +163,51 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    final state = context.read<LocationCubit>().state;
+                    final doctors = state is LocationAddressLoaded
+                        ? _nearbyDoctors(state.location, _doctors)
+                        : _doctors;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DoctorsListPage(
+                          title: 'Doctors near you',
+                          doctors: doctors,
+                        ),
+                      ),
+                    );
+                  },
                   child: const Text(
-                    "Veiw all",
+                    "View all",
                     style: TextStyle(fontSize: 18, color: Colors.blue),
                   )),
             ]),
-            BlocListener<LocationCubit, LocationState>(
-              listener: (context, state) {
-                if (state is LocationAddressLoaded) {
-                  final lat = state.location.lat;
-                  final lng = state.location.lng;
-                  context.read<DoctorCubit>().loadDoctor();
+            BlocBuilder<LocationCubit, LocationState>(
+              builder: (context, state) {
+                if (_isLoading || state is LocationLoading) {
+                  return const _DoctorSkeletonList();
+                }  if (_error != null) {
+                  return Text(_error!);
                 }
+                if (_doctors.isEmpty) {
+                  return const Text('No doctors found.');
+                }
+                final doctors = state is LocationAddressLoaded
+                    ? _nearbyDoctors(state.location, _doctors)
+                    : _doctors;
+                return ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: doctors.length,
+                  itemBuilder: (context, index) {
+                    return ApiDoctorItem(doctor: doctors[index]);
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(height: 12);
+                  },
+                );
               },
-              child: BlocBuilder<DoctorCubit, DoctorState>(
-                builder: (context, state) {
-                  if (state is DoctorLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is DoctorLoaded) {
-                    final doctors = state.doctors;
-                    if (doctors.isEmpty) {
-                      return const Center(child: Text("No doctors found"));
-                    }
-                    return SizedBox(
-                      height: 350,
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: doctors.length,
-                        itemBuilder: (context, index) {
-                          final doc = doctors[index];
-                          return DoctorItem(
-                            doctor: doc,
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(
-                            height: 10,
-                          );
-                        },
-                      ),
-                    );
-                  } else if (state is DoctorError) {
-                    return Center(child: Text(state.message));
-                  }
-                  return const SizedBox();
-                },
-              ),
             )
           ]),
         ),
@@ -159,14 +219,22 @@ class _HomePageState extends State<HomePage> {
 const double _earthRadiusKm = 6371;
 const double _maxNearbyDistanceKm = 50;
 
-List<DoctorModel> _nearbyDoctors(UserLocation location) {
-  final doctorsWithDistance = doctorsList.map((doctor) {
-    final distance = _distanceKm(
+
+List<ApiDoctor> _nearbyDoctors(
+    UserLocation location,
+    List<ApiDoctor> doctors,
+    ) {
+  final doctorsWithDistance = doctors.map((doctor) {
+    final lat = doctor.latitude;
+    final lng = doctor.longitude;
+    final distance = lat != null && lng != null
+        ? _distanceKm(
       location.lat,
       location.lng,
-      doctor.lat,
-      doctor.lng,
-    );
+      lat,
+      lng,
+    )
+        : double.infinity;
     return (doctor: doctor, distance: distance);
   }).toList();
 

@@ -46,7 +46,7 @@ final getIt = GetIt.instance;
 
 Future<void> setup() async {
   getIt.registerSingleton<Dio>(Dio());
-  getIt.registerSingleton<ApiServices>(ApiServices(getIt.get<Dio>()));
+ // getIt.registerSingleton<ApiServices>(ApiServices(getIt.get<Dio>()));
   getIt.registerSingleton<BookingRemoteDataSource>(
       BookingRemoteDataSourceImpl(dio: getIt<Dio>()));
   getIt.registerSingleton<MyBookRepo>(MyBookRepoImplement(
@@ -104,4 +104,27 @@ Future<void> setup() async {
     ..registerFactory(() => LogoutBloc(getIt()))
     ..registerLazySingleton(() => LogoutRepo(getIt()))
     ..registerLazySingleton(() => LogoutDataSource(getIt()));
+  getIt.registerLazySingleton<LocationDataSource>(
+        () => LocationDataSource(),
+  );
+
+  getIt.registerLazySingleton<LocationRepository>(
+        () => LocationRepositoryImpl(getIt<LocationDataSource>()),
+  );
+
+  getIt.registerLazySingleton<GetUserLocation>(
+        () => GetUserLocation(repo: getIt<LocationRepository>()),
+  );
+
+  getIt.registerLazySingleton<GetUserAddress>(
+        () => GetUserAddress(repo: getIt<LocationRepository>()),
+  );
+
+  getIt.registerFactory<LocationCubit>(
+        () => LocationCubit(
+      getIt<GetUserLocation>(),
+      getIt<GetUserAddress>(),
+    ),
+  );
+
 }

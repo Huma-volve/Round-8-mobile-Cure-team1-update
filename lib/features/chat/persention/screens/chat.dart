@@ -46,7 +46,7 @@ class _ChatState extends State<Chat> {
               const SizedBox(height: 16),
               const Favoritesappber(),
               const SizedBox(height: 12),
-              const Expanded(child: Notificationmassage()),
+             // const Expanded(child: Notificationmassage()),
             ],
           ),
         ),

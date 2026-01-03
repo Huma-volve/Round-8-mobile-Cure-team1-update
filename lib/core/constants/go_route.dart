@@ -104,7 +104,7 @@ abstract class Approutes {
           return BlocProvider(
             create: (context) =>
                 ChatCubit(getIt.get<Chatrepoa>())..getmassages(conv),
-            child: Chatbody(convers: conv),
+           // child: Chatbody(convers: conv),
           );
         },
       ),
