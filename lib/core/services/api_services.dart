@@ -38,7 +38,9 @@ class ApiServices {
     );
     return respons.data;
   }
-
+  
+        
+        
   put(
     endpoint,
     Map data,
@@ -59,17 +61,20 @@ class ApiServices {
     Response respons = await _dio.delete(_resolveUrl(endpoint), data: data);
     return respons.data;
   }
-
-  post2(
+post2(
       {required String endpoint,
-      required Map<String, dynamic> body,
-      required Map<String, dynamic> headers}) async {
-    Response response = await _dio.post('$basURL$endpoint',
+      required Map<String,dynamic> body,
+      required Map<String, dynamic> headers})async {
+  Response response=await  _dio.post('$basURL$endpoint',
         data: body, options: Options(headers: headers));
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      return response.data;
-    } else {
-      throw Exception(response.data['message'] ?? 'Unknown error');
-    }
-  }
+        if(response.statusCode==200|| response.statusCode==201)
+        {
+          return response.data;
+        }
+        else{
+         throw Exception(
+       
+       response.data['message'] ?? 'Unknown error'
+        
+      );}}
 }

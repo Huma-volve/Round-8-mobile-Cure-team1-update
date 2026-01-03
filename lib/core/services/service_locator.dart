@@ -12,18 +12,6 @@ import 'package:cure_team_1_update/features/doctor_details/data/data_source/crea
 import 'package:cure_team_1_update/features/doctor_details/data/data_source/create_book_remote_data_sourceimp.dart';
 import 'package:cure_team_1_update/features/doctor_details/data/repo/create_book_repo_imp.dart';
 import 'package:cure_team_1_update/features/doctor_details/domain/repo/create_book_repo.dart';
-import 'package:cure_team_1_update/features/settings/data/data_source/change_password_data_source.dart';
-import 'package:cure_team_1_update/features/settings/data/data_source/delete_account/delete_account_data_source.dart';
-import 'package:cure_team_1_update/features/settings/data/data_source/faqs/faqs_data_source.dart';
-import 'package:cure_team_1_update/features/settings/data/data_source/logout/logout_data_source.dart';
-import 'package:cure_team_1_update/features/settings/data/repos/change_password_repo.dart';
-import 'package:cure_team_1_update/features/settings/data/repos/delete_account/delete_accuont_repo.dart';
-import 'package:cure_team_1_update/features/settings/data/repos/faqs/faqs_repo.dart';
-import 'package:cure_team_1_update/features/settings/data/repos/logout/logout_repo.dart';
-import 'package:cure_team_1_update/features/settings/presentation/view_model/bloc/change_password_bloc.dart';
-import 'package:cure_team_1_update/features/settings/presentation/view_model/delete_account/delete_account_bloc.dart';
-import 'package:cure_team_1_update/features/settings/presentation/view_model/faqs_bloc/faqs_bloc.dart';
-import 'package:cure_team_1_update/features/settings/presentation/view_model/logout/logout_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:cure_team_1_update/features/auth/login/domain/login_repo_impl.dart';
@@ -78,7 +66,7 @@ Future<void> setup() async {
   getIt.registerSingleton<ApiServices>(
       ApiServices(getIt.get<Dio>()..interceptors.add(ApiInterceptor())));
   getIt.registerSingleton<Repoimplement>(
-      Repoimplement(immplementRemotdata(getIt.get<ApiServices>()) as Remotdata));
+      Repoimplement(immplementRemotdata(getIt.get<ApiServices>())));
   getIt.registerSingleton<ChatCubit>(ChatCubit(getIt.get<Repoimplement>()));
   getIt.registerSingleton<LoginRepoImpl>(
       LoginRepoImpl(getIt.get<ApiServices>()));
@@ -90,36 +78,67 @@ Future<void> setup() async {
   getIt
       .registerFactory<OtpCubit>(() => OtpCubit(otpRepo: getIt.get<OtpRepo>()));
 
-  getIt.registerSingleton<LoginCubit>(
-      LoginCubit(loginRepo: getIt.get<LoginRepoImpl>()));
-
-  // getIt.registerSingleton<OtpRepo>(OtpRepoImpl(getIt.get<ApiServices>()));
-  // getIt
-  //     .registerFactory<OtpCubit>(() => OtpCubit(otpRepo: getIt.get<OtpRepo>()));
-
   //edit profile
   getIt
     ..registerFactory(() => EditProfileBloc(getIt()))
     ..registerLazySingleton(() => EditProfileRepo(getIt()))
     ..registerLazySingleton(() => EditProfileDataSource(getIt()));
-  //Password change
+
+  // FAQs
   getIt
-    ..registerFactory(() => ChangePasswordBloc(getIt()))
-    ..registerLazySingleton(() => ChangePasswordRepo(getIt()))
-    ..registerLazySingleton(() => ChangePasswordDataSource(getIt()));
-  //FAQS
+    ..registerLazySingleton(() => FaqsDataSource(getIt<ApiServices>()))
+    ..registerLazySingleton(() => FaqsRepo(getIt<FaqsDataSource>()))
+    ..registerFactory(() => FaqsBloc(getIt<FaqsRepo>()));
+
+  // Logout
   getIt
-    ..registerFactory(() => FaqsBloc(getIt()))
-    ..registerLazySingleton(() => FaqsRepo(getIt()))
-    ..registerLazySingleton(() => FaqsDataSource(getIt()));
-  //Delete Account
+    ..registerLazySingleton(() => LogoutDataSource(getIt<ApiServices>()))
+    ..registerLazySingleton(() => LogoutRepo(getIt<LogoutDataSource>()))
+    ..registerFactory(() => LogoutBloc(getIt<LogoutRepo>()));
+
+  // Change password
   getIt
-    ..registerFactory(() => DeleteAccountBloc(getIt()))
-    ..registerLazySingleton(() => DeleteAccuontRepo(getIt()))
-    ..registerLazySingleton(() => DeleteAccounteDataSource(getIt()));
-  //Logout
+    ..registerLazySingleton(() => ChangePasswordDataSource(getIt<ApiServices>()))
+    ..registerLazySingleton(() => ChangePasswordRepo(getIt<ChangePasswordDataSource>()))
+    ..registerFactory(() => ChangePasswordBloc(getIt<ChangePasswordRepo>()));
+
+  // Delete account
   getIt
-    ..registerFactory(() => LogoutBloc(getIt()))
-    ..registerLazySingleton(() => LogoutRepo(getIt()))
-    ..registerLazySingleton(() => LogoutDataSource(getIt()));
+    ..registerLazySingleton(
+        () => DeleteAccounteDataSource(getIt<ApiServices>()))
+    ..registerLazySingleton(
+        () => DeleteAccuontRepo(getIt<DeleteAccounteDataSource>()))
+    ..registerFactory(() => DeleteAccountBloc(getIt<DeleteAccuontRepo>()));
+  // Location Feature
+  getIt.registerLazySingleton<LocationDataSource>(
+    () => LocationDataSource(),
+  );
+
+  getIt.registerLazySingleton<LocationRepository>(
+    () => LocationRepositoryImpl(getIt<LocationDataSource>()),
+  );
+
+  getIt.registerLazySingleton<GetUserLocation>(
+    () => GetUserLocation(repo: getIt<LocationRepository>()),
+  );
+
+  getIt.registerLazySingleton<GetUserAddress>(
+    () => GetUserAddress(repo: getIt<LocationRepository>()),
+  );
+
+  getIt.registerFactory<LocationCubit>(
+    () => LocationCubit(
+      getIt<GetUserLocation>(),
+      getIt<GetUserAddress>(),
+    ),
+  );
+
+  // getIt.registerSingleton<Dio>(Dio());
+  // getIt.registerSingleton<ApiServices>(ApiServices(getIt.get<Dio>()));
+//  getIt.registerSingleton<BookingRemoteDataSource>(BookingRemoteDataSourceImpl(dio: getIt<Dio>()));
+  //  getIt.registerSingleton<MyBookRepo>(MyBookRepoImplement(bookingRemoteDataSource: getIt<BookingRemoteDataSource>()));
+  getIt.registerSingleton<CreateBookRemoteDataSource>(
+      CreateBookRemoteDataSourceImp(apiServices: getIt<ApiServices>()));
+  getIt.registerSingleton<CreateBookRepo>(CreateBookRepoImp(
+      createBookRemoteDataSource: getIt<CreateBookRemoteDataSource>()));
 }

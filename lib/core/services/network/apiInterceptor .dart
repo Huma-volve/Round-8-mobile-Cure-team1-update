@@ -7,6 +7,9 @@ class ApiInterceptor extends Interceptor {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     String? token = Cachehelper.getToken();
+    if (kDebugMode) {
+      print('$token');
+    }
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
     }

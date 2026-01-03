@@ -60,8 +60,7 @@ class Histroychat extends StatelessWidget {
                   children: [
                     Text(
                       safeChatTime(massage.updatedAt),
-                      style:
-                          AppTextStyles.montserratRegular12(context).copyWith(
+                      style: AppTextStyles.montserratRegular12(context).copyWith(
                         color: unreadCount > 0
                             ? ColorsLight.green
                             : ColorsLight.textGrey,

@@ -1,6 +1,5 @@
-import 'package:cure_team_1_update/core/constants/app_route.dart';
+
 import 'package:cure_team_1_update/core/services/service_locator.dart';
-import 'package:cure_team_1_update/core/utils/assets.dart';
 import 'package:cure_team_1_update/features/chat/data/chatrepoimplment/repoimpement.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/chatbody.dart';
 import 'package:cure_team_1_update/features/chat/persention/screens/widget/histroychat.dart';
@@ -9,6 +8,7 @@ import 'package:cure_team_1_update/features/chat/persention/view_modle/chatbody_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
 
 class Notificationmassage extends StatelessWidget {
   const Notificationmassage({super.key});
@@ -39,7 +39,7 @@ class Notificationmassage extends StatelessWidget {
                           builder: (_) => BlocProvider(
                             create: (_) =>
                                 ChatbodyCubit(getIt.get<Repoimplement>())
-                                  ..startPolling(state.conversionlist[indx]),
+                                  ..getmassages(state.conversionlist[indx]),
                             child:
                                 Chatbody(convers: state.conversionlist[indx]),
                           ),

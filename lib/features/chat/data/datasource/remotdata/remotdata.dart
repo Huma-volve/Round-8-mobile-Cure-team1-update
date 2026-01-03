@@ -7,16 +7,12 @@ import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversio
 import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
 import 'package:dio/dio.dart';
 
-import 'package:cure_team_1_update/core/services/api_services.dart';
-import 'package:cure_team_1_update/features/chat/data/modle/conversion/conversion/conversion.dart';
-import 'package:cure_team_1_update/features/chat/data/modle/historymasseges/historymasseges.dart';
-import 'package:dio/dio.dart';
-
 abstract class Remotdata {
   Future<List<Conversion>> featchconversion(Chattab tab);
   Future<List<Conversion>> searchconversion(convName);
   Future<List<Historymasseges>> getHistorymassages(Conversion conv);
-  Future<List<Historymasseges>> sendmassages(int conversionId, Object data);
+  Future<List<Historymasseges>> sendmassages(
+      int conversionId, Object data);
   Future<Conversion> startConversation(int doctorId);
 }
 

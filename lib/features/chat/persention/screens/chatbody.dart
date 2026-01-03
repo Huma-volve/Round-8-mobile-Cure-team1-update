@@ -50,10 +50,10 @@ class _ChatbodyState extends State<Chatbody> {
               messages: state.historymassages,
               scroll: _scroll,
               controller: _controller,
-              onSend: () => _actions.sendText(
-                  context, widget.convers, _controller, _scroll),
-              onAttach: () => _actions.pickFile(
-                  context, widget.convers, _controller, _scroll),
+              onSend: () =>
+                  _actions.sendText(context, widget.convers, _controller, _scroll),
+              onAttach: () =>
+                  _actions.pickFile(context, widget.convers, _controller, _scroll),
               onCamera: () => showChatImageSourceSheet(
                 context,
                 onCamera: () => _actions.pickCamera(
