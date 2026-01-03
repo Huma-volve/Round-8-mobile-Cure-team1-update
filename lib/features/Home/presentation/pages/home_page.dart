@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:cure_team_1_update/features/Home/presentation/pages/search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/veiw_all_specialties.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,35 +57,35 @@ class _HomePageContentState extends State<_HomePageContent> {
 
     try {
       final api = getIt<ApiServices>();
-      final response = await api.get('api/doctors?latitude=30.0444&longitude=31.2357&radius=10');
-
-      print('0'
-          '.00 TYPE: ${response.runtimeType}');
-      print('RESPONSE VALUE: $response');
-
+      final response = await api.get('doctors');
       final doctors = _parseDoctors(response);
-
+      if (!mounted) return;
       setState(() {
         _doctors = doctors;
         _isLoading = false;
       });
-    } catch (e) {
-      print('ERRORRRRR: $e');
-      rethrow;
-    }}
+    } catch (error, stackTrace) {
+      print("Error loading doctors: $error");
+      print("StackTrace: $stackTrace");
+      if (!mounted) return;
+      setState(() {
+        _error = 'Failed to load doctors. Try again.';
+        _isLoading = false;
+      });
+    }
+  }
 
 
-    List<ApiDoctor> _parseDoctors(dynamic response) {
-    if (response is Map<String, dynamic>) {
-      final data = response['data'];
-      if (data is List) {
-        return data
-            .whereType<Map<String, dynamic>>()
-            .map(ApiDoctor.fromJson)
+  List<ApiDoctor> _parseDoctors(Response response) {
+    if (response.statusCode == 200) {
+      final data = response.data;
+      if (data['success'] == true && data['data'] is List) {
+        return (data['data'] as List)
+            .map((json) => ApiDoctor.fromJson(json))
             .toList();
       }
     }
-    return <ApiDoctor>[];
+    throw Exception("Invalid response format");
   }
   @override
   Widget build(BuildContext context) {
