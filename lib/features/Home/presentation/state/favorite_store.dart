@@ -4,23 +4,18 @@ import 'package:flutter/foundation.dart';
 import '../../../../core/services/api_services.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/services/shared_pref/shared_pref.dart';
-import '../../Data/models/doctor_api_model.dart';
-import '../../Data/models/doctor_model.dart';
+import '../../Data/models/api_doctor.dart';
 
 class FavoriteStore {
   static final ValueNotifier<Set<int>> favorites =
-  ValueNotifier(_initialFavorites());
+      ValueNotifier(_initialFavorites());
   static final ValueNotifier<List<ApiDoctor>> favoriteDoctors =
-  ValueNotifier(<ApiDoctor>[]);
+      ValueNotifier(<ApiDoctor>[]);
   static bool _syncInProgress = false;
   static bool _hasSynced = false;
   static String? _lastToken;
 
-  static bool isFavorite(ApiDoctor doctor) {
-    return favorites.value.contains(doctor.id);
-  }
-
- static void setFavoriteById(int doctorId, bool isFavorite) {
+  static void setFavoriteById(int doctorId, bool isFavorite) {
     final updated = Set<int>.from(favorites.value);
     if (isFavorite) {
       updated.add(doctorId);
@@ -37,7 +32,7 @@ class FavoriteStore {
     );
   }
 
- static Future<FavoriteToggleResult> _toggleRemote({
+  static Future<FavoriteToggleResult> _toggleRemote({
     required int doctorId,
     ApiDoctor? apiDoctor,
   }) async {
@@ -127,7 +122,6 @@ class FavoriteStore {
     return favoriteDoctors.value;
   }
 
-
   static Set<int> _initialFavorites() {
     if (Cachehelper.hasFavoriteIds()) {
       return Cachehelper.getFavoriteIds();
@@ -140,7 +134,7 @@ class FavoriteStore {
     Cachehelper.cacheFavoriteIds(updated);
   }
 
- static void _updateFavoriteDoctorsList({
+  static void _updateFavoriteDoctorsList({
     required int doctorId,
     required bool isFavorite,
     ApiDoctor? apiDoctor,
@@ -224,6 +218,7 @@ class FavoriteStore {
     return doctors;
   }
 }
+
 class FavoriteToggleResult {
   final bool? isFavorite;
   final String? message;

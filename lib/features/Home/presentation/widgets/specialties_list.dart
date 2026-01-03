@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Data/models/specialty_model.dart';
-import '../pages/search_page.dart';
+import '../pages/doctors_search_page.dart';
 
 class SpecialtiesList extends StatelessWidget {
   const SpecialtiesList({super.key});

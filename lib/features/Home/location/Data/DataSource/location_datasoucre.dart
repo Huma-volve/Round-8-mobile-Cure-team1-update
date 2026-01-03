@@ -23,11 +23,12 @@ class LocationDataSource {
 
     return Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
-    );}
+    );
+  }
 
   Future<Placemark> buildAddress(double lat, double lng) async {
     final List<Placemark> placeMarks =
-    await placemarkFromCoordinates(lat, lng);
+        await placemarkFromCoordinates(lat, lng);
     return placeMarks.first;
   }
 }

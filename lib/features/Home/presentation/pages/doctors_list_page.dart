@@ -1,4 +1,3 @@
-import 'package:cure_team_1_update/features/Home/Data/models/doctor_api_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../Data/models/api_doctor.dart';
@@ -27,7 +26,8 @@ class DoctorsListPage extends StatelessWidget {
                 return const SizedBox(height: 12);
               },
               itemBuilder: (context, index) {
-                return ApiDoctorItem(doctor: doctors[index]);              },
+                return ApiDoctorItem(doctor: doctors[index]);
+              },
             ),
     );
   }

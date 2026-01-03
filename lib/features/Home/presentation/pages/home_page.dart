@@ -1,16 +1,12 @@
-import 'dart:math' as math;
-import 'package:cure_team_1_update/features/Home/presentation/pages/doctors_search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/search_page.dart';
 import 'package:cure_team_1_update/features/Home/presentation/pages/veiw_all_specialties.dart';
-import 'package:dio/dio.dart';
+import 'package:cure_team_1_update/core/services/api_services.dart';
+import 'package:cure_team_1_update/core/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../../../../core/services/api_services.dart';
-import '../../../../core/services/service_locator.dart';
-import '../../Data/models/doctor_api_model.dart';
-import '../../Data/models/doctor_model.dart';
+import '../../Data/models/api_doctor.dart';
 import '../../location/Domin/entities/user_location.dart';
 import '../../location/presentation/cubit/location_cubit.dart';
 import '../../location/presentation/state/location_state.dart';
@@ -18,6 +14,8 @@ import '../pages/doctors_list_page.dart';
 import '../widgets/api_doctor_item.dart';
 import '../widgets/home_top_section.dart';
 import '../widgets/specialties_list.dart';
+import 'dart:math' as math;
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -46,8 +44,6 @@ class _HomePageContentState extends State<_HomePageContent> {
   void initState() {
     super.initState();
     _fetchDoctors();
-    print('Doctors count: ${_doctors.length}');
-
   }
 
   Future<void> _fetchDoctors() async {
@@ -65,9 +61,7 @@ class _HomePageContentState extends State<_HomePageContent> {
         _doctors = doctors;
         _isLoading = false;
       });
-    } catch (error, stackTrace) {
-      print("Error loading doctors: $error");
-      print("StackTrace: $stackTrace");
+    } catch (_) {
       if (!mounted) return;
       setState(() {
         _error = 'Failed to load doctors. Try again.';
@@ -76,18 +70,19 @@ class _HomePageContentState extends State<_HomePageContent> {
     }
   }
 
-
-  List<ApiDoctor> _parseDoctors(Response response) {
-    if (response.statusCode == 200) {
-      final data = response.data;
-      if (data['success'] == true && data['data'] is List) {
-        return (data['data'] as List)
-            .map((json) => ApiDoctor.fromJson(json))
+  List<ApiDoctor> _parseDoctors(dynamic response) {
+    if (response is Map<String, dynamic>) {
+      final data = response['data'];
+      if (data is List) {
+        return data
+            .whereType<Map<String, dynamic>>()
+            .map(ApiDoctor.fromJson)
             .toList();
       }
     }
-    throw Exception("Invalid response format");
+    return <ApiDoctor>[];
   }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -96,7 +91,7 @@ class _HomePageContentState extends State<_HomePageContent> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 27),
           child:
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const HomeTopSection(),
             const SizedBox(
               height: 23,
@@ -110,7 +105,7 @@ class _HomePageContentState extends State<_HomePageContent> {
                   MaterialPageRoute(
                     builder: (_) => BlocProvider.value(
                       value: locationCubit,
-                      child: const DoctorsSearchPage(),
+                      child: const SearchPage(),
                     ),
                   ),
                 );
@@ -189,7 +184,8 @@ class _HomePageContentState extends State<_HomePageContent> {
               builder: (context, state) {
                 if (_isLoading || state is LocationLoading) {
                   return const _DoctorSkeletonList();
-                }  if (_error != null) {
+                }
+                if (_error != null) {
                   return Text(_error!);
                 }
                 if (_doctors.isEmpty) {
@@ -221,21 +217,20 @@ class _HomePageContentState extends State<_HomePageContent> {
 const double _earthRadiusKm = 6371;
 const double _maxNearbyDistanceKm = 50;
 
-
 List<ApiDoctor> _nearbyDoctors(
-    UserLocation location,
-    List<ApiDoctor> doctors,
-    ) {
+  UserLocation location,
+  List<ApiDoctor> doctors,
+) {
   final doctorsWithDistance = doctors.map((doctor) {
     final lat = doctor.latitude;
     final lng = doctor.longitude;
     final distance = lat != null && lng != null
         ? _distanceKm(
-      location.lat,
-      location.lng,
-      lat,
-      lng,
-    )
+            location.lat,
+            location.lng,
+            lat,
+            lng,
+          )
         : double.infinity;
     return (doctor: doctor, distance: distance);
   }).toList();
