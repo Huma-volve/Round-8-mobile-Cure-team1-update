@@ -46,6 +46,7 @@ final getIt = GetIt.instance;
 var getit = GetIt.instance;
 Future<void> setup() async {
   getIt.registerSingleton<Dio>(Dio());
+ // getIt.registerSingleton<ApiServices>(ApiServices(getIt.get<Dio>()));
   getIt.registerSingleton<BookingRemoteDataSource>(
       BookingRemoteDataSourceImpl(dio: getIt<Dio>()));
   getIt.registerSingleton<MyBookRepo>(MyBookRepoImplement(
@@ -118,27 +119,52 @@ Future<void> setup() async {
     () => LocationRepositoryImpl(getIt<LocationDataSource>()),
   );
 
+  //edit profile
+  getIt
+    ..registerFactory(() => EditProfileBloc(getIt()))
+    ..registerLazySingleton(() => EditProfileRepo(getIt()))
+    ..registerLazySingleton(() => EditProfileDataSource(getIt()));
+  //Password change
+  getIt
+    ..registerFactory(() => ChangePasswordBloc(getIt()))
+    ..registerLazySingleton(() => ChangePasswordRepo(getIt()))
+    ..registerLazySingleton(() => ChangePasswordDataSource(getIt()));
+  //FAQS
+  getIt
+    ..registerFactory(() => FaqsBloc(getIt()))
+    ..registerLazySingleton(() => FaqsRepo(getIt()))
+    ..registerLazySingleton(() => FaqsDataSource(getIt()));
+  //Delete Account
+  getIt
+    ..registerFactory(() => DeleteAccountBloc(getIt()))
+    ..registerLazySingleton(() => DeleteAccuontRepo(getIt()))
+    ..registerLazySingleton(() => DeleteAccounteDataSource(getIt()));
+  //Logout
+  getIt
+    ..registerFactory(() => LogoutBloc(getIt()))
+    ..registerLazySingleton(() => LogoutRepo(getIt()))
+    ..registerLazySingleton(() => LogoutDataSource(getIt()));
+  getIt.registerLazySingleton<LocationDataSource>(
+        () => LocationDataSource(),
+  );
+
+  getIt.registerLazySingleton<LocationRepository>(
+        () => LocationRepositoryImpl(getIt<LocationDataSource>()),
+  );
+
   getIt.registerLazySingleton<GetUserLocation>(
-    () => GetUserLocation(repo: getIt<LocationRepository>()),
+        () => GetUserLocation(repo: getIt<LocationRepository>()),
   );
 
   getIt.registerLazySingleton<GetUserAddress>(
-    () => GetUserAddress(repo: getIt<LocationRepository>()),
+        () => GetUserAddress(repo: getIt<LocationRepository>()),
   );
 
   getIt.registerFactory<LocationCubit>(
-    () => LocationCubit(
+        () => LocationCubit(
       getIt<GetUserLocation>(),
       getIt<GetUserAddress>(),
     ),
   );
 
-  // getIt.registerSingleton<Dio>(Dio());
-  // getIt.registerSingleton<ApiServices>(ApiServices(getIt.get<Dio>()));
-//  getIt.registerSingleton<BookingRemoteDataSource>(BookingRemoteDataSourceImpl(dio: getIt<Dio>()));
-  //  getIt.registerSingleton<MyBookRepo>(MyBookRepoImplement(bookingRemoteDataSource: getIt<BookingRemoteDataSource>()));
-  getIt.registerSingleton<CreateBookRemoteDataSource>(
-      CreateBookRemoteDataSourceImp(apiServices: getIt<ApiServices>()));
-  getIt.registerSingleton<CreateBookRepo>(CreateBookRepoImp(
-      createBookRemoteDataSource: getIt<CreateBookRemoteDataSource>()));
 }

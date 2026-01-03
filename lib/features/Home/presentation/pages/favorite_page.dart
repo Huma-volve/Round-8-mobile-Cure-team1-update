@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 
-import '../../Data/models/api_doctor.dart';
-import '../state/favorite_store.dart';
-import '../widgets/api_doctor_item.dart';
+
+import 'package:cure_team_1_update/features/Home/Data/models/api_doctor.dart';
+import 'package:cure_team_1_update/features/Home/presentation/state/favorite_store.dart';
+import 'package:cure_team_1_update/features/Home/presentation/widgets/api_doctor_item.dart';
+import 'package:flutter/material.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
@@ -21,7 +22,8 @@ class FavoritePage extends StatelessWidget {
       ),
       body: ValueListenableBuilder<List<ApiDoctor>>(
         valueListenable: FavoriteStore.favoriteDoctors,
-        builder: (context, doctors, child) {
+        builder: (context, favorites, child) {
+          final doctors = FavoriteStore.currentFavorites();
           if (doctors.isEmpty) {
             return Center(
               child: Column(
@@ -48,8 +50,7 @@ class FavoritePage extends StatelessWidget {
               return const SizedBox(height: 12);
             },
             itemBuilder: (context, index) {
-              return ApiDoctorItem(doctor: doctors[index]);
-            },
+              return ApiDoctorItem(doctor:doctors[index]);  }
           );
         },
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../Data/models/specialty_model.dart';
-import '../pages/doctors_search_page.dart';
+import '../pages/search_page.dart';
 
 class SpecialityWidget extends StatelessWidget {
   final Specialty specialty;
@@ -21,8 +21,7 @@ class SpecialityWidget extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (_) =>
-                  DoctorsSearchPage(initialSpecialty: specialty.name),
-            ),
+                  DoctorsSearchPage(initialSpecialty: specialty.name),            ),
           );
         },
         child: Container(
